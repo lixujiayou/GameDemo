@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#12B7F5</color>
+    <color name="colorPrimaryDark">#12B7F5</color>
+    <color name="colorAccent">#8EC31E</color>
+
+    <color name="colorPrimaryAlpha">#ee12B7F5</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_t">#44FFFFFF</color>
+    <color name="textcolor_old">#666666</color>
+    <color name="line_q">#E9E6E6</color>
+    <color name="black_tran">#99C7C7C7</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#FF0000</color>
+    <color name="theme_body">#cc22292c</color>
+
+    <color name="hui">#E6E3E5</color>
+    <color name="backround_white">#F4F6F6</color>
+    <color name="backround_hui">#F9FAFA</color>
+    <color name="white_hui">#E6E9EB</color>
+    <color name="h_line">#ACABAE</color>
+    <color name="hui_q">#E6E3E5</color>
+    <color name="textcolor_blue_hui">#BEE4F8</color>
+    <color name="b_next">#2FA6FC</color>
+    <color name="b_commit">#D35336</color>
+    <color name="b_photo">#32A84A</color>
+    <color name="backlound_more">#ECEFF6</color>
+    <color name="backlound_more_2">#E7EAEC</color>
+    <color name="textsize_qian">#4A4A4A</color>
+    <color name="black">#000000</color>
+    <color name="line_color">#EDEEF3</color>
+
+    <color name="blue_s">#3593D2</color>
+    <color name="textcolor_yellow">#FFA14B</color>
+    <color name="textcolor_yellow_2">#F18A42</color>
+    <color name="textcolor_6">#666666</color>
+    <color name="blackround_nwhite">#F8F8F8</color>
+    <color name="btn_qing">#7ED321</color>
+    <color name="btn_qing_s">#6FC40E</color>
+    <color name="pink">#F63F56</color>
+    <color name="search_backround">#EDEEF3</color>
+    <color name="floor_status_no">#D5DDF1</color>
+    <color name="floor_status_ing">#FF2D47</color>
+    <color name="floor_status_ok">#7ED321</color>
+    <color name="floor_status_no_textcolor">#8794B8</color>
+    <color name="act_background">#efefef</color>
+
+
+    <color name="red_normal">#FF0000</color>
+    <color name="red_pressed">#FF6666</color>
+    <color name="green_normal">#37C000</color>
+    <color name="green_pressed">#30A070</color>
+    <color name="purple_normal">#9932CC</color>
+    <color name="purple_pressed">#9F79EE</color>
+    <color name="textcolor_m">#5E6379</color>
+
+    <!--上传题库色值-->
+    <color name="nick">#517fae</color>
+    <color name="item_bottom_text">#8e8e8e</color>
+    <color name="item_showmore_click">#c6c6c6</color>
+    <color name="line_bg">#e5e5e5</color>
+    <!--点赞popup色值-->
+    <color name="comment_popup_bg">#4c5154</color>
+    <color name="comment_popup_tx_bg">#c7c7c7</color>
+    <!--文字颜色-->
+    <color name="text_hint_color">#bababa</color>
+    <color name="normal_font_color">#1A1A1A</color>
+    <!--popup背景蒙层-->
+    <color name="popup_background">#8e030303</color>
+    <!--other-->
+    <color name="wechat_green_bg">#10d21c</color>
+    <color name="wechat_green_bg_click">#5eec67</color>
+    <color name="comment_click_bg">#CCD2DF</color>
+    <color name="delete_click_bg">#EAEAEA</color>
+    <!--分割线-->
+    <color name="gray_divider">#d7dce1</color>
+    <color name="dark_gray_divider">#bbc2ca</color>
+    <color name="timeline_background">#f4f6f8</color>
+    <!--刷新头头-->
+    <color name="ptr_header_bg">#323232</color>
+    <color name="action_bar_bg">#232426</color>
+    <color name="stroke_bg">#2b2b2b</color>
+    <color name="color_f9f9f9">#f9f9f9</color>
+    <color name="color_c6c6c6">#c6c6c6</color>
+    <color name="round_rect_bg">#f8f8f8</color>
+
+
+    <color name="text_comment">#5C6F98</color>
+</resources>

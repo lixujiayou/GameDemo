@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">圣经问答</string>
+    <string name="no_network">没网喽</string>
+    <string name="main_answer">答题</string>
+    <string name="main_share">分享</string>
+    <string name="main_mine">我的</string>
+
+</resources>

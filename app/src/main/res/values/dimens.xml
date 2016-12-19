@@ -1,0 +1,49 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="height_login">40dp</dimen>
+    <dimen name="textsize_login">20sp</dimen>
+    <dimen name="line_d">0.4dp</dimen>
+    <dimen name="height_bt_login">36dp</dimen>
+    <dimen name="textsize_x">20sp</dimen>
+    <dimen name="textsize_btn">18sp</dimen>
+    <dimen name="height_actionbar">50dp</dimen>
+    <dimen name="textsize_height">20sp</dimen>
+    <dimen name="height_search">40dp</dimen>
+    <dimen name="height_search_x">30dp</dimen>
+    <dimen name="height_search_2">46dp</dimen>
+    <dimen name="item_spinner">36dp</dimen>
+    <dimen name="textsize_spinner">18sp</dimen>
+    <dimen name="textsize_actionbar">22sp</dimen>
+    <dimen name="textsize_16">16sp</dimen>
+    <dimen name="textsize_14">14sp</dimen>
+    <dimen name="textsize_18">18sp</dimen>
+    <dimen name="height_item">30dp</dimen>
+    <dimen name="height_bottome_bar">36dp</dimen>
+    <dimen name="textsize_z">22sp</dimen>
+    <dimen name="height_x">30dp</dimen>
+    <dimen name="textsize_xx">12sp</dimen>
+    <dimen name="textsize_main">22sp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="wiget_line">25dp</dimen>
+    <dimen name="height_line">2.2dp</dimen>
+    <dimen name="line_x">2dp</dimen>
+    <dimen name="height_search_one">35dp</dimen>
+
+    <dimen name="item_height">60dp</dimen>
+    <dimen name="item_margin">10dp</dimen>
+
+    <dimen name="height_main">220dp</dimen>
+    <dimen name="margintop_6dp">6dp</dimen>
+    <dimen name="actionbar_height">56dp</dimen>
+    <!--api19以下无法沉浸头部，故设为0-->
+    <dimen name="height_status_bar">0dp</dimen>
+    <!--朋友圈尺寸定义-->
+    <dimen name="item_avatar">48dp</dimen>
+    <dimen name="item_padding">16dp</dimen>
+</resources>

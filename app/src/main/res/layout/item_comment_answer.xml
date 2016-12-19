@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:background="@drawable/selector_white_tran"
+    >
+
+<TextView
+    android:id="@+id/tv_send_person"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="下雨了"
+    android:textSize="@dimen/textsize_16"
+    android:textColor="@color/text_comment"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:background="@drawable/selector_white_tran"
+    />
+
+<LinearLayout
+    android:id="@+id/ll_item_gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="回复"
+    android:textColor="@color/textcolor_old"
+    android:textSize="@dimen/textsize_14"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
+    />
+
+    <TextView
+        android:id="@+id/tv_reply_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下雪了"
+        android:textColor="@color/text_comment"
+        android:textSize="@dimen/textsize_16"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:background="@drawable/selector_white_tran"
+        />
+</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="@color/textcolor_old"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textcolor_old"
+        android:textSize="@dimen/textsize_14"
+        android:layout_gravity="center_vertical"
+        android:text="啊"
+        />
+
+
+
+
+</LinearLayout>
