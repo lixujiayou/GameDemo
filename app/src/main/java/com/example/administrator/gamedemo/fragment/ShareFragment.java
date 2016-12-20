@@ -3,7 +3,6 @@ package com.example.administrator.gamedemo.fragment;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -12,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
@@ -22,73 +22,79 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
-import com.example.administrator.gamedemo.utils.PreferenceHelper;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
-import com.example.administrator.gamedemo.utils.bmob.bmob.BmobInitHelper;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
-import com.example.administrator.gamedemo.utils.view.IMomentViewShare;
 import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVH;
-import com.example.administrator.gamedemo.widget.SoftKeyboardStateHelper;
+import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentBox;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView;
 import com.example.administrator.gamedemo.widget.pullrecyclerview.interfaces.onRefreshListener2;
-import com.example.administrator.gamedemo.widget.request.MomentsRequest;
 import com.example.administrator.gamedemo.widget.request.ShareRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.orhanobut.logger.Logger;
-import com.victor.loading.rotate.RotateLoading;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 
 /**
  * Created by Administrator on 2016/12/8 0008.
+ *
  * @author lixu
  */
 
-public class ShareFragment extends BaseFragment  implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
+public class ShareFragment extends BaseFragment implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
 
-    @BindView(R.id.toolbar)
-    public Toolbar toolbar;
+//    @BindView(R.id.toolbar)
+//    public Toolbar toolbar;
     private boolean isPrepared;
 
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
 
     @BindView(R.id.recycler)
-     CircleRecyclerView circleRecyclerView;
+    CircleRecyclerView circleRecyclerView;
     @BindView(R.id.widget_comment)
-     CommentBox commentBox;
+    CommentBox commentBox;
 
+    @BindView(R.id.rl_bar)
+    RelativeLayout rl_bar;
 
-//试一下这次呢
+    @BindView(R.id.tv_repair)
+    TextView tv_repair;
+
+    //试一下这次呢
     private HostViewHolder hostViewHolder;
     private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
     //request
     private ShareRequest momentsRequest;
     private MomentPresenter presenter;
-   // private List<Share> responseTemp;
+    // private List<Share> responseTemp;
 
-    public ShareFragment(){
+    public ShareFragment() {
     }
 
     public static ShareFragment getInstance() {
-        isFirst  = true;
+        isFirst = true;
         return answerFragmentHolder.instance;
     }
 
 
-
+    @OnClick(R.id.rl_bar)
+    public void onClick() {
+        circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
+    }
 
     public static class answerFragmentHolder {
         public static final ShareFragment instance = new ShareFragment();
@@ -96,10 +102,8 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
     @Override
     public void initTheme() {
-        getActivity().setTheme(R.style.AppTheme_NoActionBar_Immerse);
+        getActivity().setTheme(R.style.AppBaseTheme);
     }
-
-
 
 
     @Override
@@ -109,10 +113,11 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
     @Override
     public void initViews() {
+        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
+        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
 
         momentsInfoList = new ArrayList<>();
         momentsRequest = new ShareRequest();
-
 
         presenter = new MomentPresenter(this);
 
@@ -136,12 +141,11 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
         circleRecyclerView.setAdapter(adapter);
 
 
-
         initKeyboardHeightObserver();
 
 
-        toolbar.setTitleTextColor(ContextCompat.getColor(mContext,R.color.white));
-        toolbar.setTitle(R.string.main_share);
+//        toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
+//        toolbar.setTitle(R.string.main_share);
 
         isPrepared = true;
         initData();
@@ -150,23 +154,36 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
     @Override
     public void initData() {
-        if(!isPrepared || !isVisible || !isFirst){
+        if (!isPrepared || !isVisible || !isFirst) {
             return;
-        }else {
+        } else {
             circleRecyclerView.autoRefresh();
             isFirst = false;
         }
 
     }
 
+
     private static class HostViewHolder {
         private View rootView;
+        private ImageView friend_wall_pic;
+
         public HostViewHolder(Context context) {
-            this.rootView = LayoutInflater.from(context).inflate(R.layout.heard_null, null);
+            this.rootView = LayoutInflater.from(context).inflate(R.layout.circle_host_header_share, null);
+            this.friend_wall_pic = (ImageView) rootView.findViewById(R.id.friend_wall_pic);
+            this.rootView.setVisibility(View.GONE);
         }
+
+        public void loadHostData(Students hostInfo) {
+            if (hostInfo == null) return;
+            ImageLoadMnanger.INSTANCE.loadImage(friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
+
+        }
+
         public View getView() {
             return rootView;
         }
+
     }
 
     // TODO: 2016/12/13 进一步优化对齐功能
@@ -205,6 +222,7 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
         momentsRequest.setRequestType(REQUEST_LOADMORE);
         momentsRequest.execute();
     }
+
     //call back block
     //==============================================
     private boolean isOne = true;
@@ -225,7 +243,7 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
 
                         Logger.i("第一条动态ID   >>>   " + response.get(0).getMomentid());
-                   //     hostViewHolder.loadHostData(Constants.getInstance().getUser());
+                        //     hostViewHolder.loadHostData(Constants.getInstance().getUser());
                         adapter.updateData(response);
                     }
                     break;
@@ -260,6 +278,7 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
     /**
      * 点击发送
+     *
      * @param itemPos
      * @param commentInfoList
      */
@@ -274,6 +293,7 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
 
     /**
      * 点击评论
+     *
      * @param itemPos
      * @param momentid
      * @param commentWidget

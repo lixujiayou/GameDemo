@@ -2,8 +2,10 @@ package com.example.administrator.gamedemo.fragment;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 
 import butterknife.BindView;
@@ -13,9 +15,9 @@ import butterknife.BindView;
  */
 
 public class MineFragment extends BaseFragment{
-   /* @BindView(R.id.toolbar)
-    public Toolbar toolbar;*/
 
+   @BindView(R.id.tv_repair)
+   TextView tv_repair;
     public MineFragment(){
     }
 
@@ -40,9 +42,8 @@ public class MineFragment extends BaseFragment{
 
     @Override
     public void initViews() {
-       /* toolbar.setTitleTextColor(ContextCompat.getColor(mContext,R.color.white));
-        toolbar.setTitle(R.string.main_mine);*/
-
+        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
+        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
     }
 
     @Override

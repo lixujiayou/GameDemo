@@ -3,6 +3,8 @@ package com.example.administrator.gamedemo.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.View;
@@ -77,6 +79,12 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
         mClickToShow.setTextSize(textSize);
         mClickToShow.setTextColor(getResources().getColor(R.color.nick));
         mClickToShow.setText(clickText);
+
+        //设置文字超链接
+        mTextView.setAutoLinkMask(Linkify.ALL);
+        mTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        mClickToShow.setAutoLinkMask(Linkify.ALL);
+        mClickToShow.setMovementMethod(LinkMovementMethod.getInstance());
 
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                                                                          ViewGroup.LayoutParams.WRAP_CONTENT);

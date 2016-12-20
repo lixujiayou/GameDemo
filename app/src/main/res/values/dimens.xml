@@ -15,7 +15,7 @@
     <dimen name="height_search_2">46dp</dimen>
     <dimen name="item_spinner">36dp</dimen>
     <dimen name="textsize_spinner">18sp</dimen>
-    <dimen name="textsize_actionbar">22sp</dimen>
+    <dimen name="textsize_actionbar">20sp</dimen>
     <dimen name="textsize_16">16sp</dimen>
     <dimen name="textsize_14">14sp</dimen>
     <dimen name="textsize_18">18sp</dimen>

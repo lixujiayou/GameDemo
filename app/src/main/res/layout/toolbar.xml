@@ -17,6 +17,7 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:layout_scrollFlags="scroll|enterAlways"
+        style="?actionBarStyle"
         />
 </android.support.design.widget.AppBarLayout>
 </merge>

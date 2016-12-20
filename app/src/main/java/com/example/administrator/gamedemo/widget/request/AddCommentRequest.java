@@ -56,28 +56,24 @@ public class AddCommentRequest extends BaseRequestClient<CommentInfo> {
         commentInfo1.setMoment(share);
         if (replyUserId != null) {
             commentInfo1.setReply(replyUserId);
-            Logger.d("评论者"+authorId.getNick_name()+"被回复者"+replyUserId.getNick_name());
         }
-
         commentInfo1.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Logger.d("评论成功");
-                    onResponseSuccess(commentInfo1, requestType);
-//                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
-//                    commentQuery.getObject(s, new QueryListener<CommentInfo>() {
-//                        @Override
-//                        public void done(CommentInfo commentInfo, BmobException e) {
-//                            if (e == null) {
-//                                onResponseSuccess(commentInfo1, requestType);
-//                            } else {
-//                                onResponseError(e, requestType);
-//                            }
-//                        }
-//                    });
+                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
+                    commentQuery.include(CommentInfo.CommentFields.AUTHOR_USER + "," + CommentInfo.CommentFields.REPLY_USER + "," + CommentInfo.CommentFields.MOMENT);
+                    commentQuery.getObject(s, new QueryListener<CommentInfo>() {
+                        @Override
+                        public void done(CommentInfo commentInfo, BmobException e) {
+                            if (e == null) {
+                                onResponseSuccess(commentInfo, requestType);
+                            } else {
+                                onResponseError(e, requestType);
+                            }
+                        }
+                    });
                 } else {
-                    Logger.d("评论失败"+s);
                     onResponseError(e, requestType);
                 }
             }

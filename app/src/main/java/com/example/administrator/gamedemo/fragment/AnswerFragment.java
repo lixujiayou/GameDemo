@@ -157,7 +157,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
         circleRecyclerView.addHeaderView(hostViewHolder.getView());
 
         toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
-        toolbar.setTitle(R.string.main_answer);
+       // toolbar.setTitle(R.string.main_answer);
 
         AnswersAdapter.Builder<MomentsInfo> builder = new AnswersAdapter.Builder<>(mContext);
         builder.addType(AnswerViewHolder.class, MomentsType.EMPTY_CONTENT, R.layout.item_problem)

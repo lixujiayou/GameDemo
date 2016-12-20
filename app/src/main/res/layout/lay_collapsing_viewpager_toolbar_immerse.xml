@@ -40,7 +40,7 @@
             android:layout_marginTop="@dimen/height_status_bar"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name"
+
             >
             <!--CollapsingToolbarLayout内的toolBar标题栏随拖动而变化，
             所以在定义了一个TextView可满足标题栏不变化的业务逻辑-->
@@ -48,9 +48,19 @@
                 android:id="@+id/title_tv"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </android.support.v7.widget.Toolbar>
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                />
 
+        </android.support.v7.widget.Toolbar>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【箴】敬畏耶和华是智慧的开端，认识至圣者便是聪明。"
+                android:layout_gravity="bottom"
+                android:padding="6dp"
+                android:textSize="@dimen/textsize_18"
+                />
     </android.support.design.widget.CollapsingToolbarLayout>
 
 

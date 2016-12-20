@@ -355,10 +355,13 @@ public class CircleRecyclerView extends FrameLayout {
         }
 
         void catchPullEvent(float offset) {
+            refreshIcon.setVisibility(View.VISIBLE);
             if (checkHacIcon()) {
                 refreshIcon.setRotation(-offset * 2);
                 if (offset >= refreshPosition) {
                     offset = refreshPosition;
+                }else if(offset < 1){
+                    refreshIcon.setVisibility(View.GONE);
                 }
                 refreshIcon.layout(refreshIcon.getLeft(), (int) Math.abs(offset), refreshIcon.getRight(), (int) (Math.abs(offset) + refreshIcon.getHeight()));
                 adjustRefreshIconPosition();
