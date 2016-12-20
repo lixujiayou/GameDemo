@@ -70,7 +70,7 @@ public class ShareFragment extends BaseFragment  implements onRefreshListener2, 
      CommentBox commentBox;
 
 
-
+//试一下这次呢
     private HostViewHolder hostViewHolder;
     private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
