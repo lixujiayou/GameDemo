@@ -4,35 +4,426 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:contentScrim="@color/colorPrimary">
+    android:background="@color/backround_hui"
+    >
     <TextView
         android:id="@+id/tv_repair"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorPrimaryDark"
         />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
-            android:text="@string/main_mine"
-            android:textSize="@dimen/textsize_actionbar"
-            android:textColor="@color/white"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            />
 
-    </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/colorPrimary"
+    >
+    <ImageView
+        android:id="@+id/iv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_mymessage"
+        android:layout_alignParentRight="true"
+        android:padding="6dp"
+        android:background="@drawable/selector_white_tran"
+        />
+
+<LinearLayout
+    android:id="@+id/ll_mine_center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    >
+    <com.example.administrator.gamedemo.utils.base_image.RoundedImageView
+        android:id="@+id/rv_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_loading_small"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        app:corner_radius="8dp"
+        app:border_width="0dp"
+        app:oval="false"
+        app:border_color="@color/colorPrimary"
+        />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我的"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击登录"
         android:textSize="@dimen/textsize_18"
+        android:padding="6dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        />
+</LinearLayout>
+</RelativeLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_search_d"
+    android:minHeight="@dimen/height_search_d"
+    android:background="@color/white"
+    android:weightSum="3"
+    >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        />
+        android:background="@drawable/selector_white_tran"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/xiaoxi"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="一起"
+    android:textSize="@dimen/textsize_16"
+    android:textColor="@color/textcolor_2"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="4dp"
+    />
+    </LinearLayout>
+
+<View
+    android:layout_width="@dimen/line_px"
+    android:layout_height="match_parent"
+    android:background="@color/backround_hui"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    /><LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/selector_white_tran"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/xiaoxi"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="收藏"
+    android:textSize="@dimen/textsize_16"
+    android:textColor="@color/textcolor_2"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="4dp"
+    />
+    </LinearLayout>
+
+<View
+    android:layout_width="@dimen/line_px"
+    android:layout_height="match_parent"
+    android:background="@color/backround_hui"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/selector_white_tran"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/xiaoxi"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="上传"
+    android:textSize="@dimen/textsize_16"
+    android:textColor="@color/textcolor_2"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="4dp"
+    />
+    </LinearLayout>
+
+</LinearLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交流"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout><LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="笔记"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+    </LinearLayout>
+
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_white"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

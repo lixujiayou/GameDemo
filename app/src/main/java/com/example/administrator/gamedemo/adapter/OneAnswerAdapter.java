@@ -49,9 +49,22 @@ public class OneAnswerAdapter extends Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
-            int a = position+1;
-            ((ItemViewHolder) holder).tv.setText(a+"、"+itemsEntities.get(randomNum[position]));
+        String selectText = null;
+           switch (position){
+               case 0:
+                   selectText = "A";
+                   break;
+               case 1:
+                   selectText = "B";
+                   break;
+               case 2:
+                   selectText = "C";
+                   break;
+               case 3:
+                   selectText = "D";
+                   break;
+           }
+            ((ItemViewHolder) holder).tv.setText(selectText+"、"+itemsEntities.get(randomNum[position]));
 
             if (onItemClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

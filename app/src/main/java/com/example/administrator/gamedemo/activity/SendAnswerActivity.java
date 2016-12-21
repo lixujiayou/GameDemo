@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -73,7 +74,9 @@ public class SendAnswerActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mToolbar.setNavigationIcon(R.drawable.icon_cancle);
+        mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
+        mToolbar.setTitle("上传答题");
+        mToolbar.setTitleTextColor(ContextCompat.getColor(SendAnswerActivity.this,R.color.textcolor_1));
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -1,10 +1,10 @@
 package com.example.administrator.gamedemo.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,19 +24,15 @@ import com.example.administrator.gamedemo.adapter.OnlineAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
-import com.example.administrator.gamedemo.model.NetWorkEvent;
 import com.example.administrator.gamedemo.model.ReshEvent;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.MyEditText;
-import com.example.administrator.gamedemo.utils.SimpleObjectPool;
 import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.widget.LoadingView;
 import com.example.administrator.gamedemo.widget.SoftKeyboardStateHelper;
-import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.example.administrator.gamedemo.widget.popup.DeleteCommentPopup;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,7 +41,6 @@ import java.util.List;
 import java.util.Vector;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
@@ -146,9 +141,9 @@ public class OnlineAnswerActivity extends BaseActivity {
         onlineAdapter = new OnlineAdapter(OnlineAnswerActivity.this,mCommentInfos);
         recyle_comment.setAdapter(onlineAdapter);
 
-
-        mToolbar.setNavigationIcon(R.drawable.icon_cancle);
+        mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
         mToolbar.setTitle(R.string.main_answer);
+        mToolbar.setTitleTextColor(ContextCompat.getColor(OnlineAnswerActivity.this,R.color.textcolor_1));
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -374,6 +369,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         if (deleteCommentPopup == null) {
             deleteCommentPopup = new DeleteCommentPopup(this);
         }
+
         deleteCommentPopup.setOnDeleteCommentClickListener(new DeleteCommentPopup.OnDeleteCommentClickListener() {
             @Override
             public void onDelClick(final CommentInfo commentInfo) {

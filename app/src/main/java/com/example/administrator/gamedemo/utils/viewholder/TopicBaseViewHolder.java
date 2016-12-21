@@ -1,28 +1,21 @@
 package com.example.administrator.gamedemo.utils.viewholder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
-import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewHolder;
 import com.example.administrator.gamedemo.utils.base_image.RoundedImageView;
-import com.example.administrator.gamedemo.widget.ClickShowMoreLayout;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.orhanobut.logger.Logger;
 
@@ -70,8 +63,8 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
 
     private void onBindMutualDataToViews(final MomentsInfo data) {
         //header
-        if(data.getCover() != null){
-            ImageLoadMnanger.INSTANCE.loadImageForRv(rv_cover, data.getCover().getFileUrl());
+        if(data.getAuthor().getUser_icon() != null){
+            ImageLoadMnanger.INSTANCE.loadImageForRv(rv_cover, data.getAuthor().getUser_icon().getFileUrl());
         }
 
         tv_name.setText(data.getAuthor().getNick_name());
@@ -89,7 +82,13 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
                 Intent gIntent = new Intent(mContext, OnlineAnswerActivity.class);
                 gIntent.putExtras(bundle);
                 mContext.startActivity(gIntent);
+            }
+        });
 
+        rv_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil3.showToast(mContext,data.getAuthor().getNick_name());
             }
         });
     }

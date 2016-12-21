@@ -3,126 +3,303 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backround_hui"
+    >
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backround_hui"
+    android:layout_above="@+id/ll_check"
     >
-    <include layout="@layout/toolbar"/>
-
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardview_shadow_end_color"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:contentPadding="@dimen/activity_horizontal_margin"
-        android:layout_margin="6dp"
-        >
-
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways"
+        style="?actionBarStyle"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:minHeight="@dimen/height_search_d"
+       android:orientation="horizontal"
+       android:weightSum="10"
+       android:background="@color/white"
+       android:paddingLeft="@dimen/activity_horizontal_margin"
+       android:paddingRight="@dimen/activity_horizontal_margin"
+       android:layout_marginTop="@dimen/activity_vertical_margin"
+       android:layout_gravity="center_vertical"
+       android:gravity="center_vertical"
+       >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="问答题目"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
         <EditText
             android:id="@+id/et_send_topic"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="填写题目"
+            android:layout_weight="7"
+            android:hint="点击输入"
             android:text=""
             android:textColor="@color/textcolor_m"
-            android:background="@color/cardview_shadow_end_color"
+            android:background="@color/white"
             />
 
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardview_shadow_end_color"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:contentPadding="@dimen/activity_horizontal_margin"
-        android:layout_margin="6dp"
-        >
+   </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="正确答案"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
         <EditText
             android:id="@+id/et_send_answer_y"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="填写正确答案"
+            android:layout_weight="7"
+            android:hint="点击输入"
+            android:text=""
             android:textColor="@color/textcolor_m"
-            />
-    <EditText
-        android:id="@+id/et_send_answer_n_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="填写错误答案"
-            android:textColor="@color/textcolor_m"
-            />
-<EditText
-    android:id="@+id/et_send_answer_n_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="填写错误答案"
-            android:textColor="@color/textcolor_m"
-            />
-<EditText
-    android:id="@+id/et_send_answer_n_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="填写错误答案"
-            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
             />
 
-</LinearLayout>
-
-        </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardview_shadow_end_color"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:contentPadding="@dimen/activity_horizontal_margin"
-        android:layout_margin="6dp"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/line_px"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="错误答案"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+        <EditText
+            android:id="@+id/et_send_answer_n_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:hint="点击输入"
+            android:text=""
+            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/line_px"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="错误答案"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+        <EditText
+            android:id="@+id/et_send_answer_n_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:hint="点击输入"
+            android:text=""
+            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/line_px"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="错误答案"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+        <EditText
+            android:id="@+id/et_send_answer_n_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:hint="点击输入"
+            android:text=""
+            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="经文参考"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
 
         <EditText
             android:id="@+id/et_send_ps"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="填写参考经文或资料"
+            android:layout_weight="7"
+            android:hint="请填写参考经文或资料"
             android:text=""
             android:textColor="@color/textcolor_m"
-            android:background="@color/cardview_shadow_end_color"
+            android:background="@color/white"
             />
-    </android.support.v7.widget.CardView>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-    <CheckBox
-        android:id="@+id/cb_agree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        />
-
-    <TextView
-        android:id="@+id/tv_send_norm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我已阅读并同意《圣经问答APP》上传规范"
-        android:padding="4dp"
-        android:background="@drawable/selector_white_tran"
-        />
-
-</LinearLayout>
     </LinearLayout>
 
+<View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_vertical_margin"/>
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
     <include layout="@layout/loading"></include>
+    <LinearLayout
+        android:id="@+id/ll_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/margintop_6dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        >
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我已阅读并同意"
+                android:textColor="@color/textcolor_2"
+                />
+            <TextView
+                android:id="@+id/tv_send_norm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《圣经问答APP》上传规范"
+                android:background="@drawable/selector_white_tran"
+                android:textColor="@color/blue_s"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

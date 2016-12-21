@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatTextView;
@@ -13,8 +14,10 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,6 +74,8 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     AppBarLayout appBarLayout;
 
 
+    @BindView(R.id.cl_fragment)
+    CoordinatorLayout coordinatorLayout;
 //    @BindView(R.id.recyclerView)
 //    RecyclerView recyclerView;
 
@@ -121,9 +126,12 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
                 break;
             case R.id.cv_set:
 
-                BmobInitHelper bb = new BmobInitHelper();
-                bb.addShares();
+                circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
 
+
+
+//                BmobInitHelper bb = new BmobInitHelper();
+//                bb.addShares();
                 break;
         }
     }
@@ -132,7 +140,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     public static class answerFragmentHolder {
         public static final AnswerFragment instance = new AnswerFragment();
     }
-
 
     @Override
     public void initTheme() {
@@ -146,6 +153,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
     @Override
     public void initViews() {
+
         EventBus.getDefault().register(this);
         login();
         swipe_refresh.setEnabled(false);

@@ -11,6 +11,7 @@
     <dimen name="height_actionbar">50dp</dimen>
     <dimen name="textsize_height">20sp</dimen>
     <dimen name="height_search">40dp</dimen>
+    <dimen name="height_search_d">46dp</dimen>
     <dimen name="height_search_x">30dp</dimen>
     <dimen name="height_search_2">46dp</dimen>
     <dimen name="item_spinner">36dp</dimen>
@@ -46,4 +47,5 @@
     <!--朋友圈尺寸定义-->
     <dimen name="item_avatar">48dp</dimen>
     <dimen name="item_padding">16dp</dimen>
+    <dimen name="line_px">1px</dimen>
 </resources>

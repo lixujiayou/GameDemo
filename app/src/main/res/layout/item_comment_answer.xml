@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:background="@drawable/selector_white_tran"
     >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_px"
+        android:background="@color/backround_hui"
+        />
 
-<TextView
-    android:id="@+id/tv_send_person"
-    android:layout_width="wrap_content"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_vertical_margin"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="下雨了"
-    android:textSize="@dimen/textsize_16"
-    android:textColor="@color/text_comment"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:background="@drawable/selector_white_tran"
-    />
+    android:orientation="horizontal"
+    >
+
 
 <LinearLayout
     android:id="@+id/ll_item_gone"
@@ -25,6 +28,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
+
     >
 <TextView
     android:layout_width="wrap_content"
@@ -48,7 +52,7 @@
         android:paddingRight="4dp"
         android:background="@drawable/selector_white_tran"
         />
-</LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,18 +61,45 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         />
-
+</LinearLayout>
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textcolor_old"
-        android:textSize="@dimen/textsize_14"
+        android:textSize="17sp"
         android:layout_gravity="center_vertical"
-        android:text="啊"
+        android:text=""
+
         />
 
+</LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        >
 
+        <TextView
+            android:id="@+id/tv_send_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下雨了"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/text_comment"
+            android:background="@drawable/selector_white_tran"
+            />
 
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刚刚"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/textcolor_3"
+            />
+
+    </RelativeLayout>
 </LinearLayout>

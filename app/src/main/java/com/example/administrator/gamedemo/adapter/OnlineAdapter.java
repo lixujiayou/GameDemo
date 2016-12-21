@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.model.CommentInfo;
+import com.example.administrator.gamedemo.utils.TimeUtil;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.orhanobut.logger.Logger;
@@ -55,22 +56,24 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
-        if(itemsEntities.get(position).getAuthor() != null){
-            ((ItemViewHolder) holder).tv_send_person.setText(itemsEntities.get(position).getAuthor().getNick_name());
+        CommentInfo itemTemp = itemsEntities.get(position);
+        if(itemTemp.getAuthor() != null){
+            ((ItemViewHolder) holder).tv_send_person.setText(itemTemp.getAuthor().getNick_name());
 
         }
 
-        if(itemsEntities.get(position).getReply() != null){
+        if(itemTemp.getReply() != null){
             ((ItemViewHolder) holder).ll_gone.setVisibility(View.VISIBLE);
-                ((ItemViewHolder) holder).tv_reply_person.setText(itemsEntities.get(position).getReply().getNick_name());
+                ((ItemViewHolder) holder).tv_reply_person.setText(itemTemp.getReply().getNick_name());
             }else{
                 ((ItemViewHolder) holder).ll_gone.setVisibility(View.GONE);
             }
 
-        if(itemsEntities.get(position).getContent() != null){
-            ((ItemViewHolder) holder).tv_content.setText(itemsEntities.get(position).getContent());
+        if(itemTemp.getContent() != null){
+            ((ItemViewHolder) holder).tv_content.setText(itemTemp.getContent());
         }
+
+        ((ItemViewHolder) holder).tv_time.setText(TimeUtil.getTimeStringFromBmob(itemTemp.getCreatedAt()));
 
         ((ItemViewHolder) holder).tv_reply_person.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +120,7 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
         TextView tv_send_person;//发送人
         TextView tv_reply_person;//被回复人
         TextView tv_content;//评论内容
+        TextView tv_time;//评论内容
         LinearLayout ll_gone;//
 
 
@@ -125,6 +129,7 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
             tv_send_person = (TextView) view.findViewById(R.id.tv_send_person);
             tv_reply_person = (TextView) view.findViewById(R.id.tv_reply_person);
             tv_content = (TextView) view.findViewById(R.id.tv_content);
+            tv_time = (TextView) view.findViewById(R.id.tv_time);
             ll_gone = (LinearLayout) view.findViewById(R.id.ll_item_gone);
         }
     }

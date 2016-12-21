@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,27 +16,28 @@
 
         <com.example.administrator.gamedemo.utils.base_image.RoundedImageView
             android:id="@+id/rv_cover"
-            android:layout_width="95dp"
+            android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_loading_small"
             app:corner_radius="8dp"
             app:border_width="0.5dp"
             app:oval="false"
-            app:border_color="@null"
+            app:border_color="@color/white"
             />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="16.0dip"
-            android:layout_toLeftOf="@id/rv_cover"
-            android:text="在迦密山与巴力先知斗法的先知是（以利亚），被丢入狮子洞中未受伤害的先知是（但以理），被吞入鱼腹中又被吐出的先知是（约拿）"
+            android:layout_toRightOf="@id/rv_cover"
+            android:layout_marginLeft="16.0dip"
+            android:text="\t\t1、在迦密山与巴力先知斗法的先知是（以利亚），被丢入狮子洞中未受伤害的先知是（但以理），被吞入鱼腹中又被吐出的先知是（约拿）"
             android:textSize="@dimen/textsize_16"
             android:lines="2"
+            android:ellipsize="end"
+            android:textColor="@color/textcolor_2"
             />
 
         <TextView
@@ -43,9 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:singleLine="true"
-            android:text="袜子@无厘头"
-            android:textColor="@color/secondary_text_default_material_light"
-            android:textSize="14sp"/>
+            android:text="以马内利"
+            android:textColor="@color/textcolor_yellow_3"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/rv_cover"
+            android:layout_marginLeft="16.0dip"
+            android:background="@drawable/selector_white_tran"
+            />
 
         <TextView
             android:id="@+id/tv_views"
@@ -55,14 +62,15 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tv_info"
             android:singleLine="true"
-            android:text="浏览1000000+次"
-            android:textColor="@color/secondary_text_default_material_light"
+            android:text="答题100次"
+            android:textColor="@color/textcolor_yellow_3"
             android:textSize="14sp"/>
+
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="#ffd9d9d9"/>
+        android:layout_height="@dimen/line_px"
+        android:background="@color/backround_hui"/>
 
 </LinearLayout>

@@ -37,7 +37,6 @@ public class MineFragment extends BaseFragment{
     @Override
     public int initCreatView() {
         return R.layout.fragment_mine;
-       // return R.layout.fragment_answer;
     }
 
     @Override

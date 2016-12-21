@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#12B7F5</color>
-    <color name="colorPrimaryDark">#12B7F5</color>
+    <!--<color name="colorPrimary">#12B7F5</color>-->
+    <color name="colorPrimary">#ef8824</color>
+    <color name="colorPrimaryDark">#ef8824</color>
     <color name="colorAccent">#8EC31E</color>
 
-    <color name="colorPrimaryAlpha">#12B7F5</color>
+    <color name="colorPrimaryAlpha">#ef8824</color>
+    <color name="textcolor_yellow_3">#ef8824</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white_t">#44FFFFFF</color>
@@ -17,7 +19,8 @@
 
     <color name="hui">#E6E3E5</color>
     <color name="backround_white">#F4F6F6</color>
-    <color name="backround_hui">#F9FAFA</color>
+    <color name="backround_topic">#5F7872</color>
+    <color name="backround_hui">#F4F0F1</color>
     <color name="white_hui">#E6E9EB</color>
     <color name="h_line">#ACABAE</color>
     <color name="hui_q">#E6E3E5</color>
@@ -32,7 +35,7 @@
     <color name="line_color">#EDEEF3</color>
 
     <color name="blue_s">#3593D2</color>
-    <color name="textcolor_yellow">#FFA14B</color>
+    <color name="textcolor_yellow">#FFA14B</color>#ef8824
     <color name="textcolor_yellow_2">#F18A42</color>
     <color name="textcolor_6">#666666</color>
     <color name="blackround_nwhite">#F8F8F8</color>
@@ -87,4 +90,7 @@
 
 
     <color name="text_comment">#5C6F98</color>
+    <color name="textcolor_1">#4a4a4a</color>
+    <color name="textcolor_2">#6b6868</color>
+    <color name="textcolor_3">#d8d8d8</color>
 </resources>
