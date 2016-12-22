@@ -2,7 +2,6 @@ package com.example.administrator.gamedemo.widget.request;
 
 import android.text.TextUtils;
 
-import com.example.administrator.gamedemo.model.MomentContent;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToolUtil;
@@ -10,6 +9,7 @@ import com.example.administrator.gamedemo.utils.ToolUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -25,11 +25,12 @@ public class AddShareRequest extends BaseRequestClient<String> {
 
     private String authId;
     private String hostId;
-    private MomentContent momentContent;
+    //private MomentContent momentContent;
+    private Share share;
     private List<Students> likesUserId;
 
     public AddShareRequest() {
-        momentContent = new MomentContent();
+        share = new Share();
         likesUserId = new ArrayList<>();
     }
 
@@ -46,19 +47,17 @@ public class AddShareRequest extends BaseRequestClient<String> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         if (checkValided()) {
-            Share momentsInfo = new Share();
+
 
             Students author = new Students();
             author.setObjectId(authId);
-            momentsInfo.setAuthor(author);
+            share.setAuthor(author);
 
-            Students host = new Students();
-            host.setObjectId(hostId);
-            momentsInfo.setHostinfo(host);
+//            Students host = new Students();
+//            host.setObjectId(hostId);
+//            share.setHostinfo(host);
 
-            momentsInfo.setContent(momentContent);
-
-            momentsInfo.save(new SaveListener<String>() {
+            share.save(new SaveListener<String>() {
                 @Override
                 public void done(String s, BmobException e) {
                     if (e == null) {
@@ -95,33 +94,33 @@ public class AddShareRequest extends BaseRequestClient<String> {
 
 
     private boolean checkValided() {
-        return !(TextUtils.isEmpty(authId) || TextUtils.isEmpty(hostId)) && momentContent.isValided();
+        return !(TextUtils.isEmpty(authId) || TextUtils.isEmpty(hostId)) && share.isValided();
     }
 
     public AddShareRequest addText(String text) {
-        momentContent.addText(text);
+        share.setText(text);
         return this;
     }
 
-    public AddShareRequest addPicture(String pic) {
-        momentContent.addPicture(pic);
+    public AddShareRequest addPicture(BmobFile pic) {
+        share.addPicture(pic);
         return this;
     }
 
-    public AddShareRequest addWebUrl(String webUrl) {
-        momentContent.addWebUrl(webUrl);
-        return this;
-    }
-
-    public AddShareRequest addWebTitle(String webTitle) {
-        momentContent.addWebTitle(webTitle);
-        return this;
-    }
-
-    public AddShareRequest addWebImage(String webImage) {
-        momentContent.addWebImage(webImage);
-        return this;
-    }
+//    public AddShareRequest addWebUrl(String webUrl) {
+//        momentContent.addWebUrl(webUrl);
+//        return this;
+//    }
+//
+//    public AddShareRequest addWebTitle(String webTitle) {
+//        momentContent.addWebTitle(webTitle);
+//        return this;
+//    }
+//
+//    public AddShareRequest addWebImage(String webImage) {
+//        momentContent.addWebImage(webImage);
+//        return this;
+//    }
 
     public AddShareRequest addLikes(Students user) {
         likesUserId.add(user);

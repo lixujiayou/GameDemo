@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
+import com.example.administrator.gamedemo.fragment.ShareFragment;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
@@ -31,7 +33,7 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
 
 
 
-    protected RoundedImageView rv_cover;     //封面
+    protected ImageView rv_cover;     //封面
     protected TextView tv_topic; //问题
 
     protected TextView tv_name;
@@ -43,7 +45,7 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
         super(context, viewGroup, layoutResId);
         onFindView(itemView);
         this.mContext = context;
-        rv_cover = (RoundedImageView) findView(rv_cover, R.id.rv_cover);
+        rv_cover = (ImageView) findView(rv_cover, R.id.rv_cover);
         tv_name = (TextView) findView(tv_name, R.id.tv_info);
         tv_topic = (TextView) findView(tv_topic, R.id.tv_title);
         tv_num = (TextView) findView(tv_num, R.id.tv_views);
@@ -64,9 +66,8 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
     private void onBindMutualDataToViews(final MomentsInfo data) {
         //header
         if(data.getAuthor().getUser_icon() != null){
-            ImageLoadMnanger.INSTANCE.loadImageForRv(rv_cover, data.getAuthor().getUser_icon().getFileUrl());
+            ImageLoadMnanger.INSTANCE.loadRoundImage(ShareFragment.getInstance(),rv_cover, data.getAuthor().getUser_icon().getFileUrl());
         }
-
         tv_name.setText(data.getAuthor().getNick_name());
         tv_topic.setText(data.getTopic());
 

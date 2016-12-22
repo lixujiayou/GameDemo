@@ -6,7 +6,6 @@ import android.os.SystemClock;
 
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
-import com.example.administrator.gamedemo.model.MomentContent;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToolUtil;
@@ -124,7 +123,7 @@ public class BmobInitHelper {
         }
     }*/
 
-    public void addShares() {
+   /* public void addShares() {
         Students students = Constants.getInstance().getUser();
         Random random = new Random();
         for (int i = 0; i < 50; i++) {
@@ -157,7 +156,7 @@ public class BmobInitHelper {
             });
             addMomentsRequest.execute();
         }
-       /* AddMomentsRequest addMomentsRequest = new AddMomentsRequest();
+       *//* AddMomentsRequest addMomentsRequest = new AddMomentsRequest();
         addMomentsRequest.setAuthId(userInfoList.get(10).getUserid())
                          .setHostId("MMbKLCCU")
                          .addPicture("http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF")
@@ -175,9 +174,9 @@ public class BmobInitHelper {
                 KLog.d(response);
             }
         });
-        addMomentsRequest.execute();*/
+        addMomentsRequest.execute();*//*
 
-    }
+    }*/
 
 
     /**

@@ -1,8 +1,10 @@
 package com.example.administrator.gamedemo.utils.viewholder;
 
 import android.app.Activity;
+import android.content.ContentProviderClient;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.fragment.ShareFragment;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Share;
@@ -67,8 +70,11 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private DeleteCommentPopup deleteCommentPopup;
     private Share momentsInfo;
 
+    private Context mContext;
+
     public ShareViewHolder(Context context, ViewGroup viewGroup, int layoutResId) {
         super(context, viewGroup, layoutResId);
+        this.mContext = context;
         onFindView(itemView);
         //header
         avatar = (ImageView) findView(avatar, R.id.avatar);
@@ -102,7 +108,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         if (data == null) {
             Logger.t("wu无数据");
             findView(userText, R.id.item_text_field);
-            userText.setText("这个家伙很懒,什么都没写.");
+            userText.setText("");
             return;
         }
         this.momentsInfo=data;
@@ -119,10 +125,15 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
 
     private void onBindMutualDataToViews(Share data) {
         //header
-        ImageLoadMnanger.INSTANCE.loadImage(avatar, data.getAuthor().getAvatar());
+        if(data.getAuthor().getUser_icon() != null) {
+            ImageLoadMnanger.INSTANCE.loadRoundImage(ShareFragment.getInstance(), avatar, data.getAuthor().getUser_icon().getFileUrl());
+        }else{
+            avatar.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_loading_small));
+        }
+
         nick.setText(data.getAuthor().getNick_name());
-//        userText.setText(data.getContent().getText());
-        userText.setText(data.getContent().getText());
+
+        userText.setText(data.getText());
 
         //bottom
         createTime.setText(TimeUtil.getTimeStringFromBmob(data.getCreatedAt()));

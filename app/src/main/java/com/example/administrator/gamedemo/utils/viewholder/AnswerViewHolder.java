@@ -29,7 +29,7 @@ import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
 public class AnswerViewHolder extends TopicBaseViewHolder {
 
-    private RoundedImageView rv_cover;
+    private ImageView rv_cover;
 
 
     public AnswerViewHolder(Context context, ViewGroup viewGroup, int layoutResId) {
@@ -40,7 +40,7 @@ public class AnswerViewHolder extends TopicBaseViewHolder {
 
     @Override
     public void onFindView(@NonNull View rootView) {
-        rv_cover = (RoundedImageView) findView(rv_cover, R.id.rv_cover);
+        rv_cover = (ImageView) findView(rv_cover, R.id.rv_cover);
     }
 
     @Override

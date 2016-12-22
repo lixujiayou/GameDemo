@@ -127,9 +127,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
             case R.id.cv_set:
 
                 circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
-
-
-
 //                BmobInitHelper bb = new BmobInitHelper();
 //                bb.addShares();
                 break;
@@ -230,7 +227,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
-                        hostViewHolder.loadHostData(response.get(0).getHostinfo());
                         adapter.updateData(response);
                         Logger.d("--" + response.size());
                     }
@@ -267,7 +263,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
         public void loadHostData(Students hostInfo) {
             if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadImage(friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
+            ImageLoadMnanger.INSTANCE.loadNomalImage(AnswerFragment.getInstance(),friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
 
         }
 

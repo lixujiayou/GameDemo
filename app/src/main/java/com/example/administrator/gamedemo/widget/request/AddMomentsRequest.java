@@ -2,7 +2,6 @@ package com.example.administrator.gamedemo.widget.request;
 
 import android.text.TextUtils;
 
-import com.example.administrator.gamedemo.model.MomentContent;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
@@ -27,14 +26,12 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
 
     private Students auth;
     private String hostId;
-    private MomentContent momentContent;
     private List<Students> likesUserId;
     private String topic;
     private String ps;
     private ArrayList<String> answers;
 
     public AddMomentsRequest() {
-        momentContent = new MomentContent();
         likesUserId = new ArrayList<>();
         answers = new ArrayList<>();
     }
@@ -132,33 +129,5 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
         return !(auth==null);
     }
 
-    public AddMomentsRequest addText(String text) {
-        momentContent.addText(text);
-        return this;
-    }
 
-    public AddMomentsRequest addPicture(String pic) {
-        momentContent.addPicture(pic);
-        return this;
-    }
-
-    public AddMomentsRequest addWebUrl(String webUrl) {
-        momentContent.addWebUrl(webUrl);
-        return this;
-    }
-
-    public AddMomentsRequest addWebTitle(String webTitle) {
-        momentContent.addWebTitle(webTitle);
-        return this;
-    }
-
-    public AddMomentsRequest addWebImage(String webImage) {
-        momentContent.addWebImage(webImage);
-        return this;
-    }
-
-    public AddMomentsRequest addLikes(Students user) {
-        likesUserId.add(user);
-        return this;
-    }
 }

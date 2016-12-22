@@ -14,19 +14,19 @@
         android:layout_height="100dp"
         android:padding="16dp">
 
-        <com.example.administrator.gamedemo.utils.base_image.RoundedImageView
+        <ImageView
             android:id="@+id/rv_cover"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentLeft="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_loading_small"
-            app:corner_radius="8dp"
-            app:border_width="0.5dp"
-            app:oval="false"
-            app:border_color="@color/white"
-            />
 
+            />
+        <!--app:corner_radius="8dp"-->
+        <!--app:border_width="0.5dp"-->
+        <!--app:oval="false"-->
+        <!--app:border_color="@color/white"-->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"

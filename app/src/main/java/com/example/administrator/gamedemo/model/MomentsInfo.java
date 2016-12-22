@@ -28,7 +28,6 @@ public class MomentsInfo extends BmobObject implements Serializable{
     private BmobRelation likes;
     private List<Students> likesList;     //已经答过本问题的
     private List<CommentInfo> commentList;//评论
-    private MomentContent content;
     private BmobFile cover;     //封面
 
     private String topic;  //问题的题目
@@ -94,13 +93,7 @@ public class MomentsInfo extends BmobObject implements Serializable{
         this.commentList.remove(comment);
     }
 
-    public MomentContent getContent() {
-        return content;
-    }
 
-    public void setContent(MomentContent content) {
-        this.content = content;
-    }
 
     public int getMomentType() {
         return 0;

@@ -111,7 +111,7 @@ public abstract class CircleBaseViewHolder extends BaseRecyclerViewHolder<Share>
         if (data == null) {
             Logger.e("数据是空的！！！！");
             findView(userText, R.id.item_text_field);
-            userText.setText("这个动态的数据是空的。。。。OMG");
+            userText.setText("");
             return;
         }
         this.momentsInfo=data;
@@ -129,7 +129,7 @@ public abstract class CircleBaseViewHolder extends BaseRecyclerViewHolder<Share>
         //header
         ImageLoadMnanger.INSTANCE.loadImage(avatar, data.getAuthor().getAvatar());
         nick.setText(data.getAuthor().getNick_name());
-        userText.setText(data.getContent().getText());
+        userText.setText(data.getText());
 
         //bottom
         createTime.setText(TimeUtil.getTimeStringFromBmob(data.getCreatedAt()));

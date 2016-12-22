@@ -1,15 +1,16 @@
 package com.example.administrator.gamedemo.utils.viewholder;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.activity.image.PhotoBrowseActivity;
 import com.example.administrator.gamedemo.model.Share;
+import com.example.administrator.gamedemo.utils.base_image.PhotoBrowseInfo;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.imageview.ForceClickImageView;
 import com.orhanobut.logger.Logger;
@@ -17,17 +18,18 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobFile;
 import razerdp.github.com.widget.PhotoContents;
 import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
 /**
- * Created by 大灯泡 on 2016/11/3.
+ * Created by lixu on 2016/12/22.
  * <p>
  * 九宮格圖片的vh
  *
  */
 
-public class MultiImageMomentsVH extends ShareViewHolder {
+public class MultiImageMomentsVH extends ShareViewHolder implements PhotoContents.OnItemClickListener {
 
 
     private PhotoContents imageContainer;
@@ -40,17 +42,25 @@ public class MultiImageMomentsVH extends ShareViewHolder {
     @Override
     public void onFindView(@NonNull View rootView) {
         imageContainer = (PhotoContents) findView(imageContainer, R.id.circle_image_container);
+        if (imageContainer.getmOnItemClickListener() == null) {
+            imageContainer.setmOnItemClickListener(this);
+        }
     }
 
     @Override
     public void onBindDataToView(@NonNull Share data, int position, int viewType) {
         if (adapter == null) {
-            adapter = new InnerContainerAdapter(getContext(), data.getContent().getPics());
+            adapter = new InnerContainerAdapter(getContext(), data.getPics());
             imageContainer.setAdapter(adapter);
         } else {
-            Logger.i("update image" + data.getAuthor().getNick_name() + "     :  " + data.getContent().getPics().size());
-            adapter.updateData(data.getContent().getPics());
+            adapter.updateData(data.getPics());
         }
+    }
+
+    @Override
+    public void onItemClick(ImageView imageView, int i) {
+        PhotoBrowseInfo info = PhotoBrowseInfo.create(adapter.datas, imageContainer.getContentViewsGlobalVisibleRects(), i);
+        PhotoBrowseActivity.startToPhotoBrowseActivity((Activity) getContext(), info);
     }
 
 
@@ -60,10 +70,12 @@ public class MultiImageMomentsVH extends ShareViewHolder {
         private Context context;
         private List<String> datas;
 
-        InnerContainerAdapter(Context context, List<String> datas) {
+        InnerContainerAdapter(Context context, List<BmobFile> datas) {
             this.context = context;
             this.datas = new ArrayList<>();
-            this.datas.addAll(datas);
+            for(int i = 0;i<datas.size();i++){
+                this.datas.add(datas.get(i).getFileUrl());
+            }
         }
 
         @Override
@@ -71,14 +83,12 @@ public class MultiImageMomentsVH extends ShareViewHolder {
             if (convertView == null) {
                 convertView = new ForceClickImageView(context);
                 convertView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                Logger.e("newInstance");
             }
             return convertView;
         }
 
         @Override
         public void onBindData(int position, @NonNull ImageView convertView) {
-            Logger.i(datas.get(position));
             ImageLoadMnanger.INSTANCE.loadImage(convertView, datas.get(position));
         }
 
@@ -87,12 +97,13 @@ public class MultiImageMomentsVH extends ShareViewHolder {
             return datas.size();
         }
 
-        public void updateData(List<String> datas) {
+        public void updateData(List<BmobFile> datas) {
             this.datas.clear();
-            this.datas.addAll(datas);
+            for(int i = 0 ;i< datas.size(); i++){
+                this.datas.add(datas.get(i).getFileUrl());
+            }
             notifyDataChanged();
         }
-
 
     }
 }

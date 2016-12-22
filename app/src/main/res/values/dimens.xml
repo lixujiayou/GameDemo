@@ -46,6 +46,7 @@
     <dimen name="height_status_bar">0dp</dimen>
     <!--朋友圈尺寸定义-->
     <dimen name="item_avatar">48dp</dimen>
+    <dimen name="item_mine_height">48dp</dimen>
     <dimen name="item_padding">16dp</dimen>
     <dimen name="line_px">1px</dimen>
 </resources>

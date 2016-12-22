@@ -46,7 +46,9 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         BmobQuery<Share> bmobQuery = new BmobQuery<>();
-        bmobQuery.include(Share.MomentsFields.AUTHOR_USER + "," + Share.MomentsFields.HOST);
+        bmobQuery.include(Share.MomentsFields.AUTHOR_USER
+                + "," + Share.MomentsFields.HOST
+        );
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");

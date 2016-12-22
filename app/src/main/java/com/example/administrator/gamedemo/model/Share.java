@@ -1,12 +1,17 @@
 package com.example.administrator.gamedemo.model;
 
+import android.text.TextUtils;
+
 import com.example.administrator.gamedemo.core.MomentsType;
+import com.example.administrator.gamedemo.utils.StringUtil;
+import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /**
@@ -17,12 +22,11 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class Share extends BmobObject {
 
-
     public interface MomentsFields {
         String LIKES = "likes";
         String HOST = "hostinfo";
-        String COMMENTS = "comments";
-        String AUTHOR_USER = "author";
+        String COMMENTS = "commentList";
+        String AUTHOR_USER = "students";
     }
 
     private Students students;
@@ -30,7 +34,11 @@ public class Share extends BmobObject {
     private BmobRelation likes;
     private List<Students> likesList;
     private List<CommentInfo> commentList;
-    private MomentContent content;
+
+    private String text;
+    private List<BmobFile> pics;
+
+   // private MomentContent content;
 
 
     public Share() {
@@ -76,20 +84,15 @@ public class Share extends BmobObject {
         this.commentList = commentList;
     }
 
-    public MomentContent getContent() {
-        return content;
-    }
 
-    public void setContent(MomentContent content) {
-        this.content = content;
-    }
+
+
 
     public int getMomentType() {
-        if (content == null) {
-            Logger.d("朋友圈内容居然是空的？？？？？MDZZ！！！！");
+        if (pics == null && StringUtil.noEmpty(text)) {
             return MomentsType.EMPTY_CONTENT;
         }
-        return content.getMomentType();
+        return getMomentType_();
     }
 
     public void addComment(CommentInfo commentInfo){
@@ -108,4 +111,58 @@ public class Share extends BmobObject {
             }
         }
     }
+
+
+    /**
+     * 获取动态的类型
+     *
+     * @return
+     */
+    public int getMomentType_() {
+        int type = MomentsType.TEXT_ONLY;
+        //图片列表为空，则只能是文字或者web
+        if (ToolUtil.isListEmpty(pics)) {
+                type = MomentsType.TEXT_ONLY;
+        } else {
+            type = MomentsType.MULTI_IMAGES;
+        }
+        return type;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public List<BmobFile> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<BmobFile> pics) {
+        this.pics = pics;
+    }
+
+    public boolean isValided() {
+        if (ToolUtil.isListEmpty(pics)) {
+            if (TextUtils.isEmpty(text)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public void addPicture(BmobFile pic) {
+        if (pics == null) {
+            pics = new ArrayList<>();
+        }
+        if (pics.size() < 9) {
+            pics.add(pic);
+        }
+    }
+
+
 }

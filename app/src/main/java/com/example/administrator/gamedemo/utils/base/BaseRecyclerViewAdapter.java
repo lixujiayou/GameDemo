@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.gamedemo.R;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +131,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     public T findData(int pos) {
         if (pos < 0 || pos > datas.size()) {
-            Log.e(TAG, "这个position他喵咪的太强大了，我hold不住");
+            Log.e(TAG, "我hold不住");
             return null;
         }
         return datas.get(pos);

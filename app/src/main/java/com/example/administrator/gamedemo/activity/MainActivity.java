@@ -117,17 +117,17 @@ public class MainActivity extends BaseFragmentActivity {
         switch (postion) {
             case 0:
                 tv_answer.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
-                tv_share.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
-                tv_mine.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
+                tv_share.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
+                tv_mine.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
                 break;
             case 1:
-                tv_answer.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
+                tv_answer.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
                 tv_share.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
-                tv_mine.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
+                tv_mine.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
                 break;
             case 2:
-                tv_answer.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
-                tv_share.setTextColor(ContextCompat.getColor(this,R.color.textcolor_m));
+                tv_answer.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
+                tv_share.setTextColor(ContextCompat.getColor(this,R.color.textcolor_3));
                 tv_mine.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
                 break;
         }

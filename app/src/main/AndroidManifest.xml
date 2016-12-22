@@ -54,6 +54,31 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
 
+        <!--个人中心-->
+        <activity android:name=".activity.mine.MineCenterActivity"
+            android:theme="@style/AppBlackTheme"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <!--一起-->
+        <activity android:name=".activity.mine.TogetherActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <!--图片浏览-->
+        <activity
+            android:name=".activity.image.PhotoBrowseActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/Transparent"
+            android:screenOrientation="portrait"/>
+
+
+        <!--glide-->
+        <meta-data
+            android:name="com.example.administrator.gamedemo.core.GlobalGlideConfiguration"
+            android:value="GlideModule"/>
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.administrator.gamedemo.utils;
 
+import com.orhanobut.logger.Logger;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +18,7 @@ public class TimeUtil {
     public static String getTimeString(long milliseconds) {
         result.delete(0, result.length());
 
-        long time = System.currentTimeMillis() - (milliseconds * 1000);
+        long time = System.currentTimeMillis() - (milliseconds);
         long mill = (long) Math.ceil(time / 1000);//秒前
 
         long minute = (long) Math.ceil(time / 60 / 1000.0f);// 分钟前
@@ -24,7 +26,7 @@ public class TimeUtil {
         long hour = (long) Math.ceil(time / 60 / 60 / 1000.0f);// 小时
 
         long day = (long) Math.ceil(time / 24 / 60 / 60 / 1000.0f);// 天前
-
+        Logger.d("时间转换后：day=="+day+"hour == "+hour+"minute == "+minute+"mill == "+mill+"time=="+time);
         if (day - 1 > 0 && day - 1 < 30) {
             result.append(day + "天");
         } else if (day - 1 >= 30) {
@@ -60,11 +62,14 @@ public class TimeUtil {
     private static SimpleDateFormat dataFormate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String getTimeStringFromBmob(String time) {
+        Logger.d("时间格式："+time);
         //格式:2016-10-28 18:48:23
         try {
-            Date date = dataFormate.parse(time);
+            Date date = dataFormate.parse(time.trim());
+            Logger.d("转换后为："+date.getTime());
             return getTimeString(date.getTime());
         } catch (ParseException e) {
+            Logger.d("时间转换错误"+e);
             e.printStackTrace();
             return getTimeString(System.currentTimeMillis());
         }

@@ -54,4 +54,13 @@
         <item name="android:layout_height">0.5dp</item>
         <item name="android:background">@color/gray_divider</item>
     </style>
+
+
+    <style name="Transparent" parent="AppTheme">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+
 </resources>

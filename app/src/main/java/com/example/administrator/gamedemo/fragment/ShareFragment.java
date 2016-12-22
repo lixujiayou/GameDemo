@@ -73,7 +73,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     @BindView(R.id.tv_repair)
     TextView tv_repair;
 
-    //试一下这次呢
+
     private HostViewHolder hostViewHolder;
     private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
@@ -102,7 +102,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initTheme() {
-        getActivity().setTheme(R.style.AppBaseTheme);
+       // getActivity().setTheme(R.style.AppBaseTheme);
     }
 
 
@@ -157,6 +157,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         } else {
+            Logger.d("切换"+isPrepared+"--"+isVisible+"--"+isFirst);
             circleRecyclerView.autoRefresh();
             isFirst = false;
         }
@@ -176,7 +177,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
         public void loadHostData(Students hostInfo) {
             if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadImage(friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
+            ImageLoadMnanger.INSTANCE.loadNomalImage(ShareFragment.getInstance(),friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
 
         }
 

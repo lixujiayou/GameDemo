@@ -39,7 +39,7 @@
           <ImageView
               android:layout_width="30dp"
               android:layout_height="30dp"
-              android:src="@drawable/icon_temp"
+              android:src="@drawable/icon_answer"
               android:layout_gravity="center"
               android:gravity="center"
               />
@@ -68,7 +68,7 @@
           <ImageView
               android:layout_width="30dp"
               android:layout_height="30dp"
-              android:src="@drawable/icon_temp"
+              android:src="@drawable/icon_share"
               android:layout_gravity="center"
               android:gravity="center"
               />
@@ -81,7 +81,7 @@
               android:textSize="@dimen/textsize_14"
               android:layout_gravity="center"
               android:gravity="center"
-              android:textColor="@color/textcolor_m"
+              android:textColor="@color/textcolor_3"
               />
       </LinearLayout>
       <LinearLayout
@@ -96,7 +96,7 @@
           <ImageView
               android:layout_width="30dp"
               android:layout_height="30dp"
-              android:src="@drawable/icon_temp"
+              android:src="@drawable/icon_mine"
               android:layout_gravity="center"
               android:gravity="center"
               />
@@ -109,17 +109,17 @@
               android:textSize="@dimen/textsize_14"
               android:layout_gravity="center"
               android:gravity="center"
-              android:textColor="@color/textcolor_m"
+              android:textColor="@color/textcolor_3"
               />
 
       </LinearLayout>
 
   </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignTop="@id/main_bottome"
-        android:background="#3000"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_alignTop="@id/main_bottome"-->
+        <!--android:background="#3000"/>-->
 
 </RelativeLayout>

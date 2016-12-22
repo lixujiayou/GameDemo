@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -74,10 +75,9 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
         mTextView.setTextSize(textSize);
         mTextView.setTextColor(textColor);
         mTextView.setMaxLines(showLine);
-
-        mClickToShow.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_tx_show_more));
+        mClickToShow.setBackground(ContextCompat.getDrawable(context,R.drawable.selector_tx_show_more));
         mClickToShow.setTextSize(textSize);
-        mClickToShow.setTextColor(getResources().getColor(R.color.nick));
+        mClickToShow.setTextColor(ContextCompat.getColor(context,R.color.nick));
         mClickToShow.setText(clickText);
 
         //设置文字超链接
@@ -141,14 +141,16 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
     }
 
     private void restoreState(String str) {
-        int state = CLOSE;
-        int holderState = TEXT_STATE.get(str.hashCode(), -1);
-        if (holderState == -1) {
-            TEXT_STATE.put(str.hashCode(), state);
-        } else {
-            state = holderState;
-        }
-        setState(state);
+        try {
+            int state = CLOSE;
+            int holderState = TEXT_STATE.get(str.hashCode(), -1);
+            if (holderState == -1) {
+                TEXT_STATE.put(str.hashCode(), state);
+            } else {
+                state = holderState;
+            }
+            setState(state);
+        }catch (Exception e){}
     }
 
     public CharSequence getText() {
