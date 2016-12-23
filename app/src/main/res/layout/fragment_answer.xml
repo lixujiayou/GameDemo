@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backround_hui"
     >
 
     <include layout="@layout/lay_collapsing_viewpager_toolbar_immerse"/>
@@ -24,10 +25,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="140dp"
+            android:layout_height="120dp"
             android:orientation="vertical"
             android:weightSum="2"
+            android:background="@color/white"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,45 +37,57 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 >
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_temp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            >
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:background="@drawable/selector_white"
+           >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\t开始答题"
+                android:textColor="@color/textcolor_m"
+                android:textSize="@dimen/textsize_18"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:drawableLeft="@drawable/icon_answer_test"
+                />
+       </LinearLayout>
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="开始答题"
-               android:textColor="@color/textcolor_m"
-               android:textSize="@dimen/textsize_actionbar"
-               android:layout_gravity="center"
-               android:gravity="center"
-               />
+                <View
+                    android:layout_width="@dimen/line_px"
+                    android:layout_height="match_parent"
+                    android:background="@color/backround_hui"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    />
 
-        </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-            android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            >
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="历史记录"
-               android:textColor="@color/textcolor_m"
-               android:textSize="@dimen/textsize_actionbar"
-               android:layout_gravity="center"
-               android:gravity="center"
-               />
-
-        </android.support.v7.widget.CardView>
+                    android:gravity="center"
+                    android:background="@drawable/selector_white"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\t历史记录"
+                        android:textColor="@color/textcolor_m"
+                        android:textSize="@dimen/textsize_18"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/icon_answer_test"
+                        />
+      </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_px"
+                android:background="@color/backround_hui"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -82,46 +95,51 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 >
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/selector_white"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\t答题规则"
+                        android:textColor="@color/textcolor_m"
+                        android:textSize="@dimen/textsize_18"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/icon_answer_test"
+                        />
+                </LinearLayout>
 
-            >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="答题规则"
-               android:textColor="@color/textcolor_m"
-               android:textSize="@dimen/textsize_actionbar"
-               android:layout_gravity="center"
-               android:gravity="center"
-               />
+                <View
+                    android:layout_width="@dimen/line_px"
+                    android:layout_height="match_parent"
+                    android:background="@color/backround_hui"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    />
 
-        </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-             android:id="@+id/cv_set"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="设置"
-               android:textColor="@color/textcolor_m"
-               android:textSize="@dimen/textsize_actionbar"
-               android:layout_gravity="center"
-               android:gravity="center"
-               android:background="@color/white"
-               android:paddingLeft="@dimen/activity_horizontal_margin"
-               android:paddingRight="@dimen/activity_horizontal_margin"
-               />
-
-        </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/selector_white"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\t设\t\t置"
+                        android:textColor="@color/textcolor_m"
+                        android:textSize="@dimen/textsize_18"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/icon_answer_test"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

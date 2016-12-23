@@ -81,10 +81,8 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
     @BindView(R.id.circleRecyclerView)
     CircleRecyclerView circleRecyclerView;
-    @BindView(R.id.cv_temp)
-    CardView cvTemp;
-    @BindView(R.id.cv_set)
-    CardView cvSet;
+
+
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipe_refresh;
 
@@ -118,20 +116,20 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
 
 
-    @OnClick({R.id.cv_temp, R.id.cv_set})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.cv_temp:
-                login();
-                break;
-            case R.id.cv_set:
-
-                circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
-//                BmobInitHelper bb = new BmobInitHelper();
-//                bb.addShares();
-                break;
-        }
-    }
+//    @OnClick({R.id.cv_temp, R.id.cv_set})
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.cv_temp:
+//                login();
+//                break;
+//            case R.id.cv_set:
+//
+//                circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
+////                BmobInitHelper bb = new BmobInitHelper();
+////                bb.addShares();
+//                break;
+//        }
+//    }
 
 
     public static class answerFragmentHolder {
@@ -249,14 +247,12 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     private static class HostViewHolder {
         private View rootView;
         private ImageView friend_wall_pic;
-        private ImageView friend_avatar;
 //        private ImageView message_avatar;
 //        private TextView message_detail;
 
         public HostViewHolder(Context context) {
             this.rootView = LayoutInflater.from(context).inflate(R.layout.circle_host_header, null);
             this.friend_wall_pic = (ImageView) rootView.findViewById(R.id.friend_wall_pic);
-            this.friend_avatar = (ImageView) rootView.findViewById(R.id.friend_avatar);
 //            this.message_avatar = (ImageView) rootView.findViewById(R.id.message_avatar);
 //            this.message_detail = (TextView) rootView.findViewById(R.id.message_detail);
         }

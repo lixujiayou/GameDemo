@@ -12,13 +12,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
-import com.orhanobut.logger.Logger;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -47,7 +45,6 @@ public class CommentBox extends FrameLayout {
     private int dataPos;
     private CommentWidget commentWidget;
 
-
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({CommentType.TYPE_CREATE, CommentType.TYPE_REPLY})
     public @interface CommentType {
@@ -56,7 +53,6 @@ public class CommentBox extends FrameLayout {
         //回复
         int TYPE_REPLY = 0x11;
     }
-
 
     public CommentBox(Context context) {
         this(context, null);
@@ -89,7 +85,6 @@ public class CommentBox extends FrameLayout {
     }
 
     public void showCommentBox(@NonNull Share momentid, @Nullable CommentInfo commentInfo) {
-        setVisibility(VISIBLE);
         if (momentid == null) return;
         if (isShowing) return;
         this.isShowing = true;
@@ -100,14 +95,12 @@ public class CommentBox extends FrameLayout {
         } else {
             mInputContent.setHint("评论");
         }
-        if(this.momentid != null) {
-            //对于同一条动态恢复草稿，否则不恢复
-            if (momentid.getObjectId().equals(this.momentid.getObjectId()) && StringUtil.noEmpty(draftString)) {
-                mInputContent.setText(draftString);
-                mInputContent.setSelection(draftString.length());
-            } else {
-                mInputContent.setText(null);
-            }
+        //对于同一条动态恢复草稿，否则不恢复
+        if (momentid.getObjectId().equals(this.momentid) && StringUtil.noEmpty(draftString)) {
+            mInputContent.setText(draftString);
+            mInputContent.setSelection(draftString.length());
+        } else {
+            mInputContent.setText(null);
         }
         setMomentid(momentid);
         setVisibility(VISIBLE);
@@ -208,4 +201,5 @@ public class CommentBox extends FrameLayout {
     public interface OnCommentSendClickListener {
         void onCommentSendClick(View v, Share momentid, Students commentAuthorId, String commentContent);
     }
+
 }

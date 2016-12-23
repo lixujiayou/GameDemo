@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.administrator.gamedemo.activity.MainActivity">
-
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         >
     </android.support.v4.view.ViewPager>
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/backround_hui"/>
   <LinearLayout
       android:id="@+id/main_bottome"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:minHeight="@dimen/height_actionbar"
+      android:minHeight="52dp"
       android:orientation="horizontal"
       android:weightSum="3"
       android:layout_alignParentBottom="true"
@@ -116,10 +118,6 @@
 
   </LinearLayout>
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1px"-->
-        <!--android:layout_alignTop="@id/main_bottome"-->
-        <!--android:background="#3000"/>-->
 
-</RelativeLayout>
+
+</LinearLayout>

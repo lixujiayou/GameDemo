@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="【箴9:10】敬畏耶和华是智慧的开端，认识至圣者便是聪明。"
             />
     </RelativeLayout>
     <include layout="@layout/include_moments_bottom"/>

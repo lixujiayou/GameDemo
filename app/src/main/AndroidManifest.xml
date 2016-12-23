@@ -19,6 +19,7 @@
         >
         <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar.Immerse"
+
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

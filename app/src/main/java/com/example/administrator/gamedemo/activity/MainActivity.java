@@ -43,8 +43,7 @@ public class MainActivity extends BaseFragmentActivity {
     TextView tv_share;
     @BindView(R.id.tv_mine)
     TextView tv_mine;
-    @BindView(R.id.activity_main)
-    RelativeLayout activityMain;
+
     private FragmentManager myFM;
     private List<Fragment> list_fragmet = new ArrayList<>();
 

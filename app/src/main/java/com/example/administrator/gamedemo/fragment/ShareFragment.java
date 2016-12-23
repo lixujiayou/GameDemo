@@ -22,6 +22,7 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
+import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
@@ -67,11 +68,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     @BindView(R.id.widget_comment)
     CommentBox commentBox;
 
-    @BindView(R.id.rl_bar)
-    RelativeLayout rl_bar;
+//    @BindView(R.id.rl_bar)
+//    RelativeLayout rl_bar;
 
-    @BindView(R.id.tv_repair)
-    TextView tv_repair;
+//    @BindView(R.id.tv_repair)
+//    TextView tv_repair;
 
 
     private HostViewHolder hostViewHolder;
@@ -91,10 +92,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     }
 
 
-    @OnClick(R.id.rl_bar)
-    public void onClick() {
-        circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
-    }
+//    @OnClick(R.id.rl_bar)
+//    public void onClick() {
+//        circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
+//    }
 
     public static class answerFragmentHolder {
         public static final ShareFragment instance = new ShareFragment();
@@ -113,8 +114,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initViews() {
-        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
-        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
+//        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
+//        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
 
         momentsInfoList = new ArrayList<>();
         momentsRequest = new ShareRequest();
@@ -141,7 +142,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         circleRecyclerView.setAdapter(adapter);
 
 
-        initKeyboardHeightObserver();
 
 
 //        toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
@@ -160,7 +160,9 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             Logger.d("切换"+isPrepared+"--"+isVisible+"--"+isFirst);
             circleRecyclerView.autoRefresh();
             isFirst = false;
+            initKeyboardHeightObserver();
         }
+
 
     }
 
@@ -195,8 +197,14 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
             @Override
             public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
+
+                ToastUtil3.showToast(mContext,"高度"+keyboardHeight);
+
+          //      commentBox.setMinimumHeight(keyboardHeight);
+
                 int commentType = commentBox.getCommentType();
                 if (isVisible) {
+                //    commentBox.setMinimumHeight(keyboardHeight);
                     //定位评论框到view
                     anchorView = alignCommentBoxToView(commentType);
                 } else {
@@ -302,6 +310,12 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     @Override
     public void showCommentBox(int itemPos, Share momentid, CommentWidget commentWidget) {
         Logger.d("showCommentBox");
+
+        if(commentWidget == null){
+            Logger.d("commentWidget == null--itemPos="+itemPos);
+        }else{
+            Logger.d("commentWidget != null--itemPos=="+itemPos);
+        }
         commentBox.setDataPos(itemPos);
         commentBox.setCommentWidget(commentWidget);
         commentBox.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
@@ -414,6 +428,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     //=============================================================call back
     private CommentBox.OnCommentSendClickListener onCommentSendClickListener = new CommentBox.OnCommentSendClickListener() {
+
+
         @Override
         public void onCommentSendClick(View v, Share momentid, Students commentAuthorId, String commentContent) {
             if (TextUtils.isEmpty(commentContent)) return;

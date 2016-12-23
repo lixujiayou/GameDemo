@@ -109,12 +109,28 @@ public class UIHelper {
     /**
      * 显示软键盘
      */
+//    public static void showInputMethod(View view) {
+//        if (view != null && view instanceof EditText) view.requestFocus();
+//
+//        InputMethodManager imm = (InputMethodManager) view.getContext()
+//                                                          .getSystemService(Context.INPUT_METHOD_SERVICE);
+//        if (imm != null) {
+//            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+//        }
+//    }
+
+
+    /**
+     * 显示软键盘
+     */
     public static void showInputMethod(View view) {
-        if (view != null && view instanceof EditText) view.requestFocus();
+        if (view == null) return;
+        if (view instanceof EditText) view.requestFocus();
         InputMethodManager imm = (InputMethodManager) view.getContext()
-                                                          .getSystemService(Context.INPUT_METHOD_SERVICE);
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            boolean success=imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            Logger.d(" isSuccess   >>>   "+success);
         }
     }
 
@@ -122,7 +138,8 @@ public class UIHelper {
      * 显示软键盘
      */
     public static void showInputMethod(Context context) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
@@ -134,7 +151,6 @@ public class UIHelper {
         // 显示输入法
         {
             view.postDelayed(new Runnable() {
-
                 @Override
                 public void run() {
                     UIHelper.showInputMethod(view);

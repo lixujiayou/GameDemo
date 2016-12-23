@@ -14,7 +14,7 @@ import com.example.administrator.gamedemo.widget.SpannableStringBuilderAllVer;
 import com.example.administrator.gamedemo.widget.span.ClickableSpanEx;
 
 /**
- * Created by lixu on 20161/2/19.
+ * Created by 大灯泡 on 2016/2/23.
  * 评论控件
  */
 public class CommentWidget extends TextView {
@@ -72,24 +72,24 @@ public class CommentWidget extends TextView {
         // 用户B为空，证明是一条原创评论
         if (info.getAuthor() != null && isApply) {
             CommentClick userA = new CommentClick.Builder(getContext(), info.getAuthor()).setColor(0xff517fae)
-                    .setClickEventColor(0xffc6c6c6)
-                    .setTextSize(textSize)
-                    .build();
+                                                                                   .setClickEventColor(0xffc6c6c6)
+                                                                                   .setTextSize(textSize)
+                                                                                   .build();
             mSpannableStringBuilderAllVer.append(info.getAuthor().getNick_name(), userA, 0);
             mSpannableStringBuilderAllVer.append(content);
         }
         else if (info.getAuthor() != null && !isApply) {
             //用户A，B不空，证明是回复评论
             CommentClick userA = new CommentClick.Builder(getContext(), info.getAuthor()).setColor(0xff517fae)
-                    .setClickEventColor(0xffc6c6c6)
-                    .setTextSize(textSize)
-                    .build();
+                                                                                   .setClickEventColor(0xffc6c6c6)
+                                                                                   .setTextSize(textSize)
+                                                                                   .build();
             mSpannableStringBuilderAllVer.append(info.getAuthor().getNick_name(), userA, 0);
             mSpannableStringBuilderAllVer.append(" 回复 ");
             CommentClick userB = new CommentClick.Builder(getContext(), info.getReply()).setColor(0xff517fae)
-                    .setClickEventColor(0xffc6c6c6)
-                    .setTextSize(textSize)
-                    .build();
+                                                                                   .setClickEventColor(0xffc6c6c6)
+                                                                                   .setTextSize(textSize)
+                                                                                   .build();
             mSpannableStringBuilderAllVer.append(info.getReply().getNick_name(), userB, 0);
             mSpannableStringBuilderAllVer.append(content);
         }

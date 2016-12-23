@@ -47,7 +47,7 @@
             android:layout_alignParentBottom="true"
             android:singleLine="true"
             android:text="以马内利"
-            android:textColor="@color/textcolor_yellow_3"
+            android:textColor="@color/textcolor_6"
             android:textSize="14sp"
             android:layout_toRightOf="@id/rv_cover"
             android:layout_marginLeft="16.0dip"
@@ -63,7 +63,7 @@
             android:layout_toRightOf="@id/tv_info"
             android:singleLine="true"
             android:text="答题100次"
-            android:textColor="@color/textcolor_yellow_3"
+            android:textColor="@color/textcolor_3"
             android:textSize="14sp"/>
 
     </RelativeLayout>

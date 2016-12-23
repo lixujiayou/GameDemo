@@ -10,6 +10,7 @@ import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.widget.span.ClickableSpanEx;
 
+
 /**
  * Created by 大灯泡 on 2016/2/23.
  * 评论点击事件
@@ -32,7 +33,7 @@ public class CommentClick extends ClickableSpanEx {
     @Override
     public void onClick(View widget) {
         if (mUserInfo != null)
-            Toast.makeText(mContext, "当前用户名是： " + mUserInfo.getNick_name() + "   它的ID是： " + mUserInfo.getUsername(),
+            Toast.makeText(mContext, "当前用户名是： " + mUserInfo.getNick_name() + "   它的ID是： " + mUserInfo.getObjectId(),
                     Toast.LENGTH_SHORT).show();
     }
 
