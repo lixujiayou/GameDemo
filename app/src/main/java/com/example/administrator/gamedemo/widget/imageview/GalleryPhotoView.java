@@ -17,10 +17,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
+import uk.co.senab.photoview_2.PhotoView;
 
-import com.orhanobut.logger.Logger;
-
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by 大灯泡 on 2016/12/20.
@@ -246,9 +244,9 @@ public class GalleryPhotoView extends PhotoView {
 
         private void setMatrixValue() {
           //  Logger.d(currentScale+"");
+
             postScale(currentScale, scaleCenterX, scaleCenterY);
             applyMatrix();
-//            drage(dx, dy);
         }
 
         private void postExecuteSelf() {

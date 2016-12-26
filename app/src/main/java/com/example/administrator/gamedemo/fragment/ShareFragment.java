@@ -22,7 +22,6 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
-import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
@@ -56,25 +55,23 @@ import cn.bmob.v3.exception.BmobException;
 
 public class ShareFragment extends BaseFragment implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
 
-//    @BindView(R.id.toolbar)
-//    public Toolbar toolbar;
-    private boolean isPrepared;
 
-    private static final int REQUEST_REFRESH = 0x10;
-    private static final int REQUEST_LOADMORE = 0x11;
-
+    @BindView(R.id.tv_repair)
+    TextView tv_repair;
+    @BindView(R.id.rl_bar)
+    RelativeLayout rlBar;
     @BindView(R.id.recycler)
     CircleRecyclerView circleRecyclerView;
     @BindView(R.id.widget_comment)
     CommentBox commentBox;
 
-//    @BindView(R.id.rl_bar)
-//    RelativeLayout rl_bar;
+    private boolean isPrepared;
 
-//    @BindView(R.id.tv_repair)
-//    TextView tv_repair;
+    private static final int REQUEST_REFRESH = 0x10;
+    private static final int REQUEST_LOADMORE = 0x11;
 
 
+    private int keyHeight;
     private HostViewHolder hostViewHolder;
     private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
@@ -92,10 +89,18 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     }
 
 
-//    @OnClick(R.id.rl_bar)
-//    public void onClick() {
-//        circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
-//    }
+    @OnClick(R.id.rl_bar)
+    public void onClick() {
+        circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
 
     public static class answerFragmentHolder {
         public static final ShareFragment instance = new ShareFragment();
@@ -103,7 +108,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initTheme() {
-       // getActivity().setTheme(R.style.AppBaseTheme);
+
+        getActivity().setTheme(R.style.AppBaseTheme);
     }
 
 
@@ -114,8 +120,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initViews() {
-//        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
-//        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
+        ViewGroup.LayoutParams lp = tv_repair.getLayoutParams();
+        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
 
         momentsInfoList = new ArrayList<>();
         momentsRequest = new ShareRequest();
@@ -142,8 +148,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         circleRecyclerView.setAdapter(adapter);
 
 
-
-
 //        toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
 //        toolbar.setTitle(R.string.main_share);
 
@@ -157,7 +161,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         } else {
-            Logger.d("切换"+isPrepared+"--"+isVisible+"--"+isFirst);
+            Logger.d("切换" + isPrepared + "--" + isVisible + "--" + isFirst);
             circleRecyclerView.autoRefresh();
             isFirst = false;
             initKeyboardHeightObserver();
@@ -179,7 +183,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
         public void loadHostData(Students hostInfo) {
             if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadNomalImage(ShareFragment.getInstance(),friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
+            ImageLoadMnanger.INSTANCE.loadNomalImage(ShareFragment.getInstance(), friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
 
         }
 
@@ -198,13 +202,12 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             @Override
             public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
 
-                ToastUtil3.showToast(mContext,"高度"+keyboardHeight);
 
-          //      commentBox.setMinimumHeight(keyboardHeight);
-
+                keyHeight = keyboardHeight;
                 int commentType = commentBox.getCommentType();
                 if (isVisible) {
-                //    commentBox.setMinimumHeight(keyboardHeight);
+                    commentBox.setMinimumHeight(keyboardHeight - 56);
+                    //    commentBox.setMinimumHeight(keyboardHeight);
                     //定位评论框到view
                     anchorView = alignCommentBoxToView(commentType);
                 } else {
@@ -311,10 +314,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     public void showCommentBox(int itemPos, Share momentid, CommentWidget commentWidget) {
         Logger.d("showCommentBox");
 
-        if(commentWidget == null){
-            Logger.d("commentWidget == null--itemPos="+itemPos);
-        }else{
-            Logger.d("commentWidget != null--itemPos=="+itemPos);
+        if (commentWidget == null) {
+            Logger.d("commentWidget == null--itemPos=" + itemPos);
+        } else {
+            Logger.d("commentWidget != null--itemPos==" + itemPos);
         }
         commentBox.setDataPos(itemPos);
         commentBox.setCommentWidget(commentWidget);
@@ -354,17 +357,16 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (commentType == CommentBox.CommentType.TYPE_CREATE) {
             //对齐到动态底部
             int scrollY = calcuateMomentsViewOffset(itemView);
-            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY);
+            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY + keyHeight - 56);
             return itemView;
         } else {
             //对齐到对应的评论
             CommentWidget commentWidget = commentBox.getCommentWidget();
             if (commentWidget == null) return null;
             int scrollY = calcuateCommentWidgetOffset(commentWidget);
-            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY);
+            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY + keyHeight - 56);
             return commentWidget;
         }
-
     }
 
     /**
@@ -428,8 +430,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     //=============================================================call back
     private CommentBox.OnCommentSendClickListener onCommentSendClickListener = new CommentBox.OnCommentSendClickListener() {
-
-
         @Override
         public void onCommentSendClick(View v, Share momentid, Students commentAuthorId, String commentContent) {
             if (TextUtils.isEmpty(commentContent)) return;

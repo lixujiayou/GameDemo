@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,6 @@
         >
         <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar.Immerse"
-
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,24 +33,22 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
-
+        <!--android:windowSoftInputMode="adjustPan"-->
         <!--上传题库界面-->
         <activity android:name=".activity.SendAnswerActivity"
             android:theme="@style/AppBlackTheme"
-            android:windowSoftInputMode="adjustPan"
+
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
 
         <!--登录-->
         <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
         <!--上传答题规范-->
         <activity android:name=".activity.UpLoadRuleActivity"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
@@ -63,10 +61,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
         <!--一起-->
-        <activity android:name=".activity.mine.TogetherActivity"
+        <activity android:name=".activity.mine.togther.TogetherActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+
+        <!--一起说-->
+        <activity android:name=".activity.mine.togther.SendTogtherActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
         <!--图片浏览-->
         <activity
             android:name=".activity.image.PhotoBrowseActivity"
@@ -74,6 +80,14 @@
             android:launchMode="singleTask"
             android:theme="@style/Transparent"
             android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name="com.lidong.photopicker.PhotoPickerActivity"
+            android:theme="@style/PhotoPickerTheme"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.lidong.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme"/>
 
 
         <!--glide-->

@@ -5,14 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backround_hui"
+    android:weightSum="5"
     >
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_weight="2"
+    >
 
 <RelativeLayout
     android:id="@+id/rl_mine"
     android:layout_width="match_parent"
-    android:layout_height="260dp"
-
+    android:layout_height="wrap_content"
     >
 
     <ImageView
@@ -66,8 +72,7 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_mine_height"
-    android:minHeight="@dimen/item_mine_height"
+    android:layout_height="40dp"
     android:background="@drawable/change_color_1"
     android:weightSum="3"
     android:layout_alignParentBottom="true"
@@ -176,10 +181,16 @@
 </LinearLayout>
 
 </RelativeLayout>
+    </LinearLayout>
+
+
+
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="0dp"
+    android:layout_weight="3"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

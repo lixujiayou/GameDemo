@@ -11,24 +11,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.utils.ToolUtil;
-import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.utils.base_image.PhotoBrowseInfo;
 import com.example.administrator.gamedemo.utils.base_image.PhotoBrowseUtil;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.imageview.GalleryPhotoView;
 import com.example.administrator.gamedemo.widget.imageview.HackyViewPager;
 import com.orhanobut.logger.Logger;
-
-
 import java.util.LinkedList;
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
+import uk.co.senab.photoview_2.PhotoView;
+import uk.co.senab.photoview_2.PhotoViewAttacher;
 
 
 /**

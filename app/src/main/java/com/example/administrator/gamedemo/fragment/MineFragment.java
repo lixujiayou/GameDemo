@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
+import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.UIHelper;
@@ -80,12 +81,16 @@ public class MineFragment extends BaseFragment {
                 gIntent.setClass(mContext, MineCenterActivity.class);
                 break;
             case R.id.ll_together:
+
                 break;
             case R.id.ll_collect:
+                gIntent.setClass(mContext, SendTogtherActivity.class);
                 break;
             case R.id.ll_upload:
                 break;
         }
+
+        startActivity(gIntent);
     }
 
     public static class answerFragmentHolder {
@@ -104,8 +109,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-        ViewGroup.LayoutParams rlLayoutParams = relativeLayout.getLayoutParams();
-        rlLayoutParams.height = UIHelper.pxToDip(700);
+//        ViewGroup.LayoutParams rlLayoutParams = relativeLayout.getLayoutParams();
+//        rlLayoutParams.height = UIHelper.pxToDip(700);
         iv_dim.setPadding(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);
 
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) iv_message.getLayoutParams();

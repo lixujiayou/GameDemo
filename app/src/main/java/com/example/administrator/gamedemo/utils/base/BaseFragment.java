@@ -24,22 +24,23 @@ public abstract class BaseFragment extends Fragment{
 
 
     public View mView;
-    public Context mContext;;
+    public Context mContext;
     private int layoutID;
     public boolean isVisible; //Fragment显示隐藏状态
     public static boolean isFirst;//是否第一次加载数据
-
+    public LayoutInflater mInflater;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mInflater = inflater;
       //  initTheme();
+
         layoutID = initCreatView();
         mView = inflater.inflate(layoutID,container,false);
         mContext = getActivity();
         ButterKnife.bind(this,mView);
 
         initViews();
-        Logger.d("Fragment--onCreateView");
         return mView;
     }
 

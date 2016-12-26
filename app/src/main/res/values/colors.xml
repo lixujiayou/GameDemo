@@ -94,5 +94,5 @@
     <color name="textcolor_2">#6b6868</color>
     <color name="textcolor_3">#d8d8d8</color>
     <color name="textcolor_4">#7D7D7D</color>
-
+    <color name="photopicker_background">#181819</color>
 </resources>

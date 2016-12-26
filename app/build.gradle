@@ -24,10 +24,6 @@ android {
         }
     }
 }
-
-
-
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.2.0'
@@ -61,6 +57,7 @@ dependencies {
     compile 'com.android.support:support-annotations:24.2.0'
     //图片处理
     compile 'jp.wasabeef:glide-transformations:2.0.0'
+    compile project(':photopicker')
     compile project(':photoview')
 }
 
