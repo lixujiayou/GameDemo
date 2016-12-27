@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * Created by 大灯泡 on 2016/11/1.
+ * Created by lixu on 2016/12/27.
  * <p>
  * 朋友圈adapter
  */

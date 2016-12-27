@@ -83,12 +83,10 @@ public class SendTogtherActivity extends BaseActivity {
                         if(text.trim() == null || text.length() == 0){
                             ToastUtil3.showToast(SendTogtherActivity.this,"请填写文字内容");
                         }else {
-                            Logger.d("开始上传");
                             commitTogther(text);
                         }
                         break;
                     default:
-                        Logger.d("点不到我");
                         break;
                 }
                 return true;

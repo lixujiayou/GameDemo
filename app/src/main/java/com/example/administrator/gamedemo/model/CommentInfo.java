@@ -23,6 +23,7 @@ public class CommentInfo extends BmobObject {
 
 
     private Share moment;
+    private Togther togther;
     private String content;
     private Students author;
     private Students reply;
@@ -33,6 +34,14 @@ public class CommentInfo extends BmobObject {
 
     public void setMoment(Share moment) {
         this.moment = moment;
+    }
+
+    public Togther getTogther() {
+        return togther;
+    }
+
+    public void setTogther(Togther togther) {
+        this.togther = togther;
     }
 
     public String getContent() {

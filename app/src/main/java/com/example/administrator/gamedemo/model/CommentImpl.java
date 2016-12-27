@@ -10,7 +10,7 @@ import com.example.administrator.gamedemo.widget.request.callback.OnCommentChang
 
 
 /**
- * Created by 大灯泡 on 2016/12/7.
+ * Created by lixu on 2016/12/27.
  * <p>
  * 评论Model
  */

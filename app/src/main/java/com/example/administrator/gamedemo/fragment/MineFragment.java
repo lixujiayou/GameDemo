@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
+import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.UIHelper;
@@ -81,13 +82,13 @@ public class MineFragment extends BaseFragment {
                 gIntent.setClass(mContext, MineCenterActivity.class);
                 break;
             case R.id.ll_together:
-
+                gIntent.setClass(mContext, TogetherActivity.class);
                 break;
             case R.id.ll_collect:
-                gIntent.setClass(mContext, SendTogtherActivity.class);
-                break;
+
+                return;
             case R.id.ll_upload:
-                break;
+               return;
         }
 
         startActivity(gIntent);

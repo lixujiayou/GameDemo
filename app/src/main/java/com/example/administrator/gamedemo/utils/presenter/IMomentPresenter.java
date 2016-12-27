@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- * Created by 大灯泡 on 2016/12/7.
+ * Created by lixu on 2016/12/7.
  */
 
 public interface IMomentPresenter extends IBasePresenter<IMomentView> {

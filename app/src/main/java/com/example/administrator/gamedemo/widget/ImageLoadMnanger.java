@@ -1,5 +1,6 @@
 package com.example.administrator.gamedemo.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -65,6 +66,17 @@ public enum ImageLoadMnanger {
 
     public void loadRoundImage(Fragment fragment,ImageView imageView,String imgUrl){
         Glide.with(fragment)
+                .load(imgUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
+                .placeholder(R.drawable.ic_loading_small)
+                .error(R.mipmap.ic_launcher)
+                .thumbnail(0.2f)
+                .into(imageView)
+        ;
+    }
+    public void loadRoundImage(ImageView imageView, String imgUrl){
+        Glide.with(getImageContext(imageView))
                 .load(imgUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
