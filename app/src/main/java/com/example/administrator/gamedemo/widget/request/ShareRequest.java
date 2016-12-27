@@ -117,7 +117,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             //根据更新时间降序
             //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
             //排序子目录
-            likesQuery.order("-updatedAt");
+            likesQuery.order("-createdAt");
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
@@ -127,7 +127,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                     BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
                     commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
                     commentQuery.addWhereEqualTo("moment", momentsInfo);
-                    commentQuery.order("createdAt");
+                    commentQuery.order("-createdAt");
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
                         @Override
                         public void done(List<CommentInfo> list, BmobException e) {

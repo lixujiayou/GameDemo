@@ -33,8 +33,7 @@ public class MomentsInfo extends BmobObject implements Serializable{
     private String topic;  //问题的题目
     private List<String> answers;//答案s
     private String hint;    //提示
-
-    private int no;//问题编号
+    private transient int no;//问题编号
     private int aw_num;//答题次数
 
     public MomentsInfo() {

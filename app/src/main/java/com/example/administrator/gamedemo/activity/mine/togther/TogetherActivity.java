@@ -9,8 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.model.Share;
+import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
+import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
+import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
+import com.example.administrator.gamedemo.widget.request.TogtherRequest;
+import com.orhanobut.logger.Logger;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +29,8 @@ import butterknife.OnClick;
  * 一起
  */
 public class TogetherActivity extends BaseActivity {
-
+    private static final int REQUEST_REFRESH = 0x10;
+    private static final int REQUEST_LOADMORE = 0x11;
 
     @BindView(R.id.rv_togther)
     RecyclerView rvTogther;
@@ -29,6 +38,7 @@ public class TogetherActivity extends BaseActivity {
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.main_content)
     CoordinatorLayout mainContent;
+    private TogtherRequest togtherRequest;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -45,10 +55,8 @@ public class TogetherActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_jiahao:
-
                         break;
                 }
-
                 return true;
             }
         });
@@ -56,19 +64,48 @@ public class TogetherActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        swipeRefresh.setRefreshing(true);
+        togtherRequest = new TogtherRequest();
+        togtherRequest.setOnResponseListener(momentsRequestCallBack);
+        togtherRequest.setRequestType(REQUEST_REFRESH);
+        togtherRequest.setCurPage(0);
+        togtherRequest.execute();
     }
 
+    //call back block
+    //==============================================
+    private boolean isOne = true;
+    private SimpleResponseListener<List<Togther>> momentsRequestCallBack = new SimpleResponseListener<List<Togther>>() {
+        @Override
+        public void onSuccess(List<Togther> response, int requestType) {
+            swipeRefresh.setRefreshing(false);
+            switch (requestType) {
+                case REQUEST_REFRESH:
+                    if (!ToolUtil.isListEmpty(response)) {
 
+                        Logger.i("第一条动态ID   >>>   " + response.get(0).getMomentid());
+                        //     hostViewHolder.loadHostData(Constants.getInstance().getUser());
+//                        adapter.updateData(response);
+                    }
+                    break;
+                case REQUEST_LOADMORE:
+//                    momentsInfoList.clear();
+//                    momentsInfoList.addAll(response);
+//                    adapter.addMore(response);
+                    break;
+            }
+        }
+    };
 
-    @OnClick(R.id.toolbar)
-    public void onClick() {
-        rvTogther.smoothScrollToPosition(0);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.menu_send, menu);
-        return true;
-    }
+        @OnClick(R.id.toolbar)
+        public void onClick() {
+            rvTogther.smoothScrollToPosition(0);
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
+            getMenuInflater().inflate(R.menu.menu_send, menu);
+            return true;
+        }
 }

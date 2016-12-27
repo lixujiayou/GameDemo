@@ -16,7 +16,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
+import com.example.administrator.gamedemo.widget.request.AddTogtherRequest;
+import com.example.administrator.gamedemo.widget.request.OnResponseListener;
+import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
+import com.example.administrator.gamedemo.widget.request.TogtherRequest;
 import com.lidong.photopicker.ImageCaptureManager;
 import com.lidong.photopicker.PhotoPickerActivity;
 import com.lidong.photopicker.PhotoPreviewActivity;
@@ -30,6 +36,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import cn.bmob.v3.exception.BmobException;
 
 
 /**
@@ -46,7 +53,7 @@ public class SendTogtherActivity extends BaseActivity {
     GridView gridView;
 
     @BindView(R.id.et_togther)
-    EditText textView;
+    EditText et_togther;
 
     private ArrayList<String> imagePaths = new ArrayList<>();
     private ImageCaptureManager captureManager; // 相机拍照处理类
@@ -71,8 +78,17 @@ public class SendTogtherActivity extends BaseActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_write:
-                        commitTogther();
+                    case R.id.action_send_whrite:
+                        String text = et_togther.getText().toString();
+                        if(text.trim() == null || text.length() == 0){
+                            ToastUtil3.showToast(SendTogtherActivity.this,"请填写文字内容");
+                        }else {
+                            Logger.d("开始上传");
+                            commitTogther(text);
+                        }
+                        break;
+                    default:
+                        Logger.d("点不到我");
                         break;
                 }
                 return true;
@@ -128,15 +144,46 @@ public class SendTogtherActivity extends BaseActivity {
 
     }
 
-    private void commitTogther() {
-        depp =textView.getText().toString().trim()!=null?textView.getText().toString().trim():"woowoeo";
-        Logger.d(imagePaths + depp);
+    private void commitTogther(String togtherText) {
+        AddTogtherRequest addTogtherRequest = new AddTogtherRequest();
+        addTogtherRequest.setAuthId(Constants.getInstance().getUser(SendTogtherActivity.this).getObjectId());
+        addTogtherRequest.addText(togtherText);
+        if(imagePaths.contains("000000")) {
+            imagePaths.remove("000000");
+        }
+        if(imagePaths != null || imagePaths.size() !=0 ) {
+            for (String picUrl : imagePaths) {
+                addTogtherRequest.addPicture(picUrl);
+            }
+        }
+
+        addTogtherRequest.setOnResponseListener(new OnResponseListener<String>() {
+            @Override
+            public void onStart(int requestType) {
+
+            }
+
+            @Override
+            public void onSuccess(String response, int requestType) {
+                ToastUtil3.showToast(SendTogtherActivity.this,response+requestType);
+                Logger.d(response+requestType);
+                finish();
+            }
+
+            @Override
+            public void onError(BmobException e, int requestType) {
+                ToastUtil3.showToast(SendTogtherActivity.this,"上传失败，请检查网络并重试");
+                Logger.d(e.toString()+requestType);
+            }
+        });
+        addTogtherRequest.execute();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.menu_write, menu);
+        getMenuInflater().inflate(R.menu.menu_send_whrite, menu);
         return true;
     }
 
@@ -180,7 +227,7 @@ public class SendTogtherActivity extends BaseActivity {
 
             final String path = listUrls.get(position);
             if (path.equals("000000")) {
-                holder.image.setImageResource(R.mipmap.ic_launcher);
+                holder.image.setImageResource(R.drawable.add_image);
             } else {
                 Glide.with(SendTogtherActivity.this)
                         .load(path)

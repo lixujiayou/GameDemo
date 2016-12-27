@@ -161,13 +161,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         } else {
-            Logger.d("切换" + isPrepared + "--" + isVisible + "--" + isFirst);
             circleRecyclerView.autoRefresh();
             isFirst = false;
             initKeyboardHeightObserver();
         }
-
-
     }
 
 

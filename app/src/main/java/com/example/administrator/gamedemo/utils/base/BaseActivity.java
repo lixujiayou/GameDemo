@@ -113,4 +113,5 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             ToastUtil3.showToast(this,R.string.no_network);
         }
     }
+
 }
