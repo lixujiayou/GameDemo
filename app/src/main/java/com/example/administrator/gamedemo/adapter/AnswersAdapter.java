@@ -25,7 +25,6 @@ import java.util.List;
  */
 
 public class AnswersAdapter extends BaseRecyclerViewAdapter<MomentsInfo> {
-
     private SparseArray<ViewHoldernfo> viewHolderKeyArray;
 
     private AnswersAdapter(@NonNull Context context,

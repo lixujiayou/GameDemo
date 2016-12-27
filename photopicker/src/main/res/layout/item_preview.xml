@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:ignore="ResourceName">
 
-    <uk.co.senab.photoview.PhotoView
+    <uk.co.senab.photoview_2.PhotoView
         android:id="@+id/iv_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

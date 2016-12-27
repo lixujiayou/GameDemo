@@ -58,7 +58,7 @@ dependencies {
     //图片处理
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile project(':photopicker')
-    compile project(':photoview')
+
 }
 
 

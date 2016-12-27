@@ -13,8 +13,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
+
+import uk.co.senab.photoview_2.PhotoView;
+import uk.co.senab.photoview_2.PhotoViewAttacher;
 
 /**
  * Created by donglua on 15/6/21.
@@ -61,15 +62,28 @@ public class PhotoPagerAdapter extends PagerAdapter {
             .error(R.mipmap.default_error)
             .crossFade()
             .into(imageView);
-
     imageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-        @Override
-        public void onPhotoTap(View view, float v, float v1) {
-          if(listener != null){
-            listener.OnPhotoTapListener(view, v, v1);
-          }
+      @Override
+      public void onPhotoTap(View view, float x, float y) {
+        if(listener != null){
+          listener.OnPhotoTapListener(view, x, y);
         }
+      }
+
+      @Override
+      public void onOutsidePhotoTap() {
+
+      }
     });
+
+//    imageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+//        @Override
+//        public void onPhotoTap(View view, float v, float v1) {
+//          if(listener != null){
+//            listener.OnPhotoTapListener(view, v, v1);
+//          }
+//        }
+//    });
 
     container.addView(itemView);
 
