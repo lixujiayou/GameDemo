@@ -6,7 +6,7 @@
     >
 
     <include layout="@layout/toolbar"/>
-
+<include layout="@layout/layout_no_network"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:background="@color/white"
-         android:hint="一起说些什么..."
+         android:hint="神在我身上的恩典..."
          android:textSize="@dimen/textsize_18"
          />
         <GridView

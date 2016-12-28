@@ -37,6 +37,11 @@ public class LikeImpl implements ILike {
             public void onError(BmobException e, int requestType) {
 
             }
+
+            @Override
+            public void onProgress(int pro) {
+
+            }
         });
         request.execute();
     }
@@ -60,6 +65,11 @@ public class LikeImpl implements ILike {
 
             @Override
             public void onError(BmobException e, int requestType) {
+
+            }
+
+            @Override
+            public void onProgress(int pro) {
 
             }
         });

@@ -49,4 +49,6 @@
     <dimen name="item_mine_height">48dp</dimen>
     <dimen name="item_padding">16dp</dimen>
     <dimen name="line_px">1px</dimen>
+
+    <dimen name="crop__bar_height">48dp</dimen>
 </resources>

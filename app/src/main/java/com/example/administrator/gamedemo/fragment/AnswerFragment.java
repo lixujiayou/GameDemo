@@ -242,6 +242,11 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
             circleRecyclerView.compelete();
             Logger.d("错误" + e.toString());
         }
+
+        @Override
+        public void onProgress(int pro) {
+
+        }
     };
 
     private static class HostViewHolder {

@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.widget.request;
 
 import android.text.TextUtils;
 
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
@@ -68,6 +69,8 @@ public class AddTogtherRequest extends BaseRequestClient<String> {
 
                     @Override
                     public void onProgress(int i, int i1, int i2, int i3) {
+                       // setProgressDialogText(String.valueOf(i3));
+                        onResponseProgress(i3);
                         Logger.d("当前上传进度：" + i3);
                     }
 

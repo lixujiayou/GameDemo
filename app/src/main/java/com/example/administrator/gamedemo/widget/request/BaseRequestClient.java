@@ -42,6 +42,11 @@ public abstract class BaseRequestClient<T> {
             onResponseListener.onError(e, requestType);
         }
     }
+    protected void onResponseProgress(int pro) {
+        if (onResponseListener != null) {
+            onResponseListener.onProgress(pro);
+        }
+    }
 
     public int getRequestType() {
         return requestType;

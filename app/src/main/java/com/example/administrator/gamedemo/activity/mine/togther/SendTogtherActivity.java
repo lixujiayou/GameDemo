@@ -1,5 +1,6 @@
 package com.example.administrator.gamedemo.activity.mine.togther;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import cn.bmob.v3.exception.BmobException;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -62,8 +64,8 @@ public class SendTogtherActivity extends BaseActivity {
     private String depp;
 
     private String TAG = SendTogtherActivity.class.getSimpleName();
-
-
+    private SweetAlertDialog pDialog;
+    private SweetAlertDialog eDialog;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther_write);
@@ -139,10 +141,11 @@ public class SendTogtherActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
     private void commitTogther(String togtherText) {
+
+        showProgressBarDialog(SendTogtherActivity.this);
         AddTogtherRequest addTogtherRequest = new AddTogtherRequest();
         addTogtherRequest.setAuthId(Constants.getInstance().getUser(SendTogtherActivity.this).getObjectId());
         addTogtherRequest.addText(togtherText);
@@ -158,20 +161,27 @@ public class SendTogtherActivity extends BaseActivity {
         addTogtherRequest.setOnResponseListener(new OnResponseListener<String>() {
             @Override
             public void onStart(int requestType) {
-
             }
 
             @Override
             public void onSuccess(String response, int requestType) {
-                ToastUtil3.showToast(SendTogtherActivity.this,response+requestType);
+                dimssProgressDialog();
+                ToastUtil3.showToast(SendTogtherActivity.this,"发布成功");
                 Logger.d(response+requestType);
+                setResult(3);
                 finish();
             }
 
             @Override
             public void onError(BmobException e, int requestType) {
-                ToastUtil3.showToast(SendTogtherActivity.this,"上传失败，请检查网络并重试");
+                dimssProgressDialog();
+                showErroDialog(SendTogtherActivity.this,"发布失败","请检查网络并重试");
                 Logger.d(e.toString()+requestType);
+            }
+
+            @Override
+            public void onProgress(int pro) {
+                setProgressDialogText("已上传%"+pro);
             }
         });
         addTogtherRequest.execute();
@@ -281,4 +291,61 @@ public class SendTogtherActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
+
+
+    public void showProgressBarDialog(final Activity mContext){
+        try {
+            if(mContext.hasWindowFocus()){
+                pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.setTitleText("正在提交数据，请耐心等待");
+                pDialog.setCancelable(false);
+                pDialog.show();
+            }
+        }catch (Exception e){
+            Logger.d("ProgressBarDialog的上下文找不到啦！");
+        }
+    }
+
+    /**
+     * 取消进度框
+     */
+    public void dimssProgressDialog(){
+        if(pDialog == null){
+            return;
+        }
+        pDialog.dismiss();
+    }
+
+    /**
+     * 设置进度
+     * @param pro
+     */
+    public void setProgressDialogText(String pro){
+        if(pDialog == null){
+            return;
+        }
+        pDialog.setTitleText(pro);
+    }
+
+    /**
+     * 错误的dialog
+     * @param mContext
+     * @param title
+     * @param message
+     */
+    public void showErroDialog(final Activity mContext,String title,String message){
+        try {
+            if(mContext.hasWindowFocus()) {
+                eDialog = new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE);
+                eDialog.setTitleText(title);
+                eDialog.setContentText(message);
+                eDialog.setConfirmText("知道啦");
+                eDialog.show();
+            }
+        }catch (Exception e){
+            Logger.d("ErroDialog的上下文找不到啦！");
+        }
+    }
+
+
 }

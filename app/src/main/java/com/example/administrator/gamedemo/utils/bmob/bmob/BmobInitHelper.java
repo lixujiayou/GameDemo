@@ -72,6 +72,11 @@ public class BmobInitHelper {
             public void onSuccess(CommentInfo response, int requestType) {
                 Logger.d( "添加成功  >>>  " + response.getCommentid());
             }
+
+            @Override
+            public void onProgress(int pro) {
+
+            }
         });
         addCommentRequest.execute();
     }

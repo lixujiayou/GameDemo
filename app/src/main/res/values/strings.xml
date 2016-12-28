@@ -1,8 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">圣经问答</string>
     <string name="no_network">没网喽</string>
     <string name="main_answer">答题</string>
     <string name="main_share">分享</string>
     <string name="main_mine">我的</string>
 
+    <string name="crop__saving" translatable="false">正在保存图片…</string>
+    <string name="crop__wait" translatable="false">请稍等…</string>
+    <string name="crop__pick_error" translatable="false">没有可用的图像来源</string>
+
+    <string name="crop__done" translatable="false">确认</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase" translatable="false">取消</string>
 </resources>

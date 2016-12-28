@@ -33,6 +33,11 @@ public class CommentImpl implements IComment {
             public void onSuccess(CommentInfo response, int requestType) {
                 onCommentChangeCallback.onAddComment(response);
             }
+
+            @Override
+            public void onProgress(int pro) {
+
+            }
         });
         addCommentRequest.execute();
     }
@@ -46,6 +51,11 @@ public class CommentImpl implements IComment {
             @Override
             public void onSuccess(String response, int requestType) {
                 onCommentChangeCallback.onDeleteComment(response);
+            }
+
+            @Override
+            public void onProgress(int pro) {
+
             }
         });
         deleteCommentRequest.execute();

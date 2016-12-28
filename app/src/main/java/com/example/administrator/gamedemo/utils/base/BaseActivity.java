@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 
 import com.example.administrator.gamedemo.R;
@@ -31,14 +32,14 @@ import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 
 /**
- * Created by Administrator on 2016/11/29.
+ * Created by lixu on 2016/11/29.
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
 
     private BroadcastReceiver netStateReceiver;
     public Students mUser ;
-
-
+    @BindView(R.id.ll_network)
+    public LinearLayout ll_netWork;
     @BindView(R.id.toolbar)
     public Toolbar mToolbar;
 
@@ -69,7 +70,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-
     }
 
 
@@ -110,7 +110,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Subscribe
     public void onEvent(NetWorkEvent event) {
         if (event.getType() == NetWorkEvent.UNAVAILABLE) {
-            ToastUtil3.showToast(this,R.string.no_network);
+            ll_netWork.setVisibility(View.VISIBLE);
+        }else{
+            ll_netWork.setVisibility(View.GONE);
         }
     }
 

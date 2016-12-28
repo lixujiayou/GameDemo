@@ -11,4 +11,5 @@ public interface OnResponseListener<T> {
     void onStart(int requestType);
     void onSuccess(T response, int requestType);
     void onError(BmobException e, int requestType);
+    void onProgress(int pro);
 }

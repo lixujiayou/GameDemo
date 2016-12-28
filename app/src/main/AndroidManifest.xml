@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administrator.gamedemo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -13,6 +14,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        tools:replace="android:icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme"
@@ -79,13 +81,19 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:theme="@style/Transparent"
+            android:screenOrientation="portrait"
+
+            />
+        <!--单张图片裁剪-->
+        <activity
+            android:name=".widget.simage.CropImageActivity"
             android:screenOrientation="portrait"/>
-
-
+        <!--多张图片选择预览-->
         <activity
             android:name="com.lidong.photopicker.PhotoPickerActivity"
             android:theme="@style/PhotoPickerTheme"
             android:configChanges="orientation|screenSize"/>
+        <!--分享模块图片预览-->
         <activity android:name="com.lidong.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme"/>
 

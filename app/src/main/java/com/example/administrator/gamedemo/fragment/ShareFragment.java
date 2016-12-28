@@ -269,6 +269,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             super.onError(e, requestType);
             circleRecyclerView.compelete();
         }
+
+        @Override
+        public void onProgress(int pro) {
+
+        }
     };
 
 

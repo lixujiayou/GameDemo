@@ -28,7 +28,7 @@ public class Students extends BmobUser{
 //    private String username;
 //    private String password;
     private String avatar;
-    private String cover;
+    private BmobFile cover;
     private BmobFile user_icon;
 
     private int age;
@@ -74,11 +74,11 @@ public class Students extends BmobUser{
         this.avatar = avatar;
     }
 
-    public String getCover() {
+    public BmobFile getCover() {
         return cover;
     }
 
-    public void setCover(String cover) {
+    public void setCover(BmobFile cover) {
         this.cover = cover;
     }
 

@@ -25,7 +25,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 /**
- * Created by 大灯泡 on 2016/11/1.
+ * Created by lixu on 2016/11/1.
  * <p>
  * 图片加载
  */
@@ -70,7 +70,7 @@ public enum ImageLoadMnanger {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
                 .placeholder(R.drawable.ic_loading_small)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.ic_loading_no)
                 .thumbnail(0.2f)
                 .into(imageView)
         ;
@@ -81,7 +81,7 @@ public enum ImageLoadMnanger {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
                 .placeholder(R.drawable.ic_loading_small)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.ic_loading_no)
                 .thumbnail(0.2f)
                 .into(imageView)
         ;
@@ -92,7 +92,7 @@ public enum ImageLoadMnanger {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .bitmapTransform(new CropCircleTransformation(getImageContext(imageView)))
                 .placeholder(R.drawable.ic_loading_small)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.ic_loading_no)
                 .thumbnail(0.2f)
                 .into(imageView)
         ;
@@ -103,7 +103,7 @@ public enum ImageLoadMnanger {
                 .load(imgUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_loading_small)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.ic_loading_no)
                 .thumbnail(0.2f)
                 .into(imageView)
         ;
@@ -115,7 +115,8 @@ public enum ImageLoadMnanger {
         return Glide.with(getImageContext(imageView))
                 .load(url)
                 .asBitmap()
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_loading_small)
+                .error(R.drawable.ic_loading_no)
                 .thumbnail(0.5f)
                 ;
     }

@@ -166,6 +166,11 @@ public class SendAnswerActivity extends BaseActivity {
                     finish();
 
                 }
+
+                @Override
+                public void onProgress(int pro) {
+
+                }
             });
             addMomentsRequest.execute();
         }

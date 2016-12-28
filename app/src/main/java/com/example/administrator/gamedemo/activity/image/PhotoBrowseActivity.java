@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
 import com.bumptech.glide.Glide;
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.utils.ToolUtil;
@@ -44,6 +46,8 @@ public class PhotoBrowseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photo_browse);
         preInitData();
         initView();
@@ -107,7 +111,14 @@ public class PhotoBrowseActivity extends Activity {
             return;
         }
         final Rect startRect = new Rect();
+        if(currentPhotoView == null){
+            Logger.d("currentPhotoView == null");
+        }
+        if(PhotoBrowseUtil.calcuateDrawableBounds(currentPhotoView) == null){
+            Logger.d("currentPhotoView != null   BUT!!!");
+        }
         startRect.set(PhotoBrowseUtil.calcuateDrawableBounds(currentPhotoView));
+
         final Rect endRect = photoBrowseInfo.getViewLocalRects().get(photoViewpager.getCurrentItem());
         PhotoBrowseUtil.playExitAnima(currentPhotoView, blackBackground, startRect, endRect, new PhotoBrowseUtil.OnAnimaEndListener() {
             @Override

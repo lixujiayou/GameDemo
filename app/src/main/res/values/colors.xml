@@ -7,6 +7,7 @@
 
     <color name="colorPrimaryAlpha">#12B7F5</color>
     <color name="textcolor_yellow_3">#ef8824</color>
+    <color name="textcolor_yellow_4">#FEEFB8</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white_t">#44FFFFFF</color>
@@ -95,4 +96,9 @@
     <color name="textcolor_3">#d8d8d8</color>
     <color name="textcolor_4">#7D7D7D</color>
     <color name="photopicker_background">#181819</color>
+
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
 </resources>

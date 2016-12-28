@@ -1,15 +1,21 @@
 package com.example.administrator.gamedemo.core;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 
+import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.model.Students;
+import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
 
 import cn.bmob.v3.BmobUser;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Administrator on 2016/12/8 0008.
@@ -19,6 +25,7 @@ public class Constants {
 
 
 
+    public SweetAlertDialog eDialog;
     //public static final String BmobId = "7fc6618e5572b09c6055ef4d53d0017a";
     public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //我的
     public static final String LoggerTAG = "qzzzzzzz";
@@ -84,6 +91,55 @@ public class Constants {
         }
         return 0;
     }
+
+
+//    public void showProgressBarDialog(final Activity mContext){
+//        try {
+//            if(mContext.hasWindowFocus()){
+//            if (pDialog == null) {
+//                pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+//            }
+//            pDialog.setTitleText("%0");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+//            }
+//        }catch (Exception e){
+//            Logger.d("ProgressBarDialog的上下文找不到啦！");
+//        }
+//    }
+
+
+
+    /**
+     * 错误的dialog
+     * @param mContext
+     * @param title
+     * @param message
+     */
+//    public void showErroDialog(final Activity mContext,String title,String message){
+//        try {
+//            if(mContext.hasWindowFocus()) {
+//                if (eDialog == null) {
+//                    eDialog = new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE);
+//                }
+//                eDialog.setTitleText(title);
+//                eDialog.setContentText(message);
+//                eDialog.setCancelText("知道啦");
+//                eDialog.show();
+//            }
+//        }catch (Exception e){
+//            Logger.d("ErroDialog的上下文找不到啦！");
+//        }
+//    }
+//
+//    public void dimssErreDialog(){
+//        if(eDialog == null){
+//            return;
+//        }
+//        eDialog.dismiss();
+//    }
+
+
 
     /**
      * 模糊图片
