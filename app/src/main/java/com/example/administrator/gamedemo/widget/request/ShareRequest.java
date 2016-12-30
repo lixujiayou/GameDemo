@@ -29,7 +29,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
 
     private int count = 10;
     private int curPage = 0;
-
+    private boolean isReadCache = true;//是否读取缓存
     public ShareRequest() {
     }
 
@@ -43,30 +43,34 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         return this;
     }
 
+    public void setCache(boolean isSet){
+        this.isReadCache = isSet;
+    }
+
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         BmobQuery<Share> bmobQuery = new BmobQuery<>();
         bmobQuery.include(Share.MomentsFields.AUTHOR_USER
                 + "," + Share.MomentsFields.HOST
-                + "," + Share.MomentsFields.COLLECTS
         );
 
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
 
-        //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
-        boolean isCache = bmobQuery.hasCachedResult(Share.class);
- //       if(isCache){
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-//            Logger.d("有缓存Share");
-//        }else{
-//            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-//            Logger.d("没缓存Share");
-//        }
+        if(isReadCache) {
+            boolean isCache = bmobQuery.hasCachedResult(Share.class);
+            if (isCache) {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+            } else {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+            }
+        }else{
+            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        }
 
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
 
         bmobQuery.findObjects(new FindListener<Share>() {
             @Override
@@ -74,6 +78,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                 if (!ToolUtil.isListEmpty(list)) {
                     queryCommentAndLikes(list);
                 }else {
+                    onResponseError(e, getRequestType());
                 }
             }
         });
@@ -129,6 +134,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             final int currentPos = i;
             final Share momentsInfo = momentsList.get(i);
             BmobQuery<Students> likesQuery = new BmobQuery<>();
+            likesQuery.include(Students.UserFields.COLLECTS);
             likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
             //根据更新时间降序
             //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
@@ -136,17 +142,17 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             likesQuery.order("-createdAt");
 
 
-            //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
-            boolean isCache = likesQuery.hasCachedResult(Students.class);
-//            if(isCache){
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-//                Logger.d("有缓存Students");
-//            }else{
-//                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-//                Logger.d("没缓存Students");
-//            }
-//
-//            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+            if(isReadCache) {
+                boolean isCache = likesQuery.hasCachedResult(Students.class);
+                if (isCache) {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                } else {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                }
+            }else{
+                likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+            }
+            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
@@ -159,15 +165,18 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                     commentQuery.order("-createdAt");
 
 
-                    boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
-//                    if(isCache){
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-//                        Logger.d("有缓存CommentInfo");
-//                    }else{
-//                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-//                        Logger.d("没缓存CommentInfo");
-//                    }
-//                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+                    if(isReadCache) {
+                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
+                        if (isCache) {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                        } else {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                        }
+                    }else{
+                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                    }
+                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
+
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
                         @Override
                         public void done(List<CommentInfo> list, BmobException e) {

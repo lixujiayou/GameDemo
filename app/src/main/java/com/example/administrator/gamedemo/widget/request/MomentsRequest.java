@@ -33,6 +33,8 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
     private int count = 10;
     private int curPage = 0;
 
+    private boolean isReadCache = true;//是否读取缓存
+
     public MomentsRequest() {
     }
 
@@ -46,6 +48,9 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         return this;
     }
 
+    public void setCache(boolean isSet){
+        this.isReadCache = isSet;
+    }
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
@@ -55,16 +60,19 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
 
-        boolean isCache = bmobQuery.hasCachedResult(MomentsInfo.class);
-        if(isCache){
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-            Logger.d("有---缓存MomentsInfo");
-        }else{
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-            Logger.d("没---缓存MomentsInfo");
-        }
 
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+
+        if(isReadCache) {
+            boolean isCache = bmobQuery.hasCachedResult(MomentsInfo.class);
+            if (isCache) {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+            } else {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+            }
+        }else{
+            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        }
+        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
 
 
         bmobQuery.findObjects(new FindListener<MomentsInfo>() {
@@ -90,16 +98,17 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
             likesQuery.order("-createdAt");
             likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
 
-            boolean isCache = likesQuery.hasCachedResult(Students.class);
-            if(isCache){
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                Logger.d("有---缓存Students");
+            if(isReadCache) {
+                boolean isCache = likesQuery.hasCachedResult(Students.class);
+                if (isCache) {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                } else {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                }
             }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                Logger.d("没---缓存Students");
+                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             }
-
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
@@ -108,16 +117,17 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
                     commentQuery.addWhereEqualTo("moment", momentsInfo);
                     commentQuery.order("-createdAt");
 
-                    boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
-                    if(isCache){
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                        Logger.d("有---缓存CommentInfo");
+                    if(isReadCache) {
+                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
+                        if (isCache) {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                        } else {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                        }
                     }else{
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                        Logger.d("没---缓存CommentInfo");
+                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
                     }
-
-                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存一天
+                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
 
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
                         @Override
@@ -125,13 +135,11 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
                             if (!ToolUtil.isListEmpty(list)) {
                                 momentsInfo.setCommentList(list);
                             }
-
                             if (e == null) {
                                 if (currentPos == momentsList.size() - 1) {
                                     onResponseSuccess(momentsList, getRequestType());
                                     curPage++;
                                 }
-
                             } else {
                                 onResponseError(e, getRequestType());
                             }

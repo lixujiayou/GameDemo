@@ -22,6 +22,7 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
+import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
@@ -79,12 +80,13 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     private ShareRequest momentsRequest;
     private MomentPresenter presenter;
     // private List<Share> responseTemp;
+    private boolean isReadCache = true;
 
     public ShareFragment() {
     }
 
     public static ShareFragment getInstance() {
-        isFirst = true;
+
         return answerFragmentHolder.instance;
     }
 
@@ -150,7 +152,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
 //        toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
 //        toolbar.setTitle(R.string.main_share);
-
+        isFirst = true;
         isPrepared = true;
         initData();
 
@@ -161,6 +163,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         } else {
+            isReadCache = true;
             circleRecyclerView.autoRefresh();
             isFirst = false;
             initKeyboardHeightObserver();
@@ -222,7 +225,9 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_REFRESH);
         momentsRequest.setCurPage(0);
+        momentsRequest.setCache(isReadCache);
         momentsRequest.execute();
+        isReadCache = false;
     }
 
     @Override
@@ -289,7 +294,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             adapter.notifyItemChanged(itemPos);
         }
     }
-
+    @Override
+    public void onCollectChange(int itemPos) {
+        ToastUtil3.showToast(mContext,"BingGo");
+    }
     /**
      * 点击发送
      *
@@ -325,6 +333,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         commentBox.setCommentWidget(commentWidget);
         commentBox.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
     }
+
+
 
     @Override
     public boolean onPreTouch(MotionEvent ev) {

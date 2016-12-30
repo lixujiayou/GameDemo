@@ -110,7 +110,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private File mTempDir;//修改封面 选取的图片路径
     private SweetAlertDialog pDialog;
 
-
+    private boolean isReadCache = true;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther);
@@ -163,20 +163,19 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 .setPresenter(presenter);
         adapter = builder.build();
         circleRecyclerView.setAdapter(adapter);
-        circleRecyclerView.autoRefresh();
 
-        hostViewHolder.loadHostData(Constants.getInstance().getUser());
-        initKeyboardHeightObserver();
+
     }
 
     @Override
     public void initData() {
-//        swipeRefresh.setRefreshing(true);
-//        togtherRequest = new TogtherRequest();
-//        togtherRequest.setOnResponseListener(momentsRequestCallBack);
-//        togtherRequest.setRequestType(REQUEST_REFRESH);
-//        togtherRequest.setCurPage(0);
-//        togtherRequest.execute();
+
+        hostViewHolder.loadHostData(Constants.getInstance().getUser());
+        initKeyboardHeightObserver();
+
+        isReadCache = true;
+        circleRecyclerView.autoRefresh();
+
     }
 
 
@@ -220,7 +219,9 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         togtherRequest.setOnResponseListener(momentsRequestCallBack);
         togtherRequest.setRequestType(REQUEST_REFRESH);
         togtherRequest.setCurPage(0);
+        togtherRequest.setCache(isReadCache);
         togtherRequest.execute();
+        isReadCache = false;
     }
 
     @Override

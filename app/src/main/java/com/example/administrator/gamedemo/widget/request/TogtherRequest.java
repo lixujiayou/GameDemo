@@ -1,12 +1,14 @@
 package com.example.administrator.gamedemo.widget.request;
 
 import com.example.administrator.gamedemo.model.CommentInfo;
+import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
@@ -28,6 +30,8 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
     private int count = 10;
     private int curPage = 0;
 
+    private boolean isReadCache = true;//是否读取缓存
+
     public TogtherRequest() {
     }
 
@@ -41,7 +45,9 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         return this;
     }
 
-
+    public void setCache(boolean isSet){
+        this.isReadCache = isSet;
+    }
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         BmobQuery<Togther> bmobQuery = new BmobQuery<>();
@@ -51,12 +57,26 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
+
+
+        if(isReadCache) {
+            boolean isCache = bmobQuery.hasCachedResult(Togther.class);
+            if (isCache) {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+            } else {
+                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+            }
+        }else{
+            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        }
+        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
         bmobQuery.findObjects(new FindListener<Togther>() {
             @Override
             public void done(List<Togther> list, BmobException e) {
                 if (!ToolUtil.isListEmpty(list)) {
                     queryCommentAndLikes(list);
                 }else {
+                    onResponseError(e, getRequestType());
                 }
             }
         });
@@ -117,6 +137,20 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
             //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
             //排序子目录
             likesQuery.order("-createdAt");
+
+
+            if(isReadCache) {
+                boolean isCache = likesQuery.hasCachedResult(Students.class);
+                if (isCache) {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                } else {
+                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                }
+            }else{
+                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+            }
+            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
+
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
@@ -127,6 +161,19 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
                     commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
                     commentQuery.addWhereEqualTo("moment", momentsInfo);
                     commentQuery.order("-createdAt");
+
+                    if(isReadCache) {
+                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
+                        if (isCache) {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+                        } else {
+                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                        }
+                    }else{
+                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+                    }
+                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
+
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
                         @Override
                         public void done(List<CommentInfo> list, BmobException e) {

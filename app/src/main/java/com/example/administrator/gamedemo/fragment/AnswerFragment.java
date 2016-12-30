@@ -91,6 +91,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     private HostViewHolder hostViewHolder;
 
     private AnswersAdapter adapter;
+    private boolean isReadCache = true;
 
     public AnswerFragment() {
     }
@@ -104,19 +105,26 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_REFRESH);
         momentsRequest.setCurPage(0);
+        momentsRequest.setCache(isReadCache);
         momentsRequest.execute();
+        isReadCache = false;
     }
 
     @Override
     public void onLoadMore() {
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
+        momentsRequest.setCache(isReadCache);
         momentsRequest.execute();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        isReadCache = true;
+    }
 
-
-//    @OnClick({R.id.cv_temp, R.id.cv_set})
+    //    @OnClick({R.id.cv_temp, R.id.cv_set})
 //    public void onClick(View view) {
 //        switch (view.getId()) {
 //            case R.id.cv_temp:
@@ -150,7 +158,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     public void initViews() {
 
         EventBus.getDefault().register(this);
-        login();
         swipe_refresh.setEnabled(false);
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
@@ -172,6 +179,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
         adapter = builder.build();
 
         circleRecyclerView.setAdapter(adapter);
+        isReadCache = true;
         circleRecyclerView.autoRefresh();
 
         hostViewHolder.friend_wall_pic.setOnClickListener(new View.OnClickListener() {
@@ -298,6 +306,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Constants.REFRESH_CODE){
+            isReadCache = false;
             circleRecyclerView.autoRefresh();
         }
     }

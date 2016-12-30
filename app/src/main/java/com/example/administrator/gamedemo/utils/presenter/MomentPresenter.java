@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.CollectImpl;
 import com.example.administrator.gamedemo.model.CommentImpl;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.LikeImpl;
@@ -13,6 +14,7 @@ import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
+import com.example.administrator.gamedemo.widget.request.callback.OnCollectChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.OnCommentChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.OnLikeChangeCallback;
 import com.orhanobut.logger.Logger;
@@ -35,6 +37,7 @@ public class MomentPresenter implements IMomentPresenter {
     private IMomentView momentView;
     private CommentImpl commentModel;
     private LikeImpl likeModel;
+    private CollectImpl collectModel;
     private Students cUser;
 
     public MomentPresenter() {
@@ -45,6 +48,7 @@ public class MomentPresenter implements IMomentPresenter {
         this.momentView = momentView;
         commentModel = new CommentImpl();
         likeModel = new LikeImpl();
+        collectModel = new CollectImpl();
         cUser = BmobUser.getCurrentUser(Students.class);
     }
 
@@ -106,10 +110,45 @@ public class MomentPresenter implements IMomentPresenter {
 
             @Override
             public void onUnLike() {
+
+            }
+        });
+    }
+    @Override
+    public void collect(final int viewHolderPos, String momentid) {
+        collectModel.addCollect(momentid, new OnCollectChangeCallback() {
+            @Override
+            public void onCollect() {
+                if (momentView != null) {
+                    momentView.onCollectChange(viewHolderPos);
+                }
+            }
+
+            @Override
+            public void onUnCollect() {
+
             }
         });
     }
 
+    @Override
+    public void unCollect(final int viewHolderPos, String momentid) {
+        collectModel.unCollect(momentid, new OnCollectChangeCallback() {
+            @Override
+            public void onCollect() {
+
+            }
+
+            @Override
+            public void onUnCollect() {
+
+                if (momentView != null) {
+                    momentView.onCollectChange(viewHolderPos);
+                }
+
+            }
+        });
+    }
     /*@Override
     public void unLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
         likeModel.unLike(momentid, new OnLikeChangeCallback() {
@@ -220,10 +259,7 @@ public class MomentPresenter implements IMomentPresenter {
 
     }
 
-    @Override
-    public void collect(int viewHolderPos, Share momentid) {
 
-    }
 
 
     public void showCommentBox(int itemPos, Share momentid, @Nullable CommentWidget commentWidget) {

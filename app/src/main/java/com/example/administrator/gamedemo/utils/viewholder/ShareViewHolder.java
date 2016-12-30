@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.fragment.ShareFragment;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
@@ -29,6 +30,7 @@ import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.SimpleObjectPool;
 import com.example.administrator.gamedemo.utils.TimeUtil;
+import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewHolder;
@@ -43,6 +45,12 @@ import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by lixu on 2016/12/14.
@@ -81,7 +89,8 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private Share momentsInfo;
 
     private Context mContext;
-
+    private boolean isOrCollect = true;
+    private SweetAlertDialog pDialog;
     public ShareViewHolder(Context context, ViewGroup viewGroup, int layoutResId) {
         super(context, viewGroup, layoutResId);
         this.mContext = context;
@@ -388,7 +397,8 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             hi_2= new helpdialog_item_2();
             view_2 = LayoutInflater.from(mContext).inflate(R.layout.popup_delete_comment, null);
             hi_2.tv_help1 = (TextView) view_2.findViewById(R.id.delete);
-            hi_2.tv_helpcancle = (TextView) view_2.findViewById(R.id.bt_helpcancle);
+            hi_2.tv_helpcancle = (TextView) view_2.findViewById(R.id.cancel);
+
             dialog_help_2 = new Dialog(mContext, R.style.transparentFrameWindowStyle);
             dialog_help_2.setContentView(view_2, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -405,13 +415,17 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         }else{
             hi_2 = (helpdialog_item_2) view_2.getTag();
         }
-
-        hi_2.tv_help1.setText("收藏");
-
+        queryCollect(dataTemp);
         hi_2.tv_help1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                momentPresenter.collect(itemPositionTemp, dataTemp);
+
+                if(isOrCollect){
+                    hi_2.tv_help1.setTextColor(ContextCompat.getColor(mContext,R.color.colorPrimary));
+                    momentPresenter.collect(itemPositionTemp, dataTemp.getObjectId());
+                }else{
+                    momentPresenter.unCollect(itemPositionTemp, dataTemp.getObjectId());
+                }
                 dialog_help_2.dismiss();
             }
         });
@@ -422,11 +436,73 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                 dialog_help_2.dismiss();
             }
         });
-        dialog_help_2.show();
     }
 
     class helpdialog_item_2{
         TextView tv_help1;
         TextView tv_helpcancle;
+    }
+
+    private void queryCollect(final Share share){
+        showProgressBarDialog(mContext);
+        Students cUser = Constants.getInstance().getUser();
+        if(cUser != null){
+            BmobQuery<Share> shareBmobQuery = new BmobQuery<>();
+            shareBmobQuery.addWhereRelatedTo("collects", new BmobPointer(cUser));
+            shareBmobQuery.findObjects(new FindListener<Share>() {
+                @Override
+                public void done(List<Share> list, BmobException e) {
+                    dimssProgressDialog();
+                    isOrCollect = true;
+                    if(e == null){
+                        if(list == null || list.size() == 0){
+                            isOrCollect = true;
+                            hi_2.tv_help1.setText("收藏");
+                            dialog_help_2.show();
+                        }else{
+                            for(int i = 0;i<list.size();i++){
+                                if(list.get(i).getObjectId().equals(share.getObjectId())){
+                                    isOrCollect = false;
+                                }
+                            }
+                            if(isOrCollect){
+                                hi_2.tv_help1.setText("收藏");
+                                dialog_help_2.show();
+                            }else{
+                                hi_2.tv_help1.setText("取消收藏");
+                                dialog_help_2.show();
+                            }
+                        }
+                    }else{
+                        isOrCollect = true;
+                        hi_2.tv_help1.setText("收藏");
+                        dialog_help_2.show();
+                    }
+                }
+            });
+
+        }
+    }
+
+    public void showProgressBarDialog(final Context mContext){
+        try {
+            pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.setTitleText("正在初始化数据");
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+        }catch (Exception e){
+            Logger.d("ProgressBarDialog的上下文找不到啦！"+e);
+        }
+    }
+
+    /**
+     * 取消进度框
+     */
+    public void dimssProgressDialog(){
+        if(pDialog == null){
+            return;
+        }
+        pDialog.dismiss();
     }
 }

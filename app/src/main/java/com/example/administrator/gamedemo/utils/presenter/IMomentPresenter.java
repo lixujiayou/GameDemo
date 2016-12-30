@@ -23,5 +23,7 @@ public interface IMomentPresenter extends IBasePresenter<IMomentView> {
 
     void deleteComment(int viewHolderPos, String commentid, List<CommentInfo> currentCommentList);
 
-    void collect(int viewHolderPos, Share momentid);
+    void collect(int viewHolderPos, String momentid);
+
+    void unCollect(int viewHolderPos, String momentid);
 }

@@ -23,6 +23,7 @@ public class Students extends BmobUser{
         String AUTHOR_USER = "author";
         String AVATAR = "avatar";
         String COVER="cover";
+        String COLLECTS = "collects";
     }
 
 //    private String username;
@@ -36,7 +37,7 @@ public class Students extends BmobUser{
     private String sex;
     private String myself_speak;
     private String nick_name;
-
+    private BmobRelation collects;
     private BmobRelation favorite;
 
     private ArrayList<String> loveid;
@@ -155,7 +156,11 @@ public class Students extends BmobUser{
     }
 
 
+    public BmobRelation getCollects() {
+        return collects;
+    }
 
-
-
+    public void setCollects(BmobRelation collects) {
+        this.collects = collects;
+    }
 }

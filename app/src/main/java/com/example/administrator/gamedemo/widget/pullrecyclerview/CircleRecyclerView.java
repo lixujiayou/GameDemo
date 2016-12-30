@@ -93,7 +93,7 @@ public class CircleRecyclerView extends FrameLayout {
 
 
     //observer
-    private InnerRefreshIconObserver iconObserver;
+    public InnerRefreshIconObserver iconObserver;
 
     //callback
     private onRefreshListener2 onRefreshListener;
