@@ -81,7 +81,7 @@
     </style>
 
     <style name="transparentFrameWindowStyle" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/selector_white</item>
+        <item name="android:windowBackground">@color/transparent</item>
     </style>
     <style name="Crop"></style>
 

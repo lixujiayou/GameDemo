@@ -49,6 +49,7 @@ public class Constants {
         Students bmobUser = BmobUser.getCurrentUser(Students.class);
         if(bmobUser == null){
             Intent lIntent = new Intent(mContext, LoginActivity.class);
+            mContext.startActivity(lIntent);
             return null;
         }
 

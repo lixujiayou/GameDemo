@@ -26,7 +26,20 @@
         android:layout_toRightOf="@id/avatar"
         android:textColor="@color/nick"
         android:textSize="@dimen/normal_font"
-        tools:text="羽翼君"/>
+        tools:text="ss"/>
+
+    <ImageView
+        android:id="@+id/iv_collect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_arrow"
+
+        android:layout_alignTop="@id/avatar"
+        android:background="@drawable/selector_white_tran"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
     <com.example.administrator.gamedemo.widget.ClickShowMoreLayout
         android:id="@+id/item_text_field"

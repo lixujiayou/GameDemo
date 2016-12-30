@@ -106,7 +106,6 @@ public class MomentPresenter implements IMomentPresenter {
 
             @Override
             public void onUnLike() {
-
             }
         });
     }
@@ -169,7 +168,7 @@ public class MomentPresenter implements IMomentPresenter {
         commentModel.addComment(momentid, Constants.getInstance().getUser(), replyUserid, commentContent, new OnCommentChangeCallback() {
             @Override
             public void onAddComment(CommentInfo response) {
-                List<CommentInfo> resultLikeList = new ArrayList<>();
+                    List<CommentInfo> resultLikeList = new ArrayList<>();
                 if (!ToolUtil.isListEmpty(currentCommentList)) {
                     resultLikeList.addAll(currentCommentList);
                 }
@@ -218,6 +217,11 @@ public class MomentPresenter implements IMomentPresenter {
 
             }
         });
+
+    }
+
+    @Override
+    public void collect(int viewHolderPos, Share momentid) {
 
     }
 

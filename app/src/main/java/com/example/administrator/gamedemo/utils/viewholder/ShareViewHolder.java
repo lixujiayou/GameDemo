@@ -1,12 +1,20 @@
 package com.example.administrator.gamedemo.utils.viewholder;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentProviderClient;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.LayoutInflaterCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +41,7 @@ import com.example.administrator.gamedemo.widget.popup.DeleteCommentPopup;
 import com.example.administrator.gamedemo.widget.praisewidget.PraiseWidget;
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -48,6 +57,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     protected ImageView avatar;
     protected TextView nick;
     protected ClickShowMoreLayout userText;
+    protected ImageView iv_collect;
 
     //底部
     protected TextView createTime;
@@ -78,8 +88,10 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         onFindView(itemView);
         //header
         avatar = (ImageView) findView(avatar, R.id.avatar);
+        iv_collect = (ImageView) findView(iv_collect, R.id.iv_collect);
         nick = (TextView) findView(nick, R.id.nick);
         userText = (ClickShowMoreLayout) findView(userText, R.id.item_text_field);
+        iv_collect.setVisibility(View.VISIBLE);
 
         //bottom
         createTime = (TextView) findView(createTime, R.id.create_time);
@@ -123,7 +135,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         onBindDataToView(data, position, getViewType());
     }
 
-    private void onBindMutualDataToViews(Share data) {
+    private void onBindMutualDataToViews(final Share data) {
         //header
         if(data.getAuthor().getUser_icon() != null) {
             ImageLoadMnanger.INSTANCE.loadRoundImage(ShareFragment.getInstance(), avatar, data.getAuthor().getUser_icon().getFileUrl());
@@ -143,7 +155,15 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         commentLayout.setVisibility(needCommentData ? View.VISIBLE : View.GONE);
         line.setVisibility(needPraiseData && needCommentData ? View.VISIBLE : View.GONE);
         commentAndPraiseLayout.setVisibility(needCommentData || needPraiseData ? View.VISIBLE : View.GONE);
+        //收藏
+        iv_collect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                showPhotoDialog(itemPosition,data);
+
+            }
+        });
     }
 
 
@@ -232,7 +252,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                     commentWidget.setPadding(commentLeftAndPaddintRight, commentTopAndPaddintBottom, commentLeftAndPaddintRight, commentTopAndPaddintBottom);
                     commentWidget.setLineSpacing(4, 1);
                 }
-                commentWidget.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.selector_comment_widget));
+                commentWidget.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.selector_comment_widget));
                 commentWidget.setOnClickListener(onCommentWidgetClickListener);
                 commentWidget.setOnLongClickListener(onCommentLongClickListener);
                 commentLayout.addView(commentWidget);
@@ -357,4 +377,56 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             }
             }
     };
+
+
+
+    private Dialog dialog_help_2;
+    View view_2;
+    helpdialog_item_2 hi_2 = null;
+    private void showPhotoDialog(final int itemPositionTemp, final Share dataTemp) {
+        if(hi_2==null){
+            hi_2= new helpdialog_item_2();
+            view_2 = LayoutInflater.from(mContext).inflate(R.layout.popup_delete_comment, null);
+            hi_2.tv_help1 = (TextView) view_2.findViewById(R.id.delete);
+            hi_2.tv_helpcancle = (TextView) view_2.findViewById(R.id.bt_helpcancle);
+            dialog_help_2 = new Dialog(mContext, R.style.transparentFrameWindowStyle);
+            dialog_help_2.setContentView(view_2, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT));
+            Window window = dialog_help_2.getWindow();
+            window.setWindowAnimations(R.style.main_menu_animstyle);
+            WindowManager.LayoutParams wl = window.getAttributes();
+            wl.x = 0;
+            wl.y = ShareFragment.getInstance().getActivity().getWindowManager().getDefaultDisplay().getHeight();
+            wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            dialog_help_2.onWindowAttributesChanged(wl);
+            dialog_help_2.setCanceledOnTouchOutside(true);
+            view_2.setTag(hi_2);
+        }else{
+            hi_2 = (helpdialog_item_2) view_2.getTag();
+        }
+
+        hi_2.tv_help1.setText("收藏");
+
+        hi_2.tv_help1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                momentPresenter.collect(itemPositionTemp, dataTemp);
+                dialog_help_2.dismiss();
+            }
+        });
+
+        hi_2.tv_helpcancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_help_2.dismiss();
+            }
+        });
+        dialog_help_2.show();
+    }
+
+    class helpdialog_item_2{
+        TextView tv_help1;
+        TextView tv_helpcancle;
+    }
 }

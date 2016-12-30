@@ -14,7 +14,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 
 /**
- * Created by 大灯泡 on 2016/12/8.
+ * Created by lixu on 2016/12/8.
  */
 public class UnLikeRequest extends BaseRequestClient<Boolean> {
 

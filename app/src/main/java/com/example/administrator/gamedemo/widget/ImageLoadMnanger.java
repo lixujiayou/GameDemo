@@ -41,6 +41,11 @@ public enum ImageLoadMnanger {
         loadImageByNormalConfig(imageView, imgUrl)
                 .into(imageView);
     }
+    //加载封面专用
+    public void loadImageToCover(ImageView imageView, String imgUrl) {
+        loadImageToC(imageView, imgUrl)
+                .into(imageView);
+    }
 
     public void loadImageForRv(RoundedImageView imageView, String imgUrl) {
         loadImageByNormalConfig(imageView, imgUrl)
@@ -117,6 +122,17 @@ public enum ImageLoadMnanger {
                 .asBitmap()
                 .placeholder(R.drawable.ic_loading_small)
                 .error(R.drawable.ic_loading_no)
+                .thumbnail(0.5f)
+                ;
+    }
+
+    private BitmapRequestBuilder loadImageToC(ImageView imageView, String url) {
+
+        return Glide.with(getImageContext(imageView))
+                .load(url)
+                .asBitmap()
+                .placeholder(R.drawable.img_huoer)
+                .error(R.drawable.img_huoer)
                 .thumbnail(0.5f)
                 ;
     }

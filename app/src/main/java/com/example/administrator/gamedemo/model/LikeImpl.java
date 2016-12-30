@@ -4,12 +4,11 @@ import com.example.administrator.gamedemo.widget.request.AddLikeRequest;
 import com.example.administrator.gamedemo.widget.request.OnResponseListener;
 import com.example.administrator.gamedemo.widget.request.callback.OnLikeChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.UnLikeRequest;
-
 import cn.bmob.v3.exception.BmobException;
 
 
 /**
- * Created by 大灯泡 on 2016/12/7.
+ * Created by lixu on 2016/12/7.
  * <p>
  * 点赞model
  */

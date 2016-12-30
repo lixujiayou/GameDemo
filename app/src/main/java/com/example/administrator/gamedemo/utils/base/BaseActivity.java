@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.NetWorkEvent;
 import com.example.administrator.gamedemo.model.Students;
@@ -42,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public LinearLayout ll_netWork;
     @BindView(R.id.toolbar)
     public Toolbar mToolbar;
+    public Students cUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mUser = BmobUser.getCurrentUser(Students.class);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.white));
-
+        cUser = BmobUser.getCurrentUser(Students.class);
         initViews();
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +74,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
     }
 
-
-
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -86,6 +85,16 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         EventBus.getDefault().unregister(this);
         overridePendingTransition(R.anim.anim_none, R.anim.trans_center_2_right);
         unregisterReceiver(netStateReceiver);
+    }
+
+    public boolean isLogin(){
+        if(cUser == null){
+            Intent lIntent = new Intent(this, LoginActivity.class);
+            startActivityForResult(lIntent,1);
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public void initNetWork(){

@@ -26,12 +26,14 @@ public class Share extends BmobObject {
         String LIKES = "likes";
         String HOST = "hostinfo";
         String COMMENTS = "commentList";
+        String COLLECTS = "students";
         String AUTHOR_USER = "students";
     }
 
     private Students students;
     private Students hostinfo;
     private BmobRelation likes;
+    private BmobRelation collects;
     private List<Students> likesList;
     private List<CommentInfo> commentList;
 

@@ -4,6 +4,7 @@ import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.Togther;
 import com.orhanobut.logger.Logger;
 
 import cn.bmob.v3.BmobUser;
@@ -57,8 +58,9 @@ public class AddLikeRequest extends BaseRequestClient<Boolean> {
             public void done(BmobException e) {
                 if(e == null){
                     Logger.d("点赞成功");
+                }else {
+                    Logger.d("点赞失败" + e);
                 }
-                Logger.d("点赞失败"+e);
                 onResponseSuccess(e == null, requestType);
             }
         });

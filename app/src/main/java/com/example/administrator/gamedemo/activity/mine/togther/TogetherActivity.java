@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
 import com.example.administrator.gamedemo.adapter.TogtherAdapter;
 import com.example.administrator.gamedemo.core.Constants;
@@ -74,7 +75,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by lixu on 2016/12/22 0022.
@@ -103,6 +108,9 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private TogtherRequest togtherRequest;
     private MomentPresenterTogther presenter;
     private File mTempDir;//修改封面 选取的图片路径
+    private SweetAlertDialog pDialog;
+
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther);
@@ -157,6 +165,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         circleRecyclerView.setAdapter(adapter);
         circleRecyclerView.autoRefresh();
 
+        hostViewHolder.loadHostData(Constants.getInstance().getUser());
         initKeyboardHeightObserver();
     }
 
@@ -221,7 +230,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         togtherRequest.execute();
     }
 
-
     //call back block
     //==============================================
     private SimpleResponseListener<List<Togther>> momentsRequestCallBack = new SimpleResponseListener<List<Togther>>() {
@@ -231,7 +239,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
-                        hostViewHolder.loadHostData(Constants.getInstance().getUser(TogetherActivity.this));
                         adapter.updateData(response);
                     }
                     break;
@@ -388,8 +395,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
     //=============================================================call back
     private CommentBoxTogther.OnCommentSendClickListener onCommentSendClickListener = new CommentBoxTogther.OnCommentSendClickListener() {
-
-
         @Override
         public void onCommentSendClick(View v, Togther momentid, Students commentAuthorId, String commentContent) {
             if (TextUtils.isEmpty(commentContent)) return;
@@ -423,16 +428,33 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 @Override
                 public void onClick(View view) {
                     //切换封面
-                    showPhotoDialog();
+                    if(isLogin()) {
+                        showPhotoDialog();
+                    }
+                }
+            });
+
+            this.friend_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(isLogin()){
+
+                    }else{
+                        Intent lIntent = new Intent(TogetherActivity.this, LoginActivity.class);
+                        startActivityForResult(lIntent,1);
+                    }
                 }
             });
         }
 
         public void loadHostData(Students hostInfo) {
-            if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadImage(friend_wall_pic, hostInfo.getCover().getFileUrl());
-            ImageLoadMnanger.INSTANCE.loadImage(friend_avatar, hostInfo.getUser_icon().getFileUrl());
-            hostid.setText(hostInfo.getNick_name());
+            if (hostInfo == null){
+                hostid.setText("未登陆");
+            }else {
+                ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, hostInfo.getCover().getFileUrl());
+                ImageLoadMnanger.INSTANCE.loadImage(friend_avatar, hostInfo.getUser_icon().getFileUrl());
+                hostid.setText(hostInfo.getNick_name());
+            }
         }
         public View getView() {
             return rootView;
@@ -446,13 +468,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         if(resultCode == 3){
             circleRecyclerView.autoRefresh();
         }
-        if(data == null){
-            Logger.d("返回Result：requestCode = "+requestCode+"resultCode == "+resultCode+"data == null");
-        }else{
-            Logger.d("返回Result：requestCode = "+requestCode+"resultCode == "+resultCode);
-        }
-
-
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case CAMERA_REQUEST_CODE:   // 调用相机拍照
@@ -462,17 +477,11 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 case GALLERY_REQUEST_CODE:  // 直接从相册获取
                     beginCrop(data.getData());
                     break;
-                case Crop.REQUEST_CROP:
+                case Crop.REQUEST_CROP:  // 裁剪图片结果
                     handleCrop( resultCode, data);
-                    Logger.d("返回Result：requestCode = "+requestCode+"resultCode == "+resultCode+"data ="+data.getExtras().toString());
-                    // TODO: 裁剪图片结果
                     break;
-
             }
         }
-
-
-
     }
 
     private Dialog dialog_help_2;
@@ -488,7 +497,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             hi_2.tv_help2 = (TextView) view_2.findViewById(R.id.bt_help2);
             hi_2.tv_helpcancle = (TextView) view_2.findViewById(R.id.bt_helpcancle);
             dialog_help_2 = new Dialog(this, R.style.transparentFrameWindowStyle);
-            dialog_help_2.setContentView(view_2, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+            dialog_help_2.setContentView(view_2, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             Window window = dialog_help_2.getWindow();
             window.setWindowAnimations(R.style.main_menu_animstyle);
@@ -544,76 +553,95 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         TextView tv_helpcancle;
     }
 
-    /**
-     * 裁剪图片方法实现
-     *
-     */
-//    public void startCropActivity(Uri uri) {
-//        String fileName = "bibleAsk" + String.valueOf( System.currentTimeMillis());
-//        File cropFile = new File( mTempDir, fileName);
-//        Uri outputUri = Uri.fromFile( cropFile);
-//
-//        UCrop.of(uri, outputUri)
-//                .withAspectRatio(1, 1)
-//                .withMaxResultSize(512, 512)
-//                .start(TogetherActivity.this);
-//    }
 
-
-
-    Bitmap a_tuwen;
+    private Uri imgUrlToImageview;
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == Activity.RESULT_OK) {
-            hostViewHolder.friend_wall_pic.setImageURI(Crop.getOutput(result));
-
-            hostViewHolder.friend_wall_pic.setDrawingCacheEnabled(true);
-            a_tuwen = hostViewHolder.friend_wall_pic.getDrawingCache();
+            imgUrlToImageview = Crop.getOutput(result);
+            upLoadImg(Crop.getOutput(result).getPath());
         } else if (resultCode == Crop.RESULT_ERROR) {
             ToastUtil3.showToast(TogetherActivity.this,"裁剪图片失败，请重试");
         }
     }
 
-
+    /**
+     * 裁剪图片
+     * @param source
+     */
     private void beginCrop(Uri source) {
-
-        String fileName = "Temp_" + String.valueOf( System.currentTimeMillis());
+        String fileName = "cover_" + String.valueOf( System.currentTimeMillis()+".image");
         File cropFile = new File( mTempDir, fileName);
         Uri outputUri = Uri.fromFile( cropFile);
-        new Crop(source).output(outputUri).withAspect(1,1).withMaxSize(512,512).start(this);
-//        new Crop( source).output( outputUri).setCropType(true).withMaxSize(512,512).start(this);
+        new Crop(source).output(outputUri).withAspect(4,3).start(this);
+    }
+
+    /**
+     * 上传封面
+     */
+    private BmobFile bmobFileCover;
+    private void upLoadImg(String imgUrl){
+        showProgressBarDialog(TogetherActivity.this);
+        bmobFileCover = new BmobFile(new File(imgUrl));
+        bmobFileCover.uploadblock(new UploadFileListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null){
+                    cUser.setCover(bmobFileCover);
+                    cUser.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            dimssProgressDialog();
+                        if(e == null){
+                            hostViewHolder.friend_wall_pic.setImageURI(imgUrlToImageview);
+                            ToastUtil3.showToast(TogetherActivity.this,"上传封面成功");
+                        }else{
+                            ToastUtil3.showToast(TogetherActivity.this,"上传封面失败，请检查网络并重试"+e);
+                        }
+                        }
+                    });
+                }else{
+                    ToastUtil3.showToast(TogetherActivity.this,"上传封面失败，请检查网络并重试"+e);
+                    dimssProgressDialog();
+                }
+            }
+        });
+
     }
 
 
 
+    public void showProgressBarDialog(final Activity mContext){
+        try {
+                pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.setTitleText("正在上传封面，请稍等");
+                pDialog.setCancelable(false);
+                pDialog.show();
 
+        }catch (Exception e){
+            Logger.d("ProgressBarDialog的上下文找不到啦！"+e);
+        }
+    }
 
     /**
-     * 处理剪切成功的返回值
-     *
-     * @param result
+     * 取消进度框
      */
-//    private void handleCropResult(Intent result) {
-//        //deleteTempPhotoFile();
-//        final Uri resultUri = UCrop.getOutput(result);
-//        if (null != resultUri) {
-//            Bitmap bitmap = null;
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            hostViewHolder.friend_wall_pic.setImageBitmap(bitmap);
-//
-//            //前去上传图片
-//            //  mOnPictureSelectedListener.onPictureSelected(resultUri, bitmap);
-//        } else {
-//            ToastUtil3.showToast(TogetherActivity.this, "无法剪切选择图片");
-//        }
-//    }
+    public void dimssProgressDialog(){
+        if(pDialog == null){
+            return;
+        }
+        pDialog.dismiss();
+    }
 
+    /**
+     * 设置进度
+     * @param pro
+     */
+    public void setProgressDialogText(String pro){
+        if(pDialog == null){
+            return;
+        }
+        pDialog.setTitleText(pro);
+    }
 
 
 }

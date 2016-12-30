@@ -22,7 +22,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:background="@color/white"
-         android:hint="神在我身上的恩典..."
+         android:hint="数算神的恩典..."
          android:textSize="@dimen/textsize_18"
          />
         <GridView
@@ -36,4 +36,5 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             />
     </LinearLayout>
+
 </LinearLayout>
