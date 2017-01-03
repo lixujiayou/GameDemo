@@ -1,10 +1,8 @@
 package com.example.administrator.gamedemo.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
@@ -65,26 +63,27 @@ public enum ImageLoadMnanger {
 
     public void loadImageDontAnimate(ImageView imageView, String imgUrl) {
         loadImageByNormalConfig(imageView, imgUrl).dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
 
 
-    public void loadRoundImage(Fragment fragment,ImageView imageView,String imgUrl){
-        Glide.with(fragment)
-                .load(imgUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
-                .placeholder(R.drawable.ic_loading_small)
-                .error(R.drawable.ic_loading_no)
-                .thumbnail(0.2f)
-                .into(imageView)
-        ;
-    }
+//    public void loadRoundImage(ImageView imageView,String imgUrl){
+//        Glide.with(fragment)
+//                .load(imgUrl)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
+//                .placeholder(R.drawable.ic_loading_small)
+//                .error(R.drawable.ic_loading_no)
+//                .thumbnail(0.2f)
+//                .into(imageView)
+//        ;
+//    }
     public void loadRoundImage(ImageView imageView, String imgUrl){
         Glide.with(getImageContext(imageView))
                 .load(imgUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),12,0, RoundedCornersTransformation.CornerType.ALL))
+                .bitmapTransform(new RoundedCornersTransformation(getImageContext(imageView),8,0, RoundedCornersTransformation.CornerType.ALL))
                 .placeholder(R.drawable.ic_loading_small)
                 .error(R.drawable.ic_loading_no)
                 .thumbnail(0.2f)

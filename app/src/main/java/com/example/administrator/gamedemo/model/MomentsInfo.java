@@ -21,6 +21,7 @@ public class MomentsInfo extends BmobObject implements Serializable{
         String HOST = "hostinfo";
         String COMMENTS = "comments";
         String AUTHOR_USER = "author";
+        String RP = "rp";
     }
 
     private Students author;
@@ -35,6 +36,7 @@ public class MomentsInfo extends BmobObject implements Serializable{
     private String hint;    //提示
     private transient int no;//问题编号
     private int aw_num;//答题次数
+    private String rp;//审核进度
 
     public MomentsInfo() {
     }
@@ -160,4 +162,14 @@ public class MomentsInfo extends BmobObject implements Serializable{
     public void setAw_num(int aw_num) {
         this.aw_num = aw_num;
     }
+
+    public String getRp() {
+        return rp;
+    }
+
+    public void setRp(String rp) {
+        this.rp = rp;
+    }
+
+
 }

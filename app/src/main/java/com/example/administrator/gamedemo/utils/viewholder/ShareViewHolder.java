@@ -147,7 +147,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private void onBindMutualDataToViews(final Share data) {
         //header
         if(data.getAuthor().getUser_icon() != null) {
-            ImageLoadMnanger.INSTANCE.loadRoundImage(ShareFragment.getInstance(), avatar, data.getAuthor().getUser_icon().getFileUrl());
+            ImageLoadMnanger.INSTANCE.loadRoundImage(avatar, data.getAuthor().getUser_icon().getFileUrl());
         }else{
             avatar.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_loading_small));
         }

@@ -13,6 +13,8 @@ import com.example.administrator.gamedemo.model.Students;
 import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -23,13 +25,15 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Constants {
 
-
-
-    public SweetAlertDialog eDialog;
-    //public static final String BmobId = "7fc6618e5572b09c6055ef4d53d0017a";
-    public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //我的
+    public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //BMOBID
     public static final String LoggerTAG = "qzzzzzzz";
     public static final int  REFRESH_CODE = 24;
+    public static final int  FIRSTLOADNUM = 10;
+    public static final List<String> strWorkText = Arrays.asList("审核成功","审核中","审核失败");//
+
+    public static final String UPLOAD_ING = "ING";
+    public static final String UPLOAD_OK = "OK";
+    public static final String UPLOAD_NO = "NO";
 
     public Constants(){
 

@@ -1,5 +1,6 @@
 package com.example.administrator.gamedemo.widget.request;
 
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Share;
@@ -30,6 +31,8 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     private int count = 10;
     private int curPage = 0;
     private boolean isReadCache = true;//是否读取缓存
+    private boolean isCollect = false;
+
     public ShareRequest() {
     }
 
@@ -41,6 +44,10 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     public ShareRequest setCurPage(int page) {
         this.curPage = page;
         return this;
+    }
+
+    public void setIsCollect(boolean isC){
+        this.isCollect = isC;
     }
 
     public void setCache(boolean isSet){
@@ -58,6 +65,9 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
+        if(isCollect){
+            bmobQuery.addWhereRelatedTo(Students.UserFields.COLLECTS, new BmobPointer(Constants.getInstance().getUser()));
+        }
 
         if(isReadCache) {
             boolean isCache = bmobQuery.hasCachedResult(Share.class);
@@ -67,7 +77,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                 bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
             }
         }else{
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         }
 
         bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
@@ -78,7 +88,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                 if (!ToolUtil.isListEmpty(list)) {
                     queryCommentAndLikes(list);
                 }else {
-                    onResponseError(e, getRequestType());
+                    onResponseSuccess(list, getRequestType());
                 }
             }
         });
@@ -127,8 +137,6 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     private void queryCommentAndLikes(final List<Share> momentsList) {
         /**
          * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         * oRz，果然没有自己写服务器来的简单，好吧，都是在下没钱的原因，我的锅
-         *
          */
         for (int i = 0; i < momentsList.size(); i++) {
             final int currentPos = i;
@@ -141,7 +149,6 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             //排序子目录
             likesQuery.order("-createdAt");
 
-
             if(isReadCache) {
                 boolean isCache = likesQuery.hasCachedResult(Students.class);
                 if (isCache) {
@@ -150,7 +157,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                     likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
                 }
             }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             }
             likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
             likesQuery.findObjects(new FindListener<Students>() {
@@ -164,7 +171,6 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                     commentQuery.addWhereEqualTo("moment", momentsInfo);
                     commentQuery.order("-createdAt");
 
-
                     if(isReadCache) {
                         boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
                         if (isCache) {
@@ -173,8 +179,9 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                             commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
                         }
                     }else{
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
                     }
+
                     commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
 
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
@@ -182,9 +189,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                         public void done(List<CommentInfo> list, BmobException e) {
                             if (!ToolUtil.isListEmpty(list)) {
                                 momentsInfo.setCommentList(list);
-                                Logger.d("----评论"+list.size());
                             }else{
-                                Logger.d("----评论为空");
                             }
 
                             if (e == null) {

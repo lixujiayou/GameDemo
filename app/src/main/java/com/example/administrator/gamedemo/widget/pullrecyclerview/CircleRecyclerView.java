@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.IntDef;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -70,7 +71,6 @@ import static com.example.administrator.gamedemo.widget.pullrecyclerview.CircleR
 
 public class CircleRecyclerView extends FrameLayout {
     private static final String TAG = "CircleRecyclerView";
-
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({DEFAULT, REFRESHING})
     @interface Status {

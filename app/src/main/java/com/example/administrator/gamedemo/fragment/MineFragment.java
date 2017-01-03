@@ -13,7 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.mine.CollectActivity;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
+import com.example.administrator.gamedemo.activity.mine.UploadActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
@@ -85,10 +87,11 @@ public class MineFragment extends BaseFragment {
                 gIntent.setClass(mContext, TogetherActivity.class);
                 break;
             case R.id.ll_collect:
-
-                return;
+                gIntent.setClass(mContext, CollectActivity.class);
+                break;
             case R.id.ll_upload:
-               return;
+                gIntent.setClass(mContext, UploadActivity.class);
+                break;
         }
 
         startActivity(gIntent);
@@ -110,30 +113,26 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-//        ViewGroup.LayoutParams rlLayoutParams = relativeLayout.getLayoutParams();
-//        rlLayoutParams.height = UIHelper.pxToDip(700);
-        iv_dim.setPadding(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);
 
+        iv_dim.setPadding(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) iv_message.getLayoutParams();
         lp.setMargins(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);
-        //   iv_message.setLayoutParams(lp);
-
-//        android.view.ViewGroup.LayoutParams lp =tv_repair.getLayoutParams();
-//        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
-
-
-        initUserInfo();
         isPrepared = true;
-        initData();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initUserInfo();
     }
 
     @Override
     public void initData() {
         if (!isPrepared || !isVisible || !isFirst) {
-            initUserInfo();
             return;
         } else {
             Logger.d("切换" + isPrepared + "--" + isVisible + "--" + isFirst);
+            //initUserInfo();
             isFirst = false;
         }
     }

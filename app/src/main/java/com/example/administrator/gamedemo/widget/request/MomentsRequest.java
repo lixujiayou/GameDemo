@@ -34,13 +34,17 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
     private int curPage = 0;
 
     private boolean isReadCache = true;//是否读取缓存
-
+    private String mType;
     public MomentsRequest() {
     }
 
     public MomentsRequest setCount(int count) {
         this.count = (count <= 0 ? 10 : count);
         return this;
+    }
+
+    public void setmType(String type){
+        this.mType = type;
     }
 
     public MomentsRequest setCurPage(int page) {
@@ -60,7 +64,9 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
 
-
+        if(mType!=null && mType.toString().length() > 0){
+            bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,mType);
+        }
 
         if(isReadCache) {
             boolean isCache = bmobQuery.hasCachedResult(MomentsInfo.class);
@@ -74,13 +80,13 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         }
         bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
 
-
         bmobQuery.findObjects(new FindListener<MomentsInfo>() {
             @Override
             public void done(List<MomentsInfo> list, BmobException e) {
                 if (!ToolUtil.isListEmpty(list)) {
                     queryCommentAndLikes(list);
                 }else {
+                    onResponseSuccess(list, getRequestType());
                 }
             }
         });

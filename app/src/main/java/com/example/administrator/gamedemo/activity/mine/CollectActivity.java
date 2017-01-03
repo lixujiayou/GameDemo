@@ -1,25 +1,18 @@
-package com.example.administrator.gamedemo.fragment;
+package com.example.administrator.gamedemo.activity.mine;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
-import com.example.administrator.gamedemo.activity.share.SendShareActivity;
 import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
-import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
@@ -27,7 +20,7 @@ import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
-import com.example.administrator.gamedemo.utils.base.BaseFragment;
+import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
 import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
@@ -47,101 +40,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 
 /**
- * Created by Administrator on 2016/12/8 0008.
- *
- * @author lixu
+ * @auther lixu
+ * Created by lixu on 2017/1/2 0002.
  */
-
-public class ShareFragment extends BaseFragment implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
-
-
-    @BindView(R.id.tv_repair)
-    TextView tv_repair;
-    @BindView(R.id.rl_bar)
-    RelativeLayout rlBar;
+public class CollectActivity extends BaseActivity implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
     @BindView(R.id.recycler)
     CircleRecyclerView circleRecyclerView;
     @BindView(R.id.widget_comment)
     CommentBox commentBox;
-    @BindView(R.id.iv_add)
-     ImageView iv_add;
 
-    private boolean isPrepared;
+    @BindView(R.id.rl_hint)
+    RelativeLayout rl_hint;
+
+    private HostViewHolder hostViewHolder;
+    private CircleMomentsAdapter adapter;
+    private List<Share> momentsInfoList;
+    private ShareRequest momentsRequest;
+    private MomentPresenter presenter;
+    private boolean isReadCache = true;
 
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
 
-
-    private int keyHeight;
-    private HostViewHolder hostViewHolder;
-    private CircleMomentsAdapter adapter;
-    private List<Share> momentsInfoList;
-    //request
-    private ShareRequest momentsRequest;
-    private MomentPresenter presenter;
-    // private List<Share> responseTemp;
-    private boolean isReadCache = true;
-
-
-
-    public ShareFragment() {
-    }
-
-    public static ShareFragment getInstance() {
-
-        return answerFragmentHolder.instance;
-    }
-
-
-    @OnClick({R.id.rl_bar,R.id.iv_add})
-    public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.rl_bar:
-                circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
-                break;
-            case R.id.iv_add:
-                Intent iIntent = new Intent(mContext, SendShareActivity.class);
-                startActivityForResult(iIntent,1);
-                break;
-        }
-
-    }
-
-
-
-    public static class answerFragmentHolder {
-        public static final ShareFragment instance = new ShareFragment();
-    }
-
     @Override
-    public void initTheme() {
-
-        getActivity().setTheme(R.style.AppBaseTheme);
-    }
-
-
-    @Override
-    public int initCreatView() {
-        return R.layout.fragment_share;
+    protected void initContentView(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_mine_collect);
     }
 
     @Override
     public void initViews() {
-        ViewGroup.LayoutParams lp = tv_repair.getLayoutParams();
-        lp.height = Constants.getInstance().getStatusBarHeight(mContext);
+        mToolbar.setTitle("我的收藏");
+        mToolbar.setNavigationIcon(R.drawable.icon_cancle);
+        hostViewHolder = new HostViewHolder(this);
 
         momentsInfoList = new ArrayList<>();
         momentsRequest = new ShareRequest();
 
         presenter = new MomentPresenter(this);
 
-        hostViewHolder = new HostViewHolder(mContext);
 
         circleRecyclerView.setOnRefreshListener(this);
         circleRecyclerView.setOnPreDispatchTouchListener(this);
@@ -150,7 +89,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
         commentBox.setOnCommentSendClickListener(onCommentSendClickListener);
 
-        CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(mContext);
+        CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(this);
         builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content)
                 .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image)
                 .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text)
@@ -159,28 +98,12 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
                 .setPresenter(presenter);
         adapter = builder.build();
         circleRecyclerView.setAdapter(adapter);
-
-
-//        toolbar.setTitleTextColor(ContextCompat.getColor(mContext, R.color.white));
-//        toolbar.setTitle(R.string.main_share);
-        isFirst = true;
-        isPrepared = true;
-        initData();
-
     }
 
     @Override
     public void initData() {
-        if (!isPrepared || !isVisible || !isFirst) {
-            return;
-        } else {
-            isReadCache = true;
-            circleRecyclerView.autoRefresh();
-            isFirst = false;
-            initKeyboardHeightObserver();
-        }
+        circleRecyclerView.autoRefresh();
     }
-
 
     private static class HostViewHolder {
         private View rootView;
@@ -192,33 +115,20 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             this.rootView.setVisibility(View.GONE);
         }
 
-        public void loadHostData(Students hostInfo) {
-            if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadNomalImage(ShareFragment.getInstance(), friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
-
-        }
-
         public View getView() {
             return rootView;
         }
 
     }
-
     // TODO: 2016/12/13 进一步优化对齐功能
     private void initKeyboardHeightObserver() {
         //观察键盘弹出与消退
-        KeyboardControlMnanager.observerKeyboardVisibleChange(this.getActivity(), new KeyboardControlMnanager.OnKeyboardStateChangeListener() {
+        KeyboardControlMnanager.observerKeyboardVisibleChange(this, new KeyboardControlMnanager.OnKeyboardStateChangeListener() {
             View anchorView;
-
             @Override
             public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
-
-
-                keyHeight = keyboardHeight;
                 int commentType = commentBox.getCommentType();
                 if (isVisible) {
-                    commentBox.setMinimumHeight(keyboardHeight - 56);
-                    //    commentBox.setMinimumHeight(keyboardHeight);
                     //定位评论框到view
                     anchorView = alignCommentBoxToView(commentType);
                 } else {
@@ -230,13 +140,13 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         });
     }
 
-
     @Override
     public void onRefresh() {
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_REFRESH);
         momentsRequest.setCurPage(0);
         momentsRequest.setCache(isReadCache);
+        momentsRequest.setIsCollect(true);
         momentsRequest.execute();
         isReadCache = false;
     }
@@ -245,6 +155,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     public void onLoadMore() {
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
+        momentsRequest.setIsCollect(true);
         momentsRequest.execute();
     }
 
@@ -258,18 +169,15 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
+                        rl_hint.setVisibility(View.GONE);
+                        circleRecyclerView.setVisibility(View.VISIBLE);
                         momentsInfoList.clear();
                         momentsInfoList.addAll(response);
-//                        if(isOne){
-//                            BmobInitHelper bb = new BmobInitHelper();
-//                            bb.addComments(response);
-//                            isOne = false;
-//                        }
 
-
-                        Logger.i("第一条动态ID   >>>   " + response.get(0).getMomentid());
-                        //     hostViewHolder.loadHostData(Constants.getInstance().getUser());
                         adapter.updateData(response);
+                    }else{
+                        rl_hint.setVisibility(View.VISIBLE);
+                        circleRecyclerView.setVisibility(View.GONE);
                     }
                     break;
                 case REQUEST_LOADMORE:
@@ -307,7 +215,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     }
     @Override
     public void onCollectChange(int itemPos) {
-        ToastUtil3.showToast(mContext,"BingGo");
+        ToastUtil3.showToast(this,"BingGo");
     }
     /**
      * 点击发送
@@ -380,14 +288,14 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         if (commentType == CommentBox.CommentType.TYPE_CREATE) {
             //对齐到动态底部
             int scrollY = calcuateMomentsViewOffset(itemView);
-            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY + keyHeight - 56);
+            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY);
             return itemView;
         } else {
             //对齐到对应的评论
             CommentWidget commentWidget = commentBox.getCommentWidget();
             if (commentWidget == null) return null;
             int scrollY = calcuateCommentWidgetOffset(commentWidget);
-            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY + keyHeight - 56);
+            circleRecyclerView.getRecyclerView().smoothScrollBy(0, scrollY);
             return commentWidget;
         }
     }
@@ -400,7 +308,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
      */
     private void alignCommentBoxToViewWhenDismiss(int commentType, View anchorView) {
         if (anchorView == null) return;
-        int decorViewHeight = getActivity().getWindow().getDecorView().getHeight();
+        int decorViewHeight = this.getWindow().getDecorView().getHeight();
         int alignScrollY;
         if (commentType == CommentBox.CommentType.TYPE_CREATE) {
             alignScrollY = decorViewHeight - anchorView.getBottom() - commentBox.getHeight();

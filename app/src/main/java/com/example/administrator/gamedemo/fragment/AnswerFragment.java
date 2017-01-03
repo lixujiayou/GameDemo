@@ -156,7 +156,7 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
     @Override
     public void initViews() {
-
+        login();
         EventBus.getDefault().register(this);
         swipe_refresh.setEnabled(false);
         momentsInfoList = new ArrayList<>();

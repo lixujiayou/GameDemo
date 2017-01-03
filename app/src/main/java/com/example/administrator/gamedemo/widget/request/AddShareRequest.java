@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.ToolUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadBatchListener;
 
 /**
  * @author lixu
@@ -22,13 +24,13 @@ import cn.bmob.v3.listener.UpdateListener;
  */
 
 public class AddShareRequest extends BaseRequestClient<String> {
-
+    private String[] pics;
     private String authId;
     private String hostId;
     //private MomentContent momentContent;
     private Share share;
     private List<Students> likesUserId;
-
+    private List<String> picList;
     public AddShareRequest() {
         share = new Share();
         likesUserId = new ArrayList<>();
@@ -46,55 +48,133 @@ public class AddShareRequest extends BaseRequestClient<String> {
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
+//        if (checkValided()) {
+//
+//
+//            Students author = new Students();
+//            author.setObjectId(authId);
+//            share.setAuthor(author);
+//
+////            Students host = new Students();
+////            host.setObjectId(hostId);
+////            share.setHostinfo(host);
+//
+//            share.save(new SaveListener<String>() {
+//                @Override
+//                public void done(String s, BmobException e) {
+//                    if (e == null) {
+//                        if (ToolUtil.isListEmpty(likesUserId)) {
+//                            onResponseSuccess(s, requestType);
+//                        } else {
+//                            Share resultMoment = new Share();
+//                            resultMoment.setObjectId(s);
+//
+//                            //关联点赞的
+//                            BmobRelation relation = new BmobRelation();
+//                            for (Students user : likesUserId) {
+//                                relation.add(user);
+//                            }
+//                            resultMoment.setLikesBmobRelation(relation);
+//                            resultMoment.update(new UpdateListener() {
+//                                @Override
+//                                public void done(BmobException e) {
+//                                    if (e == null) {
+//                                        onResponseSuccess("添加成功", requestType);
+//                                    } else {
+//                                        onResponseError(e, requestType);
+//                                    }
+//                                }
+//                            });
+//                        }
+//
+//                    }
+//                }
+//            });
+//
+//        }
         if (checkValided()) {
-
-
-            Students author = new Students();
-            author.setObjectId(authId);
-            share.setAuthor(author);
-
-//            Students host = new Students();
-//            host.setObjectId(hostId);
-//            share.setHostinfo(host);
-
-            share.save(new SaveListener<String>() {
-                @Override
-                public void done(String s, BmobException e) {
-                    if (e == null) {
-                        if (ToolUtil.isListEmpty(likesUserId)) {
-                            onResponseSuccess(s, requestType);
-                        } else {
-                            Share resultMoment = new Share();
-                            resultMoment.setObjectId(s);
-
-                            //关联点赞的
-                            BmobRelation relation = new BmobRelation();
-                            for (Students user : likesUserId) {
-                                relation.add(user);
-                            }
-                            resultMoment.setLikesBmobRelation(relation);
-                            resultMoment.update(new UpdateListener() {
-                                @Override
-                                public void done(BmobException e) {
-                                    if (e == null) {
-                                        onResponseSuccess("添加成功", requestType);
-                                    } else {
-                                        onResponseError(e, requestType);
-                                    }
-                                }
-                            });
-                        }
-
-                    }
+            if(picList == null || picList.size() == 0){
+                insertObject(null, requestType);
+            }else {
+                pics = new String[picList.size()];
+                for (int i = 0; i < picList.size(); i++) {
+                    pics[i] = picList.get(i);
                 }
-            });
+                BmobFile.uploadBatch(pics, new UploadBatchListener() {
+                    @Override
+                    public void onSuccess(List<BmobFile> list, List<String> list1) {
+                        if (list1.size() == pics.length) {//如果数量相等，则代表文件全部上传完成
+                            insertObject(list, requestType);
+                        }
+                    }
+                    @Override
+                    public void onProgress(int i, int i1, int i2, int i3) {
+                        // setProgressDialogText(String.valueOf(i3));
+                        onResponseProgress(i3);
+                        Logger.d("当前上传进度：" + i3);
+                    }
 
+                    @Override
+                    public void onError(int i, String s) {
+                        BmobException e = new BmobException();
+                        onResponseError(e, requestType);
+                        Logger.d(i + "上传失败：" + s);
+                    }
+                });
+            }
         }
+
     }
 
 
+    private void insertObject(List<BmobFile> list, final int type){
+
+        Students author = new Students();
+        author.setObjectId(authId);
+        share.setAuthor(author);
+
+        if(list != null) {
+            share.setPics(list);
+        }
+
+        share.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    if (ToolUtil.isListEmpty(likesUserId)) {
+                        onResponseSuccess("添加成功", type);
+                    }else{
+                        onResponseError(e, type);
+                    }
+//                    } else {
+//                        Share resultMoment = new Share();
+//                        resultMoment.setObjectId(s);
+//
+//                        //关联点赞的
+//                        BmobRelation relation = new BmobRelation();
+//                        for (Students user : likesUserId) {
+//                            relation.add(user);
+//                        }
+//                        resultMoment.setLikesBmobRelation(relation);
+//                        resultMoment.update(new UpdateListener() {
+//                            @Override
+//                            public void done(BmobException e) {
+//                                if (e == null) {
+//                                    onResponseSuccess("添加成功", type);
+//                                } else {
+//                                    onResponseError(e, type);
+//                                }
+//                            }
+//                        });
+//                    }
+
+                }
+            }
+        });
+    }
+
     private boolean checkValided() {
-        return !(TextUtils.isEmpty(authId) || TextUtils.isEmpty(hostId)) && share.isValided();
+        return !TextUtils.isEmpty(authId) && share.isValided();
     }
 
     public AddShareRequest addText(String text) {
@@ -102,8 +182,11 @@ public class AddShareRequest extends BaseRequestClient<String> {
         return this;
     }
 
-    public AddShareRequest addPicture(BmobFile pic) {
-        share.addPicture(pic);
+    public AddShareRequest addPicture(String pic) {
+        if(picList == null){
+            picList = new ArrayList<>();
+        }
+        picList.add(pic);
         return this;
     }
 

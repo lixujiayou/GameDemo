@@ -1,6 +1,7 @@
 package com.example.administrator.gamedemo.activity.mine;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -18,7 +19,8 @@ public class MineCenterActivity extends BaseActivity{
 
     @Override
     public void initViews() {
-        mToolbar.setTitle("个人中心");
+        mToolbar.setTitle("修改资料");
+        mToolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.textcolor_2));
         mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
     }
 

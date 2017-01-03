@@ -74,6 +74,24 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+        <!--发布分享，管理员权限-->
+        <activity android:name=".activity.share.SendShareActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
+        <!--收藏-->
+        <activity android:name=".activity.mine.CollectActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <!--我的上传-->
+        <activity android:name=".activity.mine.UploadActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
 
         <!--图片浏览-->
         <activity

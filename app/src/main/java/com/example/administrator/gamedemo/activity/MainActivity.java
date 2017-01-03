@@ -61,7 +61,7 @@ public class MainActivity extends BaseFragmentActivity {
         list_fragmet.add(AnswerFragment.getInstance());
         list_fragmet.add(ShareFragment.getInstance());
         list_fragmet.add(MineFragment.getInstance());
-        vp.setOffscreenPageLimit(3);
+        vp.setOffscreenPageLimit(2);
         vp.setAdapter(new BaseFragmentAdapter(list_fragmet, myFM));
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

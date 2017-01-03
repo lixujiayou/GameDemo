@@ -66,7 +66,7 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
     private void onBindMutualDataToViews(final MomentsInfo data) {
         //header
         if(data.getAuthor().getUser_icon() != null){
-            ImageLoadMnanger.INSTANCE.loadRoundImage(ShareFragment.getInstance(),rv_cover, data.getAuthor().getUser_icon().getFileUrl());
+            ImageLoadMnanger.INSTANCE.loadRoundImage(rv_cover, data.getAuthor().getUser_icon().getFileUrl());
         }
         tv_name.setText(data.getAuthor().getNick_name());
         tv_topic.setText(data.getTopic());

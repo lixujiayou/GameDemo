@@ -11,4 +11,14 @@
 
     <string name="crop__done" translatable="false">确认</string>
     <string name="crop__cancel" tools:ignore="ButtonCase" translatable="false">取消</string>
+    
+    <string name="upload_ing_1">暂时没有审核中记录哦</string>
+    <string name="upload_ing_2">上传答题后会自动进入审核中队列</string>
+    <string name="upload_ok_1">暂时没有审核成功记录哦</string>
+    <string name="upload_ok_2">点击右上角上传吧</string>
+    <string name="upload_no_1">暂时没有审核失败记录哦</string>
+    <string name="upload_no_2">上传的答题不符合《圣经问答APP》上传规范则审核失败</string>
+
+    <string name="load_over">已经到底啦</string>
+    <string name="load_ing">加载中</string>
 </resources>

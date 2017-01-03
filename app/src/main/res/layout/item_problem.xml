@@ -2,7 +2,6 @@
 <LinearLayout
     android:id="@+id/ll_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -47,7 +46,7 @@
             android:layout_alignParentBottom="true"
             android:singleLine="true"
             android:text="以马内利"
-            android:textColor="@color/textcolor_6"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp"
             android:layout_toRightOf="@id/rv_cover"
             android:layout_marginLeft="16.0dip"
@@ -65,7 +64,6 @@
             android:text="答题100次"
             android:textColor="@color/textcolor_3"
             android:textSize="14sp"/>
-
     </RelativeLayout>
 
     <View
