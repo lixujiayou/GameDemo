@@ -35,7 +35,6 @@ import butterknife.OnClick;
 
 public class MineFragment extends BaseFragment {
 
-
     @BindView(R.id.rl_mine)
     RelativeLayout relativeLayout;
 
@@ -147,15 +146,18 @@ public class MineFragment extends BaseFragment {
                 ImageLoadMnanger.INSTANCE.loadCicleImage(this, iv_icon, students.getUser_icon().getFileUrl());
                 ImageLoadMnanger.INSTANCE.steDimImage(this, students.getUser_icon().getFileUrl(), iv_dim);
             } else {
-                iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_loading_small));
-                iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.drawable.ic_loading_small), 10, false));
+                iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_user_default));
+                iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 10, false));
             }
             if (students.getNick_name() != null) {
                 tv_name.setText(students.getNick_name());
             } else {
-                tv_name.setText("编辑我的昵称");
+                tv_name.setText("前去编辑我的昵称");
             }
-
+        }else{
+            iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_user_default));
+            iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 10, false));
+            tv_name.setText("点击登录");
         }
     }
 }

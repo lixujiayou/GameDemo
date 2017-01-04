@@ -5,7 +5,7 @@
     tools:context=".MainActivity">
 
     <item android:id="@+id/action_send_whrite"
-        android:title="发表"
+        android:title="完成"
         android:orderInCategory="90"
         android:icon="@drawable/icon_send_white"
         app:showAsAction="ifRoom" />

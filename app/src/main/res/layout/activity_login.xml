@@ -1,16 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<include layout="@layout/toolbar"/>
+<include layout="@layout/toolbar"
+    />
 
     <include layout="@layout/layout_no_network"/>
 
-    <TextView
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    >
+
+<com.example.administrator.gamedemo.utils.base_image.RoundedImageView
+    android:layout_width="74dp"
+    android:layout_height="74dp"
+    android:src="@mipmap/ic_launcher"
+    app:riv_corner_radius="10dp"
+    app:riv_border_color="@color/transparent"
+    android:layout_centerHorizontal="true"
+    android:layout_above="@+id/et_name"
+
+
+    />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="账号"
+        android:layout_centerInParent="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:lines="1"
+        />
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/et_name"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:lines="1"
+        />
+
+    <Button
+        android:id="@+id/bt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这是登录页！"
-        android:textSize="20sp"
+        android:text="登录"
+        android:layout_below="@+id/et_pwd"
+        android:layout_centerHorizontal="true"
         />
+ <Button
+        android:id="@+id/bt_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:layout_below="@+id/et_pwd"
+        android:layout_centerHorizontal="true"
+        />
+
+<Button
+        android:id="@+id/bt_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忘记密码"
+        android:layout_below="@+id/et_pwd"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</LinearLayout>
 </LinearLayout>

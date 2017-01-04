@@ -34,6 +34,10 @@ public class Constants {
     public static final String UPLOAD_ING = "ING";
     public static final String UPLOAD_OK = "OK";
     public static final String UPLOAD_NO = "NO";
+    public static final int LOGIN_OK = 66;
+    public static final int EXITAPP = 33;
+
+    public static final int GOLOGIN = 22;
 
     public Constants(){
 
@@ -59,10 +63,9 @@ public class Constants {
 
         return bmobUser;
     }
- public Students getUser(){
-        Students bmobUser = BmobUser.getCurrentUser(Students.class);
-
-
+    public Students bmobUser;
+    public Students getUser(){
+         bmobUser = BmobUser.getCurrentUser(Students.class);
         return bmobUser;
     }
 

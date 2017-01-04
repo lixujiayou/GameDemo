@@ -156,7 +156,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
 
     @Override
     public void initViews() {
-        login();
         EventBus.getDefault().register(this);
         swipe_refresh.setEnabled(false);
         momentsInfoList = new ArrayList<>();
@@ -280,26 +279,6 @@ public class AnswerFragment extends BaseFragment implements onRefreshListener2 {
             return rootView;
         }
 
-    }
-
-    private void login() {
-        Logger.d("登录中");
-        Students bmobUser = new Students();
-        bmobUser.setUsername("qwerrr");
-        bmobUser.setPassword("123");
-        bmobUser.login(new SaveListener<Object>() {
-
-            @Override
-            public void done(Object o, BmobException e) {
-                if (e == null) {
-                    Logger.d("登录成功");
-                    ToastUtil3.showToast(mContext, "登录成功");
-                } else {
-                    Logger.d("登录失败" + e.toString());
-                }
-
-            }
-        });
     }
 
     @Override

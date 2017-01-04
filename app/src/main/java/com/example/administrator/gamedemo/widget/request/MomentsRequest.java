@@ -32,10 +32,12 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
 
     private int count = 10;
     private int curPage = 0;
+    private Students cUser;
 
     private boolean isReadCache = true;//是否读取缓存
     private String mType;
     public MomentsRequest() {
+        cUser = Constants.getInstance().getUser();
     }
 
     public MomentsRequest setCount(int count) {
@@ -66,6 +68,7 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
 
         if(mType!=null && mType.toString().length() > 0){
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,mType);
+            bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.AUTHOR_USER,new BmobPointer(cUser));
         }
 
         if(isReadCache) {

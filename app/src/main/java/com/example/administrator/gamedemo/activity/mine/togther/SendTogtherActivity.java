@@ -66,6 +66,7 @@ public class SendTogtherActivity extends BaseActivity {
     private String TAG = SendTogtherActivity.class.getSimpleName();
     private SweetAlertDialog pDialog;
     private SweetAlertDialog eDialog;
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther_write);

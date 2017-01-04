@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backround_hui"
+    >
+
+    <include layout="@layout/toolbar"/>
+    <include layout="@layout/layout_no_network"/>
+    <EditText
+        android:id="@+id/et_modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="点击输入当前密码"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/white"
+        />
+    <LinearLayout
+        android:id="@+id/ll_modifypwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+<EditText
+        android:id="@+id/et_modify_pwd_new_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入新密码"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/white"
+        />
+
+<EditText
+        android:id="@+id/et_modify_pwd_new_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="再次输入新密码"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="@dimen/line_px"
+        android:background="@color/white"
+        />
+    </LinearLayout>
+
+</LinearLayout>

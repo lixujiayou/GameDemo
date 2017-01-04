@@ -17,7 +17,7 @@
     android:orientation="vertical"
     >
     <LinearLayout
-        android:id="@+id/activity_about_info_ll_icon"
+        android:id="@+id/ll_icon"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/activity_about_info_iv_icon"
+            android:id="@+id/iv_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_loading_small"
@@ -61,7 +61,7 @@
 
 
     <LinearLayout
-        android:id="@+id/activity_about_info_ll_mobile"
+        android:id="@+id/ll_mobile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_mine_height"
         android:orientation="horizontal"
@@ -89,16 +89,23 @@
             android:layout_weight="1"
             />
        <TextView
-           android:id="@+id/activity_about_infO_tv_mobile"
+           android:id="@+id/atv_mobile"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="15662770999"
            android:layout_marginRight="15dp"
            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            android:visibility="invisible"
+            />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/activity_about_info_ll_nickname"
+        android:id="@+id/ll_nickname"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_mine_height"
         android:orientation="horizontal"
@@ -126,7 +133,7 @@
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/activity_about_info_tv_nickname"
+            android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="nick15662770999"
@@ -141,7 +148,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/activity_about_info_ll_pwd"
+
+        android:id="@+id/ll_pwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_mine_height"
         android:orientation="horizontal"
@@ -183,7 +191,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/activity_about_info_ll_bd"
+        android:id="@+id/ll_note"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_mine_height"
         android:orientation="horizontal"
@@ -200,32 +208,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="绑定账号"
+            android:text="个人说明"
             android:layout_marginLeft="10dp"
             android:textColor="@color/textcolor_2"
             android:textSize="@dimen/textsize_16"
             />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+
         <TextView
-            android:id="@+id/activity_about_info_tv_isbd"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_note"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="未绑定"
+            android:text="敬畏耶和华是智慧的开端，认识至圣者便是聪明。"
             android:layout_marginLeft="6dp"
+            android:lines="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ellipsize="end"
+           android:gravity="right"
             />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/travel__ic_arrow_search_result"
-            android:layout_marginRight="15dp"
-            />
+
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_change_user"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_mine_height"
         android:orientation="horizontal"
@@ -240,6 +247,34 @@
             <!--android:layout_marginLeft="10dp"-->
             <!--/>-->
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="切换账号"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/textcolor_2"
+            android:textSize="@dimen/textsize_16"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_exit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/selector_white"
+        android:layout_marginTop="@dimen/line_px"
+        >
+        <!--<ImageView-->
+            <!--android:layout_width="16dp"-->
+            <!--android:layout_height="16dp"-->
+            <!--android:src="@drawable/ic_menu_deal_off"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--/>-->
+        <TextView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="退出"
