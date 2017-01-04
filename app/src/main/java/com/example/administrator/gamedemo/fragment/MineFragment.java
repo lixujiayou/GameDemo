@@ -67,13 +67,7 @@ public class MineFragment extends BaseFragment {
         return answerFragmentHolder.instance;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
+
 
     @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload})
     public void onClick(View view) {
@@ -112,7 +106,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-
         iv_dim.setPadding(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) iv_message.getLayoutParams();
         lp.setMargins(0, Constants.getInstance().getStatusBarHeight(mContext), 0, 0);

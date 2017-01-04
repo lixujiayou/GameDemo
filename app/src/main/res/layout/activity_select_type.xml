@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:circle="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/beijing"
+    >
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.example.administrator.gamedemo.widget.imageview.CircleLayout
+            android:id="@+id/main_circle_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/main_selected_textView"
+            android:layout_gravity="center_horizontal"
+            circle:firstChildPosition="South"
+            circle:rotateToCenter="true"
+            circle:isRotating="true" >
+            <!--         circle:circleBackground="@drawable/green"  > -->
+
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_facebook_image"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_facebook"
+                circle:name="@string/facebook" />
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_myspace_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_myspace"
+                circle:name="@string/myspace" />
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_google_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_google"
+                circle:name="@string/google" />
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_linkedin_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_linkedin"
+                circle:name="@string/linkedin" />
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_twitter_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_twitter"
+                circle:name="@string/twitter" />
+
+            <com.example.administrator.gamedemo.widget.imageview.CircleImageView
+                android:id="@+id/main_wordpress_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_wordpress"
+                circle:name="@string/wordpress"
+
+                />
+
+        </com.example.administrator.gamedemo.widget.imageview.CircleLayout>
+
+        <TextView
+            android:id="@+id/main_selected_textView_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:layout_marginBottom="40dp"
+            />
+
+
+        <Button
+            android:id="@+id/main_selected_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_above="@+id/main_selected_textView_temp"
+            android:layout_centerHorizontal="true"
+            android:text="四福音"
+            android:textStyle="bold"
+            android:textColor="#009EB9"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@drawable/shape_sure_btn_blue_kong"
+            />
+</RelativeLayout>
+
+    </LinearLayout>

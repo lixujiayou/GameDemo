@@ -1,163 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/cl_fragment"
+<com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backround_hui"
     >
 
-    <include layout="@layout/lay_collapsing_viewpager_toolbar_immerse"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
+    >
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <ImageView
+        android:id="@+id/banner_imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/img_huoer"
+        android:fitsSystemWindows="false"
+        android:scaleType="fitXY"
+        />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="3"
+    android:orientation="vertical"
+    >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="90dp"
             android:orientation="vertical"
-            >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="vertical"
-            android:weightSum="2"
             android:background="@color/white"
+            android:gravity="center"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                >
-       <LinearLayout
-           android:layout_width="0dp"
-           android:layout_height="match_parent"
-           android:layout_weight="1"
-           android:gravity="center"
-           android:background="@drawable/selector_white"
-           >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\t开始答题"
-                android:textColor="@color/textcolor_m"
+                android:text="敬畏耶和华是智慧的开端，认识至圣者便是聪明。【箴9:10】"
                 android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_1"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:lineSpacingExtra="4dp"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:drawableLeft="@drawable/icon_answer_test"
                 />
-       </LinearLayout>
 
-                <View
-                    android:layout_width="@dimen/line_px"
-                    android:layout_height="match_parent"
-                    android:background="@color/backround_hui"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:background="@drawable/selector_white"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="\t历史记录"
-                        android:textColor="@color/textcolor_m"
-                        android:textSize="@dimen/textsize_18"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/icon_answer_test"
-                        />
-      </LinearLayout>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_px"
-                android:background="@color/backround_hui"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:background="@drawable/selector_white"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="\t答题规则"
-                        android:textColor="@color/textcolor_m"
-                        android:textSize="@dimen/textsize_18"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/icon_answer_test"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/line_px"
-                    android:layout_height="match_parent"
-                    android:background="@color/backround_hui"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:background="@drawable/selector_white"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="\t设\t\t置"
-                        android:textColor="@color/textcolor_m"
-                        android:textSize="@dimen/textsize_18"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/icon_answer_test"
-                        />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
 
 
-<com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView
-    android:id="@+id/circleRecyclerView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_start"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/selector_white"
+        >
 
-    ></com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView>
-        <!--<android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            >
-        </android.support.v7.widget.RecyclerView>-->
-        </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:textColor="@color/textcolor_2"
+            android:text="开始答题"
+            android:textSize="@dimen/textsize_actionbar"
+            android:gravity="center"
+            android:layout_gravity="center"
+            />
 
-</android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/line_px"
+        android:background="@color/white"
+        android:weightSum="3"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史记录"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_myerro"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的错题"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_online"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一起答"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>
+</com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout>

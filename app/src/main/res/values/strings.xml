@@ -19,6 +19,36 @@
     <string name="upload_no_1">暂时没有审核失败记录哦</string>
     <string name="upload_no_2">上传的答题不符合《圣经问答APP》上传规范则审核失败</string>
 
+    <string name="upload">暂时没有任何答题</string>
+    <string name="upload_2">可点击右上角上传答题</string>
+
     <string name="load_over">已经到底啦</string>
     <string name="load_ing">加载中</string>
+
+    <string name="app_back">返回</string>
+    <string name="app_ok">确定</string>
+    <string name="app_cancel">取消</string>
+    <string name="app_continue">继续</string>
+    <string name="app_tip">提示</string>
+    <string name="app_send">发送</string>
+    <string name="app_set">设置</string>
+    <string name="app_save">保存</string>
+    <string name="app_delete">删除</string>
+    <string name="app_nextstep">下一步</string>
+    <string name="app_prevstep">上一步</string>
+    <string name="app_finish">完成</string>
+    <string name="app_find">查找</string>
+    <string name="app_edit">编辑</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unknown">发送返回</string>
+
+    <string name="facebook">四福音</string>
+    <string name="twitter">历史诗歌书</string>
+    <string name="google">摩西五经</string>
+    <string name="linkedin">大小先知书</string>
+    <string name="wordpress">圣经</string>
+    <string name="myspace">新约书信</string>
 </resources>

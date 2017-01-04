@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="as_xz_1">
+        <item>１７卷</item>
+        <item>１８卷</item>
+        <item>１９卷</item>
+        <item>１３卷</item>
+    </array>
+    <array name="as_xz_2">
+        <item>约拿</item>
+        <item>以利亚</item>
+        <item>但以理</item>
+        <item>约伯</item>
+    </array>
+
+    <array name="as_xz_3">
+        <item>流泪的先知</item>
+        <item>呼吁的先知</item>
+        <item>恳求的先知</item>
+        <item>撒种的先知</item>
+    </array>
+    <array name="as_xz_4">
+        <item>尼尼微</item>
+        <item>埃及</item>
+        <item>巴比伦 </item>
+        <item>迦南</item>
+    </array>
+    <!--WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW-->
+    <array name="as_xz_5">
+        <item>忧患</item>
+        <item>病痛</item>
+        <item>责任</item>
+        <item>重担</item>
+    </array>
+    <array name="as_xz_6">
+        <item>耶利米</item>
+        <item>以西结</item>
+        <item>但以理 </item>
+        <item>以赛亚  </item>
+    </array>
+    <array name="as_xz_7">
+        <item>以西结书</item>
+        <item>何西阿书 </item>
+        <item>弥迦书</item>
+        <item>路得记</item>
+
+    </array>
+
+    <array name="as_xz_8">
+        <item>以赛亚书53：7 </item>
+        <item>以赛亚书30：18</item>
+        <item>以赛亚书24：21</item>
+        <item>以赛亚书24：18</item>
+    </array>
+
+    <array name="as_xz_9">
+        <item>大利乌年间</item>
+        <item>尼布甲尼撒年间</item>
+        <item>伯沙撒年间</item>
+        <item>不详</item>
+    </array>
+    <array name="as_xz_10">
+        <item>加百列</item>
+        <item>撒拉弗</item>
+        <item>米迦勒</item>
+        <item>不详</item>
+    </array>
+    <array name="as_xz_11">
+        <item>阿摩司书3：3</item>
+        <item>弥迦书6：8</item>
+        <item>哈巴谷书3：17</item>
+        <item>哈巴谷书3：2</item>
+    </array>
+    <array name="as_xz_12">
+        <item>因为耶和华住在锡安</item>
+        <item>向亚伯拉罕施慈爱</item>
+        <item>这是耶和华说的</item>
+        <item>其它都不对</item>
+    </array>
+    <array name="as_xz_13">
+        <item>以西结</item>
+        <item>以赛亚</item>
+        <item>但以理</item>
+        <item>巴兰</item>
+    </array>
+    <!--++++++++++++++++++++++++++++++++++++大小先知书简单++++++++++++++++++++++++++++++++++++++-->
+    <array name="as_xz_14">
+        <item>耶路撒冷</item>
+        <item>波斯王</item>
+        <item>亚述</item>
+        <item>巴比伦</item>
+    </array>
+    <array name="as_xz_15">
+        <item>上帝同在</item>
+        <item>上帝必看顾</item>
+        <item>上帝旌旗</item>
+        <item>上帝预备</item>
+    </array>
+    <array name="as_xz_16">
+        <item>荣光</item>
+        <item>公义</item>
+        <item>慈爱</item>
+        <item>能力</item>
+    </array>
+    <array name="as_xz_17">
+        <item>藐视</item>
+        <item>谨慎</item>
+        <item>轻心</item>
+        <item>诚心</item>
+    </array>
+    <array name="as_xz_18">
+        <item>至圣所</item>
+        <item>内室</item>
+        <item>会幕</item>
+        <item>圣屋</item>
+    </array>
+    <array name="as_xz_19">
+        <item>撒旦</item>
+        <item>亚伦</item>
+        <item>摩西</item>
+        <item>耶和华</item>
+    </array>
+    <array name="as_xz_20">
+        <item>约雅斤</item>
+        <item>约阿施</item>
+        <item>约沙法</item>
+        <item>约西亚</item>
+    </array>
+    <array name="as_xz_21">
+        <item>罗阿米</item>
+        <item>耶斯</item>
+        <item>耶斯列</item>
+        <item>罗波安</item>
+    </array>
+    <array name="as_xz_22">
+        <item>暗利</item>
+        <item>耶罗波安</item>
+        <item>罗波安</item>
+        <item>亚哈</item>
+    </array>
+    <array name="as_xz_23">
+        <item>撒拉铁</item>
+        <item>示罗密</item>
+        <item>约书亚</item>
+        <item>滴拉音</item>
+    </array>
+    <array name="as_xz_24">
+        <item>鹰</item>
+        <item>云雀</item>
+        <item>雁</item>
+        <item>小鸟</item>
+    </array>
+    <array name="as_xz_25">
+        <item>旷野</item>
+        <item>城里</item>
+        <item>海洋</item>
+        <item>高山</item>
+    </array>
+    <array name="as_xz_26">
+        <item>正路</item>
+        <item>歪路</item>
+        <item>歧路</item>
+        <item>义路</item>
+    </array>
+    <array name="as_xz_27">
+        <item>慈绳爱索</item>
+        <item>公义怜悯</item>
+        <item>律例典章</item>
+        <item>杖和竿</item>
+    </array>
+    <array name="as_xz_28">
+        <item>甘甜</item>
+        <item>辛辣</item>
+        <item>酸溜</item>
+        <item>苦涩</item>
+    </array>
+    <array name="as_xz_29">
+        <item>铁</item>
+        <item>铜</item>
+        <item>金</item>
+        <item>石</item>
+    </array>
+    <array name="as_xz_30">
+        <item>乌西雅</item>
+        <item>约坦</item>
+        <item>希西家</item>
+        <item>亚哈斯</item>
+    </array>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++大小先知困难++++++++++++++++++++++++++++++++-->
+    <array name="as_xz_31">
+        <item>叶子华美</item>
+        <item>根被拔起</item>
+        <item>果子被虫咬</item>
+        <item>树叶枯干</item>
+    </array>
+    <array name="as_xz_32">
+        <item>墙壁</item>
+        <item>苍天</item>
+        <item>祭坛</item>
+        <item>圣殿</item>
+    </array>
+    <array name="as_xz_33">
+        <item>推罗王</item>
+        <item>波斯王</item>
+        <item>西顿王</item>
+        <item>巴比伦王</item>
+    </array>
+    <array name="as_xz_34">
+        <item>加百列</item>
+        <item>沙得拉</item>
+        <item>米煞</item>
+        <item>米沙利</item>
+    </array>
+    <array name="as_xz_35">
+        <item>静坐</item>
+        <item>轻叹</item>
+        <item>低泣</item>
+        <item>祷告</item>
+    </array>
+    <array name="as_xz_36">
+        <item>悖逆我</item>
+        <item>拒绝我</item>
+        <item>不爱我</item>
+        <item>不信我</item>
+    </array>
+    <array name="as_xz_37">
+        <item>耶和华的灵</item>
+        <item>膏油</item>
+        <item>福乐</item>
+        <item>甘霖</item>
+    </array>
+    <array name="as_xz_38">
+        <item>野兽</item>
+        <item>尸体</item>
+        <item>罪犯</item>
+        <item>妓女</item>
+    </array>
+    <array name="as_xz_39">
+        <item>以诺，以利亚 </item>
+        <item>以利沙，亚伯拉罕</item>
+        <item>以利亚，以利沙</item>
+        <item>以诺，亚伯拉罕</item>
+    </array>
+    <array name="as_xz_40">
+        <item>拉撒路,睚鲁的女儿,拿因城寡妇的独子</item>
+        <item>少年人犹推古,多加,拉撒路</item>
+        <item>多加,拉撒路,睚鲁的女儿</item>
+        <item>少年人犹推古,睚鲁的女儿,拿因城寡妇的独生子</item>
+    </array>
+    <array name="as_xz_41">
+        <item>以利亚,约拿,约伯</item>
+        <item>约伯,约拿,哈巴谷</item>
+        <item>约拿,以赛亚,哈巴谷</item>
+        <item>以利亚,约拿,以赛亚</item>
+    </array>
+    <array name="as_xz_42">
+        <item>爱 </item>
+        <item>信 </item>
+        <item>说方言</item>
+        <item>望</item>
+    </array>
+    <array name="as_xz_43">
+        <item>耶利米哀歌</item>
+        <item>雅歌书 </item>
+        <item>传道书</item>
+        <item>以赛亚书</item>
+    </array>
+    <array name="as_xz_44">
+        <item>尼布甲尼撒</item>
+        <item>扫罗 </item>
+        <item>西希家</item>
+        <item>大卫</item>
+    </array>
+    <array name="as_xz_45">
+        <item>憔悴</item>
+        <item>精神 </item>
+        <item>俊美</item>
+        <item>光彩</item>
+    </array>
+    <array name="as_xz_46">
+        <item>下拜</item>
+        <item>降职 </item>
+        <item>祷告</item>
+        <item>监禁</item>
+    </array>
+    <array name="as_xz_47">
+        <item>政权</item>
+        <item>重担 </item>
+        <item>责任</item>
+        <item>罪债</item>
+    </array>
+    <array name="as_xz_48">
+        <item>亚哈斯</item>
+        <item>约坦 </item>
+        <item>乌西雅</item>
+        <item>以赛亚</item>
+    </array>
+    <array name="as_xz_49">
+        <item>亚撒</item>
+        <item>希西家 </item>
+        <item>亚哈斯</item>
+        <item>约坦</item>
+    </array>
+    <array name="as_xz_50">
+        <item>我主</item>
+        <item>我神 </item>
+        <item>我王</item>
+        <item>撒旦</item>
+    </array>
+</resources>

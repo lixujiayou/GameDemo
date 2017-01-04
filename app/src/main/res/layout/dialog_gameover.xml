@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    >
+    <LinearLayout
+        android:id="@+id/view5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="#00000000"
+        >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/gameover"
+    android:scaleType="fitCenter"
+    />
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_gameover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="得分：8000"
+        android:layout_below="@+id/tv_gameover_chenghao"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="#00FF00"
+        android:background="#00000000"
+        />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="(点击任意处退出)"
+    android:layout_below="@id/tv_gameover"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="10dp"
+    />
+    <TextView
+        android:id="@+id/tv_gameover_chenghao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="根本停不下来"
+        android:layout_below="@+id/view5"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:layout_marginTop="-130dip"
+        android:textColor="#FF0000"
+        />
+</RelativeLayout>

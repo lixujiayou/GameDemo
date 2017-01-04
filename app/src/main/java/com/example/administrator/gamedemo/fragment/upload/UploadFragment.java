@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -88,6 +89,9 @@ public abstract class UploadFragment extends BaseFragment{
     @BindView(R.id.tv_hint_2)
     TextView tv_hint_2;
 
+    @BindView(R.id.ll_toobar)
+    LinearLayout ll_toobar;
+
     public String mType = Constants.UPLOAD_OK;
     private boolean isLoad = false;
     protected abstract void setmType();
@@ -105,7 +109,7 @@ public abstract class UploadFragment extends BaseFragment{
 
     @Override
     public void initViews() {
-
+        ll_toobar.setVisibility(View.GONE);
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
 
@@ -187,7 +191,6 @@ public abstract class UploadFragment extends BaseFragment{
 
             return;
         } else {
-            isReadCache = true;
             isFirst = false;
 
             momentsRequest.setOnResponseListener(momentsRequestCallBack);

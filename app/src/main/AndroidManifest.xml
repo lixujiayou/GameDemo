@@ -100,6 +100,28 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
 
+
+        <!--答题页面-->
+        <activity android:name=".activity.answer.AnswerListActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
+        <!--开始答题页面-->
+        <activity android:name=".activity.answer.Starting"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <!--选择答题类型-->
+        <activity android:name=".activity.answer.SelectTypeActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
+
         <!--图片浏览-->
         <activity
             android:name=".activity.image.PhotoBrowseActivity"
@@ -123,6 +145,35 @@
             android:theme="@style/PhotoPickerTheme"/>
 
 
+        <activity android:name="com.wxapi.WXEntryActivity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sdksample"/>
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:noHistory="true"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1105176662" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <!--glide-->
         <meta-data
             android:name="com.example.administrator.gamedemo.core.GlobalGlideConfiguration"

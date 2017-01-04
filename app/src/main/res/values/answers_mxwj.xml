@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="as_mxwj_1">
+        <item>１１０</item>
+        <item>１３０</item>
+        <item>１２０</item>
+        <item>１００</item>
+    </array>
+    <array name="as_mxwj_2">
+        <item>１３０</item>
+        <item>１２０</item>
+        <item>１１０</item>
+        <item>不详细</item>
+    </array>
+    <array name="as_mxwj_3">
+        <item>变成一根盐柱</item>
+        <item>变成一根石柱</item>
+        <item>立刻扑到</item>
+        <item>惊呆了</item>
+    </array>
+    <array name="as_mxwj_4">
+        <item>放声大哭</item>
+        <item>祷告</item>
+        <item>叹息</item>
+        <item>把儿子放下</item>
+    </array>
+    <array name="as_mxwj_5">
+        <item>红土</item>
+        <item>第一个人</item>
+        <item>永生之父</item>
+        <item>被造之人能</item>
+    </array>
+    <array name="as_mxwj_6">
+    <item>第六日</item>
+    <item>第七日</item>
+    <item>第四日</item>
+    <item>第五日</item>
+</array>
+<array name="as_mxwj_7">
+<item>６００</item>
+<item>６５０</item>
+<item>５００</item>
+<item>９５０</item>
+</array>
+<array name="as_mxwj_8">
+<item>含</item>
+<item>闪</item>
+<item>雅弗</item>
+<item>诺亚</item>
+</array>
+<array name="as_mxwj_9">
+<item>巴别</item>
+<item>迦南</item>
+<item>吾耳</item>
+<item>不详</item>
+</array>
+<array name="as_mxwj_10">
+<item>７５</item>
+<item>１００</item>
+<item>９９</item>
+<item>５９</item>
+</array>
+<array name="as_mxwj_11">
+<item>７０</item>
+<item>５０</item>
+<item>６０</item>
+<item>３０</item>
+</array>
+<array name="as_mxwj_12">
+<item>４０</item>
+<item>５０</item>
+<item>６０</item>
+<item>３０</item>
+</array>
+<array name="as_mxwj_13">
+<item>１２０</item>
+<item>１５０</item>
+<item>１１０</item>
+<item>１３０</item>
+</array>
+    <array name="as_mxwj_14">
+        <item>旷野</item>
+        <item>迦南</item>
+        <item>埃及</item>
+        <item>约旦</item>
+    </array>
+    <array name="as_mxwj_15">
+        <item>申命记</item>
+        <item>士师记</item>
+        <item>约书亚记</item>
+        <item>约伯记</item>
+    </array>
+    <array name="as_mxwj_16">
+        <item>挪亚</item>
+        <item>以诺</item>
+        <item>摩西</item>
+        <item>村民</item>
+    </array>
+
+    <array name="as_mxwj_17">
+        <item>借摩西与以色列人所立的约</item>
+        <item>雅各立的约</item>
+        <item>亚伯拉罕所立的约</item>
+        <item>与所有人立约</item>
+    </array>
+    <array name="as_mxwj_18">
+        <item>亚伯拉罕</item>
+        <item>雅各</item>
+        <item>约瑟</item>
+        <item>摩西</item>
+    </array>
+    <array name="as_mxwj_19">
+        <item>约书亚</item>
+        <item>摩西的长子</item>
+        <item>亚伦</item>
+        <item>米粒暗</item>
+    </array>
+    <array name="as_mxwj_20">
+        <item>该隐</item>
+        <item>亚伯</item>
+        <item>亚当</item>
+        <item>夏娃</item>
+    </array>
+    <array name="as_mxwj_21">
+        <item>恶又毒的疮生在拜偶像的人身上</item>
+        <item>江河与众水的泉源里水就都变成血了</item>
+        <item>搀着血与火的雹子烧毁了地和植物的三分之一 </item>
+        <item>蝇灾</item>
+    </array>
+
+    <array name="as_mxwj_22">
+        <item>拿答、亚比户</item>
+        <item>以利户、亚比撒</item>
+        <item>可拉、亚比兰</item>
+        <item>以利户、亚比兰</item>
+    </array>
+    <array name="as_mxwj_23">
+        <item>４</item>
+        <item>５</item>
+        <item>６</item>
+        <item>３</item>
+    </array>
+    <array name="as_mxwj_24">
+        <item>３０</item>
+        <item>２８</item>
+        <item>４０</item>
+        <item>２４</item>
+    </array>
+    <array name="as_mxwj_25">
+        <item>虱灾  </item>
+        <item>蛙灾</item>
+        <item>水变血灾 </item>
+        <item>蝇灾 </item>
+    </array>
+    <array name="as_mxwj_26">
+        <item>99岁 </item>
+        <item>89岁</item>
+        <item>100岁  </item>
+        <item>120岁 </item>
+    </array>
+    <array name="as_mxwj_27">
+    <item>雅各与神摔跤  </item>
+    <item>亚伯拉罕受割礼</item>
+    <item>亚伯拉罕献以撒</item>
+    <item>不详</item>
+</array>
+    <array name="as_mxwj_28">
+        <item>《出埃及记》和《申命记》</item>
+        <item>《民数记》和《申命记》</item>
+        <item>《出埃及记》和《利未记》 </item>
+        <item>《出埃及记》和《以赛亚书》  </item>
+    </array>
+    <array name="as_mxwj_29">
+        <item>琐珥</item>
+        <item>逃城</item>
+        <item>尼尼微</item>
+        <item>迦南</item>
+    </array>
+    <array name="as_mxwj_30">
+        <item>毗努伊勒</item>
+        <item>马哈念</item>
+        <item>迦累得</item>
+        <item>伯利恒</item>
+    </array>
+    <array name="as_mxwj_31">
+        <item>四十</item>
+        <item>六十</item>
+        <item>二十</item>
+        <item>三十</item>
+    </array>
+    <array name="as_mxwj_32">
+        <item>利未支派</item>
+        <item>犹大支派</item>
+        <item>便雅悯支派</item>
+        <item>流便支派</item>
+    </array>
+    <array name="as_mxwj_33">
+    <item>路斯</item>
+    <item>基拉耳</item>
+    <item>别是巴</item>
+    <item>夸口</item>
+</array>
+    <array name="as_mxwj_34">
+        <item>赫人</item>
+        <item>亚摩利人</item>
+        <item>基尼人</item>
+        <item>撒玛利亚人</item>
+    </array>
+    <array name="as_mxwj_35">
+        <item>伯特利</item>
+        <item>伯利恒</item>
+        <item>巴旦亚兰</item>
+        <item>西奈山</item>
+    </array>
+    <array name="as_mxwj_36">
+        <item>拿答、亚比户</item>
+        <item>可拉、亚比兰</item>
+        <item>以利户、亚比撒</item>
+        <item>以利户、亚比兰</item>
+    </array>
+    <array name="as_mxwj_37">
+        <item>含</item>
+        <item>闪</item>
+        <item>雅弗</item>
+        <item>闪、雅弗</item>
+    </array>
+    <array name="as_mxwj_38">
+        <item>利未</item>
+        <item>但 </item>
+        <item>玛拿西</item>
+        <item>流便</item>
+    </array>
+    <array name="as_mxwj_39">
+        <item>普阿</item>
+        <item>米利暗 </item>
+        <item>他玛  </item>
+        <item>底波拉</item>
+    </array>
+    <array name="as_mxwj_40">
+        <item>西坡拉</item>
+        <item>他拉 </item>
+        <item>他玛  </item>
+        <item>玛拉</item>
+    </array>
+    <array name="as_mxwj_41">
+        <item>约基别</item>
+        <item>伊丽莎白 </item>
+        <item>内奥米  </item>
+        <item>底波拉</item>
+    </array>
+    <array name="as_mxwj_42">
+        <item>暗兰</item>
+        <item>革顺 </item>
+        <item>示每  </item>
+        <item>内奥米</item>
+    </array>
+    <array name="as_mxwj_43">
+        <item>以撒、以实玛利</item>
+        <item>雅各、以扫 </item>
+        <item>摩西、亚伦  </item>
+        <item>雅各、亚伦</item>
+    </array>
+
+
+
+    <array name="as_mxwj_44">
+        <item>以法莲</item>
+        <item>玛拿西</item>
+        <item>以萨迦</item>
+        <item>西布伦</item>
+    </array>
+    <array name="as_mxwj_45">
+        <item>人多</item>
+        <item>纤弱</item>
+        <item>傲慢</item>
+        <item>富有</item>
+    </array>
+    <array name="as_mxwj_46">
+        <item>拙口笨舌</item>
+        <item>害怕</item>
+        <item>没有能力</item>
+        <item>没有文化</item>
+    </array>
+    <array name="as_mxwj_47">
+        <item>宰相</item>
+        <item>护卫长</item>
+        <item>王</item>
+        <item>百夫长</item>
+    </array>
+    <array name="as_mxwj_48">
+        <item>3天</item>
+        <item>2天</item>
+        <item>5天</item>
+        <item>1天</item>
+    </array>
+    <array name="as_mxwj_49">
+        <item>便雅悯</item>
+        <item>流便</item>
+        <item>西缅</item>
+        <item>犹大</item>
+    </array>
+    <array name="as_mxwj_50">
+        <item>火烧</item>
+        <item>保留</item>
+        <item>扔掉</item>
+        <item>给别人</item>
+    </array>
+    <array name="as_mxwj_51">
+        <item>20年</item>
+        <item>4年</item>
+        <item>14年</item>
+        <item>7年</item>
+    </array>
+    <array name="as_mxwj_52">
+        <item>七年</item>
+        <item>十二年</item>
+        <item>十四年</item>
+        <item>三年</item>
+    </array>
+    <array name="as_mxwj_53">
+        <item>米甸</item>
+        <item>摩押</item>
+        <item>以东</item>
+        <item>迦南</item>
+    </array>
+    <array name="as_mxwj_54">
+        <item>430年</item>
+        <item>450年</item>
+        <item>500年</item>
+        <item>410年</item>
+    </array>
+    <array name="as_mxwj_55">
+        <item>吗哪</item>
+        <item>肉</item>
+        <item>馒头</item>
+        <item>水果</item>
+    </array>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++摩西五经简单+++++++++++++++++++++++++++++++++++-->
+    <array name="as_mxwj_56">
+        <item>以诺</item>
+        <item>挪亚</item>
+        <item>塞特</item>
+        <item>亚伯拉罕</item>
+    </array>
+    <array name="as_mxwj_57">
+        <item>恩典时代</item>
+        <item>新约时代</item>
+        <item>旧约时代</item>
+        <item>律法时代</item>
+    </array>
+    <array name="as_mxwj_58">
+        <item>分别善恶的树</item>
+        <item>生命树</item>
+        <item>一般的树</item>
+        <item>果树</item>
+    </array>
+    <array name="as_mxwj_59">
+        <item>40年</item>
+        <item>38年</item>
+        <item>35年</item>
+        <item>30年</item>
+    </array>
+    <array name="as_mxwj_60">
+        <item>神是三位一体的</item>
+        <item>作者写错</item>
+        <item>神故意的</item>
+        <item>不知道</item>
+    </array>
+    <array name="as_mxwj_61">
+        <item>法老女儿</item>
+        <item>法老</item>
+        <item>以色列妇女</item>
+        <item>官兵</item>
+    </array>
+    <array name="as_mxwj_62">
+        <item>石版</item>
+        <item>金牌</item>
+        <item>木板</item>
+        <item>铜牌</item>
+    </array>
+    <array name="as_mxwj_63">
+        <item>恶</item>
+        <item>食</item>
+        <item>衣</item>
+        <item>善</item>
+    </array>
+    <array name="as_mxwj_64">
+        <item>300年</item>
+        <item>400年</item>
+        <item>100年</item>
+        <item>200年</item>
+    </array>
+    <array name="as_mxwj_65">
+        <item>空气</item>
+        <item>泥土</item>
+        <item>冰雪</item>
+        <item>山脉</item>
+    </array>
+    <array name="as_mxwj_66">
+    <item>云彩</item>
+    <item>环境</item>
+    <item>摩西</item>
+    <item>天气</item>
+</array>
+    <array name="as_mxwj_67">
+        <item>脚跟</item>
+        <item>大腿</item>
+        <item>手肘</item>
+        <item>头发</item>
+    </array>
+    <array name="as_mxwj_68">
+        <item>火烧</item>
+        <item>弃掉</item>
+        <item>给别人</item>
+        <item>保留</item>
+    </array>
+    <array name="as_mxwj_69">
+        <item>下体</item>
+        <item>脚趾</item>
+        <item>肢体</item>
+        <item>鞋子</item>
+    </array>
+    <array name="as_mxwj_70">
+        <item>迦南</item>
+        <item>以东</item>
+        <item>亚述</item>
+        <item>埃及</item>
+    </array>
+    <array name="as_mxwj_71">
+        <item>误杀者</item>
+        <item>逃债者</item>
+        <item>灾民</item>
+        <item>逃税者</item>
+    </array>
+    <array name="as_mxwj_72">
+        <item>约书亚</item>
+        <item>迦南</item>
+        <item>摩西</item>
+        <item>亚伦</item>
+    </array>
+    <array name="as_mxwj_73">
+        <item>你们要赞美耶和华</item>
+        <item>你们要亲近耶和华</item>
+        <item>你们要荣耀耶和华</item>
+        <item>你们要称颂耶和华</item>
+    </array>
+    <array name="as_mxwj_74">
+        <item>约书亚</item>
+        <item>摩西的儿子</item>
+        <item>摩西的父亲</item>
+        <item>亚伦</item>
+    </array>
+    <array name="as_mxwj_75">
+        <item>摩西</item>
+        <item>约瑟</item>
+        <item>约书亚</item>
+        <item>亚伯拉罕</item>
+    </array>
+    <array name="as_mxwj_76">
+        <item>罗得的妻子 </item>
+        <item>罗得全家</item>
+        <item>罗得的女儿</item>
+        <item>罗得</item>
+    </array>
+    <array name="as_mxwj_77">
+        <item>筑坛 </item>
+        <item>庆祝</item>
+        <item>洗澡</item>
+        <item>烧香</item>
+    </array>
+    <array name="as_mxwj_78">
+        <item>皮子 </item>
+        <item>树皮</item>
+        <item>树叶</item>
+        <item>羊毛</item>
+    </array>
+    <array name="as_mxwj_79">
+        <item>凡火</item>
+        <item>香火</item>
+        <item>灵火</item>
+        <item>圣火</item>
+    </array>
+    <array name="as_mxwj_80">
+        <item>昼夜</item>
+        <item>星辰</item>
+        <item>众水</item>
+        <item>空气</item>
+    </array>
+    <array name="as_mxwj_81">
+        <item>二十</item>
+        <item>十</item>
+        <item>四十</item>
+        <item>三十</item>
+    </array>
+    <array name="as_mxwj_82">
+        <item>希西家</item>
+        <item>约书亚</item>
+        <item>所罗门 </item>
+        <item>大卫 </item>
+    </array>
+    <array name="as_mxwj_83">
+        <item>耶和华必预备</item>
+        <item>耶和华是拯救</item>
+        <item>耶和华赐平安 </item>
+        <item>耶和华是我旌旗 </item>
+    </array>
+    <array name="as_mxwj_84">
+        <item>亚比米勒</item>
+        <item>约拿单</item>
+        <item>撒母耳 </item>
+        <item>大卫</item>
+    </array>
+    <array name="as_mxwj_85">
+        <item>玛土撒拉九百六十九</item>
+        <item>雅列九百六十三</item>
+        <item>雅列九百六十二 </item>
+        <item>玛土撒拉九百六十八</item>
+    </array>
+    <array name="as_mxwj_86">
+        <item>所罗门</item>
+        <item>塞缪尔</item>
+        <item>扫罗  </item>
+        <item>大卫</item>
+    </array>
+    <array name="as_mxwj_87">
+        <item>借摩西与以色列人立的约</item>
+        <item>约书亚立的约</item>
+        <item>雅各立的约  </item>
+        <item>亚伯拉罕立的约</item>
+    </array>
+    <array name="as_mxwj_88">
+        <item>亚伯拉罕、以撒和雅各</item>
+        <item>亚伯拉罕、以实玛利和雅各</item>
+        <item>亚伯拉罕、以撒和扫罗  </item>
+        <item>亚伯拉罕、扫罗和雅各</item>
+    </array>
+    <array name="as_mxwj_89">
+        <item>洗礼</item>
+        <item>祷告</item>
+        <item>传福音</item>
+        <item>普通</item>
+    </array>
+    <array name="as_mxwj_90">
+        <item>希律</item>
+        <item>约拿单</item>
+        <item>扫罗</item>
+        <item>比拉多</item>
+    </array>
+    <!--++++++++++++++++++++++++++++++++摩西五经困难++++++++++++++++++++++++++++++++++++++++-->
+    <array name="as_mxwj_91">
+        <item>亚伯拉罕</item>
+        <item>约瑟</item>
+        <item>艾萨克 </item>
+        <item>雅各</item>
+    </array>
+    <array name="as_mxwj_92">
+        <item>摩西</item>
+        <item>雅各</item>
+        <item>艾萨克 </item>
+        <item>亚伯拉罕</item>
+    </array>
+    <array name="as_mxwj_93">
+        <item>燔祭、素祭、平安祭、赎罪祭、赎愆祭</item>
+        <item>燔祭、火祭、平安祭、感谢祭、赎愆祭</item>
+        <item>燔祭、火祭、平安祭、赎罪祭、赎愆祭 </item>
+        <item>感谢祭、素祭、平安祭、赎罪祭、赎愆祭</item>
+    </array>
+    <array name="as_mxwj_94">
+        <item>耶和华是我旌旗</item>
+        <item>耶和华是拯救</item>
+        <item>耶和华赐平安 </item>
+        <item>耶和华必预备</item>
+    </array>
+    <array name="as_mxwj_95">
+        <item>亚伯拉罕</item>
+        <item>雅各</item>
+        <item>艾萨克 </item>
+        <item>约瑟</item>
+    </array>
+    <array name="as_mxwj_96">
+        <item>以利亚</item>
+        <item>以西结</item>
+        <item>耶利米 </item>
+        <item>以赛亚</item>
+    </array>
+    <array name="as_mxwj_97">
+        <item>申命记</item>
+        <item>民数记</item>
+        <item>利未记 </item>
+        <item>出埃及记</item>
+    </array>
+    <array name="as_mxwj_98">
+        <item>亚伯拉罕</item>
+        <item>约瑟</item>
+        <item>雅各 </item>
+        <item>挪亚</item>
+    </array>
+    <array name="as_mxwj_99">
+        <item>米利暗</item>
+        <item>多比雅</item>
+        <item>户勒大 </item>
+        <item>底波拉</item>
+    </array>
+    <array name="as_mxwj_100">
+        <item>以诺</item>
+        <item>罗得</item>
+        <item>亚伯 </item>
+        <item>以拿</item>
+    </array>
+    <array name="as_mxwj_101">
+        <item>摩西</item>
+        <item>亚伯拉罕</item>
+        <item>约书亚 </item>
+        <item>雅各</item>
+    </array>
+    <array name="as_mxwj_102">
+        <item>拿杖</item>
+        <item>拿刀</item>
+        <item>握鞋</item>
+        <item>握手</item>
+    </array>
+    <array name="as_mxwj_103">
+        <item>十分之一</item>
+        <item>全部</item>
+        <item>一半</item>
+        <item>五分之一</item>
+    </array>
+    <array name="as_mxwj_104">
+        <item>果子</item>
+        <item>禾稼</item>
+        <item>牛羊</item>
+        <item>蜂蜜</item>
+    </array>
+    <array name="as_mxwj_105">
+        <item>第三天</item>
+        <item>第四天</item>
+        <item>第二天</item>
+        <item>第一天</item>
+    </array>
+    <array name="as_mxwj_106">
+        <item>美索布达米亚</item>
+        <item>迦南</item>
+        <item>希伯伦</item>
+        <item>埃及</item>
+    </array>
+    <array name="as_mxwj_107">
+        <item>米利暗</item>
+        <item>亚伦</item>
+        <item>约基别</item>
+        <item>西波拉</item>
+    </array>
+</resources>

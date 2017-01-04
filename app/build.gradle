@@ -59,7 +59,10 @@ dependencies {
     compile project(':photopicker')
     compile project(':library')
     //图片裁剪
-   // compile 'com.yalantis:ucrop:2.2.0'
+    // compile 'com.yalantis:ucrop:2.2.0'
+    compile files('src/main/libs/libammsdk.jar')
+    compile files('src/main/libs/mta-sdk-1.6.2.jar')
+    compile files('src/main/libs/open_sdk_r5509.jar')
 }
 
 

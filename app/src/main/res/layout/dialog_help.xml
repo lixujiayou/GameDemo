@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/bt_help1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/photo_gallery_selector1"
+        android:paddingBottom="15dip"
+        android:paddingTop="15dip"
+        android:text="重新计时(2)"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/textcolor_2"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#DAD9DB" />
+
+    <TextView
+        android:id="@+id/bt_help2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/photo_camera_selector1"
+        android:paddingBottom="15dip"
+        android:paddingTop="15dip"
+        android:text="去掉两个错误答案(1)"
+        android:textSize="18sp"
+        android:textColor="@color/textcolor_2"
+        android:gravity="center"
+        />
+
+    <Button
+        android:id="@+id/bt_helpcancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/photo_cancel_selector"
+        android:paddingBottom="12dip"
+        android:paddingTop="12dip"
+        android:text="取消"
+        android:textSize="18sp"
+        android:textColor="@color/textcolor_2"
+        />
+
+</LinearLayout>

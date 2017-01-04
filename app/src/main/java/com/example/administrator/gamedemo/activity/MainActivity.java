@@ -3,6 +3,7 @@ package com.example.administrator.gamedemo.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
@@ -44,12 +45,15 @@ public class MainActivity extends BaseFragmentActivity {
     @BindView(R.id.tv_mine)
     TextView tv_mine;
 
-    private FragmentManager myFM;
+
     private List<Fragment> list_fragmet = new ArrayList<>();
 
-    @BindView(R.id.viewpager)
-    ViewPager vp;
+    private FragmentManager fragmentManager;
 
+
+    private AnswerFragment answerFragment;
+    private ShareFragment shareFragment;
+    private MineFragment mineFragment;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
@@ -57,11 +61,21 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     public void initViews() {
-        myFM = getSupportFragmentManager();
-        list_fragmet.add(AnswerFragment.getInstance());
-        list_fragmet.add(ShareFragment.getInstance());
-        list_fragmet.add(MineFragment.getInstance());
-        vp.setOffscreenPageLimit(2);
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+
+        hideFragments(transaction);
+
+        if(answerFragment == null) {
+            answerFragment = new AnswerFragment();
+            transaction.add(R.id.framelayout, AnswerFragment.getInstance());
+        }else{
+            transaction.show(answerFragment);
+        }
+        transaction.commit();
+
+      /*  vp.setOffscreenPageLimit(2);
         vp.setAdapter(new BaseFragmentAdapter(list_fragmet, myFM));
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -79,12 +93,62 @@ public class MainActivity extends BaseFragmentActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
     }
 
     @Override
     public void initData() {
 
+    }
+
+
+    private void OnTabSelected(int index) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        switch (index) {
+            case 0:
+                hideFragments(transaction);
+                if (answerFragment == null) {
+                    answerFragment = AnswerFragment.getInstance();
+                    transaction.add(R.id.framelayout, answerFragment);
+                } else {
+                    transaction.show(answerFragment);
+                }
+                break;
+            case 1:
+                hideFragments(transaction);
+                if (shareFragment == null) {
+                    shareFragment = new ShareFragment();
+                    transaction.add(R.id.framelayout, shareFragment);
+                } else {
+                    transaction.show(shareFragment);
+                }
+                break;
+            case 2:
+                hideFragments(transaction);
+                if (mineFragment == null) {
+                    mineFragment = new MineFragment();
+                    transaction.add(R.id.framelayout, mineFragment);
+                } else {
+                    transaction.show(mineFragment);
+                }
+                break;
+                default:
+                    break;
+        }
+        transaction.commit();
+    }
+
+
+    private void hideFragments(FragmentTransaction transaction) {
+        if(answerFragment != null){
+            transaction.hide(answerFragment);
+        }
+        if(shareFragment != null){
+            transaction.hide(shareFragment);
+        }
+        if(mineFragment != null){
+            transaction.hide(mineFragment);
+        }
     }
 
 
@@ -150,27 +214,21 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.ll_main_answer, R.id.ll_main_mine, R.id.main_bottome})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_main_answer:
                 changePage(0);
-                vp.setCurrentItem(0);
+                OnTabSelected(0);
                 break;
             case R.id.ll_main_mine:
                 changePage(2);
-                vp.setCurrentItem(2);
+                OnTabSelected(2);
                 break;
             case R.id.main_bottome:
                 changePage(1);
-                vp.setCurrentItem(1);
+                OnTabSelected(1);
                 break;
         }
     }

@@ -1,0 +1,1627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="answers_1">
+        <item>抹大拉的马利亚</item>
+        <item>马利亚的姐姐与马大</item>
+        <item>伯大尼的马利亚</item>
+        <item>撒玛利亚妇人</item>
+    </array>
+    <array name="answers_2">
+        <item>上好的袍子</item>
+        <item>鞋</item>
+        <item>戒指</item>
+        <item>食物</item>
+    </array>
+    <array name="answers_3">
+        <item>撒玛利亚人</item>
+        <item>耶路撒冷人</item>
+        <item>加利利人</item>
+        <item>犹太人</item>
+    </array>
+
+    <array name="answers_4">
+        <item>一朵百合花</item>
+        <item>一朵玫瑰花</item>
+        <item>一朵凤仙花</item>
+        <item>一朵鲜花</item>
+    </array>
+
+    <array name="answers_5">
+        <item>路加福音</item>
+        <item>马太福音</item>
+        <item>约翰福音</item>
+        <item>马可福音</item>
+    </array>
+
+    <array name="answers_6">
+        <item>多马</item>
+        <item>巴多罗买</item>
+        <item>马太</item>
+        <item>犹大</item>
+    </array>
+
+    <array name="answers_7">
+        <item>罗马文</item>
+        <item>埃及文</item>
+        <item>亚兰文</item>
+        <item>阿拉伯文</item>
+    </array>
+
+    <array name="answers_8">
+        <item>守着申初的祷告</item>
+        <item>清晨的祷告</item>
+        <item>夜间的异象</item>
+        <item>清晨的异象</item>
+    </array>
+
+    <array name="answers_9">
+        <item>罗马书</item>
+        <item>以弗所书</item>
+        <item>哥林多前书</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="answers_10">
+        <item>彼得</item>
+        <item>约翰</item>
+        <item>雅各</item>
+        <item>多马</item>
+    </array>
+    <array name="answers_11">
+        <item>撒该</item>
+        <item>少年财主</item>
+        <item>马太</item>
+        <item>路人</item>
+    </array>
+    <array name="answers_12">
+        <item>两位</item>
+        <item>四位</item>
+        <item>三位</item>
+        <item>一位</item>
+    </array>
+    <array name="answers_13">
+        <item>彼此相爱</item>
+        <item>同心合意</item>
+        <item>爱人如己</item>
+        <item>助人为乐</item>
+    </array>
+    <array name="answers_14">
+        <item>传福音给万民</item>
+        <item>周济穷人</item>
+        <item>彼此相爱</item>
+        <item>悔改认罪</item>
+    </array>
+    <array name="answers_15">
+        <item>圣灵的引导</item>
+        <item>人的悟性</item>
+        <item>人的知识</item>
+        <item>自身素养</item>
+    </array>
+    <array name="answers_16">
+        <item>神的吩咐</item>
+        <item>人家提醒</item>
+        <item>心有感动</item>
+        <item>圣灵的引导</item>
+    </array>
+    <array name="answers_17">
+        <item>耶稣基督并他钉十字架</item>
+        <item>圣经的道德标准</item>
+        <item>神的诫命与律法</item>
+        <item>神的大能医治疾病</item>
+    </array>
+    <array name="answers_18">
+        <item>基督的福音</item>
+        <item>正统的神学</item>
+        <item>教会的传统</item>
+        <item>家庭的背景</item>
+    </array>
+    <array name="answers_19">
+        <item>撒迦利亚</item>
+        <item>该撒利亚</item>
+        <item>约阿施</item>
+        <item>雅各</item>
+    </array>
+    <array name="answers_20">
+        <item>税吏长</item>
+        <item>议士</item>
+        <item>税吏</item>
+        <item>百夫长</item>
+    </array>
+    <array name="answers_21">
+        <item>鉴察</item>
+        <item>垂顾</item>
+        <item>审判</item>
+        <item>怜悯</item>
+    </array>
+    <array name="answers_22">
+        <item>生命</item>
+        <item>尊容</item>
+        <item>前途</item>
+        <item>尊严</item>
+    </array>
+    <array name="answers_23">
+        <item>约伯</item>
+        <item>但以理</item>
+        <item>摩西</item>
+        <item>亚伯拉罕</item>
+    </array>
+    <array name="answers_24">
+        <item>耶米玛</item>
+        <item>基洗亚</item>
+        <item>基连哈朴</item>
+        <item>耶洗别</item>
+    </array>
+    <array name="answers_25">
+        <item>亚萨</item>
+        <item>所罗门</item>
+        <item>大卫</item>
+        <item>摩西</item>
+    </array>
+    <array name="answers_26">
+        <item>１１０</item>
+        <item>１３０</item>
+        <item>１２０</item>
+        <item>１００</item>
+    </array>
+    <array name="answers_27">
+        <item>１３０</item>
+        <item>１２０</item>
+        <item>１１０</item>
+        <item>不详细</item>
+    </array>
+
+    <array name="answers_28">
+        <item>仁爱</item>
+        <item>和平</item>
+        <item>善良</item>
+        <item>节制</item>
+    </array>
+    <array name="answers_29">
+        <item>节制</item>
+        <item>忍耐</item>
+        <item>恩慈</item>
+        <item>善良</item>
+    </array>
+    <array name="answers_30">
+        <item>变成一根盐柱</item>
+        <item>变成一根石柱</item>
+        <item>立刻扑到</item>
+        <item>惊呆了</item>
+    </array>
+    <array name="answers_31">
+        <item>放声大哭</item>
+        <item>祷告</item>
+        <item>叹息</item>
+        <item>把儿子放下</item>
+    </array>
+    <array name="answers_32">
+        <item>约拿单</item>
+        <item>亚比拿达</item>
+        <item>麦基舒亚</item>
+        <item>约坦</item>
+    </array>
+    <array name="answers_33">
+        <item>非利士人</item>
+        <item>亚玛力人</item>
+        <item>亚扪人</item>
+        <item>撒玛利亚人</item>
+    </array>
+    <array name="answers_34">
+        <item>米该雅</item>
+        <item>西底家 </item>
+        <item>何西阿</item>
+        <item>撒母耳</item>
+    </array>
+    <array name="answers_35">
+        <item>耶洗别</item>
+        <item>基连哈朴</item>
+        <item>以利沙伯</item>
+        <item>耶米玛</item>
+    </array>
+    <array name="answers_36">
+        <item>以利亚</item>
+        <item>以利沙</item>
+        <item>一位未具名的先知</item>
+        <item>撒母耳</item>
+    </array>
+    <array name="answers_37">
+        <item>永生</item>
+        <item>平安</item>
+        <item>荣耀</item>
+        <item>生命</item>
+    </array>
+    <array name="answers_38">
+        <item>放猪</item>
+        <item>放牛</item>
+        <item>放羊</item>
+        <item>放马</item>
+    </array>
+    <array name="answers_39">
+        <item>荣耀的身体相似</item>
+        <item>荣耀的形像相似</item>
+        <item>荣耀的地位相似</item>
+        <item>荣耀的气节相似</item>
+    </array>
+    <array name="answers_40">
+        <item>１７卷</item>
+        <item>１８卷</item>
+        <item>１９卷</item>
+        <item>１３卷</item>
+    </array>
+    <array name="answers_41">
+        <item>保罗</item>
+        <item>约翰</item>
+        <item>彼得</item>
+        <item>马太</item>
+    </array>
+    <array name="answers_42">
+        <item>大卫</item>
+        <item>所罗门</item>
+        <item>摩西</item>
+        <item>亚萨</item>
+    </array>
+    <array name="answers_43">
+        <item>红土</item>
+        <item>第一个人</item>
+        <item>永生之父</item>
+        <item>被造之人能</item>
+    </array>
+    <array name="answers_44">
+        <item>１５０篇</item>
+        <item>１６０篇</item>
+        <item>１４０篇</item>
+        <item>１３０篇</item>
+    </array>
+    <array name="answers_45">
+        <item>约拿</item>
+        <item>以利亚</item>
+        <item>但以理</item>
+        <item>约伯</item>
+    </array>
+    <array name="answers_46">
+        <item>众人都可看见</item>
+        <item>只有基督徒能见</item>
+        <item>谁也看不见</item>
+        <item>只有信的才可看见</item>
+    </array>
+    <array name="answers_47">
+        <item>哥林多后书</item>
+        <item>罗马书</item>
+        <item>加拉太书</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="answers_48">
+        <item>第六日</item>
+        <item>第七日</item>
+        <item>第四日</item>
+        <item>第五日</item>
+    </array>
+    <array name="answers_49">
+        <item>６００</item>
+        <item>６５０</item>
+        <item>５００</item>
+        <item>９５０</item>
+    </array>
+    <array name="answers_50">
+        <item>含</item>
+        <item>闪</item>
+        <item>雅弗</item>
+        <item>诺亚</item>
+    </array>
+    <array name="answers_51">
+        <item>巴别</item>
+        <item>迦南</item>
+        <item>吾耳</item>
+        <item>不详</item>
+    </array>
+    <array name="answers_52">
+        <item>７５</item>
+        <item>１００</item>
+        <item>９９</item>
+        <item>５９</item>
+    </array>
+    <array name="answers_53">
+        <item>７０</item>
+        <item>５０</item>
+        <item>６０</item>
+        <item>３０</item>
+    </array>
+    <array name="answers_54">
+        <item>４０</item>
+        <item>５０</item>
+        <item>６０</item>
+        <item>３０</item>
+    </array>
+    <array name="answers_55">
+        <item>１２０</item>
+        <item>１５０</item>
+        <item>１１０</item>
+        <item>１３０</item>
+    </array>
+    <array name="answers_56">
+        <item>虚空</item>
+        <item>日光之下</item>
+        <item>捕风</item>
+        <item>爱</item>
+    </array>
+    <array name="answers_57">
+        <item>流泪的先知</item>
+        <item>呼吁的先知</item>
+        <item>恳求的先知</item>
+        <item>撒种的先知</item>
+    </array>
+    <array name="answers_58">
+        <item>出于神的允许</item>
+        <item>被神抛弃</item>
+        <item>失去神的保守</item>
+        <item>短暂的被神离弃</item>
+    </array>
+    <array name="answers_59">
+        <item>旷野</item>
+        <item>迦南</item>
+        <item>埃及</item>
+        <item>约旦</item>
+    </array>
+    <array name="answers_60">
+        <item>三位一体的真神</item>
+        <item>传说中神祗之一</item>
+        <item>并不存在的</item>
+        <item>人们心灵的寄托</item>
+    </array>
+    <array name="answers_61">
+        <item>申命记</item>
+        <item>士师记</item>
+        <item>约书亚记</item>
+        <item>约伯记</item>
+    </array>
+    <array name="answers_62">
+        <item>新约书信中</item>
+        <item>旧约先知书中</item>
+        <item>旧约历史书中</item>
+        <item>四福音</item>
+    </array>
+    <array name="answers_63">
+        <item>耶稣</item>
+        <item>约瑟</item>
+        <item>约伯</item>
+        <item>以利亚</item>
+    </array>
+    <array name="answers_64">
+        <item>提摩太前书</item>
+        <item>启示录</item>
+        <item>约翰福音</item>
+        <item>路加福音</item>
+    </array>
+    <array name="answers_65">
+        <item>挪亚</item>
+        <item>以诺</item>
+        <item>摩西</item>
+        <item>村民</item>
+    </array>
+    <array name="answers_66">
+        <item>作挽回祭救赎罪人</item>
+        <item>犹太人嫉妒</item>
+        <item>犹大出卖</item>
+        <item>耶稣犯了罪</item>
+    </array>
+    <array name="answers_67">
+        <item>借摩西与以色列人所立的约</item>
+        <item>雅各立的约</item>
+        <item>亚伯拉罕所立的约</item>
+        <item>与所有人立约</item>
+    </array>
+    <array name="answers_68">
+        <item>亚伯拉罕</item>
+        <item>雅各</item>
+        <item>约瑟</item>
+        <item>摩西</item>
+    </array>
+    <array name="answers_69">
+        <item>约书亚</item>
+        <item>摩西的长子</item>
+        <item>亚伦</item>
+        <item>米粒暗</item>
+    </array>
+    <array name="answers_70">
+        <item>爱</item>
+        <item>警醒</item>
+        <item>圣洁</item>
+        <item>谨守</item>
+    </array>
+    <array name="answers_71">
+        <item>保罗</item>
+        <item>多马</item>
+        <item>腓力</item>
+        <item>彼得</item>
+    </array>
+    <array name="answers_72">
+        <item>该隐</item>
+        <item>亚伯</item>
+        <item>亚当</item>
+        <item>夏娃</item>
+    </array>
+    <array name="answers_73">
+        <item>巴多罗买</item>
+        <item>司提反</item>
+        <item>西拉</item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_74">
+        <item>犹大书</item>
+        <item>罗马书</item>
+        <item>启示录</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="answers_75">
+        <item>彼拉多</item>
+        <item>大祭司</item>
+        <item>希律</item>
+        <item>很多人</item>
+    </array>
+    <array name="answers_76">
+        <item>雅歌</item>
+        <item>诗篇</item>
+        <item>约伯记</item>
+        <item>箴言</item>
+    </array>
+    <array name="answers_77">
+        <item>灯</item>
+        <item>光</item>
+        <item>窗</item>
+        <item>门</item>
+    </array>
+    <array name="answers_78">
+        <item>救恩</item>
+        <item>信德</item>
+        <item>公义</item>
+        <item>忍耐</item>
+    </array>
+    <array name="answers_79">
+        <item>拿但业</item>
+        <item>安德烈</item>
+        <item>腓力</item>
+        <item>彼得</item>
+    </array>
+    <array name="answers_80">
+        <item>生命、身体</item>
+        <item>金钱、名望</item>
+        <item>聪明、智慧</item>
+        <item>生命、智慧</item>
+    </array>
+    <array name="answers_81">
+        <item>光</item>
+        <item>耶稣</item>
+        <item>神</item>
+        <item>神的道</item>
+    </array>
+    <array name="answers_82">
+        <item>安德烈</item>
+        <item>约翰</item>
+        <item>拿但业</item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_83">
+        <item>基甸</item>
+        <item>耶弗他</item>
+        <item>扫罗</item>
+        <item>俄陀聂</item>
+    </array>
+    <array name="answers_84">
+        <item>迷失的羊</item>
+        <item>患病的人</item>
+        <item>失丧的人</item>
+        <item>需要的人</item>
+    </array>
+    <array name="answers_85">
+        <item>敬虔</item>
+        <item>身体</item>
+        <item>行为</item>
+        <item>爱心</item>
+    </array>
+    <array name="answers_86">
+        <item>童子</item>
+        <item>妇人</item>
+        <item>门徒</item>
+        <item>老人</item>
+    </array>
+    <array name="answers_87">
+        <item>西面</item>
+        <item>西拉</item>
+        <item>西门</item>
+        <item>三位博士</item>
+    </array>
+    <array name="answers_88">
+        <item>亲戚</item>
+        <item>同族</item>
+        <item>邻居</item>
+        <item>不详</item>
+    </array>
+    <array name="answers_89">
+        <item>主来</item>
+        <item>末时</item>
+        <item>事情成就</item>
+        <item>那日</item>
+    </array>
+    <array name="answers_90">
+        <item>歌颂</item>
+        <item>赞美</item>
+        <item>欢笑</item>
+        <item>祷告</item>
+    </array>
+    <array name="answers_91">
+        <item>天使</item>
+        <item>使徒</item>
+        <item>使者</item>
+        <item>朋友</item>
+    </array>
+    <array name="answers_92">
+        <item>恶又毒的疮生在拜偶像的人身上</item>
+        <item>江河与众水的泉源里水就都变成血了</item>
+        <item>搀着血与火的雹子烧毁了地和植物的三分之一 </item>
+        <item>蝇灾</item>
+    </array>
+    <array name="answers_93">
+        <item>庄稼</item>
+        <item>出产</item>
+        <item>粮食 </item>
+        <item>田地</item>
+    </array>
+    <array name="answers_94">
+        <item>亚历山大和鲁孚</item>
+        <item>雅各和约翰</item>
+        <item>彼得和安得烈 </item>
+        <item>雅各和彼得</item>
+    </array>
+    <array name="answers_95">
+        <item>提幔人以利法</item>
+        <item>布西人以利户</item>
+        <item>提斯比人以利亚 </item>
+        <item>布西人以利亚</item>
+    </array>
+    <array name="answers_96">
+        <item>膏油</item>
+        <item>智慧</item>
+        <item>荣光 </item>
+        <item>荣耀</item>
+    </array>
+    <array name="answers_97">
+        <item>尼尼微</item>
+        <item>埃及</item>
+        <item>巴比伦 </item>
+        <item>迦南</item>
+    </array>
+    <array name="answers_98">
+        <item>施洗约翰</item>
+        <item>尼哥底母</item>
+        <item>拿但业 </item>
+        <item>神</item>
+    </array>
+    <array name="answers_99">
+        <item>甘心</item>
+        <item>乐意</item>
+        <item>尽力 </item>
+        <item>尽心</item>
+    </array>
+    <array name="answers_100">
+        <item>拿答、亚比户</item>
+        <item>以利户、亚比撒</item>
+        <item>可拉、亚比兰</item>
+        <item>以利户、亚比兰</item>
+    </array>
+    <array name="answers_101">
+        <item>４</item>
+        <item>５</item>
+        <item>６</item>
+        <item>３</item>
+    </array>
+    <array name="answers_102">
+        <item>马可福音9：23</item>
+        <item>路加福音19：22 </item>
+        <item>约翰福音11：23</item>
+        <item>约翰福音11：24</item>
+    </array>
+    <array name="answers_103">
+        <item>３０</item>
+        <item>２８</item>
+        <item>４０</item>
+        <item>２４</item>
+    </array>
+    <!--WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW-->
+    <array name="answers_104">
+        <item>忧患</item>
+        <item>病痛</item>
+        <item>责任</item>
+        <item>重担</item>
+    </array>
+    <array name="answers_105">
+        <item>腓立比 </item>
+        <item>以弗所</item>
+        <item>哥林多 </item>
+        <item>安提阿</item>
+    </array> <array name="answers_106">
+        <item>虱灾  </item>
+        <item>蛙灾</item>
+        <item>水变血灾 </item>
+        <item>蝇灾 </item>
+</array>
+    <array name="answers_107">
+        <item>99岁 </item>
+        <item>89岁</item>
+        <item>100岁  </item>
+        <item>120岁 </item>
+    </array>   <array name="answers_108">
+    <item>雅各与神摔跤  </item>
+    <item>亚伯拉罕受割礼</item>
+    <item>亚伯拉罕献以撒</item>
+    <item>不详</item>
+</array>
+    <array name="answers_109">
+        <item>约拿、阿摩司、何西阿</item>
+        <item>俄巴底亚、约珥、以赛亚</item>
+        <item>弥迦、耶利米、那鸿 </item>
+        <item>撒迦利亚、哈该、西番雅 </item>
+    </array>
+    <array name="answers_110">
+        <item>公元前586和公元前722年</item>
+        <item>公元前612和公元前539年</item>
+        <item>公元前722和公元前539年 </item>
+        <item>公元前586和公元前612年 </item>
+    </array>
+    <array name="answers_111">
+        <item>耶利米</item>
+        <item>以西结</item>
+        <item>但以理 </item>
+        <item>以赛亚  </item>
+    </array>
+    <array name="answers_112">
+        <item>以弗所，士每拿，别迦摩，推雅推喇，撒狄，非拉铁非，老底嘉</item>
+        <item>以弗所，别迦摩，士每拿，撒狄，推雅推喇，非拉铁非，老底嘉</item>
+        <item>以弗所，士每拿，推雅推喇，别迦摩，非拉铁非，撒狄，老底嘉 </item>
+        <item>以弗所，推雅推喇，士每拿别迦摩，非拉铁非，撒狄，老底嘉</item>
+    </array>
+    <array name="answers_113">
+        <item>杨廷筠、李之藻、徐光启</item>
+        <item>汤若望、利玛窦、徐光启</item>
+        <item>马礼逊、景净、阿罗本</item>
+        <item>吴耀宗、赵紫宸、吴雷川 </item>
+    </array>
+    <array name="answers_114">
+        <item>《出埃及记》和《申命记》</item>
+        <item>《民数记》和《申命记》</item>
+        <item>《出埃及记》和《利未记》 </item>
+        <item>《出埃及记》和《以赛亚书》  </item>
+    </array>
+    <array name="answers_115">
+        <item>扫罗、大卫、所罗门 </item>
+        <item>大卫、扫罗、所罗门</item>
+        <item>撒母耳、扫罗、大卫 </item>
+        <item>撒母耳、大卫、所罗门   </item>
+    </array>
+    <array name="answers_116">
+        <item>带马利亚和耶稣去埃及</item>
+        <item>带耶稣去圣殿</item>
+        <item>耶稣是神的儿子</item>
+        <item>约瑟应该娶马利亚为妻</item>
+    </array>
+
+
+    <array name="answers_117">
+        <item>《马可福音》和《约翰福音》</item>
+        <item>《马太福音》和《路加福音》</item>
+        <item>《马太福音》和《马可福音》 </item>
+        <item>《路加福音》和《约翰福音》  </item>
+    </array>
+    <array name="answers_118">
+        <item>唐朝</item>
+        <item>元朝</item>
+        <item>明朝 </item>
+        <item>清朝</item>
+    </array>
+    <array name="answers_119">
+        <item>耶罗波安</item>
+        <item>罗波安</item>
+        <item>耶户 </item>
+        <item>亚哈 </item>
+    </array>
+    <array name="answers_120">
+        <item>安提阿</item>
+        <item>耶路撒冷</item>
+        <item>加利利</item>
+        <item>以弗所</item>
+    </array>
+    <array name="answers_121">
+        <item>16世纪 </item>
+        <item>15世纪</item>
+        <item>17世纪</item>
+        <item>18世纪</item>
+    </array> <array name="answers_122">
+    <item>信实 </item>
+    <item>温柔 </item>
+    <item>节制</item>
+    <item>慈善</item>
+</array>
+    <array name="answers_123">
+        <item>洗礼和圣餐  </item>
+        <item>礼拜和洗礼 </item>
+        <item>悔改和圣餐</item>
+        <item>礼拜和圣餐</item>
+</array>
+    <array name="answers_124">
+        <item>太、可、路   </item>
+        <item>太、路、约 </item>
+        <item>太、可、约</item>
+        <item>可、路、约</item>
+    </array>
+    <array name="answers_125">
+        <item>马太福音</item>
+        <item>路加福音</item>
+        <item>约翰福音</item>
+        <item>马可福音</item>
+    </array><array name="answers_126">
+    <item>以西结书</item>
+    <item>何西阿书 </item>
+    <item>弥迦书</item>
+    <item>路得记</item>
+
+</array>
+    <array name="answers_127">
+        <item>马礼逊</item>
+        <item>利玛窦 </item>
+        <item>阿罗本</item>
+        <item>戴德生</item>
+</array>
+    <array name="answers_128">
+        <item>底波拉 </item>
+        <item>参孙 </item>
+        <item>耶弗他</item>
+        <item>俄佗聂 </item>
+    </array><array name="answers_129">
+    <item>智慧书  </item>
+    <item>先知书 </item>
+    <item>律法书</item>
+    <item>历史书  </item>
+</array>
+    <array name="answers_130">
+        <item>腓立比书  </item>
+        <item>以弗所书</item>
+        <item>罗马书</item>
+        <item>歌罗西书 </item>
+    </array>
+    <array name="answers_131">
+        <item>考门夫人</item>
+        <item>盖恩夫人</item>
+        <item>约翰班扬</item>
+        <item>奥古斯丁 </item>
+    </array>
+    <array name="answers_132">
+        <item>150、119</item>
+        <item>119、150</item>
+        <item>146、90</item>
+        <item>160、90 </item>
+    </array>
+    <array name="answers_133">
+        <item>《申命记》</item>
+        <item>《利未记》</item>
+        <item>《民数记》</item>
+        <item>《创世记》</item>
+    </array>
+    <array name="answers_134">
+        <item>犹大书</item>
+        <item>以弗所书</item>
+        <item>腓立比书</item>
+        <item>歌罗西书 </item>
+    </array>
+    <array name="answers_135">
+        <item>安提阿 </item>
+        <item>特庇</item>
+         <item>撒玛利亚</item>
+    <item>耶路撒冷</item>
+</array>
+    <array name="answers_136">
+        <item>约沙法 </item>
+        <item>亚哈谢</item>
+        <item>约兰</item>
+        <item>亚撒</item>
+    </array>
+
+    <array name="answers_137">
+        <item>约翰贰书</item>
+        <item>腓利门书</item>
+        <item>约翰叁书</item>
+        <item>犹大书</item>
+    </array>
+    <array name="answers_138">
+        <item>约翰福音 </item>
+        <item>马太福音</item>
+        <item>马可福音</item>
+        <item>路加福音</item>
+    </array>
+    <array name="answers_139">
+        <item>扫罗 </item>
+        <item>大卫</item>
+        <item>所罗门</item>
+        <item>亚伯拉罕 </item>
+    </array>
+    <array name="answers_140">
+        <item>耶利哥 </item>
+        <item>耶路撒冷</item>
+        <item>艾城</item>
+        <item>撒玛利亚 </item>
+    </array>
+    <array name="answers_141">
+        <item>“人若不重生，就不能见神的国。”</item>
+        <item>去变卖你所有的分给穷人”</item>
+        <item>我实在告诉你：“今日你要同我在乐园里了。”</item>
+        <item>“起来，拿着你的褥子回家去吧！” </item>
+    </array>
+    <array name="answers_142">
+    <item>启示录 </item>
+    <item>约翰福音</item>
+    <item>约翰一书</item>
+    <item>罗马书 </item>
+</array>
+    <array name="answers_143">
+    <item>亚拿 </item>
+    <item>伊莱沙伯  </item>
+    <item>多加</item>
+    <item>百基拉 </item>
+</array>
+    <array name="answers_144">
+        <item>凯撒奥古斯都 </item>
+        <item>尤利乌斯.凯撒   </item>
+        <item>尼禄</item>
+        <item>希律 </item>
+    </array>
+    <array name="answers_145">
+        <item>伊莱沙伯 </item>
+        <item>马利亚</item>
+        <item>米利暗</item>
+        <item>亚拿</item>
+    </array>
+    <array name="answers_146">
+        <item>罗马百夫长 </item>
+        <item>大祭司 </item>
+        <item>税吏</item>
+        <item>制棚人</item>
+    </array>
+    <array name="answers_147">
+        <item>希律王 </item>
+        <item>法老 </item>
+        <item>彼拉多</item>
+        <item>该亚法</item>
+    </array>
+    <array name="answers_148">
+        <item>亚拿尼亚和撒非利 </item>
+        <item>亚基拉和百基拉  </item>
+        <item>抹大拉的马利亚和拉撒路</item>
+        <item>加略人犹大和该亚法</item>
+    </array>
+    <array name="answers_149">
+        <item>施洗约翰的头</item>
+        <item>嫁给希律 </item>
+        <item>三十块钱</item>
+        <item>半个王国</item>
+    </array>
+    <array name="answers_150">
+        <item>约翰</item>
+        <item>安德烈 </item>
+        <item>保罗</item>
+        <item>彼得 </item>
+    </array>
+    <array name="answers_151">
+        <item>彼得、雅各、约翰</item>
+        <item>彼得、安德烈、雅各  </item>
+        <item>彼得、约翰、保罗</item>
+        <item>马太、马可、路加 </item>
+    </array>
+    <!--222222222222222222222222222222222222222222222222222222222222222222222222222222-->
+    <array name="answers_152">
+        <item>该亚法</item>
+        <item>亚伦  </item>
+        <item>巴拿巴</item>
+        <item>以斯拉 </item>
+    </array>
+    <array name="answers_153">
+        <item>埋葬耶稣的坟墓原本属于他的</item>
+        <item>他爸爸送他一件彩衣</item>
+        <item>他是童女马利亚的丈夫</item>
+        <item>他背着耶稣的十字架去各各他</item>
+    </array>
+    <array name="answers_154">
+        <item>马太、加略人犹大、安德烈、约翰</item>
+        <item>马太、马可、路加、约翰</item>
+        <item>马太、马可、彼得、约翰</item>
+        <item>彼得、雅各布布、约翰、保罗</item>
+    </array>
+    <array name="answers_155">
+        <item>拉撒路</item>
+        <item>亚拿尼亚  </item>
+        <item>西门</item>
+        <item>哥尼流 </item>
+    </array>
+    <array name="answers_156">
+        <item>加略人犹大</item>
+        <item>彼拉多  </item>
+        <item>巫师西门</item>
+        <item>抹大拉的马利亚 </item>
+    </array>
+    <array name="answers_157">
+        <item>一个奴隶</item>
+        <item>一个百夫长</item>
+        <item>一个税吏</item>
+        <item>耶稣的门徒 </item>
+    </array>
+    <array name="answers_158">
+        <item>司提反</item>
+        <item>约翰</item>
+        <item>扫罗</item>
+        <item>彼得 </item>
+    </array>
+    <array name="answers_159">
+        <item>耶稣从死里复活</item>
+        <item>彼得被放出狱</item>
+        <item>耶稣平静了风浪</item>
+        <item>彼得在水上行走 </item>
+    </array>
+    <array name="answers_160">
+        <item>亚干-因贪爱财物，被人用石头打死</item>
+        <item>参孙-因贪爱财物，被人用石头打死</item>
+        <item>但以理-祷告，日、月止住没急速下落</item>
+        <item>约书亚-晚年时扶着杖头敬拜上帝 </item>
+    </array>
+    <array name="answers_161">
+        <item>吊死</item>
+        <item>摔死</item>
+        <item>被刀杀死</item>
+        <item>被石头砸死</item>
+    </array>
+    <array name="answers_162">
+        <item>第一个牧羊人-亚伯</item>
+        <item>第一个杀人犯-亚伯</item>
+        <item>第一对双胞胎-亚伯、该隐</item>
+        <item>第一队报佳音的队员-挪亚</item>
+    </array>
+    <array name="answers_163">
+        <item>约翰福音3章16 </item>
+        <item>马可福音3章16</item>
+        <item>路加福音3章16</item>
+        <item>路加福音3章6</item>
+    </array>
+    <array name="answers_164">
+        <item>无谬误的</item>
+        <item>错误极少、也有一些错误</item>
+        <item>不影响什么</item>
+        <item>真理</item>
+    </array>
+    <array name="answers_165">
+    <item>伯利恒</item>
+    <item>拿撒勒 </item>
+    <item>加利利</item>
+    <item>耶路撒冷</item>
+</array>
+    <array name="answers_166">
+        <item>橄榄山</item>
+        <item>锡安山 </item>
+        <item>西奈山</item>
+        <item>基督山</item>
+    </array>
+    <array name="answers_167">
+        <item>每位基督徒</item>
+        <item>耶稣基督 </item>
+        <item>牧师</item>
+        <item>神的仆人</item>
+    </array>
+    <array name="answers_168">
+        <item>基督徒</item>
+        <item>主的道  </item>
+        <item>圣灵</item>
+        <item>没有</item>
+    </array>
+    <array name="answers_169">
+        <item>神与我们同在</item>
+        <item>神是主宰 </item>
+        <item>赞美主</item>
+        <item>直到如今耶和华都帮助我们</item>
+    </array>
+    <array name="answers_170">
+        <item>约伯记</item>
+        <item>启示录 </item>
+        <item>路得记</item>
+        <item>创世纪</item>
+    </array>
+    <array name="answers_171">
+        <item>保罗</item>
+        <item>约翰 </item>
+        <item>彼得</item>
+        <item>路加</item>
+    </array>
+    <array name="answers_172">
+    <item>耶和华的名</item>
+    <item>自己的能力</item>
+    <item>智慧</item>
+    <item>实力</item>
+</array>
+    <array name="answers_173">
+        <item>祷告仰望神</item>
+        <item>以恶报恶</item>
+        <item>反驳辩护</item>
+        <item>让大家团结</item>
+    </array>
+    <array name="answers_174">
+        <item>琐珥</item>
+        <item>逃城</item>
+        <item>尼尼微</item>
+        <item>迦南</item>
+    </array>
+    <array name="answers_175">
+        <item>毗努伊勒</item>
+        <item>马哈念</item>
+        <item>迦累得</item>
+        <item>伯利恒</item>
+    </array>
+    <array name="answers_176">
+        <item>希伯来书6：1</item>
+        <item>犹大书1：7</item>
+        <item>罗马书15：8</item>
+        <item>使徒行传15：8</item>
+    </array>
+    <array name="answers_177">
+        <item>嘴唇</item>
+        <item>愚昧</item>
+        <item>夸口</item>
+        <item>舌头</item>
+    </array>
+    <array name="answers_178">
+        <item>约翰福音1：18 </item>
+        <item>路加福音15：4 </item>
+        <item>马可福音8：15</item>
+        <item>马太福音1：18</item>
+    </array>
+    <array name="answers_179">
+        <item>路加福音1：46</item>
+        <item>马太福音5：19 </item>
+        <item>约翰福音3：10</item>
+        <item>马太福音1：18</item>
+    </array>
+    <array name="answers_180">
+        <item>撒母耳</item>
+        <item>俄佗聂</item>
+        <item>基甸</item>
+        <item>参孙</item>
+    </array>
+    <array name="answers_181">
+        <item>四十</item>
+        <item>六十</item>
+        <item>二十</item>
+        <item>三十</item>
+    </array>
+    <array name="answers_182">
+        <item>喇合</item>
+        <item>米利暗</item>
+        <item>哈拿</item>
+        <item>马里亚</item>
+    </array>
+    <array name="answers_183">
+        <item>利未支派</item>
+        <item>犹大支派</item>
+        <item>便雅悯支派</item>
+        <item>流便支派</item>
+    </array><array name="answers_184">
+        <item>路斯</item>
+        <item>基拉耳</item>
+        <item>别是巴</item>
+        <item>夸口</item>
+    </array>
+    <array name="answers_185">
+        <item>赫人</item>
+        <item>亚摩利人</item>
+        <item>基尼人</item>
+        <item>撒玛利亚人</item>
+    </array>
+    <array name="answers_186">
+        <item>摩押</item>
+        <item>犹太</item>
+        <item>迦南</item>
+        <item>利未</item>
+    </array>
+    <array name="answers_187">
+        <item>马可福音9：23</item>
+        <item>路加福音19：22 </item>
+        <item>约翰福音11：23</item>
+        <item>马太福音10：12</item>
+    </array>
+    <array name="answers_188">
+        <item>伯特利</item>
+        <item>伯利恒</item>
+        <item>巴旦亚兰</item>
+        <item>西奈山</item>
+    </array>
+    <array name="answers_189">
+        <item>十五</item>
+        <item>十二</item>
+        <item>十</item>
+        <item>十三</item>
+    </array>
+
+    <!--lllllllllllllllllllllllllllllllllllllllllllllllll-->
+    <array name="answers_190">
+        <item>拿答、亚比户</item>
+        <item>可拉、亚比兰</item>
+        <item>以利户、亚比撒</item>
+        <item>以利户、亚比兰</item>
+    </array>
+
+
+    <array name="answers_191">
+        <item>含</item>
+        <item>闪</item>
+        <item>雅弗</item>
+        <item>闪、雅弗</item>
+    </array>
+    <array name="answers_192">
+        <item>启22：20</item>
+        <item>罗8：15</item>
+        <item>来13：9</item>
+        <item>徒15：3</item>
+    </array>
+    <array name="answers_193">
+        <item>彼得前书4：7</item>
+        <item>希伯来书11：22</item>
+        <item>提多书1：14</item>
+        <item>马太福音11：10</item>
+    </array>
+    <array name="answers_194">
+        <item>基哈西</item>
+        <item>巴兰</item>
+        <item>罗得</item>
+        <item>扫罗</item>
+    </array>
+    <array name="answers_195">
+        <item>太7：1 </item>
+        <item>可13：24</item>
+        <item>太13：21</item>
+        <item>可7：10</item>
+    </array>
+    <array name="answers_196">
+        <item>136篇</item>
+        <item>119篇</item>
+        <item>100篇</item>
+        <item>121篇</item>
+    </array>
+    <array name="answers_197">
+        <item>以赛亚书53：7 </item>
+        <item>以赛亚书30：18</item>
+        <item>以赛亚书24：21</item>
+        <item>以赛亚书24：18</item>
+    </array>
+    <array name="answers_198">
+        <item>谦卑的人 </item>
+        <item>诚实的人</item>
+        <item>圣洁的人</item>
+        <item>慈善的人</item>
+    </array>
+    <array name="answers_199">
+        <item>各人任意而行 </item>
+        <item>谨守摩西律法</item>
+        <item>敬畏神 </item>
+        <item>素常盼望主来</item>
+    </array>
+    <array name="answers_200">
+        <item>安息</item>
+        <item>荣耀</item>
+        <item>平安 </item>
+        <item>安慰</item>
+    </array>
+    <array name="answers_201">
+        <item>彼得</item>
+        <item>雅各布布</item>
+        <item>约翰 </item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_202">
+        <item>亚兰</item>
+        <item>犹太</item>
+        <item>埃及 </item>
+        <item>撒玛利亚</item>
+    </array>
+    <array name="answers_203">
+        <item>20年</item>
+        <item>22年</item>
+        <item>15年 </item>
+        <item>10年</item>
+    </array>
+    <array name="answers_204">
+    <item>提斯比人</item>
+    <item>B耶路撒冷人</item>
+    <item>以法莲 </item>
+    <item>便雅悯人</item>
+</array>
+
+    <array name="answers_205">
+        <item>八</item>
+        <item>七</item>
+        <item>六</item>
+        <item>五</item>
+    </array>
+
+    <array name="answers_206">
+        <item>六肘零一虎口</item>
+        <item>五肘零一虎口 </item>
+        <item>七肘零一虎口 </item>
+        <item>七肘零二虎口</item>
+    </array>
+    <array name="answers_207">
+        <item>非利士人</item>
+        <item>埃及人 </item>
+        <item>亚兰人  </item>
+        <item>撒玛利亚人</item>
+    </array>
+
+    <array name="answers_208">
+        <item>利未</item>
+        <item>但 </item>
+        <item>玛拿西</item>
+        <item>流便</item>
+    </array>
+    <array name="answers_209">
+        <item>普阿</item>
+        <item>米利暗 </item>
+        <item>他玛  </item>
+        <item>底波拉</item>
+    </array>
+    <array name="answers_210">
+        <item>西坡拉</item>
+        <item>他拉 </item>
+        <item>他玛  </item>
+        <item>玛拉</item>
+    </array>
+    <array name="answers_211">
+        <item>约基别</item>
+        <item>伊丽莎白 </item>
+        <item>内奥米  </item>
+        <item>底波拉</item>
+    </array>
+    <array name="answers_212">
+        <item>暗兰</item>
+        <item>革顺 </item>
+        <item>示每  </item>
+        <item>内奥米</item>
+    </array>
+    <array name="answers_213">
+        <item>以撒、以实玛利</item>
+        <item>雅各、以扫 </item>
+        <item>摩西、亚伦  </item>
+        <item>雅各、亚伦</item>
+    </array>
+
+    <array name="answers_214">
+        <item>巴比伦军队</item>
+        <item>波斯军队 </item>
+        <item>罗马军队 </item>
+        <item>城中百姓</item>
+    </array>
+    <array name="answers_215">
+        <item>西底家</item>
+        <item>约雅敬 </item>
+        <item>约雅斤 </item>
+        <item>希西家</item>
+    </array> <array name="answers_216">
+    <item>何细亚</item>
+    <item>米拿现 </item>
+    <item>比加 </item>
+    <item>西底家</item>
+</array>
+    <array name="answers_217">
+        <item>巴比伦手中</item>
+        <item>亚述手中 </item>
+        <item>波斯手中 </item>
+        <item>北国以色列手中</item>
+</array>
+    <array name="answers_218">
+        <item>亚述手中</item>
+        <item>巴比伦手中  </item>
+        <item>波斯玛代手中 </item>
+        <item>南国犹大手中</item>
+    </array>
+    <array name="answers_219">
+        <item>亚希雅</item>
+        <item>以利沙  </item>
+        <item>以利亚 </item>
+        <item>巴兰</item>
+    </array>
+    <array name="answers_220">
+        <item>六</item>
+        <item>八  </item>
+        <item>三 </item>
+        <item>四</item>
+    </array>
+    <array name="answers_221">
+        <item>友尼基</item>
+        <item>罗以 </item>
+        <item>友阿爹 </item>
+        <item>亚希雅</item>
+    </array>
+    <array name="answers_222">
+        <item> 神旨意</item>
+        <item>教会的规矩 </item>
+        <item>自己的才干 </item>
+        <item>基本道德</item>
+    </array>
+    <array name="answers_223">
+        <item>生命平安</item>
+        <item>荣耀喜乐 </item>
+        <item>荣耀赏赐 </item>
+        <item>尊贵的赏赐</item>
+    </array>
+    <array name="answers_224">
+        <item>诗19：14</item>
+        <item>诗40：10 </item>
+        <item>诗51：10 </item>
+        <item>诗51：11</item>
+    </array>
+    <array name="answers_225">
+        <item>爱情 </item>
+        <item>代祷</item>
+        <item>祝福</item>
+        <item>帮助</item>
+    </array>
+    <array name="answers_226">
+        <item>亲近  </item>
+        <item>保守</item>
+        <item>坚持</item>
+        <item>真诚</item>
+    </array>
+    <array name="answers_227">
+        <item>约翰</item>
+        <item>保罗</item>
+        <item>马太</item>
+        <item>路加</item>
+    </array>
+    <array name="answers_228">
+        <item>罗3：23</item>
+        <item>罗1：24</item>
+        <item>罗2：23</item>
+        <item>罗2：24</item>
+    </array>
+    <array name="answers_229">
+        <item>父亲</item>
+        <item>师长</item>
+        <item>弟兄</item>
+        <item>孩子</item>
+    </array>
+
+
+
+    <array name="answers_230">
+        <item>马太福音24：36</item>
+        <item>路加福音21：27</item>
+        <item>约翰福音16：28</item>
+        <item>约翰福音16：27</item>
+    </array>
+    <array name="answers_231">
+        <item>警醒祷告</item>
+        <item>凡事谢恩</item>
+        <item>常常喜乐</item>
+        <item>保守己心</item>
+    </array>
+    <array name="answers_232">
+        <item>大利乌年间</item>
+        <item>尼布甲尼撒年间</item>
+        <item>伯沙撒年间</item>
+        <item>不详</item>
+    </array>
+    <array name="answers_233">
+    <item>加百列</item>
+    <item>撒拉弗</item>
+    <item>米迦勒</item>
+    <item>不详</item>
+</array>
+    <array name="answers_234">
+        <item>阿摩司书3：3</item>
+        <item>弥迦书6：8</item>
+        <item>哈巴谷书3：17</item>
+        <item>哈巴谷书3：2</item>
+    </array>
+    <array name="answers_235">
+        <item>因为耶和华住在锡安</item>
+        <item>向亚伯拉罕施慈爱</item>
+        <item>这是耶和华说的</item>
+        <item>其它都不对</item>
+    </array>
+    <array name="answers_236">
+        <item>圣灵</item>
+        <item>圣经</item>
+        <item>恩典</item>
+        <item>仁爱</item>
+    </array>
+    <array name="answers_237">
+        <item>示玛雅</item>
+        <item>亚希雅</item>
+        <item>伯特利的老先知</item>
+        <item>巴兰</item>
+    </array>
+    <array name="answers_238">
+        <item>耶杜顿</item>
+        <item>利未</item>
+        <item>可拉</item>
+        <item>亚希雅</item>
+    </array>
+    <array name="answers_239">
+        <item>抹大拉的马利亚</item>
+        <item>马利亚与姐姐马大</item>
+        <item>伯大尼的马利亚</item>
+        <item>多个选项</item>
+    </array>
+    <!--33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333-->
+    <array name="answers_240">
+        <item>希伯来书</item>
+        <item>路加福音</item>
+        <item>罗马书</item>
+        <item>约翰一书</item>
+    </array>
+    <array name="answers_241">
+        <item>彼得</item>
+        <item>巴拿巴</item>
+        <item>主耶稣</item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_242">
+        <item>提摩太前书</item>
+        <item>提摩太后书</item>
+        <item>提多书</item>
+        <item>哥林多前书</item>
+    </array>
+    <array name="answers_243">
+        <item>西门</item>
+        <item>腓利</item>
+        <item>巴拉巴</item>
+        <item>犹大</item>
+    </array>
+    <array name="answers_244">
+        <item>约翰一书</item>
+        <item>使徒行传</item>
+        <item>马太福音</item>
+        <item>约翰福音</item>
+    </array>
+    <array name="answers_245">
+        <item>诗篇22篇</item>
+        <item>以赛亚书53章</item>
+        <item>撒亚利亚书14章</item>
+        <item>诗篇20篇</item>
+    </array>
+    <array name="answers_246">
+        <item>拉撒路</item>
+        <item>约翰</item>
+        <item>马利亚</item>
+        <item>约瑟</item>
+    </array>
+    <array name="answers_247">
+        <item>以弗所书</item>
+        <item>加拉太书</item>
+        <item>腓立比书</item>
+        <item>罗马书</item>
+    </array>
+    <array name="answers_248">
+        <item>彼得</item>
+        <item>雅各</item>
+        <item>约翰</item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_249">
+        <item>阿尼西母</item>
+        <item>马可</item>
+        <item>亚波罗</item>
+        <item>巴拿巴</item>
+    </array>
+    <array name="answers_250">
+        <item>披着羊皮的狼 </item>
+        <item>流荡的星</item>
+        <item>没有果子的树</item>
+        <item>没有雨的云彩</item>
+    </array>
+    <array name="answers_251">
+        <item>苹果树 </item>
+        <item>无花果树</item>
+        <item>葡萄树</item>
+        <item>其它提到的次数都差不多</item>
+    </array>
+    <array name="answers_252">
+        <item>二十</item>
+        <item>三十</item>
+        <item>四十</item>
+        <item>三十五</item>
+    </array>
+
+
+
+    <!--444444444444444444444444444444444444444444444444444444444444444-->
+    <array name="answers_253">
+        <item>以法莲</item>
+        <item>玛拿西</item>
+        <item>以萨迦</item>
+        <item>西布伦</item>
+    </array>
+    <array name="answers_254">
+        <item>人多</item>
+        <item>纤弱</item>
+        <item>傲慢</item>
+        <item>富有</item>
+    </array>
+    <array name="answers_255">
+        <item>拙口笨舌</item>
+        <item>害怕</item>
+        <item>没有能力</item>
+        <item>没有文化</item>
+    </array>
+    <array name="answers_256">
+        <item>宰相</item>
+        <item>护卫长</item>
+        <item>王</item>
+        <item>百夫长</item>
+    </array>
+    <array name="answers_257">
+        <item>3天</item>
+        <item>2天</item>
+        <item>5天</item>
+        <item>1天</item>
+    </array>
+    <array name="answers_258">
+        <item>便雅悯</item>
+        <item>流便</item>
+        <item>西缅</item>
+        <item>犹大</item>
+    </array>
+    <array name="answers_259">
+        <item>火烧</item>
+        <item>保留</item>
+        <item>扔掉</item>
+        <item>给别人</item>
+    </array>
+    <array name="answers_260">
+        <item>20年</item>
+        <item>4年</item>
+        <item>14年</item>
+        <item>7年</item>
+    </array>
+    <array name="answers_261">
+        <item>七年</item>
+        <item>十二年</item>
+        <item>十四年</item>
+        <item>三年</item>
+    </array>
+    <array name="answers_262">
+        <item>米甸</item>
+        <item>摩押</item>
+        <item>以东</item>
+        <item>迦南</item>
+    </array>
+    <array name="answers_263">
+        <item>430年</item>
+        <item>450年</item>
+        <item>500年</item>
+        <item>410年</item>
+    </array>
+    <array name="answers_264">
+        <item>吗哪</item>
+        <item>肉</item>
+        <item>馒头</item>
+        <item>水果</item>
+    </array>
+    <array name="answers_265">
+        <item>以西结</item>
+        <item>以赛亚</item>
+        <item>但以理</item>
+        <item>巴兰</item>
+    </array>
+    <array name="answers_266">
+        <item>彼得</item>
+        <item>雅各</item>
+        <item>约翰</item>
+        <item>保罗</item>
+    </array>
+    <array name="answers_267">
+        <item>提摩太前书</item>
+        <item>提摩太后书</item>
+        <item>提多书</item>
+        <item>使徒行传</item>
+    </array>
+</resources>

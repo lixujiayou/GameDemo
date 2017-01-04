@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="as_sx_1">
+        <item>启示录</item>
+        <item>希伯来书</item>
+        <item>雅各书</item>
+        <item>约翰一书</item>
+    </array>
+    <array name="as_sx_2">
+        <item>基督</item>
+        <item>保罗</item>
+        <item>大卫</item>
+        <item>摩西</item>
+    </array>
+    <array name="as_sx_3">
+        <item>末世</item>
+        <item>十字架</item>
+        <item>大卫死后</item>
+        <item>中古时代</item>
+    </array>
+    <array name="as_sx_4">
+        <item>爱</item>
+        <item>刑罚</item>
+        <item>律法</item>
+        <item>钱</item>
+    </array>
+    <array name="as_sx_5">
+        <item>永生</item>
+        <item>种子</item>
+        <item>果子</item>
+        <item>生命</item>
+    </array>
+    <array name="as_sx_6">
+        <item>知足</item>
+        <item>温柔</item>
+        <item>忍耐</item>
+        <item>爱人</item>
+    </array>
+    <array name="as_sx_7">
+        <item>不信</item>
+        <item>厌烦</item>
+        <item>抱怨</item>
+        <item>软弱</item>
+    </array>
+    <array name="as_sx_8">
+        <item>平安</item>
+        <item>忍耐</item>
+        <item>仁爱</item>
+        <item>喜乐</item>
+    </array>
+    <array name="as_sx_9">
+        <item>德行</item>
+        <item>忍耐</item>
+        <item>节制</item>
+        <item>知识</item>
+    </array>
+    <array name="as_sx_10">
+        <item>祭物</item>
+        <item>圣灵</item>
+        <item>圣幕</item>
+        <item>圣物</item>
+    </array>
+    <array name="as_sx_11">
+        <item>祈祷</item>
+        <item>赞美</item>
+        <item>心</item>
+        <item>名字</item>
+    </array>
+
+    <array name="as_sx_12">
+        <item>麦基洗德</item>
+        <item>大卫</item>
+        <item>亚伯拉罕</item>
+        <item>亚伦</item>
+    </array>
+    <array name="as_sx_13">
+        <item>阿拉伯</item>
+        <item>叙利亚</item>
+        <item>伯利恒</item>
+        <item>大马士革</item>
+    </array>
+    <array name="as_sx_14">
+        <item>知罪</item>
+        <item>得救</item>
+        <item>成圣</item>
+        <item>称义</item>
+    </array>
+    <array name="as_sx_15">
+        <item>权能</item>
+        <item>智慧</item>
+        <item>行为</item>
+        <item>动作</item>
+    </array>
+    <array name="as_sx_16">
+        <item>悟性</item>
+        <item>爱心</item>
+        <item>感谢</item>
+        <item>灵</item>
+    </array>
+    <array name="as_sx_17">
+        <item>管家</item>
+        <item>长老</item>
+        <item>牧者</item>
+        <item>谋士</item>
+    </array>
+    <array name="as_sx_18">
+        <item>生产</item>
+        <item>悲惨</item>
+        <item>监禁</item>
+        <item>隔离</item>
+    </array>
+    <array name="as_sx_19">
+        <item>神</item>
+        <item>德行</item>
+        <item>良知</item>
+        <item>道理</item>
+    </array>
+    <array name="as_sx_20">
+        <item>降卑</item>
+        <item>蒙羞</item>
+        <item>惭愧</item>
+        <item>羞愧</item>
+    </array>
+    <!--+++++++++++++++++++++++++++新约书信普通+++++++++++++++++++++++++++++++++++++++-->
+    <array name="as_sx_21">
+        <item>扫罗,大马色路上</item>
+        <item>提摩太,耶路撒冷路上</item>
+        <item>提摩太,大马色路上</item>
+        <item>扫罗,耶路撒冷路上</item>
+    </array>
+    <array name="as_sx_22">
+        <item>德行</item>
+        <item>生活</item>
+        <item>教会</item>
+        <item>关系</item>
+    </array>
+    <array name="as_sx_23">
+        <item>大祭司</item>
+        <item>使徒</item>
+        <item>士师</item>
+        <item>先知</item>
+    </array>
+    <array name="as_sx_24">
+        <item>七位</item>
+        <item>十四位</item>
+        <item>十二位</item>
+        <item>一位</item>
+    </array>
+    <array name="as_sx_25">
+        <item>试验他们</item>
+        <item>责备他们</item>
+        <item>教导他们</item>
+        <item>鼓励他们</item>
+    </array>
+    <array name="as_sx_26">
+        <item>麦基洗德</item>
+        <item>大卫</item>
+        <item>亚伯拉罕</item>
+        <item>亚伦</item>
+    </array>
+    <array name="as_sx_27">
+        <item>雅各</item>
+        <item>约翰</item>
+        <item>保罗</item>
+        <item>基督</item>
+    </array>
+    <array name="as_sx_28">
+        <item>虚假</item>
+        <item>不洁</item>
+        <item>自私</item>
+        <item>气馁</item>
+    </array>
+    <array name="as_sx_29">
+        <item>情理</item>
+        <item>本位</item>
+        <item>责任</item>
+        <item>喜好</item>
+    </array>
+    <array name="as_sx_30">
+        <item>私欲</item>
+        <item>神</item>
+        <item>天使</item>
+        <item>撒旦</item>
+    </array>
+    <array name="as_sx_31">
+        <item>未婚</item>
+        <item>好善</item>
+        <item>不暴躁</item>
+        <item>不任性</item>
+    </array>
+    <array name="as_sx_32">
+        <item>便雅悯</item>
+        <item>以法莲</item>
+        <item>但</item>
+        <item>犹大</item>
+    </array>
+    <array name="as_sx_33">
+        <item>造就自己</item>
+        <item>埋没自己</item>
+        <item>表现自己</item>
+        <item>荣耀自己</item>
+    </array>
+    <array name="as_sx_34">
+        <item>一千</item>
+        <item>一万</item>
+        <item>四千</item>
+        <item>一百</item>
+    </array>
+    <array name="as_sx_35">
+        <item>耶路撒冷</item>
+        <item>锡安</item>
+        <item>伯利恒</item>
+        <item>何烈山</item>
+    </array>
+    <array name="as_sx_36">
+        <item>七个使者</item>
+        <item>七个灾</item>
+        <item>神的约</item>
+        <item>七个诫</item>
+    </array>
+    <array name="as_sx_37">
+        <item>亚伯拉罕</item>
+        <item>摩西</item>
+        <item>挪亚</item>
+        <item>亚伦</item>
+    </array>
+    <array name="as_sx_38">
+    <item>所多玛</item>
+    <item>无底坑</item>
+    <item>蛾摩拉</item>
+    <item>巴比伦</item>
+</array>
+    <array name="as_sx_39">
+        <item>以斯帖记</item>
+        <item>以西结书</item>
+        <item>以赛亚书</item>
+        <item>耶利米书</item>
+    </array>
+    <array name="as_sx_40">
+        <item>细麻衣</item>
+        <item>白衣</item>
+        <item>祭司袍</item>
+        <item>白甲胄</item>
+    </array>
+    <array name="as_sx_41">
+    <item>提摩太前后书</item>
+    <item>罗马书</item>
+    <item>歌罗西书</item>
+    <item>以弗所书</item>
+</array>
+    <array name="as_sx_42">
+        <item>提摩太前书</item>
+        <item>以弗所书</item>
+        <item>歌罗西书</item>
+        <item>提摩太后书</item>
+    </array>
+    <array name="as_sx_43">
+    <item>保罗</item>
+    <item>彼得</item>
+    <item>约翰</item>
+    <item>路加</item>
+</array>
+    <array name="as_sx_44">
+        <item>摩西的尸体</item>
+        <item>摩西是否合神心意</item>
+        <item>摩西进不进迦南</item>
+        <item>摩西怎样死的</item>
+    </array>
+    <!--===========================新约书信复制==================-->
+    <array name="as_sx_45">
+        <item>罗马书</item>
+        <item>以弗所书</item>
+        <item>哥林多前书</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="as_sx_46">
+        <item>彼得</item>
+        <item>约翰</item>
+        <item>雅各</item>
+        <item>多马</item>
+    </array>
+    <array name="as_sx_47">
+        <item>神的吩咐</item>
+        <item>人家提醒</item>
+        <item>心有感动</item>
+        <item>圣灵的引导</item>
+    </array>
+    <array name="as_sx_48">
+        <item>仁爱</item>
+        <item>和平</item>
+        <item>善良</item>
+        <item>节制</item>
+    </array>
+    <array name="as_sx_49">
+        <item>节制</item>
+        <item>忍耐</item>
+        <item>恩慈</item>
+        <item>善良</item>
+    </array>
+    <array name="as_sx_50">
+        <item>保罗</item>
+        <item>约翰</item>
+        <item>彼得</item>
+        <item>马太</item>
+    </array>
+    <array name="as_sx_51">
+        <item>哥林多后书</item>
+        <item>罗马书</item>
+        <item>加拉太书</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="as_sx_52">
+        <item>新约书信中</item>
+        <item>旧约先知书中</item>
+        <item>旧约历史书中</item>
+        <item>四福音</item>
+    </array>
+    <array name="as_sx_53">
+        <item>爱</item>
+        <item>警醒</item>
+        <item>圣洁</item>
+        <item>谨守</item>
+    </array>
+    <array name="as_sx_54">
+        <item>犹大书</item>
+        <item>罗马书</item>
+        <item>启示录</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="as_sx_55">
+        <item>救恩</item>
+        <item>信德</item>
+        <item>公义</item>
+        <item>忍耐</item>
+    </array>
+    <array name="as_sx_56">
+        <item>敬虔</item>
+        <item>身体</item>
+        <item>行为</item>
+        <item>爱心</item>
+    </array>
+    <array name="as_sx_57">
+        <item>主来</item>
+        <item>末时</item>
+        <item>事情成就</item>
+        <item>那日</item>
+    </array>
+    <array name="as_sx_58">
+        <item>歌颂</item>
+        <item>赞美</item>
+        <item>欢笑</item>
+        <item>祷告</item>
+    </array>
+    <array name="as_sx_59">
+        <item>天使</item>
+        <item>使徒</item>
+        <item>使者</item>
+        <item>朋友</item>
+    </array>
+    <array name="as_sx_60">
+        <item>腓立比 </item>
+        <item>以弗所</item>
+        <item>哥林多 </item>
+        <item>安提阿</item>
+    </array>
+    <array name="as_sx_61">
+        <item>以弗所，士每拿，别迦摩，推雅推喇，撒狄，非拉铁非，老底嘉</item>
+        <item>以弗所，别迦摩，士每拿，撒狄，推雅推喇，非拉铁非，老底嘉</item>
+        <item>以弗所，士每拿，推雅推喇，别迦摩，非拉铁非，撒狄，老底嘉 </item>
+        <item>以弗所，推雅推喇，士每拿别迦摩，非拉铁非，撒狄，老底嘉</item>
+    </array>
+    <array name="as_sx_62">
+        <item>安提阿</item>
+        <item>耶路撒冷</item>
+        <item>加利利</item>
+        <item>以弗所</item>
+    </array>
+    <array name="as_sx_63">
+        <item>信实 </item>
+        <item>温柔 </item>
+        <item>节制</item>
+        <item>慈善</item>
+    </array>
+    <array name="as_sx_64">
+        <item>腓立比书  </item>
+        <item>以弗所书</item>
+        <item>罗马书</item>
+        <item>歌罗西书 </item>
+    </array>
+    <array name="as_sx_65">
+        <item>犹大书</item>
+        <item>以弗所书</item>
+        <item>腓立比书</item>
+        <item>歌罗西书 </item>
+    </array>
+    <array name="as_sx_66">
+        <item>约翰贰书</item>
+        <item>腓利门书</item>
+        <item>约翰叁书</item>
+        <item>犹大书</item>
+    </array>
+    <array name="as_sx_67">
+        <item>启示录 </item>
+        <item>约翰福音</item>
+        <item>约翰一书</item>
+        <item>罗马书 </item>
+    </array>
+
+
+
+
+
+
+    <array name="as_sx_68">
+        <item>亚拿尼亚和撒非利 </item>
+        <item>亚基拉和百基拉  </item>
+        <item>抹大拉的马利亚和拉撒路</item>
+        <item>加略人犹大和该亚法</item>
+    </array>
+    <array name="as_sx_69">
+        <item>司提反</item>
+        <item>约翰</item>
+        <item>扫罗</item>
+        <item>彼得 </item>
+    </array>
+
+    <array name="as_sx_70">
+        <item>每位基督徒</item>
+        <item>耶稣基督 </item>
+        <item>牧师</item>
+        <item>神的仆人</item>
+    </array>
+    <array name="as_sx_71">
+        <item>保罗</item>
+        <item>约翰 </item>
+        <item>彼得</item>
+        <item>路加</item>
+    </array>
+    <array name="as_sx_72">
+        <item>希伯来书6：1</item>
+        <item>犹大书1：7</item>
+        <item>罗马书15：8</item>
+        <item>使徒行传15：8</item>
+    </array>
+    <array name="as_sx_73">
+        <item>启22：20</item>
+        <item>罗8：15</item>
+        <item>来13：9</item>
+        <item>徒15：3</item>
+    </array>
+    <array name="as_sx_74">
+        <item>彼得前书4：7</item>
+        <item>希伯来书11：22</item>
+        <item>提多书1：14</item>
+        <item>马太福音11：10</item>
+    </array>
+    <array name="as_sx_75">
+        <item>谦卑的人 </item>
+        <item>诚实的人</item>
+        <item>圣洁的人</item>
+        <item>慈善的人</item>
+    </array>
+
+
+    <array name="as_sx_76">
+        <item> 神旨意</item>
+        <item>教会的规矩 </item>
+        <item>自己的才干 </item>
+        <item>基本道德</item>
+    </array>
+    <array name="as_sx_77">
+        <item>生命平安</item>
+        <item>荣耀喜乐 </item>
+        <item>荣耀赏赐 </item>
+        <item>尊贵的赏赐</item>
+    </array>
+    <array name="as_sx_78">
+        <item>亲近  </item>
+        <item>保守</item>
+        <item>坚持</item>
+        <item>真诚</item>
+    </array>
+    <array name="as_sx_79">
+        <item>罗3：23</item>
+        <item>罗1：24</item>
+        <item>罗2：23</item>
+        <item>罗2：24</item>
+    </array>
+    <array name="as_sx_80">
+        <item>父亲</item>
+        <item>师长</item>
+        <item>弟兄</item>
+        <item>孩子</item>
+    </array>
+    <array name="as_sx_81">
+        <item>警醒祷告</item>
+        <item>凡事谢恩</item>
+        <item>常常喜乐</item>
+        <item>保守己心</item>
+    </array>
+    <array name="as_sx_82">
+        <item>圣灵</item>
+        <item>圣经</item>
+        <item>恩典</item>
+        <item>仁爱</item>
+    </array>
+    <array name="as_sx_83">
+        <item>希伯来书</item>
+        <item>路加福音</item>
+        <item>罗马书</item>
+        <item>约翰一书</item>
+    </array>
+    <array name="as_sx_84">
+        <item>提摩太前书</item>
+        <item>提摩太后书</item>
+        <item>提多书</item>
+        <item>哥林多前书</item>
+    </array>
+    <array name="as_sx_85">
+        <item>西门</item>
+        <item>腓利</item>
+        <item>巴拉巴</item>
+        <item>犹大</item>
+    </array>
+    <array name="as_sx_86">
+        <item>以弗所书</item>
+        <item>加拉太书</item>
+        <item>腓立比书</item>
+        <item>罗马书</item>
+    </array>
+    <array name="as_sx_87">
+        <item>彼得</item>
+        <item>雅各</item>
+        <item>约翰</item>
+        <item>保罗</item>
+    </array>
+    <array name="as_sx_88">
+        <item>阿尼西母</item>
+        <item>马可</item>
+        <item>亚波罗</item>
+        <item>巴拿巴</item>
+    </array>
+    <array name="as_sx_89">
+        <item>披着羊皮的狼 </item>
+        <item>流荡的星</item>
+        <item>没有果子的树</item>
+        <item>没有雨的云彩</item>
+    </array>
+    <array name="as_sx_90">
+        <item>彼得</item>
+        <item>雅各</item>
+        <item>约翰</item>
+        <item>保罗</item>
+    </array>
+    <array name="as_sx_91">
+        <item>提摩太前书</item>
+        <item>提摩太后书</item>
+        <item>提多书</item>
+        <item>使徒行传</item>
+    </array>
+    <array name="as_sx_92">
+        <item>友尼基</item>
+        <item>罗以 </item>
+        <item>友阿爹 </item>
+        <item>亚希雅</item>
+    </array>
+</resources>
