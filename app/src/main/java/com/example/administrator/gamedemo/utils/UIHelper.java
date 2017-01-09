@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -180,6 +182,32 @@ public class UIHelper {
                               .getColor(colorResId);
         } else {
             return Color.TRANSPARENT;
+        }
+    }
+
+    public static int getScreenWidthPixels(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
+
+    public static int getScreenHeightPixels(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
+    }
+
+    public static float dipToPx(Context context, int dip) {
+        return dip * getScreenDensity(context) + 0.5f;
+    }
+
+    public static float getScreenDensity(Context context) {
+        try {
+            DisplayMetrics dm = new DisplayMetrics();
+            ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+            return dm.density;
+        } catch (Exception e) {
+            return DisplayMetrics.DENSITY_DEFAULT;
         }
     }
 }

@@ -71,8 +71,6 @@ public class UploadAdapter extends Adapter<ViewHolder> {
         return null;
     }
 
-
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {

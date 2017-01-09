@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!--<CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_no_network"
+
+        />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/id_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_white" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.example.administrator.gamedemo.widget.RevealBackgroundView
+            android:id="@+id/revealBackgroundView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/itemRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:elevation="6dp"
+            android:translationZ="12dp"
+            app:borderWidth="0dp"
+            app:pressedTranslationZ="12dp" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

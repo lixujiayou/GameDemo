@@ -16,7 +16,7 @@ import java.util.List;
 
 
 /**
- * Created by 大灯泡 on 2016/11/1.
+ * Created by lixu on 2017/1/1.
  * <p>
  * 抽象的adapter
  */

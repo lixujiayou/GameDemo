@@ -63,4 +63,9 @@
     <dimen name="PreferenceItemHeight">42dp</dimen>
     <dimen name="ConversationItemHeight">58dp</dimen>
     <dimen name="LargeAvatarSize">56dp</dimen>
+
+    <dimen name="listLinePaddingWithContent">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_horizontal">16dp</dimen>
+    <dimen name="margin_horizontal_small">2dp</dimen>
 </resources>

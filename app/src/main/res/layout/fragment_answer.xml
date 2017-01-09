@@ -17,16 +17,16 @@
         android:id="@+id/banner_imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1.6"
         android:background="@drawable/img_huoer"
         android:fitsSystemWindows="false"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         />
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="3"
+    android:layout_weight="3.4"
     android:orientation="vertical"
     >
         <LinearLayout
@@ -49,6 +49,22 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_gravity="center"
+                android:typeface="serif"
+                />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017/1/6/星期五"
+                android:gravity="right"
+                android:layout_gravity="right"
+                android:layout_marginBottom="6dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/textcolor_3"
+                android:typeface="serif"
                 />
 
         </LinearLayout>
@@ -61,6 +77,7 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/selector_white"
+        android:visibility="gone"
         >
 
         <TextView
@@ -71,6 +88,7 @@
             android:textSize="@dimen/textsize_actionbar"
             android:gravity="center"
             android:layout_gravity="center"
+            android:typeface="serif"
             />
 
     </LinearLayout>
@@ -80,36 +98,11 @@
         android:layout_height="wrap_content"
         android:minHeight="90dp"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/line_px"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@color/white"
         android:weightSum="3"
+
         >
-
-        <LinearLayout
-            android:id="@+id/ll_history"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@drawable/selector_white"
-            android:layout_margin="4dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="历史记录"
-                android:textSize="@dimen/textsize_18"
-                android:textColor="@color/textcolor_2"
-                />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_myerro"
@@ -118,6 +111,7 @@
             android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center"
+            android:layout_gravity="center"
             android:background="@drawable/selector_white"
             android:layout_margin="4dp"
             >
@@ -137,7 +131,32 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_online"
+            android:id="@+id/ll_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史记录"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_help"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -156,10 +175,72 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="帮助"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/line_px"
+        android:background="@color/white"
+        android:weightSum="2"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始答题"
+                android:textSize="@dimen/textsize_18"
+                android:textColor="@color/textcolor_2"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_online"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/selector_white"
+            android:layout_margin="4dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="一起答"
                 android:textSize="@dimen/textsize_18"
                 android:textColor="@color/textcolor_2"
                 />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

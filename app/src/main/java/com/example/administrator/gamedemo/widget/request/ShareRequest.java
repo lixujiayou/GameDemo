@@ -27,7 +27,6 @@ import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields
  */
 
 public class ShareRequest extends BaseRequestClient<List<Share>> {
-
     private int count = 10;
     private int curPage = 0;
     private boolean isReadCache = true;//是否读取缓存
@@ -68,6 +67,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         if(isCollect){
             bmobQuery.addWhereRelatedTo(Students.UserFields.COLLECTS, new BmobPointer(Constants.getInstance().getUser()));
         }
+
 
         if(isReadCache) {
             boolean isCache = bmobQuery.hasCachedResult(Share.class);

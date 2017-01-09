@@ -29,6 +29,7 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
     private List<Students> likesUserId;
     private String topic;
     private String ps;
+    private String rp;
     private ArrayList<String> answers;
 
     public AddMomentsRequest() {
@@ -50,6 +51,12 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
         return this;
     }
 
+
+
+    public AddMomentsRequest setRp(String Rp){
+        this.rp = Rp;
+        return this;
+    }
     /**
      * 设置问题题目
      * @param topic

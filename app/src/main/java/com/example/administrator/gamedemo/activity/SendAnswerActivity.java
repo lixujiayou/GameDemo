@@ -154,6 +154,7 @@ public class SendAnswerActivity extends BaseActivity {
             addMomentsRequest.setTopic(mTopic);
             addMomentsRequest.setAnswers(mAnswerList);
             addMomentsRequest.setPs(mPs);
+            addMomentsRequest.setRp(Constants.UPLOAD_ING);
             addMomentsRequest.setAuth(mUser);
             addMomentsRequest.setOnResponseListener(new SimpleResponseListener<String>() {
                 @Override

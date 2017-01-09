@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -70,12 +72,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     CommentBox commentBox;
     @BindView(R.id.iv_add)
      ImageView iv_add;
-
     private boolean isPrepared;
 
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
-
 
     private int keyHeight;
     private HostViewHolder hostViewHolder;

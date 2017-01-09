@@ -145,7 +145,6 @@ public class SendShareActivity extends BaseActivity {
     }
 
     private void commitTogther(String togtherText) {
-
         showProgressBarDialog(SendShareActivity.this);
         AddShareRequest addTogtherRequest = new AddShareRequest();
         addTogtherRequest.setAuthId(Constants.getInstance().getUser(SendShareActivity.this).getObjectId());
@@ -179,7 +178,6 @@ public class SendShareActivity extends BaseActivity {
                 showErroDialog(SendShareActivity.this,"发布失败","请检查网络并重试");
                 Logger.d(e.toString()+requestType);
             }
-
             @Override
             public void onProgress(int pro) {
                 setProgressDialogText("已上传%"+pro);

@@ -202,136 +202,14 @@
         android:orientation="vertical"
         >
     <LinearLayout
+        android:id="@+id/ll_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
-        android:background="@drawable/selector_white"
         android:gravity="center_vertical"
-        android:visibility="visible"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="设置"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/textsize_16"
-            android:textColor="@color/textcolor_2"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/travel__ic_arrow_search_result"
-            android:layout_marginRight="15dp"
-            />
-
-    </LinearLayout>
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/item_mine_height"
-        android:orientation="horizontal"
-        android:background="@drawable/selector_white"
-        android:gravity="center_vertical"
-        android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="交流"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/textsize_16"
-            android:textColor="@color/textcolor_2"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/travel__ic_arrow_search_result"
-            android:layout_marginRight="15dp"
-            />
-
-    </LinearLayout>
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/item_mine_height"
-        android:orientation="horizontal"
-        android:background="@drawable/selector_white"
-        android:gravity="center_vertical"
-        android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关于"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/textsize_16"
-            android:textColor="@color/textcolor_2"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/travel__ic_arrow_search_result"
-            android:layout_marginRight="15dp"
-            />
-
-    </LinearLayout><LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/item_mine_height"
-        android:orientation="horizontal"
-        android:background="@drawable/selector_white"
-        android:gravity="center_vertical"
-        android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
+        style="@style/about_item_style"
         >
 
         <ImageView
@@ -362,6 +240,128 @@
             android:src="@drawable/travel__ic_arrow_search_result"
             android:layout_marginRight="15dp"
             />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+    style="@style/about_item_style"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待定"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+    style="@style/about_item_style"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待定"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout><LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        style="@style/about_item_style"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反馈"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
     </LinearLayout>
 
 
@@ -370,10 +370,10 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
-        android:background="@drawable/selector_white"
         android:gravity="center_vertical"
         android:visibility="visible"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        style="@style/about_item_style"
         >
 
         <ImageView
@@ -411,10 +411,10 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
-        android:background="@drawable/selector_white"
         android:gravity="center_vertical"
         android:visibility="visible"
         android:layout_marginTop="@dimen/line_px"
+    style="@style/about_item_style"
         >
 
         <ImageView

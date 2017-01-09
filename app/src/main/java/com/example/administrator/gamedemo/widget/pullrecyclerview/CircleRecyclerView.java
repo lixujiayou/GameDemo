@@ -336,7 +336,6 @@ public class CircleRecyclerView extends FrameLayout {
     /**
      * 刷新Icon的动作观察者
      */
-
     private static class InnerRefreshIconObserver {
         private ImageView refreshIcon;
         private final int refreshPosition;

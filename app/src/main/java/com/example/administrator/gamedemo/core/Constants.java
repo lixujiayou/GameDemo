@@ -14,7 +14,9 @@ import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import cn.bmob.v3.BmobUser;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -390,5 +392,37 @@ public class Constants {
 
         return (bitmap);
     }
+    private static String mYear;
+    private static String mMonth;
+    private static String mDay;
+    private static String mWay;
 
+    /**
+     * 获取年、月、日、星期
+     * @return
+     */
+    public static String StringData(){
+        final Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
+        mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
+        mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
+        mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
+        if("1".equals(mWay)){
+            mWay ="礼拜天";
+        }else if("2".equals(mWay)){
+            mWay ="星期一";
+        }else if("3".equals(mWay)){
+            mWay ="星期二";
+        }else if("4".equals(mWay)){
+            mWay ="星期三";
+        }else if("5".equals(mWay)){
+            mWay ="星期四";
+        }else if("6".equals(mWay)){
+            mWay ="星期五";
+        }else if("7".equals(mWay)){
+            mWay ="星期六";
+        }
+        return mYear + "/" + mMonth + "/" + mDay+"/"+"/"+mWay;
+    }
 }

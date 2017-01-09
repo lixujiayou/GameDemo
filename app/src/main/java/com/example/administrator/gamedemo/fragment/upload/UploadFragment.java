@@ -124,7 +124,7 @@ public abstract class UploadFragment extends BaseFragment{
         adapter.setOnItemClickListener(new UploadAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                //
             }
 
             @Override
@@ -192,7 +192,7 @@ public abstract class UploadFragment extends BaseFragment{
             return;
         } else {
             isFirst = false;
-
+            isLoad = true;
             momentsRequest.setOnResponseListener(momentsRequestCallBack);
             momentsRequest.setRequestType(REQUEST_REFRESH);
             momentsRequest.setCurPage(0);
@@ -208,6 +208,7 @@ public abstract class UploadFragment extends BaseFragment{
      * 加载更多
      */
     private void loadMore(){
+        isLoad = true;
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
         momentsRequest.setmType(mType);
@@ -218,6 +219,7 @@ public abstract class UploadFragment extends BaseFragment{
     private SimpleResponseListener<List<MomentsInfo>> momentsRequestCallBack = new SimpleResponseListener<List<MomentsInfo>>() {
         @Override
         public void onSuccess(List<MomentsInfo> response, int requestType) {
+            isLoad = false;
             swipeRefreshLayout.setRefreshing(false);
             adapter.setLoadStatus(false);
             switch (requestType) {

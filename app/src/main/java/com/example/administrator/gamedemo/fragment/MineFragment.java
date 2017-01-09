@@ -18,6 +18,7 @@ import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
 import com.example.administrator.gamedemo.activity.mine.UploadActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
+import com.example.administrator.gamedemo.activity.notes.NotesListActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.UIHelper;
@@ -58,6 +59,9 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.ll_upload)
     LinearLayout llUpload;
 
+    @BindView(R.id.ll_note)
+    LinearLayout ll_note;
+
     private boolean isPrepared;
 
     public MineFragment() {
@@ -69,7 +73,7 @@ public class MineFragment extends BaseFragment {
 
 
 
-    @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload})
+    @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload,R.id.ll_note})
     public void onClick(View view) {
         Intent gIntent = new Intent();
         switch (view.getId()) {
@@ -84,6 +88,11 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.ll_upload:
                 gIntent.setClass(mContext, UploadActivity.class);
+                break;
+            case R.id.ll_note:
+                gIntent.setClass(mContext, NotesListActivity.class);
+                break;
+            default:
                 break;
         }
 

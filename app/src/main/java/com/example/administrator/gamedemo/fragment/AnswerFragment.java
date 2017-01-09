@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.answer.AnswerListActivity;
 import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 
 import butterknife.BindView;
@@ -35,8 +37,8 @@ public class AnswerFragment extends BaseFragment {
     LinearLayout llHistory;
     @BindView(R.id.ll_myerro)
     LinearLayout llMyerro;
-
-
+    @BindView(R.id.tv_time)
+    TextView tv_time;
     public AnswerFragment() {
     }
 
@@ -94,7 +96,7 @@ public class AnswerFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        tv_time.setText(Constants.StringData());
     }
 
 

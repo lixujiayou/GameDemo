@@ -51,4 +51,10 @@
     <string name="linkedin">大小先知书</string>
     <string name="wordpress">圣经</string>
     <string name="myspace">新约书信</string>
+
+    <string name="text_book">写笔记</string>
+    <string name="text_book_name">标题</string>
+    <string name="text_time_label">内容</string>
+    <string name="text_book_delete">删除</string>
+    <string name="text_book_save">保存</string>
 </resources>
