@@ -88,9 +88,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
     public boolean isLogin(){
+        cUser = BmobUser.getCurrentUser(Students.class);
         if(cUser == null){
-            Intent lIntent = new Intent(this, LoginActivity.class);
-            startActivityForResult(lIntent,1);
             return false;
         }else{
             return true;

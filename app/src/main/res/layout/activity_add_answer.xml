@@ -22,6 +22,7 @@
         android:minHeight="?attr/actionBarSize"
         app:layout_scrollFlags="scroll|enterAlways"
         style="?actionBarStyle"
+        android:elevation="4dp"
         />
     <include layout="@layout/layout_no_network"/>
     <ScrollView

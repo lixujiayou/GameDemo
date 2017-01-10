@@ -3,6 +3,8 @@ package com.example.administrator.gamedemo.activity.notes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -16,6 +18,7 @@ import android.view.animation.OvershootInterpolator;
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.adapter.RoutinesAdapter;
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.NoteInfo;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -33,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -70,17 +74,12 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
         setupDatabase();
         setupGridLayout();
         setupRevealBackground(savedInstanceState);
-
         initAddItemBtn(addRoutinesItemBtn);
-
     }
 
     @Override
     public void initViews() {
         mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
-
-
-
 
     }
 
@@ -90,10 +89,12 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
     }
 
     private void setupDatabase() {
-        mDataSet = BookDatabaseUtil.getInstance(NotesListActivity.this).queryBookInfos();
+        if(isLogin()){
+            mDataSet = BookDatabaseUtil.getInstance(NotesListActivity.this).queryBookInfos();
         if (mDataSet == null ) {
             BmobQuery<NoteInfo> bmobQuery = new BmobQuery<>();
-            bmobQuery.setLimit(10);
+            bmobQuery.addWhereEqualTo(NoteInfo.NotesFields.AUTHOR,new BmobPointer(cUser));
+            //bmobQuery.setLimit(10);
             boolean isCache = bmobQuery.hasCachedResult(NoteInfo.class);
             if (isCache) {
                 bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
@@ -111,12 +112,14 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
                 }
             });
         }
+        }else{
+            mDataSet = BookDatabaseUtil.getInstance(NotesListActivity.this).queryBookInfos();
+        }
     }
 
-
     private void setupGridLayout() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         routinesRecyclerView.setLayoutManager(layoutManager);
         routinesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -131,7 +134,7 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
     }
 
     private void setupRevealBackground(Bundle savedInstanceState) {
-        revealBackgroundView.setFillPaintColor(getResources().getColor(R.color.background_daytime_material_blue));
+        revealBackgroundView.setFillPaintColor(ContextCompat.getColor(NotesListActivity.this,R.color.colorPrimary));
         revealBackgroundView.setOnStateChangeListener(this);
         if (savedInstanceState == null) {
             revealBackgroundView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -220,6 +223,7 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String name;
+        String content;
         int colorIndex;
         String time = "";
 
@@ -227,8 +231,10 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
             case UPDATE_BOOK:
                 if (resultCode == RENEW_BOOK) {
                     name = data.getStringExtra(RoutinesAdapter.BOOK_NAME);
+                    content = data.getStringExtra(RoutinesAdapter.BOOK_CONTENT);
+                    colorIndex = data.getIntExtra(RoutinesAdapter.BOOK_COLOR_INDEX, new Random().nextInt(4));
                     time = data.getStringExtra(RoutinesAdapter.BOOK_ALARM_TIME);
-                    updateItem(itemPosition - 1, name,data.getStringExtra(RoutinesAdapter.BOOK_CONTENT), time);
+                    updateItem(itemPosition - 1, name,colorIndex,content, time);
                 } else if (resultCode == DELETE_BOOK) {
                     deleteItem(itemPosition - 1, false);
                 }
@@ -236,9 +242,10 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
             case NEW_BOOK:
                 if (resultCode == RENEW_BOOK) {
                     name = data.getStringExtra(RoutinesAdapter.BOOK_NAME);
+                    content = data.getStringExtra(RoutinesAdapter.BOOK_CONTENT);
                     colorIndex = data.getIntExtra(RoutinesAdapter.BOOK_COLOR_INDEX, new Random().nextInt(4));
                     time = data.getStringExtra(RoutinesAdapter.BOOK_ALARM_TIME);
-                    addItem(name, colorIndex, time);
+                    addItem(name,content, colorIndex, time);
                 }
                 break;
             default:
@@ -253,10 +260,11 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
 
     //addItem,deleteItem,updateItem 的position从0开始
     //添加
-    private void addItem(String name, int colorIndex, String time) {
+    private void addItem(String name,String content, int colorIndex, String time) {
         final NoteInfo bookInfo = new NoteInfo();
         bookInfo.setAuthor(Constants.getInstance().getUser());
         bookInfo.setTitle(name);
+        bookInfo.setContent(content);
         bookInfo.setNoteColor(colorIndex);
         bookInfo.save(new SaveListener<String>() {
             @Override
@@ -265,7 +273,7 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
                 ToastUtil3.showToast(NotesListActivity.this,"编辑成功");
                 BookDatabaseUtil.getInstance(NotesListActivity.this).insertBookInfo(bookInfo);
             }else{
-                ToastUtil3.showToast(NotesListActivity.this,"编辑失败"+e);
+                Snackbar.make(addRoutinesItemBtn,"新增失败,已为您新增到本地，请检查网络并点击该笔记重新提交", Snackbar.LENGTH_INDEFINITE).setAction("Error", null).show();
                 BookDatabaseUtil.getInstance(NotesListActivity.this).insertBookInfo(bookInfo, bookInfo, true);
             }
             }
@@ -289,8 +297,6 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
             }
         });
 
-
-
         int size = mDataSet.size();
         if (size > 0 && position < size) {
             mDataSet.remove(position);
@@ -304,7 +310,7 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
     }
 
     //更新
-    private void updateItem(final int position, String name,String content, String time) {
+    private void updateItem(final int position, String name,int colorIndex,String content, String time) {
         final NoteInfo bookInfo = mDataSet.get(position);
         final NoteInfo bookInfoOld = new NoteInfo(
                   bookInfo.getAuthor()
@@ -315,21 +321,19 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
         bookInfo.setAuthor(Constants.getInstance().getUser());
         bookInfo.setTitle(name);
         bookInfo.setContent(content);
-    //    bookInfo.setNoteColor(colorIndex);
+        bookInfo.setNoteColor(colorIndex);
         bookInfo.setNoteCreateTime(time);
-
-        Logger.d( "test id = " + bookInfo.getObjectId());
-
         if (bookInfo.getObjectId() == null) {
             Logger.d( "into : test id = null");
             bookInfo.save(new SaveListener<String>() {
                 @Override
                 public void done(String s, BmobException e) {
                     if(e == null){
-                        ToastUtil3.showToast(NotesListActivity.this,"上传成功");
+                        ToastUtil3.showToast(NotesListActivity.this,"更新成功");
                         BookDatabaseUtil.getInstance(NotesListActivity.this).insertBookInfo(bookInfo, bookInfoOld, true);
                     }else{
-                        ToastUtil3.showToast(NotesListActivity.this,"上传失败"+e);
+
+                        Snackbar.make(addRoutinesItemBtn,"更新失败,已将本地笔记更新，请检查网络并点击该笔记重新提交", Snackbar.LENGTH_INDEFINITE).setAction("Error", null).show();
                         BookDatabaseUtil.getInstance(NotesListActivity.this).insertBookInfo(bookInfo, bookInfoOld, true); //无效invalid ObjectId
                     }
                 }

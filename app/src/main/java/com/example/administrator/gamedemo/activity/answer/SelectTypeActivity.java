@@ -31,9 +31,7 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
     MediaPlayer readllyGo = new MediaPlayer();
     IntentHandler ih = new IntentHandler();
     CircleLayout circleMenu;
-
-    private ToolBarHelper mToolBarHelper ;
-    public Toolbar toolbar ;
+    private Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +48,7 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
         circleMenu.setOnItemSelectedListener(this);
         circleMenu.setOnItemClickListener(this);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
         selectedTextView.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
         selectedTextView.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +64,6 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
                         while (num_<=3) {
                             try {
                                 Thread.sleep(800);
@@ -79,19 +77,20 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
 
             }
         });
+        mToolbar.setNavigationIcon(R.drawable.icon_cancle);
+        mToolbar.setTitle("选择答题范围");
 
-    }
-
-    @Override
-    public void setContentView(int layoutResID) {
-        mToolBarHelper = new ToolBarHelper(this,layoutResID) ;
-        toolbar = mToolBarHelper.getToolBar() ;
-        setContentView(mToolBarHelper.getContentView());
         /*把 toolbar 设置到Activity 中*/
-        setSupportActionBar(toolbar);
-        /*自定义的一些操作*/
-      //  onCreateCustomToolBar(toolbar) ;
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
+
 
     public void onCreateCustomToolBar(Toolbar toolbar){
         toolbar.setContentInsetsRelative(0, 0);

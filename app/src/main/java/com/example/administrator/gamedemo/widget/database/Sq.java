@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Sq extends SQLiteOpenHelper{
 
-	private String create_1 = "create table user1(_id integer primary key autoincrement,username text,pwd text,name_h text)";
+	private String create_1 = "create table user1(_id integer primary key autoincrement,username text,pwd text,name_h text,user_id text)";
 	
 	public Sq(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);

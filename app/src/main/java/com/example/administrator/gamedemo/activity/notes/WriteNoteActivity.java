@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +41,12 @@ import butterknife.OnClick;
 public class WriteNoteActivity extends BaseActivity {
     public static final String INTENT_ISCHANGE = "isChange";
     public static final String INTENT_NOTE = "cNote";
+
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
 
     @BindView(R.id.tv_content)
     TextView tvContent;
@@ -79,9 +87,7 @@ public class WriteNoteActivity extends BaseActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     getWindow().setStatusBarColor(Color.alpha(colorBook[getBookColorIndex]));
                 }
-
-
-
+                appBarLayout.setBackgroundColor(colorBook[getBookColorIndex]);
                 isPreView = true;
                 init();
                 llPreview.setVisibility(View.VISIBLE);
@@ -89,7 +95,7 @@ public class WriteNoteActivity extends BaseActivity {
 
         } else {
             isPreView = false;
-            mToolbar.setTitle("写笔记");
+            collapsingToolbarLayout.setTitle("写笔记");
         }
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -109,7 +115,7 @@ public class WriteNoteActivity extends BaseActivity {
                             updateAlarmTimeView();
                            // Intent intent = new Intent();
                             gIntent.putExtra(RoutinesAdapter.BOOK_NAME, name);
-                            gIntent.putExtra(RoutinesAdapter.BOOK_CONTENT, name);
+                            gIntent.putExtra(RoutinesAdapter.BOOK_CONTENT, content);
                             gIntent.putExtra(RoutinesAdapter.BOOK_ALARM_TIME, getBookAlarmTime);
                             setResult(NotesListActivity.RENEW_BOOK, gIntent);
                             finish();
@@ -136,14 +142,12 @@ public class WriteNoteActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
     private void init() {
         String name = gIntent.getStringExtra(RoutinesAdapter.BOOK_NAME);
         String content = gIntent.getStringExtra(RoutinesAdapter.BOOK_CONTENT);
-
-        mToolbar.setTitle(name);
+        collapsingToolbarLayout.setTitle(name);
         tvContent.setText(content);
         etTitle.setText(name);
         etContent.setText(content);
@@ -160,10 +164,9 @@ public class WriteNoteActivity extends BaseActivity {
 
             llPreview.setVisibility(View.VISIBLE);
             ll_write.setVisibility(View.GONE);
-            mToolbar.setTitle(etTitle.getText().toString());
+            collapsingToolbarLayout.setTitle(etTitle.getText().toString());
             tvContent.setText(etContent.getText().toString());
             isPreView = true;
-
         }
     }
 

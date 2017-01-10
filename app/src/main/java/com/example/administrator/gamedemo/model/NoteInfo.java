@@ -14,7 +14,14 @@ public class NoteInfo extends BmobObject{
     private Students author;
     private Integer noteColor;
     private String noteCreateTime;
+    public interface NotesFields {
+        String TITLE = "title";
+        String CONTENT = "content";
+        String COLOR = "noteColor";
+        String AUTHOR = "author";
+        String TIME = "noteCreateTime";
 
+    }
     public NoteInfo(){}
 
     public NoteInfo(Students author, String title, String content, Integer noteColor, String noteCreateTime) {

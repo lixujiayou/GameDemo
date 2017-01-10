@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:id="@+id/id_tool_bar"
         android:background="?attr/colorPrimary"
-
         app:navigationIcon="@drawable/icon_cancle"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -16,6 +15,8 @@
         android:subtitleTextColor="@color/white"
         app:subtitleTextColor="@color/white"
         app:titleTextColor="@color/white"
+        android:elevation="4dp"
+
         >
     </android.support.v7.widget.Toolbar>
 </FrameLayout>

@@ -10,10 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.answer.AnswerHistoryActivity;
 import com.example.administrator.gamedemo.activity.answer.AnswerListActivity;
 import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +26,6 @@ import butterknife.OnClick;
  */
 
 public class AnswerFragment extends BaseFragment {
-
 
     @BindView(R.id.banner_imageView)
     ImageView bannerImageView;
@@ -63,6 +64,8 @@ public class AnswerFragment extends BaseFragment {
                 startActivity(sIntent);
                 break;
             case R.id.ll_history:
+                Intent hIntent = new Intent(mContext, AnswerHistoryActivity.class);
+                startActivityForResult(hIntent, 1);
                 break;
             case R.id.ll_myerro:
                 break;
@@ -90,8 +93,8 @@ public class AnswerFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-
-
+        tv_time.setText(Constants.StringData());
+        Logger.d("当前时间为：" + Constants.StringData());
     }
 
     @Override

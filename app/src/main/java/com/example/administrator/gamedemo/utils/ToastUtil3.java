@@ -28,7 +28,9 @@ public class ToastUtil3 {
     private static TextView tv_toast;
     public static void showToast(Context context, String s){
 
-
+        if(s.equals("No cache data") || s.contains("No cache data")){
+            return;
+        }
         if(toast==null){
 
             LayoutInflater inflater = LayoutInflater.from(context);

@@ -23,9 +23,9 @@ import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields
 import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields.REPLY_USER;
 
 /**
- * Created by 大灯泡 on 2016/10/27.
+ * Created by lixu on 2016/11/27.
  * <p>
- * 朋友圈时间线请求
+ * 上传题库时间线请求
  */
 
 public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
