@@ -101,8 +101,6 @@ public class AnswerListActivity extends BaseActivity{
             }
         });
 
-
-
         circleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

@@ -36,8 +36,7 @@ public class AnswerFragment extends BaseFragment {
     LinearLayout llStart;
     @BindView(R.id.ll_history)
     LinearLayout llHistory;
-    @BindView(R.id.ll_myerro)
-    LinearLayout llMyerro;
+
     @BindView(R.id.tv_time)
     TextView tv_time;
     public AnswerFragment() {
@@ -47,15 +46,9 @@ public class AnswerFragment extends BaseFragment {
         return answerFragmentHolder.instance;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-    @OnClick({R.id.ll_start, R.id.ll_history, R.id.ll_myerro, R.id.ll_online})
+
+    @OnClick({R.id.ll_start, R.id.ll_history, R.id.ll_online})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_start:
@@ -66,8 +59,6 @@ public class AnswerFragment extends BaseFragment {
             case R.id.ll_history:
                 Intent hIntent = new Intent(mContext, AnswerHistoryActivity.class);
                 startActivityForResult(hIntent, 1);
-                break;
-            case R.id.ll_myerro:
                 break;
             case R.id.ll_online:
                 Intent gIntent = new Intent(mContext, AnswerListActivity.class);

@@ -171,6 +171,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initData() {
+        Logger.d("isPrepared="+isPrepared+"isVisible="+isVisible+"isFirst="+isFirst);
+
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         } else {

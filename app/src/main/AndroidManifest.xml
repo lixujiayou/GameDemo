@@ -139,13 +139,22 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+
         <!--推荐APP-->
         <activity android:name=".activity.mine.InviteFriend"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+
         <!--答题历史记录-->
         <activity android:name=".activity.answer.AnswerHistoryActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
+        <!--错题-->
+        <activity android:name=".activity.answer.ErroTopicActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"

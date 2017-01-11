@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.widget.popup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Share;
@@ -171,14 +173,18 @@ public class CommentPopup extends BasePopupWindow implements View.OnClickListene
          hasLiked = false;
         if (!ToolUtil.isListEmpty(info.getLikesList())) {
             for (Students userInfo : info.getLikesList()) {
-                if (TextUtils.equals(userInfo.getObjectId(), Constants.getInstance().getUser(mContext).getObjectId())) {
-                    hasLiked = true;
-                    break;
+                if(Constants.getInstance().getUser()!= null){
+                    if (TextUtils.equals(userInfo.getObjectId(), Constants.getInstance().getUser().getObjectId())) {
+                        hasLiked = true;
+                        break;
+                    }
+                }else{
+                    Intent lIntent = new Intent(mContext, LoginActivity.class);
+                    this.mContext.startActivity(lIntent);
                 }
             }
         }
         mLikeText.setText(hasLiked ? "取消" : "赞");
-
     }
 
 

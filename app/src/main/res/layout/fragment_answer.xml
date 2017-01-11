@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backround_hui"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backround_hui">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -12,23 +11,36 @@
     android:orientation="vertical"
     android:weightSum="5"
     >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="10dp"
+        android:layout_weight="1.6"
+        >
 
     <ImageView
         android:id="@+id/banner_imageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.6"
+        android:layout_height="match_parent"
+
         android:background="@drawable/img_huoer"
         android:fitsSystemWindows="false"
         android:scaleType="centerCrop"
         />
-
+</android.support.v7.widget.CardView>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="3.4"
     android:orientation="vertical"
     >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:elevation="6dp"
+        app:contentPadding="4dp"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,6 +49,7 @@
             android:background="@color/white"
             android:gravity="center"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,6 +64,7 @@
                 android:layout_gravity="center"
                 android:typeface="serif"
                 />
+
 
             <TextView
                 android:id="@+id/tv_time"
@@ -68,29 +82,85 @@
                 />
 
         </LinearLayout>
-
+    </android.support.v7.widget.CardView>
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/selector_white"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/line_px"
+        android:weightSum="2"
         >
-
-        <TextView
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:textColor="@color/textcolor_2"
-            android:text="开始答题"
-            android:textSize="@dimen/textsize_actionbar"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:typeface="serif"
-            />
+            android:layout_weight="1"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="6dp"
+            android:elevation="6dp"
+            app:contentPadding="4dp"
+            >
+            <LinearLayout
+                android:id="@+id/ll_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_white"
+                android:layout_margin="4dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_main_start"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开始答题"
+                    android:textSize="@dimen/textsize_18"
+                    android:textColor="@color/textcolor_2"
+                    />
 
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="3dp"
+            android:elevation="6dp"
+            app:contentPadding="4dp"
+            >
+            <LinearLayout
+                android:id="@+id/ll_online"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/selector_white"
+                android:layout_margin="4dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_main_start"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一起答"
+                    android:textSize="@dimen/textsize_18"
+                    android:textColor="@color/textcolor_2"
+                    />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
     <LinearLayout
@@ -98,44 +168,24 @@
         android:layout_height="wrap_content"
         android:minHeight="90dp"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@color/white"
-        android:weightSum="3"
-
+        android:layout_marginTop="@dimen/line_px"
+        android:weightSum="2"
         >
-
-        <LinearLayout
-            android:id="@+id/ll_myerro"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@drawable/selector_white"
-            android:layout_margin="4dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的错题"
-                android:textSize="@dimen/textsize_18"
-                android:textColor="@color/textcolor_2"
-                />
-
-        </LinearLayout>
-
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:elevation="6dp"
+        app:contentPadding="4dp"
+        >
         <LinearLayout
             android:id="@+id/ll_history"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/selector_white"
             android:layout_margin="4dp"
@@ -143,33 +193,43 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
+                android:src="@drawable/icon_main_start"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="历史记录"
+                android:text="时间轴"
                 android:textSize="@dimen/textsize_18"
                 android:textColor="@color/textcolor_2"
+                android:layout_marginTop="6dp"
                 />
 
         </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/ll_help"
+        <android.support.v7.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="3dp"
+            android:elevation="6dp"
+            app:contentPadding="4dp"
+            >
+        <LinearLayout
+            android:id="@+id/ll_help"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center"
             android:background="@drawable/selector_white"
-            android:layout_margin="4dp"
             >
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
+                android:src="@drawable/icon_main_start"
                 />
 
             <TextView
@@ -180,70 +240,11 @@
                 android:textColor="@color/textcolor_2"
                 />
         </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="90dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/line_px"
-        android:background="@color/white"
-        android:weightSum="2"
-        >
 
-        <LinearLayout
-            android:id="@+id/ll_start"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@drawable/selector_white"
-            android:layout_margin="4dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="开始答题"
-                android:textSize="@dimen/textsize_18"
-                android:textColor="@color/textcolor_2"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_online"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/selector_white"
-            android:layout_margin="4dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_mine"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="一起答"
-                android:textSize="@dimen/textsize_18"
-                android:textColor="@color/textcolor_2"
-                />
-
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
 </LinearLayout>
 </com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout>

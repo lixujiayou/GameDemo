@@ -40,6 +40,11 @@ public class Constants {
     public static final int EXITAPP = 33;
 
     public static final int GOLOGIN = 22;
+    /**
+     * 历史记录是否同步字段
+     */
+    public static final String SYNC_OK= "SYNCOK";
+    public static final String SYNC_NO= "SYNCNO";
 
     public Constants(){
 
