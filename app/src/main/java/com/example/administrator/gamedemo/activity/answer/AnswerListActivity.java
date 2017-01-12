@@ -82,7 +82,7 @@ public class AnswerListActivity extends BaseActivity{
                 switch (menuItem.getItemId()) {
                     case R.id.action_jiahao:
                         Intent gIntent = new Intent(AnswerListActivity.this,SendAnswerActivity.class);
-                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.CHANGE);
+                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
                         startActivityForResult(gIntent,1);
                         break;
                 }

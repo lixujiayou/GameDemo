@@ -50,5 +50,6 @@
         android:layout_marginTop="8dp"
         app:show_line="5"
         app:text_color="@color/textcolor_2"
+
         />
 </RelativeLayout>

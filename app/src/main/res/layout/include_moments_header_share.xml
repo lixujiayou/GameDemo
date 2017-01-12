@@ -41,19 +41,18 @@
         android:layout_alignTop="@id/avatar"
         android:background="@drawable/selector_white_tran"
         android:layout_centerInParent="true"
-
         />
 
-    <com.example.administrator.gamedemo.widget.commentwidget.StretchyTextView
+    <com.example.administrator.gamedemo.widget.ClickShowMoreLayout
         android:id="@+id/item_text_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/nick"
-        android:layout_below="@id/nick"
+        android:layout_below="@id/iv_collect"
         android:layout_marginTop="8dp"
-
+        app:show_line="5"
+        app:text_color="@color/textcolor_2"
+        app:text_size="12sp"
         />
-    <!--app:show_line="5"-->
-    <!--app:text_color="@color/textcolor_2"-->
-    <!--app:text_size="@dimen/textsize_18"-->
+
 </RelativeLayout>
