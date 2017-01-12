@@ -152,6 +152,7 @@ public class AnswerListActivity extends BaseActivity{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                isReadCache = false;
                 initData();
             }
         });

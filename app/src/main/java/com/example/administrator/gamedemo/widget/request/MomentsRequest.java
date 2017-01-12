@@ -83,7 +83,7 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         }else{
             bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         }
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
+        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
 
         bmobQuery.findObjects(new FindListener<MomentsInfo>() {
             @Override
