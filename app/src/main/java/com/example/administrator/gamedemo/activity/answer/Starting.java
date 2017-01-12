@@ -859,7 +859,7 @@ public void timeStop_dialog(){
                 cv.put("pwd", myScore+"");
                 cv.put("name_h", tv.getText().toString());
 
-                cv.put("is_upload", Constants.SYNC_OK);
+                cv.put("is_upload", Constants.SYNC_NO);
                 cv.put("type_", cType);
                 cv.put("erro_", mErroNum);
                 cv.put("erro_select", mErroSelect);
@@ -878,7 +878,7 @@ public void timeStop_dialog(){
                 cv.put("pwd", myScore+"");
                 cv.put("name_h", tv.getText().toString());
 
-                cv.put("is_upload", Constants.SYNC_OK);
+                cv.put("is_upload", Constants.SYNC_NO);
                 cv.put("type_", cType);
                 cv.put("erro_", mErroNum);
                 cv.put("erro_select", mErroSelect);
@@ -1014,7 +1014,7 @@ public void timeStop_dialog(){
                             cv.put("pwd", myScore+"");
                             cv.put("name_h", "中途退出");
 
-                            cv.put("is_upload", Constants.SYNC_OK);
+                            cv.put("is_upload", Constants.SYNC_NO);
                             cv.put("type_", cType);
                             cv.put("erro_", mErroNum);
                             cv.put("erro_select", mErroSelect);

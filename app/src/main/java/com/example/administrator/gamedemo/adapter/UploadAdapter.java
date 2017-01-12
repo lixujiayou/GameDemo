@@ -1,6 +1,7 @@
 package com.example.administrator.gamedemo.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -27,10 +28,11 @@ public class UploadAdapter extends Adapter<ViewHolder> {
     private static final int TYPE_FOOTER = 1;
     private Context context;
     private List<MomentsInfo> itemsEntities;
-
+    private  int[] colorBook;
     public UploadAdapter(Context context, List<MomentsInfo> itemsEntities) {
         this.context = context;
         this.itemsEntities = itemsEntities;
+        colorBook = context.getResources().getIntArray(R.array.style_topic);
     }
 
     public interface OnItemClickListener {
@@ -82,7 +84,11 @@ public class UploadAdapter extends Adapter<ViewHolder> {
 
             ((ItemViewHolder) holder).tv_name.setText(momentsInfo.getAuthor().getNick_name());
             ((ItemViewHolder) holder).tv_topic.setText(momentsInfo.getTopic());
-
+            try {
+                ((ItemViewHolder) holder).cv.setCardBackgroundColor(colorBook[momentsInfo.getColor()]);
+            }catch (Exception e){
+                Logger.d(position+"设置背景色异常"+e);
+            }
             try {
                 ((ItemViewHolder) holder).tv_num.setText("答题" + momentsInfo.getAw_num() + "次");
             }catch (Exception e){}
@@ -119,6 +125,7 @@ public class UploadAdapter extends Adapter<ViewHolder> {
 
         protected TextView tv_name;
         protected TextView tv_num;
+        protected CardView cv;
 
         public ItemViewHolder(View view) {
             super(view);
@@ -126,6 +133,7 @@ public class UploadAdapter extends Adapter<ViewHolder> {
             tv_name = (TextView) findView(tv_name, R.id.tv_info);
             tv_topic = (TextView) findView(tv_topic, R.id.tv_title);
             tv_num = (TextView) findView(tv_num, R.id.tv_views);
+            cv = (CardView) findView(cv,R.id.cv_item);
         }
 
         protected final View findView(View view, int resid) {

@@ -57,4 +57,8 @@
     <string name="text_time_label">内容</string>
     <string name="text_book_delete">删除</string>
     <string name="text_book_save">保存</string>
+
+
+    <string name="retract">收起</string>
+    <string name="spread">展开</string>s
 </resources>

@@ -33,6 +33,125 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <LinearLayout
+        android:id="@+id/ll_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="审核人"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+        <TextView
+            android:id="@+id/tv_s_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:text="lixu"
+            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
+            android:textSize="@dimen/textsize_16"
+            />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/line_px"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="审核建议"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+        <TextView
+            android:id="@+id/tv_s_idea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:text="请按照《圣经问答APP》上传规范进行上传，详细请看24条规范，请修改后继续上传，感谢您的支持，如有问题，请联系15662770998."
+            android:textColor="@color/textcolor_m"
+            android:background="@color/white"
+            android:textSize="@dimen/textsize_16"
+            android:lineSpacingExtra="4dp"
+            />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_search_d"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/line_px"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:text="审核时间"
+                android:textSize="@dimen/textsize_18"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/textcolor_2"
+                />
+            <TextView
+                android:id="@+id/tv_s_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:text="2017-01-12 11:48"
+                android:textColor="@color/textcolor_m"
+                android:background="@color/white"
+                android:textSize="@dimen/textsize_16"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -46,6 +165,7 @@
        android:layout_gravity="center_vertical"
        android:gravity="center_vertical"
        >
+
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
@@ -56,6 +176,7 @@
             android:gravity="center_vertical"
             android:textColor="@color/textcolor_2"
             />
+
         <EditText
             android:id="@+id/et_send_topic"
             android:layout_width="0dp"
@@ -256,7 +377,99 @@
     android:layout_height="@dimen/activity_vertical_margin"/>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search_d"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
 
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="背景色"
+            android:textSize="@dimen/textsize_18"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_red"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.75"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/selector_white_tran"
+            >
+        <View
+            android:id="@+id/view_red"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_red_s"
+            />
+            </LinearLayout>
+        <LinearLayout
+        android:id="@+id/ll_green"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.75"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+        android:background="@drawable/selector_white_tran"
+            >
+        <View
+            android:id="@+id/view_green"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_green"
+            />
+            </LinearLayout> <LinearLayout
+        android:id="@+id/ll_blue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.75"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+        android:background="@drawable/selector_white_tran"
+            >
+        <View
+            android:id="@+id/view_blue"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_blue"
+            />
+            </LinearLayout> <LinearLayout
+        android:id="@+id/ll_gray"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.75"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+        android:background="@drawable/selector_white_tran"
+            >
+        <View
+            android:id="@+id/view_gray"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/shape_gray"
+            />
+            </LinearLayout>
+
+
+    </LinearLayout>
 
     </LinearLayout>
     </ScrollView>

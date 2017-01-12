@@ -22,6 +22,7 @@ public class MomentsInfo extends BmobObject implements Serializable{
         String COMMENTS = "comments";
         String AUTHOR_USER = "author";
         String RP = "rp";
+        String CPERSON = "cperson";
     }
 
     private Students author;
@@ -37,6 +38,9 @@ public class MomentsInfo extends BmobObject implements Serializable{
     private transient int no;//问题编号
     private int aw_num;//答题次数
     private String rp;//审核进度
+    private int color;//背景色
+    private String idea;//审核建议
+    private Students cperson;//审核人
 
     public MomentsInfo() {
     }
@@ -172,4 +176,27 @@ public class MomentsInfo extends BmobObject implements Serializable{
     }
 
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public String getIdea() {
+        return idea;
+    }
+
+    public void setIdea(String idea) {
+        this.idea = idea;
+    }
+
+    public Students getCperson() {
+        return cperson;
+    }
+
+    public void setCperson(Students cperson) {
+        this.cperson = cperson;
+    }
 }

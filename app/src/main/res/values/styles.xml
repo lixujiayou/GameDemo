@@ -77,6 +77,14 @@
         <item>@color/style_book_color_gray</item>
     </integer-array>
 
+
+<integer-array name="style_topic">
+        <item>@color/delete_btn_press</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/background_daytime_material_blue</item>
+        <item>@color/style_book_color_gray</item>
+    </integer-array>
+
     <style name="Transparent" parent="AppTheme">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>

@@ -55,8 +55,9 @@ public class UploadActivity extends BaseFragmentActivity{
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_write:
+                    case R.id.action_jiahao:
                         Intent gIntent = new Intent(UploadActivity.this, SendAnswerActivity.class);
+                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
                         startActivityForResult(gIntent,1);
                         break;
                 }
@@ -70,7 +71,6 @@ public class UploadActivity extends BaseFragmentActivity{
                 finish();
             }
         });
-
         myFM = getSupportFragmentManager();
         list_fragmet.add(UploadFragmentOK.getInstance());
         list_fragmet.add(UploadFragmentING.getInstance());
@@ -93,7 +93,7 @@ public class UploadActivity extends BaseFragmentActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.menu_write, menu);
+        getMenuInflater().inflate(R.menu.menu_togther, menu);
         return true;
     }
 

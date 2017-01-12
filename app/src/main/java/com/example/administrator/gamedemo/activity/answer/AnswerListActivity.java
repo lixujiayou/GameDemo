@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
 import com.example.administrator.gamedemo.activity.SendAnswerActivity;
 import com.example.administrator.gamedemo.activity.mine.UploadActivity;
+import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
 import com.example.administrator.gamedemo.adapter.UploadAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.MomentsInfo;
@@ -62,9 +64,7 @@ public class AnswerListActivity extends BaseActivity{
 
     @BindView(R.id.ll_toobar)
     LinearLayout ll_toobar;
-
     private boolean isReadCache = true;
-
     private boolean isLoad = false;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -76,6 +76,19 @@ public class AnswerListActivity extends BaseActivity{
         mToolbar.setTitle("一起答");
         mToolbar.setNavigationIcon(R.drawable.icon_cancle);
         setSupportActionBar(mToolbar);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_jiahao:
+                        Intent gIntent = new Intent(AnswerListActivity.this,SendAnswerActivity.class);
+                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.CHANGE);
+                        startActivityForResult(gIntent,1);
+                        break;
+                }
+                return true;
+            }
+        });
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
         mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
@@ -92,6 +105,7 @@ public class AnswerListActivity extends BaseActivity{
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("topic",momentsInfoList.get(position));
                 Intent gIntent = new Intent(AnswerListActivity.this, OnlineAnswerActivity.class);
+
                 gIntent.putExtras(bundle);
                 startActivityForResult(gIntent,1);
             }
@@ -147,7 +161,7 @@ public class AnswerListActivity extends BaseActivity{
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_send_whrite:
+                    case R.id.action_jiahao:
                         if(isLogin()){
                             Intent wIntent = new Intent(AnswerListActivity.this, SendAnswerActivity.class);
                             startActivityForResult(wIntent,1);
@@ -197,14 +211,11 @@ public class AnswerListActivity extends BaseActivity{
                     }else{
                         circleRecyclerView.setVisibility(View.GONE);
                         rl_hint.setVisibility(View.VISIBLE);
-
                             tv_hint_1.setText(R.string.upload);
                             tv_hint_2.setText(R.string.upload_2);
-
                     }
                     break;
                 case REQUEST_LOADMORE:
-
                     adapter.addMore(response);
                     break;
             }
@@ -219,7 +230,6 @@ public class AnswerListActivity extends BaseActivity{
 
         @Override
         public void onProgress(int pro) {
-
         }
     };
 
@@ -227,9 +237,16 @@ public class AnswerListActivity extends BaseActivity{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
+        if(requestCode == 1 || resultCode == Constants.REFRESH_CODE ){
             isReadCache = false;
             initData();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
+        getMenuInflater().inflate(R.menu.menu_togther, menu);
+        return true;
     }
 }

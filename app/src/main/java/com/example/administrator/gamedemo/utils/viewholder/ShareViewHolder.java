@@ -38,6 +38,7 @@ import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.widget.ClickShowMoreLayout;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
+import com.example.administrator.gamedemo.widget.commentwidget.StretchyTextView;
 import com.example.administrator.gamedemo.widget.popup.CommentPopup;
 import com.example.administrator.gamedemo.widget.popup.DeleteCommentPopup;
 import com.example.administrator.gamedemo.widget.praisewidget.PraiseWidget;
@@ -64,7 +65,8 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     //头部
     protected ImageView avatar;
     protected TextView nick;
-    protected ClickShowMoreLayout userText;
+    //protected ClickShowMoreLayout userText;
+    protected StretchyTextView userText;
     protected ImageView iv_collect;
 
     //底部
@@ -99,7 +101,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         avatar = (ImageView) findView(avatar, R.id.avatar);
         iv_collect = (ImageView) findView(iv_collect, R.id.iv_collect);
         nick = (TextView) findView(nick, R.id.nick);
-        userText = (ClickShowMoreLayout) findView(userText, R.id.item_text_field);
+        userText = (StretchyTextView) findView(userText, R.id.item_text_field);
         iv_collect.setVisibility(View.VISIBLE);
 
         //bottom
@@ -129,7 +131,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         if (data == null) {
             Logger.t("wu无数据");
             findView(userText, R.id.item_text_field);
-            userText.setText("");
+            userText.setContent("");
             return;
         }
         this.momentsInfo=data;
@@ -154,7 +156,9 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
 
         nick.setText(data.getAuthor().getNick_name());
 
-        userText.setText(data.getText());
+        userText.setContentTextColor(ContextCompat.getColor(mContext,R.color.textcolor_2));
+        userText.setMaxLineCount(4);
+        userText.setContent(data.getText());
 
         //bottom
         createTime.setText(TimeUtil.getTimeStringFromBmob(data.getCreatedAt()));

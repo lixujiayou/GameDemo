@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
+
+    <include layout="@layout/layout_no_network"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rl_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:paddingBottom="100dp"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/ic_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_nomessage"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_hint_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textcolor_main_2"
+            android:text="本次没有错题哦"
+            android:layout_below="@+id/ic_temp"
+            android:textSize="@dimen/textsize_18"
+            android:layout_marginTop="6dp"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/tv_hint_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textcolor_main_2"
+            android:text="看一下其它记录吧 ~"
+            android:layout_below="@+id/tv_hint_1"
+            android:textSize="@dimen/textsize_18"
+            android:layout_marginTop="6dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+</LinearLayout>

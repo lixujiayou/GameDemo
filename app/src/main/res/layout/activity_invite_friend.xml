@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<include layout="@layout/toolbar"/>
+    <include layout="@layout/layout_no_network"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+    <EditText
+        android:id="@+id/activity_invite_friend_et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:background="@drawable/backround_shap_kong"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="标题(建议在10字以内)"
+        android:textSize="@dimen/textsize_18"
+        android:paddingLeft="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注意:若此处不填,则使用默认标题"
+        android:textSize="@dimen/textsize_xx"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="4dp"
+        />
+    <EditText
+        android:id="@+id/activity_invite_friend_et_content"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/backround_shap_kong"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="内容\t(建议在15个字内)"
+        android:textSize="@dimen/textsize_18"
+        android:paddingLeft="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注意:若此处不填,则使用默认邀请语"
+        android:textSize="@dimen/textsize_xx"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="4dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share_qq"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="邀请QQ好友"
+                android:textSize="@dimen/textsize_actionbar"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center_vertical"
+    >
+        <RadioButton
+            android:id="@+id/activity_invite_rb_qq"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            />
+</LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_px"
+        android:background="@color/backround_hui"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_qzone"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享到QQ空间"
+                android:textSize="@dimen/textsize_actionbar"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            >
+            <RadioButton
+                android:id="@+id/activity_invite_rb_qz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_px"
+        android:background="@color/backround_hui"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_wx"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="邀请微信好友"
+                android:textSize="@dimen/textsize_actionbar"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            >
+            <RadioButton
+                android:id="@+id/activity_invite_rb_wx"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_px"
+        android:background="@color/backround_hui"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_pyq"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享到朋友圈"
+                android:textSize="@dimen/textsize_actionbar"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            >
+            <RadioButton
+                android:id="@+id/activity_invite_rb_pyq"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/activity_invite_friend_bt_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_search"
+        android:text="立即邀请"
+        android:background="@drawable/blue_button_background"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="@dimen/textsize_x"
+        />
+
+</LinearLayout>
+    </ScrollView>
+</LinearLayout>

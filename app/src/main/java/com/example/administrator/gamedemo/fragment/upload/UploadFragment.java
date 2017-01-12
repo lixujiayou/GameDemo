@@ -1,9 +1,12 @@
 package com.example.administrator.gamedemo.fragment.upload;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
+import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
 import com.example.administrator.gamedemo.activity.SendAnswerActivity;
 import com.example.administrator.gamedemo.activity.share.SendShareActivity;
 import com.example.administrator.gamedemo.adapter.AnswersAdapter;
@@ -57,6 +61,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Administrator on 2016/12/8 0008.
@@ -124,11 +129,29 @@ public abstract class UploadFragment extends BaseFragment{
         adapter.setOnItemClickListener(new UploadAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //
+
+                if(mType.equals(Constants.UPLOAD_OK)){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("topic",momentsInfoList.get(position));
+                    Intent gIntent = new Intent(mContext, OnlineAnswerActivity.class);
+                    gIntent.putExtras(bundle);
+                    startActivityForResult(gIntent,1);
+                }else if(mType.equals(Constants.UPLOAD_ING)){
+                    ToastUtil3.showToast(mContext,"审核中");
+                }else if(mType.equals(Constants.UPLOAD_NO)){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(SendAnswerActivity.TOPIC,momentsInfoList.get(position));
+                    Intent nIntent = new Intent(mContext, SendAnswerActivity.class);
+                    nIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.CHANGE);
+                    nIntent.putExtras(bundle);
+                    startActivityForResult(nIntent,1);
+                }
+
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
+                showDiaLog(position);
             }
         });
 
@@ -202,6 +225,66 @@ public abstract class UploadFragment extends BaseFragment{
             isReadCache = false;
 
         }
+    }
+    private void showDiaLog(final int position) {
+        try {
+            new AlertDialog.Builder(mContext)
+                    .setTitle("提示")
+                    .setMessage("是否删除本条数据？")
+                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            delete(position);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        } catch (Exception e) {
+            ToastUtil3.showToast(mContext, "程序异常,请稍后重试");
+        }
+    }
+
+    public void delete(final int position){
+        MomentsInfo momentsInfo  = momentsInfoList.get(position);
+        swipeRefreshLayout.setRefreshing(true);
+        momentsInfo.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                swipeRefreshLayout.setRefreshing(false);
+                if(e == null){
+                    circleRecyclerView.setVisibility(View.VISIBLE);
+                    rl_hint.setVisibility(View.GONE);
+                    momentsInfoList.remove(position);
+                    adapter.updateData(momentsInfoList);
+                    if(momentsInfoList.size() == 0){
+
+                            circleRecyclerView.setVisibility(View.GONE);
+                            rl_hint.setVisibility(View.VISIBLE);
+                            if(mType.equals(Constants.UPLOAD_OK)){
+                                tv_hint_1.setText(R.string.upload_ok_1);
+                                tv_hint_2.setText(R.string.upload_ok_2);
+                            }else if(mType.equals(Constants.UPLOAD_ING)){
+                                tv_hint_1.setText(R.string.upload_ing_1);
+                                tv_hint_2.setText(R.string.upload_ing_2);
+                            }else if(mType.equals(Constants.UPLOAD_NO)){
+                                tv_hint_1.setText(R.string.upload_no_1);
+                                tv_hint_2.setText(R.string.upload_no_2);
+                            }
+
+                    }
+                }else{
+                    ToastUtil3.showToast(mContext,"删除失败，请检查网络并重试");
+                    Logger.d("删除失败"+e);
+                }
+
+            }
+        });
     }
 
     /**

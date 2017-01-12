@@ -13,10 +13,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -33,9 +35,14 @@ import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/12/14 0014.
- * 上传题
+ * 上传题/上传失败的答题
  */
 public class SendAnswerActivity extends BaseActivity {
+
+    public final static String SEND = "SEND";
+    public final static String CHANGE = "CHANGE";
+    public final static String INTENT = "INTENT";
+    public final static String TOPIC = "topic";
 
     @BindView(R.id.et_send_topic)
     EditText etSendTopic;
@@ -56,6 +63,32 @@ public class SendAnswerActivity extends BaseActivity {
 
     @BindView(R.id.loading)
     RotateLoading loading;
+    @BindView(R.id.view_red)
+    View viewRed;
+    @BindView(R.id.ll_red)
+    LinearLayout llRed;
+    @BindView(R.id.view_green)
+    View viewGreen;
+    @BindView(R.id.ll_green)
+    LinearLayout llGreen;
+    @BindView(R.id.view_blue)
+    View viewBlue;
+    @BindView(R.id.ll_blue)
+    LinearLayout llBlue;
+    @BindView(R.id.view_gray)
+    View viewGray;
+    @BindView(R.id.ll_gray)
+    LinearLayout llGray;
+    @BindView(R.id.ll_check)
+    LinearLayout llCheck;
+    @BindView(R.id.tv_s_name)
+    TextView tvSName;
+    @BindView(R.id.tv_s_idea)
+    TextView tvSIdea;
+    @BindView(R.id.tv_s_time)
+    TextView tvSTime;
+    @BindView(R.id.ll_hint)
+    LinearLayout llHint;
 
     private ArrayList<String> mAnswerList = new ArrayList<>();
     private String mTopic;
@@ -66,6 +99,9 @@ public class SendAnswerActivity extends BaseActivity {
     private String mPs;
 
     private boolean isAgree = true;
+    private int mColor = 0;//当前选择的色值
+    private String cType = "";
+    private MomentsInfo cMomentsInfo;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -75,8 +111,25 @@ public class SendAnswerActivity extends BaseActivity {
     @Override
     public void initViews() {
         mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
-        mToolbar.setTitle("上传答题");
-        mToolbar.setTitleTextColor(ContextCompat.getColor(SendAnswerActivity.this,R.color.textcolor_1));
+        Intent gIntent = getIntent();
+        cType = gIntent.getExtras().getString(INTENT);
+
+        if (cType.equals(CHANGE)) {
+            mToolbar.setTitle("审核详情");
+            llHint.setVisibility(View.VISIBLE);
+            cMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra(TOPIC);
+            tvSIdea.setText(cMomentsInfo.getIdea());
+            tvSTime.setText(cMomentsInfo.getUpdatedAt());
+            if(cMomentsInfo.getCperson()!=null){
+                tvSName.setText(cMomentsInfo.getCperson().getNick_name());
+            }
+
+        } else {
+            mToolbar.setTitle("上传答题");
+            llHint.setVisibility(View.GONE);
+        }
+
+        mToolbar.setTitleTextColor(ContextCompat.getColor(SendAnswerActivity.this, R.color.textcolor_1));
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -90,10 +143,10 @@ public class SendAnswerActivity extends BaseActivity {
                         mAnser4 = etSendAnswerN3.getText().toString().trim();
                         mPs = etSendPs.getText().toString().trim();
                         if (!isEmpty()) {
-                            if(isAgree) {
+                            if (isAgree) {
                                 showDiaLog();
-                            }else{
-                                ToastUtil3.showToast(SendAnswerActivity.this,"请阅读并同意《圣经问答APP》上传规范");
+                            } else {
+                                ToastUtil3.showToast(SendAnswerActivity.this, "请阅读并同意《圣经问答APP》上传规范");
                             }
                         }
                         break;
@@ -154,6 +207,7 @@ public class SendAnswerActivity extends BaseActivity {
             addMomentsRequest.setTopic(mTopic);
             addMomentsRequest.setAnswers(mAnswerList);
             addMomentsRequest.setPs(mPs);
+            addMomentsRequest.setColor(mColor);
             addMomentsRequest.setRp(Constants.UPLOAD_ING);
             addMomentsRequest.setAuth(mUser);
             addMomentsRequest.setOnResponseListener(new SimpleResponseListener<String>() {
@@ -221,8 +275,6 @@ public class SendAnswerActivity extends BaseActivity {
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -232,23 +284,64 @@ public class SendAnswerActivity extends BaseActivity {
         }
     }
 
-
-
-
-    @OnClick({R.id.tv_send_norm})
-    public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.tv_send_norm:
-                Intent lIntent = new Intent(SendAnswerActivity.this, UpLoadRuleActivity.class);
-                startActivityForResult(lIntent, 1);
-                break;
-        }
-    }
-
     @Override
     public void onBackPressed() {
         setResult(Constants.REFRESH_CODE);
         finish();
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.tv_send_norm, R.id.ll_red, R.id.ll_green, R.id.ll_blue, R.id.ll_gray})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_send_norm:
+                Intent lIntent = new Intent(SendAnswerActivity.this, UpLoadRuleActivity.class);
+                startActivityForResult(lIntent, 1);
+                break;
+            case R.id.ll_red:
+                mColor = 0;
+                changeView();
+                break;
+            case R.id.ll_green:
+                mColor = 1;
+                changeView();
+                break;
+            case R.id.ll_blue:
+                mColor = 2;
+                changeView();
+                break;
+            case R.id.ll_gray:
+                mColor = 3;
+                changeView();
+                break;
+        }
+    }
+
+    private void changeView() {
+        viewRed.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_red));
+        viewGreen.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_green));
+        viewBlue.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_blue));
+        viewGray.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_gray));
+        switch (mColor) {
+            case 0:
+                viewRed.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_red_s));
+                break;
+            case 1:
+                viewGreen.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_green_s));
+                break;
+            case 2:
+                viewBlue.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_blue_s));
+                break;
+            case 3:
+                viewGray.setBackground(ContextCompat.getDrawable(SendAnswerActivity.this, R.drawable.shape_gray_s));
+                break;
+        }
+    }
+
 }

@@ -30,6 +30,7 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
     private String topic;
     private String ps;
     private String rp;
+    private int  color;
     private ArrayList<String> answers;
 
     public AddMomentsRequest() {
@@ -51,7 +52,10 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
         return this;
     }
 
-
+    public AddMomentsRequest setColor(int tColor){
+        this.color = tColor;
+        return this;
+    }
 
     public AddMomentsRequest setRp(String Rp){
         this.rp = Rp;
@@ -83,6 +87,7 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
             }
             momentsInfo.setHint(ps);  //参考经节
             momentsInfo.setAuthor(auth);//作者
+            momentsInfo.setColor(color);//背景
 
 //            UserInfo host = new UserInfo();
 //            host.setObjectId(hostId);

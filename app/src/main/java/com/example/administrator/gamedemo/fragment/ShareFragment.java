@@ -151,10 +151,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         commentBox.setOnCommentSendClickListener(onCommentSendClickListener);
 
         CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(mContext);
-        builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content)
-                .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image)
-                .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text)
-                .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web)
+        builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content_share)
+                .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image_share)
+                .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text_share)
+                .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web_share)
                 .setData(momentsInfoList)
                 .setPresenter(presenter);
         adapter = builder.build();
@@ -173,7 +173,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     public void initData() {
         Logger.d("isPrepared="+isPrepared+"isVisible="+isVisible+"isFirst="+isFirst);
 
-        if (!isPrepared || !isVisible || !isFirst) {
+        if (!isPrepared || !isFirst) {
             return;
         } else {
             isReadCache = true;

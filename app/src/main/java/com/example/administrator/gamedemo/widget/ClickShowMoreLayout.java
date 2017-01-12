@@ -72,6 +72,9 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
         mTextView = new TextView(context);
         mClickToShow = new TextView(context);
 
+        mTextView.setLineSpacing(4,4);
+        mClickToShow.setLineSpacing(4,4);
+
         mTextView.setTextSize(textSize);
         mTextView.setTextColor(textColor);
         mTextView.setMaxLines(showLine);

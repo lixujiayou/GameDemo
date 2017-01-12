@@ -10,6 +10,6 @@
         android:layout_height="@dimen/height_x"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="s"
+        android:text=""
         />
 </LinearLayout>

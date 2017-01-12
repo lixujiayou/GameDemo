@@ -25,10 +25,8 @@ import java.util.List;
 
 public class CircleMomentsAdapter extends BaseRecyclerViewAdapter<Share> {
 
-
     private SparseArray<ViewHoldernfo> viewHolderKeyArray;
     private MomentPresenter momentPresenter;
-
 
     private CircleMomentsAdapter(@NonNull Context context,
                                  @NonNull List<Share> datas) {

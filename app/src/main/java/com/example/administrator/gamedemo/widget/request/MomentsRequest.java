@@ -61,7 +61,9 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         BmobQuery<MomentsInfo> bmobQuery = new BmobQuery<>();
-        bmobQuery.include(MomentsInfo.MomentsFields.AUTHOR_USER + "," + MomentsInfo.MomentsFields.HOST);
+        bmobQuery.include(MomentsInfo.MomentsFields.AUTHOR_USER
+                + "," + MomentsInfo.MomentsFields.HOST
+                + "," + MomentsInfo.MomentsFields.CPERSON);
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");

@@ -14,7 +14,9 @@
         android:layout_width="@dimen/item_avatar"
         android:layout_height="@dimen/item_avatar"
         android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher"/>
+        tools:src="@mipmap/ic_launcher"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/nick"
@@ -26,7 +28,9 @@
         android:layout_toRightOf="@id/avatar"
         android:textColor="@color/nick"
         android:textSize="@dimen/normal_font"
-        tools:text="ss"/>
+        tools:text="ss"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/iv_collect"
@@ -34,21 +38,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:src="@drawable/icon_arrow"
-
         android:layout_alignTop="@id/avatar"
         android:background="@drawable/selector_white_tran"
         android:layout_centerInParent="true"
 
         />
 
-    <com.example.administrator.gamedemo.widget.ClickShowMoreLayout
+    <com.example.administrator.gamedemo.widget.commentwidget.StretchyTextView
         android:id="@+id/item_text_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/nick"
         android:layout_below="@id/nick"
         android:layout_marginTop="8dp"
-        app:show_line="5"
-        app:text_color="@color/textcolor_2"
+
         />
+    <!--app:show_line="5"-->
+    <!--app:text_color="@color/textcolor_2"-->
+    <!--app:text_size="@dimen/textsize_18"-->
 </RelativeLayout>
