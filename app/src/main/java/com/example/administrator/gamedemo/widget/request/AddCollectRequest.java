@@ -48,17 +48,13 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
         Share info = new Share();
         info.setObjectId(momentsId);
 
-        BmobRelation relation = new BmobRelation();
-        //将当前Share添加到多对多关联中
-        relation.add(info);
-
 
         Students userInfo = new Students();
         userInfo.setObjectId(userid);
+        info.addCollect(userInfo);
 
-        userInfo.setCollects(relation);
 
-        userInfo.update(new UpdateListener() {
+        info.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if(e == null){

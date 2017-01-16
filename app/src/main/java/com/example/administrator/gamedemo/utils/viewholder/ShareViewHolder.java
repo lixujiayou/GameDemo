@@ -45,6 +45,7 @@ import com.example.administrator.gamedemo.widget.praisewidget.PraiseWidget;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -67,7 +68,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     protected TextView nick;
     protected ClickShowMoreLayout userText;
     //protected StretchyTextView userText;
-    protected ImageView iv_collect;
+
 
     //底部
     protected TextView createTime;
@@ -90,6 +91,8 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private DeleteCommentPopup deleteCommentPopup;
     private Share momentsInfo;
 
+    private RelativeLayout rl_all;
+
     private Context mContext;
     private boolean isOrCollect = true;
     private SweetAlertDialog pDialog;
@@ -99,10 +102,10 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         onFindView(itemView);
         //header
         avatar = (ImageView) findView(avatar, R.id.avatar);
-        iv_collect = (ImageView) findView(iv_collect, R.id.iv_collect);
+
         nick = (TextView) findView(nick, R.id.nick);
         userText = (ClickShowMoreLayout) findView(userText, R.id.item_text_field);
-        iv_collect.setVisibility(View.VISIBLE);
+        rl_all = (RelativeLayout) findView(rl_all,R.id.rl_all);
 
         //bottom
         createTime = (TextView) findView(createTime, R.id.create_time);
@@ -167,12 +170,10 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         line.setVisibility(needPraiseData && needCommentData ? View.VISIBLE : View.GONE);
         commentAndPraiseLayout.setVisibility(needCommentData || needPraiseData ? View.VISIBLE : View.GONE);
         //收藏
-        iv_collect.setOnClickListener(new View.OnClickListener() {
+        rl_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showPhotoDialog(itemPosition,data);
-
             }
         });
     }
@@ -408,7 +409,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             window.setWindowAnimations(R.style.main_menu_animstyle);
             WindowManager.LayoutParams wl = window.getAttributes();
             wl.x = 0;
-            wl.y = ShareFragment.getInstance().getActivity().getWindowManager().getDefaultDisplay().getHeight();
+            //wl.y = ShareFragment.getInstance().getActivity().getWindowManager().getDefaultDisplay().getHeight();
             wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
             wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             dialog_help_2.onWindowAttributesChanged(wl);
@@ -417,16 +418,33 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         }else{
             hi_2 = (helpdialog_item_2) view_2.getTag();
         }
-        queryCollect(dataTemp);
+      //  queryCollect(dataTemp);
+        List<Students> studentsList = new ArrayList<>();
+        if(!ToolUtil.isListEmpty(dataTemp.getCollectList())){
+            studentsList.addAll(dataTemp.getCollectList());
+        }
+        Logger.d("收藏："+studentsList.size()+"----"+studentsList.toString());
+        Students cUser = Constants.getInstance().getUser();
+        isOrCollect = true;
+        hi_2.tv_help1.setText("收藏");
+        hi_2.tv_help1.setTextColor(ContextCompat.getColor(mContext,R.color.colorAccent));
+        for(int i = 0;i< studentsList.size();i++){
+            if(studentsList.get(i).getObjectId().equals(cUser.getObjectId())){
+                isOrCollect = false;
+                hi_2.tv_help1.setText("取消收藏");
+                hi_2.tv_help1.setTextColor(ContextCompat.getColor(mContext,R.color.red));
+            }
+        }
+
+
         hi_2.tv_help1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(isOrCollect){
-                    hi_2.tv_help1.setTextColor(ContextCompat.getColor(mContext,R.color.colorPrimary));
-                    momentPresenter.collect(itemPositionTemp, dataTemp.getObjectId());
+                    momentPresenter.collect(itemPositionTemp, dataTemp.getObjectId(),dataTemp.getCollectList());
                 }else{
-                    momentPresenter.unCollect(itemPositionTemp, dataTemp.getObjectId());
+                    momentPresenter.unCollect(itemPositionTemp, dataTemp.getObjectId(), dataTemp.getCollectList());
                 }
                 dialog_help_2.dismiss();
             }
@@ -438,6 +456,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                 dialog_help_2.dismiss();
             }
         });
+        dialog_help_2.show();
     }
 
     class helpdialog_item_2{

@@ -115,13 +115,24 @@ public class MomentPresenter implements IMomentPresenter {
         });
     }
     @Override
-    public void collect(final int viewHolderPos, String momentid) {
+    public void collect(final int viewHolderPos, String momentid, final List<Students> collectUserList) {
         collectModel.addCollect(momentid, new OnCollectChangeCallback() {
             @Override
             public void onCollect() {
-                if (momentView != null) {
-                    momentView.onCollectChange(viewHolderPos);
+
+                List<Students> resultLikeList = new ArrayList<Students>();
+                if (!ToolUtil.isListEmpty(collectUserList)) {
+                    resultLikeList.addAll(collectUserList);
                 }
+                boolean hasLocalLiked = findPosByObjid(resultLikeList, Constants.getInstance().getUser().getObjectId()) > -1;
+                if (!hasLocalLiked) {
+                    resultLikeList.add(0, Constants.getInstance().getUser());
+                }
+                if (momentView != null) {
+                    momentView.onCollectChange(viewHolderPos, resultLikeList);
+                }
+
+
             }
 
             @Override
@@ -132,7 +143,7 @@ public class MomentPresenter implements IMomentPresenter {
     }
 
     @Override
-    public void unCollect(final int viewHolderPos, String momentid) {
+    public void unCollect(final int viewHolderPos, String momentid, final List<Students> unCollectUserList) {
         collectModel.unCollect(momentid, new OnCollectChangeCallback() {
             @Override
             public void onCollect() {
@@ -141,11 +152,17 @@ public class MomentPresenter implements IMomentPresenter {
 
             @Override
             public void onUnCollect() {
-
-                if (momentView != null) {
-                    momentView.onCollectChange(viewHolderPos);
+                List<Students> resultLikeList = new ArrayList<Students>();
+                if (!ToolUtil.isListEmpty(unCollectUserList)) {
+                    resultLikeList.addAll(unCollectUserList);
                 }
-
+                final int localLikePos = findPosByObjid(resultLikeList, Constants.getInstance().getUser().getObjectId());
+                if (localLikePos > -1) {
+                    resultLikeList.remove(localLikePos);
+                }
+                if (momentView != null) {
+                    momentView.onCollectChange(viewHolderPos, resultLikeList);
+                }
             }
         });
     }

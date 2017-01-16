@@ -21,6 +21,6 @@ public interface IMomentView extends IBaseView {
 
     void showCommentBox(int itemPos, Share momentid, CommentWidget commentWidget);
 
-    void onCollectChange(int itemPos);
+    void onCollectChange(int itemPos, List<Students> collectUserList);
 
 }

@@ -7,7 +7,10 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="@dimen/item_padding"
                 android:paddingRight="@dimen/item_padding"
-                android:paddingTop="@dimen/item_padding">
+                android:paddingTop="@dimen/item_padding"
+                android:id="@+id/rl_all"
+    android:background="@drawable/selector_white_tran"
+    >
 
     <ImageView
         android:id="@+id/avatar"
@@ -32,17 +35,6 @@
         android:visibility="gone"
         />
 
-    <ImageView
-        android:id="@+id/iv_collect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/icon_arrow"
-        android:layout_alignTop="@id/avatar"
-        android:background="@drawable/selector_white_tran"
-        android:layout_centerInParent="true"
-        />
-
     <com.example.administrator.gamedemo.widget.ClickShowMoreLayout
         android:id="@+id/item_text_field"
         android:layout_width="match_parent"
@@ -54,5 +46,7 @@
         app:text_color="@color/textcolor_2"
         app:text_size="12sp"
         />
+
+
 
 </RelativeLayout>

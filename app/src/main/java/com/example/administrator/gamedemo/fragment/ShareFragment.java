@@ -61,7 +61,6 @@ import cn.bmob.v3.exception.BmobException;
 
 public class ShareFragment extends BaseFragment implements onRefreshListener2, IMomentView, CircleRecyclerView.OnPreDispatchTouchListener {
 
-
     @BindView(R.id.tv_repair)
     TextView tv_repair;
     @BindView(R.id.rl_bar)
@@ -87,8 +86,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     // private List<Share> responseTemp;
     private boolean isReadCache = true;
 
-
-
     public ShareFragment() {
     }
 
@@ -101,7 +98,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     @OnClick({R.id.rl_bar,R.id.iv_add})
     public void onClick(View v) {
         switch (v.getId()){
-
             case R.id.rl_bar:
                 circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
                 break;
@@ -110,10 +106,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
                 startActivityForResult(iIntent,1);
                 break;
         }
-
     }
-
-
 
     public static class answerFragmentHolder {
         public static final ShareFragment instance = new ShareFragment();
@@ -220,7 +213,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
                 int commentType = commentBox.getCommentType();
                 if (isVisible) {
                     commentBox.setMinimumHeight(keyboardHeight - 56);
-                    //    commentBox.setMinimumHeight(keyboardHeight);
+                        commentBox.setMinimumHeight(keyboardHeight);
                     //定位评论框到view
                     anchorView = alignCommentBoxToView(commentType);
                 } else {
@@ -308,8 +301,14 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         }
     }
     @Override
-    public void onCollectChange(int itemPos) {
-        ToastUtil3.showToast(mContext,"BingGo");
+    public void onCollectChange(int itemPos, List<Students> collectUserList) {
+        Share momentsInfo = adapter.findData(itemPos);
+        if (momentsInfo != null) {
+            momentsInfo.setCollectList(collectUserList);
+            adapter.notifyItemChanged(itemPos);
+        }
+        ToastUtil3.showToast(mContext,"BingGo(*^__^*)");
+
     }
     /**
      * 点击发送

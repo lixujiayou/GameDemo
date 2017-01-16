@@ -28,17 +28,21 @@ public class Share extends BmobObject {
         String COMMENTS = "commentList";
 
         String AUTHOR_USER = "students";
+        String AUTHOR_COLLECT = "collectInfo";
     }
 
     private Students students;
     private Students hostinfo;
+
     private BmobRelation likes;
 
     private List<Students> likesList;
+    private List<Students> collectList;
     private List<CommentInfo> commentList;
 
     private String text;
     private List<BmobFile> pics;
+
 
    // private MomentContent content;
 
@@ -114,6 +118,13 @@ public class Share extends BmobObject {
         }
     }
 
+    public List<Students> getCollectList() {
+        return collectList;
+    }
+
+    public void setCollectList(List<Students> collectList) {
+        this.collectList = collectList;
+    }
 
     /**
      * 获取动态的类型
@@ -164,6 +175,22 @@ public class Share extends BmobObject {
         if (pics.size() < 9) {
             pics.add(pic);
         }
+    }
+
+
+  public void addCollect(Students students) {
+        if (collectList == null) {
+            collectList = new ArrayList<>();
+        }
+        collectList.add(students);
+    }
+
+ public void removeCollect(Students students) {
+        if (collectList == null || collectList.size() == 0) {
+            Logger.d("没有就不要删了");
+           return;
+        }
+        collectList.remove(students);
     }
 
 

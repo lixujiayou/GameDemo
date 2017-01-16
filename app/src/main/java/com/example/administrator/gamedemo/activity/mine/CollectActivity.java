@@ -60,7 +60,7 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     private List<Share> momentsInfoList;
     private ShareRequest momentsRequest;
     private MomentPresenter presenter;
-    private boolean isReadCache = true;
+    private boolean isReadCache = false;
 
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
@@ -142,10 +142,11 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
 
     @Override
     public void onRefresh() {
+        Logger.d("发起请求-----");
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_REFRESH);
         momentsRequest.setCurPage(0);
-        momentsRequest.setCache(isReadCache);
+        momentsRequest.setCache(false);
         momentsRequest.setIsCollect(true);
         momentsRequest.execute();
         isReadCache = false;
@@ -155,7 +156,6 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     public void onLoadMore() {
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
-        momentsRequest.setIsCollect(true);
         momentsRequest.execute();
     }
 
@@ -177,7 +177,7 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
                         adapter.updateData(response);
                     }else{
                         rl_hint.setVisibility(View.VISIBLE);
-                        circleRecyclerView.setVisibility(View.GONE);
+                        //circleRecyclerView.setVisibility(View.GONE);
                     }
                     break;
                 case REQUEST_LOADMORE:
@@ -214,12 +214,17 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
         }
     }
     @Override
-    public void onCollectChange(int itemPos) {
-        ToastUtil3.showToast(this,"BingGo");
+    public void onCollectChange(int itemPos, List<Students> collectUserList) {
+        Share momentsInfo = adapter.findData(itemPos);
+        if (momentsInfo != null) {
+            momentsInfo.setCollectList(collectUserList);
+            adapter.notifyItemChanged(itemPos);
+        }
+        ToastUtil3.showToast(CollectActivity.this,"BingGo(*^__^*)");
     }
+
     /**
      * 点击发送
-     *
      * @param itemPos
      * @param commentInfoList
      */

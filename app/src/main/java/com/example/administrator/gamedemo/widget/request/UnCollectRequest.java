@@ -47,21 +47,15 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
         Share info = new Share();
         info.setObjectId(momentsId);
 
-        BmobRelation bmobRelation = new BmobRelation();
-        bmobRelation.remove(info);
-
         Students userInfo = new Students();
         userInfo.setObjectId(userid);
 
-        userInfo.setCollects(bmobRelation);
+        info.removeCollect(userInfo);
 
-        userInfo.setCollects(bmobRelation);
-        userInfo.update(new UpdateListener() {
+        info.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-
                 onResponseSuccess(e == null, requestType);
-
                 if(e == null ){
                     Logger.d("取消收藏啦");
                 }else{
