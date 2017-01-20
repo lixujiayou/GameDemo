@@ -120,6 +120,17 @@ public class SendAnswerActivity extends BaseActivity {
             cMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra(TOPIC);
             tvSIdea.setText(cMomentsInfo.getIdea());
             tvSTime.setText(cMomentsInfo.getUpdatedAt());
+            etSendTopic.setText(cMomentsInfo.getTopic());
+
+            etSendAnswerY.setText(cMomentsInfo.getAnswers().get(0));
+            etSendAnswerN1.setText(cMomentsInfo.getAnswers().get(1));
+            etSendAnswerN2.setText(cMomentsInfo.getAnswers().get(2));
+            etSendAnswerN3.setText(cMomentsInfo.getAnswers().get(3));
+            etSendPs.setText(cMomentsInfo.getHint());
+
+            mColor =  cMomentsInfo.getColor();
+            changeView();
+
             if(cMomentsInfo.getCperson()!=null){
                 tvSName.setText(cMomentsInfo.getCperson().getNick_name());
             }
@@ -151,7 +162,6 @@ public class SendAnswerActivity extends BaseActivity {
                         }
                         break;
                 }
-
                 return true;
             }
         });

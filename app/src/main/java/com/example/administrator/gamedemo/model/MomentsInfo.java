@@ -28,10 +28,9 @@ public class MomentsInfo extends BmobObject implements Serializable{
     private Students author;
     private Students hostinfo;
     private BmobRelation likes;
-    private List<Students> likesList;     //已经答过本问题的
+    private List<Students> likesList; //已经答过本问题的
     private List<CommentInfo> commentList;//评论
     private BmobFile cover;     //封面
-
     private String topic;  //问题的题目
     private List<String> answers;//答案s
     private String hint;    //提示

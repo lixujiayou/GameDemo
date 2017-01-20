@@ -169,19 +169,24 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         commentLayout.setVisibility(needCommentData ? View.VISIBLE : View.GONE);
         line.setVisibility(needPraiseData && needCommentData ? View.VISIBLE : View.GONE);
         commentAndPraiseLayout.setVisibility(needCommentData || needPraiseData ? View.VISIBLE : View.GONE);
-        //收藏
-        rl_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhotoDialog(itemPosition,data);
-            }
-        });
+        if(rl_all == null){
+            rl_all = (RelativeLayout) findView(rl_all,R.id.rl_all);
+        }
+        if(rl_all != null){
+            //收藏
+            rl_all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPhotoDialog(itemPosition,data);
+                }
+            });
+        }else{
+            Logger.d("还是等于null");
+        }
     }
-
 
     /**
      * 添加点赞
-     *
      * @param likesList
      * @return ture=显示点赞，false=不显示点赞
      */

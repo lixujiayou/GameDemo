@@ -71,6 +71,8 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         if(mType!=null && mType.toString().length() > 0){
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,mType);
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.AUTHOR_USER,new BmobPointer(cUser));
+        }else{
+            bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,Constants.UPLOAD_OK);
         }
 
         if(isReadCache) {
@@ -83,7 +85,7 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         }else{
             bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         }
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
+        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
 
         bmobQuery.findObjects(new FindListener<MomentsInfo>() {
             @Override

@@ -63,13 +63,14 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         cUser = Constants.getInstance().getUser();
-        Logger.d("开始啦");
         BmobQuery<Share> bmobQuery = new BmobQuery<>();
         bmobQuery.include(Share.MomentsFields.AUTHOR_USER
                 + "," + Share.MomentsFields.HOST
         );
-        bmobQuery.setLimit(count);
-        bmobQuery.setSkip(curPage * count);
+        if(!isCollect) {
+            bmobQuery.setLimit(count);
+            bmobQuery.setSkip(curPage * count);
+        }
         bmobQuery.order("-createdAt");
         if(isReadCache) {
             boolean isCache = bmobQuery.hasCachedResult(Share.class);
@@ -91,34 +92,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                // Logger.d("共有"+list.size());
                 if (!ToolUtil.isListEmpty(list)) {
                     Logger.d("list不是空但是");
-                    List<Share> shares = new ArrayList<Share>();
-                    List<Students> studentsList = new ArrayList<Students>();
-
-                    if(isCollect){
-                        queryCollect(list);
-
-
-//                        for(int i = 0;i < list.size();i++){
-//                            Logger.d(list.get(i).getCollectList().size()+"被收藏个数。");
-//                            studentsList = list.get(i).getCollectList();
-//                            for(int ii = 0;ii<studentsList.size();ii++){
-//                                if(studentsList.get(ii).getObjectId().equals(cUser.getObjectId())){
-//                                    shares.add(list.get(i));
-//                                }
-//                            }
-//                        }
-//
-//                        if(!ToolUtil.isListEmpty(shares)){
-//                            queryCommentAndLikes(shares);
-//                        }else{
-//                            onResponseSuccess(shares, getRequestType());
-//                        }
-
-                    }else {
-                        queryCommentAndLikes(list);
-                    }
-
-
+                    queryCommentAndLikes(list);
                 }else {
                     Logger.d("list就是空");
                     onResponseSuccess(list, getRequestType());
@@ -126,6 +100,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             }
         });
     }
+
 
     private void queryCommentAndLikes(final List<Share> momentsList) {
         /**
@@ -138,11 +113,10 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             final int currentPos = i;
             final Share momentsInfo = momentsList.get(i);
             BmobQuery<Students> likesQuery = new BmobQuery<>();
-          //  likesQuery.include(Students.UserFields.COLLECTS);
+
             likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
-            //根据更新时间降序
-            //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
-            //排序子目录
+            likesQuery.addWhereRelatedTo(Share.MomentsFields.AUTHOR_COLLECT, new BmobPointer(momentsInfo));
+
             likesQuery.order("-createdAt");
 
             if(isReadCache) {
@@ -155,7 +129,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             }else{
                 likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
+            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
@@ -177,9 +151,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                     }else{
                         commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
                     }
-
                     commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
-
                     commentQuery.findObjects(new FindListener<CommentInfo>() {
                         @Override
                         public void done(List<CommentInfo> list, BmobException e) {
@@ -189,6 +161,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
                             }
 
                             if (e == null) {
+                                Logger.d("查询当前位置"+currentPos);
                                 if (currentPos == momentsList.size() - 1) {
                                     onResponseSuccess(momentsList, getRequestType());
                                     curPage++;
@@ -203,22 +176,18 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         }
 
     }
-    List<Share> shares;
+
+    /*Share mMomentsInfo;
+    int controlI = 0;
     private void queryCollect(final List<Share> momentsList) {
-        /**
+        *//**
          * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         */
-        shares = new ArrayList<>();
+         *//*
+        controlI = 0;
         for (int i = 0; i < momentsList.size(); i++) {
-            final int currentPos = i;
-            final Share momentsInfo = momentsList.get(i);
+            mMomentsInfo = momentsList.get(i);
             BmobQuery<Students> likesQuery = new BmobQuery<>();
-          //  likesQuery.include(Students.UserFields.COLLECTS);
-            likesQuery.addWhereEqualTo(Share.MomentsFields.AUTHOR_COLLECT,);
-            likesQuery.addWhereRelatedTo(Share.MomentsFields.AUTHOR_COLLECT, new BmobPointer(momentsInfo));
-            //根据更新时间降序
-            //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
-            //排序子目录
+            likesQuery.addWhereRelatedTo(Share.MomentsFields.AUTHOR_COLLECT, new BmobPointer(mMomentsInfo));
             likesQuery.order("-createdAt");
 
             if(isReadCache) {
@@ -231,27 +200,24 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             }else{
                 likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
+            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
-                    if (!ToolUtil.isListEmpty(list)) {
+                    Logger.d("得到收藏时的顺序"+controlI);
 
-                        momentsInfo.setCollectList(list);
-                        shares.add(momentsInfo);
+                    mMomentsInfo.setCollectList(list);
+                    queryCommentAndLikes(mMomentsInfo);
 
-                    }else{
-                        Logger.d("list空");
-                       // onResponseSuccess(new ArrayList<Share>(), getRequestType());
+                    if(controlI == momentsList.size() - 1){
+                        onResponseSuccess(momentsList, getRequestType());
+                                    curPage++;
                     }
-
+                    controlI += 1;
                 }
             });
         }
-        if(ToolUtil.isListEmpty(shares)){
-            onResponseSuccess(shares, getRequestType());
-        }else{
-            queryCommentAndLikes(shares);
-        }
-    }
+
+
+    }*/
 }

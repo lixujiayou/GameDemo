@@ -75,7 +75,6 @@ public class OnlineAnswerActivity extends BaseActivity {
     @BindView(R.id.btn_send)
     TextView tv_send;
 
-
     @BindView(R.id.view_loading)
     LoadingView loadingView;
 
@@ -88,21 +87,17 @@ public class OnlineAnswerActivity extends BaseActivity {
     @BindView(R.id.tv_reminder)
     TextView tv_tv_reminder;
 
-
     private OneAnswerAdapter oneAnswerAdapter;
     private LinearLayoutManager mLayoutManager;
     private LinearLayoutManager mLayoutManager_comment;
     private OnlineAdapter onlineAdapter;
-
 
     private MomentsInfo mMomentsInfo;
     private ArrayList<String> mAnswers = new ArrayList<>();
     private ArrayList<CommentInfo> mCommentInfos = new ArrayList<>();
 
     private int[] Randoms;
-
     private DeleteCommentPopup deleteCommentPopup;
-
     /**
      * 被回复者相关
      */

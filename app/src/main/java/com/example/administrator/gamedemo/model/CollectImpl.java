@@ -8,6 +8,8 @@ import com.example.administrator.gamedemo.widget.request.callback.OnCollectChang
 import com.example.administrator.gamedemo.widget.request.callback.OnLikeChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.UnLikeRequest;
 
+import java.util.List;
+
 import cn.bmob.v3.exception.BmobException;
 
 
@@ -20,9 +22,9 @@ import cn.bmob.v3.exception.BmobException;
 public class CollectImpl implements ICollect {
 
     @Override
-    public void addCollect(String momentid, final OnCollectChangeCallback onCollectChangeCallback) {
+    public void addCollect(String momentid, List<Students> collectUserList,final OnCollectChangeCallback onCollectChangeCallback) {
         if (onCollectChangeCallback == null) return;
-        AddCollectRequest request = new AddCollectRequest(momentid);
+        AddCollectRequest request = new AddCollectRequest(momentid,collectUserList);
         request.setOnResponseListener(new OnResponseListener<Boolean>() {
             @Override
             public void onStart(int requestType) {
@@ -50,9 +52,9 @@ public class CollectImpl implements ICollect {
     }
 
     @Override
-    public void unCollect(String momentid, final OnCollectChangeCallback onCollectChangeCallback) {
+    public void unCollect(String momentid,List<Students> collectUserList, final OnCollectChangeCallback onCollectChangeCallback) {
         if (onCollectChangeCallback == null) return;
-        UnCollectRequest request = new UnCollectRequest(momentid);
+        UnCollectRequest request = new UnCollectRequest(momentid,collectUserList);
         request.setOnResponseListener(new OnResponseListener<Boolean>() {
             @Override
             public void onStart(int requestType) {

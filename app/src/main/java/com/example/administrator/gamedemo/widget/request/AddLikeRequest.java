@@ -53,6 +53,7 @@ public class AddLikeRequest extends BaseRequestClient<Boolean> {
         Students userInfo = new Students();
         userInfo.setObjectId(userid);
         info.setLikesBmobRelation(new BmobRelation(userInfo));
+
         info.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {

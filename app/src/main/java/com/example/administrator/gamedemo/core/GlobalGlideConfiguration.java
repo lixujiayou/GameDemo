@@ -33,11 +33,11 @@ public class GlobalGlideConfiguration implements GlideModule {
         int customMemoryCacheSize = (int) (1.5 * defaultMemoryCacheSize);
         int customBitmapPoolSize = defaultBitmapPoolSize;
 
-        Logger.d(
-               "bitmapPoolSize >>>>>   "
-                       + android.text.format.Formatter.formatFileSize(context, customBitmapPoolSize)
-                       + "          memorySize>>>>>>>>   " +
-                       android.text.format.Formatter.formatFileSize(context, customMemoryCacheSize));
+//        Logger.d(
+//               "bitmapPoolSize >>>>>   "
+//                       + android.text.format.Formatter.formatFileSize(context, customBitmapPoolSize)
+//                       + "          memorySize>>>>>>>>   " +
+//                       android.text.format.Formatter.formatFileSize(context, customMemoryCacheSize));
 
         builder.setMemoryCache(new LruResourceCache(customMemoryCacheSize));
         builder.setBitmapPool(new LruBitmapPool(customBitmapPoolSize));

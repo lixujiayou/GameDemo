@@ -5,6 +5,8 @@ import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.orhanobut.logger.Logger;
 
+import java.util.List;
+
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -17,10 +19,11 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
 
     private String momentsId;
     private String userid;
-
-    public UnCollectRequest(String momentsId) {
+    private List<Students> collectUserList;
+    public UnCollectRequest(String momentsId,List<Students> collectUserList) {
         this.momentsId = momentsId;
         this.userid = Constants.getInstance().getUser().getObjectId();
+        this.collectUserList = collectUserList;
     }
 
     public String getMomentsId() {
@@ -50,7 +53,11 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
         Students userInfo = new Students();
         userInfo.setObjectId(userid);
 
-        info.removeCollect(userInfo);
+        for(int i = 0;i<collectUserList.size();i++){
+            if(collectUserList.get(i).getObjectId().equals(userid)){
+                collectUserList.remove(collectUserList.get(i));
+            }
+        }
 
         info.update(new UpdateListener() {
             @Override

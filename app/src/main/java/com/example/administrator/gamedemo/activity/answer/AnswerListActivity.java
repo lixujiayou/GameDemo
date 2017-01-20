@@ -76,19 +76,19 @@ public class AnswerListActivity extends BaseActivity{
         mToolbar.setTitle("一起答");
         mToolbar.setNavigationIcon(R.drawable.icon_cancle);
         setSupportActionBar(mToolbar);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.action_jiahao:
-                        Intent gIntent = new Intent(AnswerListActivity.this,SendAnswerActivity.class);
-                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
-                        startActivityForResult(gIntent,1);
-                        break;
-                }
-                return true;
-            }
-        });
+//        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                switch (menuItem.getItemId()) {
+//                    case R.id.action_jiahao:
+//                        Intent gIntent = new Intent(AnswerListActivity.this,SendAnswerActivity.class);
+//                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
+//                        startActivityForResult(gIntent,1);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
         mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
@@ -164,8 +164,9 @@ public class AnswerListActivity extends BaseActivity{
                 switch (menuItem.getItemId()) {
                     case R.id.action_jiahao:
                         if(isLogin()){
-                            Intent wIntent = new Intent(AnswerListActivity.this, SendAnswerActivity.class);
-                            startActivityForResult(wIntent,1);
+                            Intent gIntent = new Intent(AnswerListActivity.this, SendAnswerActivity.class);
+                            gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
+                            startActivityForResult(gIntent,1);
                         }
                         break;
                     default:

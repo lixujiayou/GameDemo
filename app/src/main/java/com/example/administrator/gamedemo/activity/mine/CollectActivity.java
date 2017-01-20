@@ -81,19 +81,24 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
 
         presenter = new MomentPresenter(this);
 
-
         circleRecyclerView.setOnRefreshListener(this);
         circleRecyclerView.setOnPreDispatchTouchListener(this);
+        mToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                circleRecyclerView.getRecyclerView().smoothScrollToPosition(0);
+            }
+        });
 
         circleRecyclerView.addHeaderView(hostViewHolder.getView());
 
         commentBox.setOnCommentSendClickListener(onCommentSendClickListener);
 
         CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(this);
-        builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content)
-                .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image)
-                .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text)
-                .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web)
+        builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content_share)
+                .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image_share)
+                .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text_share)
+                .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web_share)
                 .setData(momentsInfoList)
                 .setPresenter(presenter);
         adapter = builder.build();

@@ -116,10 +116,9 @@ public class MomentPresenter implements IMomentPresenter {
     }
     @Override
     public void collect(final int viewHolderPos, String momentid, final List<Students> collectUserList) {
-        collectModel.addCollect(momentid, new OnCollectChangeCallback() {
+        collectModel.addCollect(momentid,collectUserList, new OnCollectChangeCallback() {
             @Override
             public void onCollect() {
-
                 List<Students> resultLikeList = new ArrayList<Students>();
                 if (!ToolUtil.isListEmpty(collectUserList)) {
                     resultLikeList.addAll(collectUserList);
@@ -144,7 +143,7 @@ public class MomentPresenter implements IMomentPresenter {
 
     @Override
     public void unCollect(final int viewHolderPos, String momentid, final List<Students> unCollectUserList) {
-        collectModel.unCollect(momentid, new OnCollectChangeCallback() {
+        collectModel.unCollect(momentid,unCollectUserList, new OnCollectChangeCallback() {
             @Override
             public void onCollect() {
 

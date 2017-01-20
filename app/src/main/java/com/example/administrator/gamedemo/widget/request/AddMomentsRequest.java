@@ -88,6 +88,7 @@ public class AddMomentsRequest extends BaseRequestClient<String> {
             momentsInfo.setHint(ps);  //参考经节
             momentsInfo.setAuthor(auth);//作者
             momentsInfo.setColor(color);//背景
+            momentsInfo.setRp(rp);
 
 //            UserInfo host = new UserInfo();
 //            host.setObjectId(hostId);
