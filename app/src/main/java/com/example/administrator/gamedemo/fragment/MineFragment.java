@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.activity.mine.CollectActivity;
 import com.example.administrator.gamedemo.activity.mine.InviteFriend;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
@@ -30,6 +31,7 @@ import com.orhanobut.logger.Logger;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by Administrator on 2016/12/8 0008.
@@ -82,7 +84,11 @@ public class MineFragment extends BaseFragment {
         Intent gIntent = new Intent();
         switch (view.getId()) {
             case R.id.ll_mine_center:
-                gIntent.setClass(mContext, MineCenterActivity.class);
+                if(BmobUser.getCurrentUser() == null){
+                    gIntent.setClass(mContext, LoginActivity.class);
+                }else {
+                    gIntent.setClass(mContext, MineCenterActivity.class);
+                }
                 break;
             case R.id.ll_together:
                 gIntent.setClass(mContext, TogetherActivity.class);
@@ -103,7 +109,7 @@ public class MineFragment extends BaseFragment {
                 break;
         }
 
-        startActivity(gIntent);
+        startActivityForResult(gIntent,1);
     }
 
     public static class answerFragmentHolder {

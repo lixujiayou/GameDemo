@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
 import com.example.administrator.gamedemo.activity.SendAnswerActivity;
 import com.example.administrator.gamedemo.activity.mine.UploadActivity;
@@ -166,6 +167,9 @@ public class AnswerListActivity extends BaseActivity{
                         if(isLogin()){
                             Intent gIntent = new Intent(AnswerListActivity.this, SendAnswerActivity.class);
                             gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
+                            startActivityForResult(gIntent,1);
+                        }else{
+                            Intent gIntent = new Intent(AnswerListActivity.this, LoginActivity.class);
                             startActivityForResult(gIntent,1);
                         }
                         break;

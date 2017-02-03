@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +24,7 @@ import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.utils.ClipImageActivity;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
@@ -48,6 +51,8 @@ public class MineCenterActivity extends BaseActivity {
 
     private static final int CAMERA_REQUEST_CODE = 1458;
     private static final int GALLERY_REQUEST_CODE = 1450;
+    //请求截图
+    private static final int REQUEST_CROP_PHOTO = 102;
 
     @BindView(R.id.ll_change_user)
     LinearLayout ll_change;
@@ -226,13 +231,34 @@ public class MineCenterActivity extends BaseActivity {
             switch (requestCode) {
                 case CAMERA_REQUEST_CODE:   // 调用相机拍照
                     File temp = new File(mCurrentPhotoPath);
-                    beginCrop(Uri.fromFile(temp));
+                    //beginCrop(Uri.fromFile(temp));
+                    gotoClipActivity(Uri.fromFile(temp));
                     break;
                 case GALLERY_REQUEST_CODE:  // 直接从相册获取
-                    beginCrop(data.getData());
+                    gotoClipActivity(data.getData());
+                   // beginCrop(data.getData());
                     break;
                 case Crop.REQUEST_CROP:  // 裁剪图片结果
                     handleCrop( resultCode, data);
+                    break;
+                case REQUEST_CROP_PHOTO:  //剪切图片返回
+                    Logger.d("返回"+data.getData().getPath());
+                    handleCrop( resultCode, data);
+//                    if (resultCode == RESULT_OK) {
+//                        final Uri uri = data.getData();
+//                        if (uri == null) {
+//                            return;
+//                        }
+//                        String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
+//                        Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
+//                        if (type == 1) {
+//                            headImage1.setImageBitmap(bitMap);
+//                        } else {
+//                            headImage2.setImageBitmap(bitMap);
+//                        }
+                        //此处后面可以将bitMap转为二进制上传后台网络
+                        //......
+ //                   }
                     break;
             }
         }
@@ -272,7 +298,7 @@ public class MineCenterActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
                 // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
-                pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
                 startActivityForResult(pickIntent, GALLERY_REQUEST_CODE);
                 dialog_help_2.dismiss();
             }
@@ -310,8 +336,11 @@ public class MineCenterActivity extends BaseActivity {
     private Uri imgUrlToImageview;
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == Activity.RESULT_OK) {
-            imgUrlToImageview = Crop.getOutput(result);
-            upLoadImg(Crop.getOutput(result).getPath());
+//            imgUrlToImageview = Crop.getOutput(result);
+//            upLoadImg(Crop.getOutput(result).getPath());
+
+            imgUrlToImageview = result.getData();
+            upLoadImg(result.getData().getPath());
         } else if (resultCode == Crop.RESULT_ERROR) {
             ToastUtil3.showToast(MineCenterActivity.this,"裁剪图片失败，请重试");
         }
@@ -326,6 +355,23 @@ public class MineCenterActivity extends BaseActivity {
         File cropFile = new File( mTempDir, fileName);
         Uri outputUri = Uri.fromFile( cropFile);
         new Crop(source).output(outputUri).withAspect(1,1).start(this);
+    }
+
+
+    /**
+     * 打开截图界面
+     *
+     * @param uri
+     */
+    public void gotoClipActivity(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setClass(this, ClipImageActivity.class);
+        intent.putExtra("type", 2);
+        intent.setData(uri);
+        startActivityForResult(intent, REQUEST_CROP_PHOTO);
     }
 
     /**

@@ -9,6 +9,7 @@ import com.orhanobut.logger.Logger;
 import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.bmob.v3.BmobInstallation;
 
 
 /**
@@ -56,6 +57,7 @@ public static Context getAppContext() {
                 .setFileExpiration(1800)
                 .build();
         Bmob.initialize(config);
+        BmobInstallation.getCurrentInstallation().save();
         BmobPush.startWork(this);
     }
 

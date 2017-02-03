@@ -250,7 +250,6 @@ public class CropImageActivity extends MonitoredActivity {
 
         public void crop() {
             handler.post( new Runnable() {
-
                 public void run() {
                     makeDefault();
                     imageView.invalidate();

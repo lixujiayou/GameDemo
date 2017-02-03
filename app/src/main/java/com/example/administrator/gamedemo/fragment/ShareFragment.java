@@ -97,7 +97,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         return answerFragmentHolder.instance;
     }
 
-
     @OnClick({R.id.rl_bar,R.id.iv_add})
     public void onClick(View v) {
         switch (v.getId()){
@@ -310,11 +309,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             adapter.notifyItemChanged(itemPos);
         }
         ToastUtil3.showToast(mContext,"BingGo(*^__^*)");
-
     }
 
     @Override
     public void onMessageChange(String itemPos, String content) {
+        Logger.d("推送目标人："+itemPos+"推送内容:"+content);
         BmobPushManager bmobPush = new BmobPushManager();
         BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
         query.addWhereEqualTo("installationId", itemPos);

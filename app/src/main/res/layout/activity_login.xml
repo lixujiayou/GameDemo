@@ -131,6 +131,7 @@
         android:paddingRight="4dip"
         android:singleLine="true"
         android:textCursorDrawable="@null"
+        android:visibility="gone"
         />
 
     <Button

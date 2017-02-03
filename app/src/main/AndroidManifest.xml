@@ -187,6 +187,14 @@
         <activity
             android:name=".widget.simage.CropImageActivity"
             android:screenOrientation="portrait"/>
+
+        <!--头像选择-->
+        <activity android:name=".utils.ClipImageActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
         <!--多张图片选择预览-->
         <activity
             android:name="com.lidong.photopicker.PhotoPickerActivity"
@@ -234,10 +242,13 @@
 
 
 
+
+
+
         <service
             android:label="PushService"
             android:name="cn.bmob.push.lib.service.PushService"
-            android:process="cn.bmob.push"
+            android:process=":bmobpush"
             android:exported="true">
             <intent-filter>
                 <action android:name="cn.bmob.push.lib.service.PushService"/>
