@@ -40,6 +40,10 @@ public class Constants {
     public static final int EXITAPP = 33;
 
     public static final int GOLOGIN = 22;
+
+
+    public static final String MESSAGE_SHARE = "mShare";
+    public static final String MESSAGE_TOGTHER = "mTogther";
     /**
      * 历史记录是否同步字段
      */
@@ -70,9 +74,9 @@ public class Constants {
 
         return bmobUser;
     }
-    public Students bmobUser;
+
     public Students getUser(){
-         bmobUser = BmobUser.getCurrentUser(Students.class);
+        Students bmobUser = BmobUser.getCurrentUser(Students.class);
         return bmobUser;
     }
 

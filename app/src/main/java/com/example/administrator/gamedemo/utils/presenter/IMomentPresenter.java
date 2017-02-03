@@ -26,4 +26,7 @@ public interface IMomentPresenter extends IBasePresenter<IMomentView> {
     void collect(int viewHolderPos, String momentid,List<Students> collectUserList);
 
     void unCollect(int viewHolderPos, String momentid,List<Students> unCollectUserList);
+
+
+    void addMessage(String cUserId,String rId,String type,String content);
 }

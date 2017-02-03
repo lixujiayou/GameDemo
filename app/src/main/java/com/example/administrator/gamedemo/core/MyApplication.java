@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.administrator.gamedemo.model.Students;
 import com.orhanobut.logger.Logger;
 
+import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 
@@ -55,6 +56,7 @@ public static Context getAppContext() {
                 .setFileExpiration(1800)
                 .build();
         Bmob.initialize(config);
+        BmobPush.startWork(this);
     }
 
 

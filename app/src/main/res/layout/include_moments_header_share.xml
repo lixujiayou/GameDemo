@@ -9,7 +9,7 @@
                 android:paddingRight="@dimen/item_padding"
                 android:paddingTop="@dimen/item_padding"
                 android:id="@+id/rl_all"
-    android:background="@drawable/selector_white_tran"
+                android:background="@drawable/selector_white_tran"
     >
 
     <ImageView
@@ -44,9 +44,6 @@
         android:layout_marginTop="8dp"
         app:show_line="5"
         app:text_color="@color/textcolor_2"
-        app:text_size="12sp"
+        android:background="@drawable/selector_white_tran"
         />
-
-
-
 </RelativeLayout>

@@ -23,6 +23,7 @@ public class Students extends BmobUser{
         String AUTHOR_USER = "author";
         String AVATAR = "avatar";
         String COVER="cover";
+        String FAV="favoritee";
 
     }
 
@@ -38,7 +39,8 @@ public class Students extends BmobUser{
     private String myself_speak;
     private String nick_name;
 
-    private BmobRelation favorite;
+    private BmobRelation favoritee;
+    private BmobRelation message;
 
     private ArrayList<String> loveid;
     private ArrayList<String> favid;
@@ -132,11 +134,11 @@ public class Students extends BmobUser{
     }
 
     public BmobRelation getFavorite() {
-        return favorite;
+        return favoritee;
     }
 
     public void setFavorite(BmobRelation favorite) {
-        this.favorite = favorite;
+        this.favoritee = favorite;
     }
 
     public ArrayList<String> getLoveid() {
@@ -156,4 +158,11 @@ public class Students extends BmobUser{
     }
 
 
+    public BmobRelation getMessage() {
+        return message;
+    }
+
+    public void setMessage(BmobRelation message) {
+        this.message = message;
+    }
 }

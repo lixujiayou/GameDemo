@@ -192,7 +192,7 @@ public class MineCenterActivity extends BaseActivity {
                                 finish();
                             }else{
                                 BmobUser.logOut();
-                                Constants.getInstance().bmobUser = null;
+                                //Constants.getInstance().getUser() = null;
                                 Intent gIntent = new Intent(MineCenterActivity.this, LoginActivity.class);
                                 startActivityForResult(gIntent,1);
                             }

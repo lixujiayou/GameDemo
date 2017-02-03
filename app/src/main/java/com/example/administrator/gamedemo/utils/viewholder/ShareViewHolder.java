@@ -172,7 +172,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         if(rl_all == null){
             rl_all = (RelativeLayout) findView(rl_all,R.id.rl_all);
         }
-        if(rl_all != null){
+
             //收藏
             rl_all.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -180,9 +180,16 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                     showPhotoDialog(itemPosition,data);
                 }
             });
-        }else{
-            Logger.d("还是等于null");
-        }
+
+        userText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPhotoDialog(itemPosition,data);
+            }
+        });
+
+
+
     }
 
     /**
@@ -340,6 +347,11 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             } else {
                 Logger.d("点赞");
                 momentPresenter.addLike(itemPosition, info.getMomentid(), info.getLikesList());
+
+                momentPresenter.addMessage(info.getAuthor().getObjectId()
+                        ,info.getObjectId()
+                        ,Constants.MESSAGE_SHARE
+                        ,""+Constants.getInstance().getUser().getNick_name()+"赞了您的分享,点击查看");
             }
         }
 
@@ -348,6 +360,8 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
 
             Logger.d("评论");
             momentPresenter.showCommentBox(itemPosition, info, null);
+
+
         }
     };
 
@@ -355,13 +369,13 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
      * ============  tools method block
      */
 
-
     protected final View findView(View view, int resid) {
         if (resid > 0 && itemView != null && view == null) {
             return itemView.findViewById(resid);
         }
         return view;
     }
+
     public void setPresenter(MomentPresenter momentPresenter) {
         this.momentPresenter = momentPresenter;
     }
@@ -441,7 +455,6 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             }
         }
 
-
         hi_2.tv_help1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -491,6 +504,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                                     isOrCollect = false;
                                 }
                             }
+
                             if(isOrCollect){
                                 hi_2.tv_help1.setText("收藏");
                                 dialog_help_2.show();

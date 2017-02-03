@@ -51,6 +51,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 
 /**
@@ -114,7 +117,6 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void initTheme() {
-
         getActivity().setTheme(R.style.AppBaseTheme);
     }
 
@@ -310,6 +312,16 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         ToastUtil3.showToast(mContext,"BingGo(*^__^*)");
 
     }
+
+    @Override
+    public void onMessageChange(String itemPos, String content) {
+        BmobPushManager bmobPush = new BmobPushManager();
+        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
+        query.addWhereEqualTo("installationId", itemPos);
+        bmobPush.setQuery(query);
+        bmobPush.pushMessage(content);
+    }
+
     /**
      * 点击发送
      *
@@ -341,6 +353,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         } else {
             Logger.d("commentWidget != null--itemPos==" + itemPos);
         }
+
+
         commentBox.setDataPos(itemPos);
         commentBox.setCommentWidget(commentWidget);
         commentBox.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
@@ -463,6 +477,14 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
             commentBox.clearDraft();
             commentBox.dismissCommentBox(true);
+
+
+
+            presenter.addMessage(momentid.getAuthor().getObjectId()
+                    ,momentid.getObjectId()
+                    ,Constants.MESSAGE_SHARE
+                    ,""+Constants.getInstance().getUser().getNick_name()+"评论了您的...点击查看");
+
         }
     };
 
@@ -474,4 +496,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             circleRecyclerView.autoRefresh();
         }
     }
+
+
+
+
 }

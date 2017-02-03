@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
@@ -40,6 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 
 /**
@@ -228,6 +232,15 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
         ToastUtil3.showToast(CollectActivity.this,"BingGo(*^__^*)");
     }
 
+    @Override
+    public void onMessageChange(String itemPos, String content) {
+        BmobPushManager bmobPush = new BmobPushManager();
+        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
+        query.addWhereEqualTo("installationId", itemPos);
+        bmobPush.setQuery(query);
+        bmobPush.pushMessage(content);
+    }
+
     /**
      * 点击发送
      * @param itemPos
@@ -380,6 +393,13 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
             presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
             commentBox.clearDraft();
             commentBox.dismissCommentBox(true);
+
+
+            presenter.addMessage(momentid.getAuthor().getObjectId()
+                    ,momentid.getObjectId()
+                    , Constants.MESSAGE_SHARE
+                    ,""+Constants.getInstance().getUser().getNick_name()+"评论了您的...点击查看");
+
         }
     };
 

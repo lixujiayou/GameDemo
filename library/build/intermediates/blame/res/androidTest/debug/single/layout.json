@@ -40,12 +40,12 @@
         "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
-        "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
-        "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout\\abc_search_view.xml"
-    },
-    {
         "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
+        "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_item_layout.xml",

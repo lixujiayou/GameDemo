@@ -7,16 +7,17 @@ import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
 import com.orhanobut.logger.Logger;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by lixu on 2016/12/13.
  */
 
-// FIXME: 2016/12/13 如果不怕嵌套地狱，可以考虑返回当前点赞列表，然而在下不干了。。。
 public class AddLikeRequest extends BaseRequestClient<Boolean> {
 
     private String momentsId;
@@ -62,6 +63,16 @@ public class AddLikeRequest extends BaseRequestClient<Boolean> {
                 }else {
                     Logger.d("点赞失败" + e);
                 }
+
+                BmobQuery<Share> bmobQuery = new BmobQuery<Share>();
+                bmobQuery.getObject(momentsId, new QueryListener<Share>() {
+                    @Override
+                    public void done(Share share, BmobException e) {
+
+                    }
+                });
+
+
                 onResponseSuccess(e == null, requestType);
             }
         });

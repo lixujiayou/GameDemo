@@ -59,6 +59,8 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
             }
         }
 
+        info.setCollectList(collectUserList);
+
         info.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
@@ -68,6 +70,16 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
                 }else{
                     Logger.d("取消收藏失败"+e);
                 }
+            }
+        });
+
+
+        BmobRelation relation = new BmobRelation();
+        relation.remove(info);
+        userInfo.setFavorite(relation);
+        userInfo.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
 
             }
         });

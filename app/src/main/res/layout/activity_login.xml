@@ -9,78 +9,156 @@
     />
 
     <include layout="@layout/layout_no_network"/>
-
-<LinearLayout
+<android.support.v7.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:layout_alignParentTop="true"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    app:contentPadding="16dp"
     android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:elevation="6dp"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     >
 
-<com.example.administrator.gamedemo.utils.base_image.RoundedImageView
-    android:layout_width="74dp"
-    android:layout_height="74dp"
-    android:src="@mipmap/ic_launcher"
-    app:riv_corner_radius="10dp"
-    app:riv_border_color="@color/transparent"
-    android:layout_centerHorizontal="true"
-    android:layout_above="@+id/et_name"
 
 
-    />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/login_menu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="账号"
-        android:layout_centerInParent="true"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:lines="1"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_login_tab"
+        android:gravity="center"
+        android:padding="8dip"
+        android:text="登录"
+        android:textColor="@color/second_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/register_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/login_menu"
+        android:layout_toRightOf="@id/login_menu"
+        android:gravity="center"
+        android:padding="8dip"
+        android:text="注册"
+        android:textColor="@color/second_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/reset_password_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/login_menu"
+        android:layout_toRightOf="@id/register_menu"
+        android:gravity="center"
+        android:padding="8dip"
+        android:text="找回密码"
+        android:textColor="@color/second_color"
+        android:textSize="16sp"
         />
-    <EditText
-        android:id="@+id/et_pwd"
+
+    <View
+        android:id="@+id/diviver"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="密码"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/et_name"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:lines="1"
+        android:layout_height="1dp"
+        android:layout_below="@id/register_menu"
+
+        android:background="@color/blue_btn_bg_color" />
+
+    <com.example.administrator.gamedemo.widget.DeletableEditText
+        android:id="@+id/user_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:layout_alignLeft="@id/diviver"
+        android:layout_alignRight="@id/diviver"
+        android:layout_below="@id/diviver"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:drawableLeft="@drawable/user_account"
+        android:drawableRight="@drawable/user_delete"
+        android:ems="1"
+        android:hint="请输入帐号名"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:singleLine="true"
+        android:inputType="textPersonName"
+        android:textCursorDrawable="@null"
+        >
+
+        <requestFocus />
+    </com.example.administrator.gamedemo.widget.DeletableEditText>
+
+    <com.example.administrator.gamedemo.widget.DeletableEditText
+        android:id="@+id/user_password_input"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:layout_alignLeft="@id/user_name_input"
+        android:layout_alignRight="@id/user_name_input"
+        android:layout_below="@+id/user_name_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/user_password"
+        android:drawableRight="@drawable/user_delete"
+        android:ems="10"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:singleLine="true"
+        android:textCursorDrawable="@null"
+        />
+
+    <com.example.administrator.gamedemo.widget.DeletableEditText
+        android:id="@+id/user_email_input"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:layout_alignLeft="@id/user_name_input"
+        android:layout_alignRight="@id/user_name_input"
+        android:layout_below="@+id/user_password_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/user_name"
+        android:drawableRight="@drawable/user_delete"
+        android:ems="10"
+        android:hint="请输入邮箱地址"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:singleLine="true"
+        android:textCursorDrawable="@null"
         />
 
     <Button
-        android:id="@+id/bt_login"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/user_email_input"
+        android:layout_alignRight="@+id/user_email_input"
+        android:layout_below="@+id/user_email_input"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/blue_button_background"
         android:text="登录"
-        android:layout_below="@+id/et_pwd"
-        android:layout_centerHorizontal="true"
-        />
- <Button
-        android:id="@+id/bt_register"
-        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <com.example.administrator.gamedemo.widget.SmoothProgressBar
+        android:id="@+id/sm_progressbar"
+        style="@style/GPlusProgressBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="注册"
-        android:layout_below="@+id/et_pwd"
-        android:layout_centerHorizontal="true"
-        />
-
-<Button
-        android:id="@+id/bt_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="忘记密码"
-        android:layout_below="@+id/et_pwd"
-        android:layout_centerHorizontal="true"
-        />
-
-
-</LinearLayout>
+        android:layout_alignLeft="@id/register"
+        android:layout_alignRight="@id/register"
+        android:layout_below="@id/register"
+        android:layout_marginTop="-9dp"
+        android:indeterminate="true"
+        android:paddingLeft="1dip"
+        android:paddingRight="1dip"
+        android:visibility="gone" />
+</RelativeLayout>
+</android.support.v7.widget.CardView>
 </LinearLayout>

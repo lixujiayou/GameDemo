@@ -44,12 +44,12 @@
         "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\src\\main\\res\\drawable\\error_center_x.xml"
     },
     {
-        "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
-        "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
-    },
-    {
         "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\debug\\drawable\\success_bow.xml",
         "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\src\\main\\res\\drawable\\success_bow.xml"
+    },
+    {
+        "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "E:\\as_file\\mys\\myself\\GameDemoTest\\GameDemo\\library\\build\\intermediates\\res\\merged\\debug\\drawable\\warning_sigh.xml",

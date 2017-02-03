@@ -23,4 +23,6 @@ public interface IMomentView extends IBaseView {
 
     void onCollectChange(int itemPos, List<Students> collectUserList);
 
+    void onMessageChange(String itemPos,String content);
+
 }

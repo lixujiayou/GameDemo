@@ -49,9 +49,9 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
+
         Share info = new Share();
         info.setObjectId(momentsId);
-
 
         Students userInfo = new Students();
         userInfo.setObjectId(userid);
@@ -70,5 +70,17 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
                 onResponseSuccess(e == null, requestType);
             }
         });
+
+        BmobRelation relation = new BmobRelation();
+        relation.add(info);
+        userInfo.setFavorite(relation);
+        userInfo.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+
+            }
+        });
+
+
     }
 }
