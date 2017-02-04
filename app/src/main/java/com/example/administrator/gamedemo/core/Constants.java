@@ -432,6 +432,9 @@ public class Constants {
         }else if("7".equals(mWay)){
             mWay ="星期六";
         }
+
+        Logger.d("当前时间为"+mYear + "/" + mMonth + "/" + mDay+"/"+"/"+mWay);
+
         return mYear + "/" + mMonth + "/" + mDay+"/"+"/"+mWay;
     }
 }

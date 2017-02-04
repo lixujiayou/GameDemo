@@ -474,7 +474,6 @@ public class OnlineAnswerActivity extends BaseActivity {
                                 mIsSelect = true;
                                 pDialog.dismiss();
 
-
                                 isReply = false;
                                 if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
                                     //获取焦点

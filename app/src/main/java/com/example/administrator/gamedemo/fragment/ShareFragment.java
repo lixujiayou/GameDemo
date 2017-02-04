@@ -208,13 +208,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
             @Override
             public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
-
-
                 keyHeight = keyboardHeight;
                 int commentType = commentBox.getCommentType();
                 if (isVisible) {
                     commentBox.setMinimumHeight(keyboardHeight - 56);
-                        commentBox.setMinimumHeight(keyboardHeight);
+//                        commentBox.setMinimumHeight(keyboardHeight);
                     //定位评论框到view
                     anchorView = alignCommentBoxToView(commentType);
                 } else {
