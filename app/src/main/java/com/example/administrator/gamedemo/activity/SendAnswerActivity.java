@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Administrator on 2016/12/14 0014.
@@ -61,8 +62,8 @@ public class SendAnswerActivity extends BaseActivity {
     @BindView(R.id.et_send_ps)
     EditText etSendPs;
 
-    @BindView(R.id.loading)
-    RotateLoading loading;
+//    @BindView(R.id.loading)
+//    RotateLoading loading;
     @BindView(R.id.view_red)
     View viewRed;
     @BindView(R.id.ll_red)
@@ -206,7 +207,7 @@ public class SendAnswerActivity extends BaseActivity {
 
     private void startSend() {
         if (mUser != null) {
-            loading.start();
+            showProgressBarDialog();
             mAnswerList.clear();
             mAnswerList.add(mAnser1);
             mAnswerList.add(mAnser2);
@@ -223,7 +224,9 @@ public class SendAnswerActivity extends BaseActivity {
             addMomentsRequest.setOnResponseListener(new SimpleResponseListener<String>() {
                 @Override
                 public void onSuccess(String response, int requestType) {
-                    loading.stop();
+
+                    pDialog.dismiss();
+
                     ToastUtil3.showToast(SendAnswerActivity.this, response);
                     Logger.d(response);
 
@@ -353,5 +356,16 @@ public class SendAnswerActivity extends BaseActivity {
                 break;
         }
     }
+    private SweetAlertDialog pDialog;
+    public void showProgressBarDialog(){
+        try {
+                pDialog = new SweetAlertDialog(SendAnswerActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.setTitleText("正在提交数据...");
+                pDialog.setCancelable(false);
+                pDialog.show();
 
+        }catch (Exception e){
+            Logger.d("ProgressBarDialog的上下文找不到啦！");
+        }
+    }
 }

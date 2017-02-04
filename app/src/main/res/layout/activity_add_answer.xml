@@ -475,7 +475,8 @@
     </ScrollView>
 </LinearLayout>
 
-    <include layout="@layout/loading"></include>
+
+
     <LinearLayout
         android:id="@+id/ll_check"
         android:layout_width="match_parent"

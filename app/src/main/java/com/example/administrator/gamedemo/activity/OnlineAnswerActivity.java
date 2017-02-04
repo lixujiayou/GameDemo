@@ -1,5 +1,6 @@
 package com.example.administrator.gamedemo.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.widget.LoadingView;
 import com.example.administrator.gamedemo.widget.SoftKeyboardStateHelper;
 import com.example.administrator.gamedemo.widget.popup.DeleteCommentPopup;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -49,6 +51,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by lixu on 2016/12/14 0014.
@@ -75,11 +78,11 @@ public class OnlineAnswerActivity extends BaseActivity {
     @BindView(R.id.btn_send)
     TextView tv_send;
 
-    @BindView(R.id.view_loading)
-    LoadingView loadingView;
+//    @BindView(R.id.view_loading)
+//    LoadingView loadingView;
 
-    @BindView(R.id.rl_loading)
-    RelativeLayout rlLoading;
+//    @BindView(R.id.rl_loading)
+//    RelativeLayout rlLoading;
 
     @BindView(R.id.recyler_comment)
     RecyclerView recyle_comment;
@@ -98,6 +101,9 @@ public class OnlineAnswerActivity extends BaseActivity {
 
     private int[] Randoms;
     private DeleteCommentPopup deleteCommentPopup;
+
+    private boolean mIsSelect = false;
+
     /**
      * 被回复者相关
      */
@@ -121,8 +127,6 @@ public class OnlineAnswerActivity extends BaseActivity {
 
         Intent gIntent = getIntent();
         mMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra("topic");
-        loadingView.start();
-
         initDeleteWidget();
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -145,6 +149,7 @@ public class OnlineAnswerActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_write:
+                        if(mIsSelect = true){
                         isReply = false;
                         if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
                             //获取焦点
@@ -155,7 +160,9 @@ public class OnlineAnswerActivity extends BaseActivity {
                             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
                         }
-
+                        }else{
+                            isSelected();
+                        }
                         break;
                 }
                 return true;
@@ -184,7 +191,6 @@ public class OnlineAnswerActivity extends BaseActivity {
         }else{
             tv_tv_reminder.setVisibility(View.VISIBLE);
         }
-
 
         oneAnswerAdapter.setOnItemClickListener(new OneAnswerAdapter.OnItemClickListener() {
             @Override
@@ -306,8 +312,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         ll_write.setVisibility(View.GONE);
-
-        rlLoading.setVisibility(View.VISIBLE);
+        showProgressBarDialog(OnlineAnswerActivity.this);
 
         momentContent = new CommentInfo();
         momentContent.setContent(content);
@@ -323,8 +328,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                     mMomentsInfo.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
-
-                            rlLoading.setVisibility(View.GONE);
+                            pDialog.dismiss();
                             tv_tv_reminder.setVisibility(View.GONE);
 
                             if(e == null){
@@ -339,7 +343,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                         }
                     });
                 } else {
-                    rlLoading.setVisibility(View.GONE);
+                    pDialog.dismiss();
                     ToastUtil3.showToast(OnlineAnswerActivity.this, "评论失败" + s);
                 }
             }
@@ -369,12 +373,12 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void onDelClick(final CommentInfo commentInfo) {
                 deleteCommentPopup.dismiss();
-                rlLoading.setVisibility(View.VISIBLE);
+                showProgressBarDialog(OnlineAnswerActivity.this);
                 mMomentsInfo.removeComment(commentInfo);
                 mMomentsInfo.update(new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        rlLoading.setVisibility(View.GONE);
+                        pDialog.dismiss();
                         if(e == null){
                             EventBus.getDefault().post(new ReshEvent(ReshEvent.ReshOk));
                             mCommentInfos.remove(commentInfo);
@@ -392,8 +396,7 @@ public class OnlineAnswerActivity extends BaseActivity {
      * 选择答题 并进行关联
      */
     private void selectAnswer(final String sContent){
-
-        rlLoading.setVisibility(View.VISIBLE);
+        showProgressBarDialog(OnlineAnswerActivity.this);
         BmobRelation relation = new BmobRelation();
         relation.add(Constants.getInstance().getUser(OnlineAnswerActivity.this));
         mMomentsInfo.setLikes(relation);
@@ -401,12 +404,14 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void done(BmobException e) {
                 if(e == null){
+                    mIsSelect = true;
                     sendContent(sContent);
                     tvResultData.setVisibility(View.VISIBLE);
                     tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
                     setAnswerNum();
                 }else{
-                    rlLoading.setVisibility(View.GONE);
+                    mIsSelect = false;
+                    pDialog.dismiss();
                     ToastUtil3.showToast(OnlineAnswerActivity.this,"选择失败"+e);
                 }
             }
@@ -418,11 +423,10 @@ public class OnlineAnswerActivity extends BaseActivity {
      */
     private void isSelected(final String sAnswer){
         tNum = 0;
-        rlLoading.setVisibility(View.VISIBLE);
+        showProgressBarDialog(OnlineAnswerActivity.this);
         BmobQuery<Students> query = new BmobQuery<>();
         query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
         query.findObjects(new FindListener<Students>() {
-
             @Override
             public void done(List<Students> object, BmobException e) {
                 if(e==null){
@@ -433,7 +437,8 @@ public class OnlineAnswerActivity extends BaseActivity {
                                 ToastUtil3.showToast(OnlineAnswerActivity.this,"您已答过此题,看看讨论吧");
                                 tvResultData.setVisibility(View.VISIBLE);
                                 tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
-                                rlLoading.setVisibility(View.GONE);
+                                mIsSelect = true;
+                                pDialog.dismiss();
                                 return;
                             }
                         }
@@ -442,7 +447,51 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                 }else{
                     ToastUtil3.showToast(OnlineAnswerActivity.this,e.toString());
-                    rlLoading.setVisibility(View.GONE);
+                    pDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 是否选择过
+     */
+    private void isSelected(){
+        tNum = 0;
+        showProgressBarDialog(OnlineAnswerActivity.this);
+        BmobQuery<Students> query = new BmobQuery<>();
+        query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
+        query.findObjects(new FindListener<Students>() {
+            @Override
+            public void done(List<Students> object, BmobException e) {
+                if(e==null){
+                    Students students = Constants.getInstance().getUser(OnlineAnswerActivity.this);
+
+                        for(Students s : object){
+                            if(students.getObjectId().equals(s.getObjectId())){
+                                tvResultData.setVisibility(View.VISIBLE);
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                                mIsSelect = true;
+                                pDialog.dismiss();
+
+
+                                isReply = false;
+                                if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
+                                    //获取焦点
+                                    ll_write.setVisibility(View.VISIBLE);
+                                    et_write.setFocusable(true);
+                                    et_write.requestFocus();
+
+                                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
+                                }
+                                return;
+                            }
+                        }
+                        tNum = object.size();
+                }else{
+                    ToastUtil3.showToast(OnlineAnswerActivity.this,e.toString());
+                    pDialog.dismiss();
                 }
             }
         });
@@ -484,12 +533,14 @@ public class OnlineAnswerActivity extends BaseActivity {
     }
 
     private void showAlertDialog(final String sAnswer){
+        pDialog.dismiss();
         new AlertDialog.Builder(OnlineAnswerActivity.this)
                 .setTitle("提示")
                 .setMessage("您的选择将会被同步到评论中,是否继续")
                 .setPositiveButton("继续", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        showProgressBarDialog(OnlineAnswerActivity.this);
                         selectAnswer(sAnswer);
                         dialogInterface.dismiss();
                     }
@@ -498,13 +549,23 @@ public class OnlineAnswerActivity extends BaseActivity {
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        rlLoading.setVisibility(View.GONE);
+                        mIsSelect = false;
+                        pDialog.dismiss();
                         dialogInterface.dismiss();
                     }
                 })
                 .show();
     }
-
-
+    private SweetAlertDialog pDialog;
+    public void showProgressBarDialog(final Activity mContext){
+        try {
+                pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.setTitleText("正在连接服务器...");
+                pDialog.setCancelable(false);
+                pDialog.show();
+        }catch (Exception e){
+            Logger.d("ProgressBarDialog的上下文找不到啦！");
+        }
+    }
 
 }
