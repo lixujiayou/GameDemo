@@ -15,8 +15,8 @@ public class AboutMessage extends BmobObject{
     private String content;
     private String type;
     private String id;
-    private BmobRelation cUsers;
-    private BmobRelation mUsers;
+    private Students cUsers;
+    private Students mUsers;
 
     public AboutMessage(){}
 
@@ -45,19 +45,19 @@ public class AboutMessage extends BmobObject{
         this.id = id;
     }
 
-    public BmobRelation getcUsers() {
+    public Students getcUsers() {
         return cUsers;
     }
 
-    public void setcUsers(BmobRelation cUsers) {
+    public void setcUsers(Students cUsers) {
         this.cUsers = cUsers;
     }
 
-    public BmobRelation getmUsers() {
+    public Students getmUsers() {
         return mUsers;
     }
 
-    public void setmUsers(BmobRelation mUsers) {
+    public void setmUsers(Students mUsers) {
         this.mUsers = mUsers;
     }
 }

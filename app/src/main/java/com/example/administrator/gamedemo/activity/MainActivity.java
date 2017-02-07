@@ -45,11 +45,9 @@ public class MainActivity extends BaseFragmentActivity {
     @BindView(R.id.tv_mine)
     TextView tv_mine;
 
-
     private List<Fragment> list_fragmet = new ArrayList<>();
 
     private FragmentManager fragmentManager;
-
 
     private AnswerFragment answerFragment;
     private ShareFragment shareFragment;

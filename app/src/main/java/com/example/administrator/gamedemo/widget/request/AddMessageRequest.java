@@ -28,11 +28,11 @@ public class AddMessageRequest extends BaseRequestClient<Boolean> {
     private String mUserid;//被动人
     private String mType;//
     private String mContent;//
-
+    Students mUserInfo;
     public AddMessageRequest(String userId,String rId,String type,String content) {
         this.momentsId = rId;
         this.userid = userId;
-        this.mUserid = BmobUser.getCurrentUser(Students.class).getObjectId();
+        this.mUserid = BmobUser.getCurrentUser().getObjectId();
         this.mType = type;
         this.mContent = content;
     }
@@ -63,6 +63,14 @@ public class AddMessageRequest extends BaseRequestClient<Boolean> {
         info.setContent(mContent);
         info.setId(momentsId);
 
+        Students userInfo = new Students();
+        userInfo.setObjectId(userid);
+        info.setcUsers(userInfo);
+
+         mUserInfo = new Students();
+        mUserInfo.setObjectId(mUserid);
+        info.setmUsers(mUserInfo);
+
         info.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
@@ -72,29 +80,6 @@ public class AddMessageRequest extends BaseRequestClient<Boolean> {
                         @Override
                         public void done(AboutMessage aboutMessage, BmobException e) {
                             if (e == null) {
-                                Students userInfo = new Students();
-                                userInfo.setObjectId(userid);
-                                BmobRelation bmobRelation = new BmobRelation();
-                                bmobRelation.add(userInfo);
-                                aboutMessage.setcUsers(bmobRelation);
-
-                                Students mUserInfo = new Students();
-                                mUserInfo.setObjectId(mUserid);
-                                BmobRelation mBmobRelation = new BmobRelation();
-                                mBmobRelation.add(mUserInfo);
-                                aboutMessage.setmUsers(bmobRelation);
-
-                                aboutMessage.update(new UpdateListener() {
-                                    @Override
-                                    public void done(BmobException e) {
-                                             if(e == null){
-
-                                             }else{
-
-                                             }
-                                        onResponseSuccess(e == null, requestType);
-                                    }
-                                });
                                 BmobRelation mbmobRelation = new BmobRelation();
                                 mbmobRelation.add(aboutMessage);
                                 mUserInfo.setMessage(mbmobRelation);
@@ -104,12 +89,14 @@ public class AddMessageRequest extends BaseRequestClient<Boolean> {
 
                                     }
                                 });
+
                             } else {
                                 onResponseSuccess(e == null, requestType);
                             }
                         }
                     });
                 }else{
+                    Logger.d("保存失败"+e.toString());
                     onResponseSuccess(e == null, requestType);
                 }
 

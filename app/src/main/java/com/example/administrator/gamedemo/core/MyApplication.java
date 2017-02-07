@@ -58,7 +58,7 @@ public static Context getAppContext() {
 //                .build();
 //        Bmob.initialize(config);
         Bmob.initialize(this,Constants.BmobId);
-        BmobInstallation.getCurrentInstallation().save();
+//        BmobInstallation.getCurrentInstallation().save();
  //       BmobPush.startWork(this);
     }
 

@@ -71,7 +71,6 @@ public class AnswerFragment extends BaseFragment {
         ivStart.setOnClickIntent(new MyImageView.OnViewClickListener() {
             @Override
             public void onViewClick(MyImageView view) {
-
                 Intent sIntent = new Intent(getActivity(), SelectTypeActivity.class);
                 sIntent.putExtra("yinliang", true);
                 startActivity(sIntent);

@@ -71,38 +71,46 @@ public class UnMessageRequest extends BaseRequestClient<Boolean> {
                         @Override
                         public void done(AboutMessage aboutMessage, BmobException e) {
                             if (e == null) {
-                                Students userInfo = new Students();
-                                userInfo.setObjectId(userid);
-                                BmobRelation bmobRelation = new BmobRelation();
-                                bmobRelation.add(userInfo);
-                                aboutMessage.setcUsers(bmobRelation);
+//                                Students userInfo = new Students();
+//                                userInfo.setObjectId(userid);
+//        //                        BmobRelation bmobRelation = new BmobRelation();
+//       //                         bmobRelation.add(userInfo);
+//                                aboutMessage.setcUsers(userInfo);
+//                                Students mUserInfo = new Students();
+//                                mUserInfo.setObjectId(mUserid);
+//                              //  BmobRelation mBmobRelation = new BmobRelation();
+//                              //  mBmobRelation.add(mUserInfo);
+//                                aboutMessage.setmUsers(mUserInfo);
+//
+//                                aboutMessage.update(new UpdateListener() {
+//                                    @Override
+//                                    public void done(BmobException e) {
+//                                        if(e == null){
+//
+//                                        }else{
+//
+//                                        }
+//                                        onResponseSuccess(e == null, requestType);
+//                                    }
+//                                });
 
-                                Students mUserInfo = new Students();
-                                mUserInfo.setObjectId(mUserid);
-                                BmobRelation mBmobRelation = new BmobRelation();
-                                mBmobRelation.add(mUserInfo);
-                                aboutMessage.setmUsers(bmobRelation);
-
-                                aboutMessage.update(new UpdateListener() {
+                                aboutMessage.remove(aboutMessage.getObjectId());
+                                aboutMessage.delete(new UpdateListener() {
                                     @Override
                                     public void done(BmobException e) {
-                                        if(e == null){
-
-                                        }else{
-
-                                        }
-                                        onResponseSuccess(e == null, requestType);
-                                    }
-                                });
-                                BmobRelation mbmobRelation = new BmobRelation();
-                                mbmobRelation.add(aboutMessage);
-                                mUserInfo.setMessage(mbmobRelation);
-                                mUserInfo.update(new UpdateListener() {
-                                    @Override
-                                    public void done(BmobException e) {
 
                                     }
                                 });
+
+//                                BmobRelation mbmobRelation = new BmobRelation();
+//                                mbmobRelation.add(aboutMessage);
+//                                mUserInfo.setMessage(mbmobRelation);
+//                                mUserInfo.update(new UpdateListener() {
+//                                    @Override
+//                                    public void done(BmobException e) {
+//
+//                                    }
+//                                });
                             } else {
                                 onResponseSuccess(e == null, requestType);
                             }
