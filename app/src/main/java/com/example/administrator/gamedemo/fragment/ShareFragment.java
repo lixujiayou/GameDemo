@@ -74,6 +74,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     CommentBox commentBox;
     @BindView(R.id.iv_add)
      ImageView iv_add;
+
     private boolean isPrepared;
 
     private static final int REQUEST_REFRESH = 0x10;
@@ -188,11 +189,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             this.rootView.setVisibility(View.GONE);
         }
 
-        public void loadHostData(Students hostInfo) {
-            if (hostInfo == null) return;
-            ImageLoadMnanger.INSTANCE.loadNomalImage(ShareFragment.getInstance(), friend_wall_pic, "http://qn.ciyo.cn/upload/FgbnwPphrRD46RsX_gCJ8PxMZLNF");
 
-        }
 
         public View getView() {
             return rootView;
@@ -475,13 +472,10 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             commentBox.clearDraft();
             commentBox.dismissCommentBox(true);
 
-
-
             presenter.addMessage(momentid.getAuthor().getObjectId()
                     ,momentid.getObjectId()
                     ,Constants.MESSAGE_SHARE
-                    ,""+Constants.getInstance().getUser().getNick_name()+"评论了您的...点击查看");
-
+                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
         }
     };
 

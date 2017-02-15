@@ -76,6 +76,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -286,6 +289,16 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     }
 
     @Override
+    public void onMessageChange(String itemPos, String content) {
+        Logger.d("推送目标人："+itemPos+"推送内容:"+content);
+        BmobPushManager bmobPush = new BmobPushManager();
+        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
+        query.addWhereEqualTo("installationId", itemPos);
+        bmobPush.setQuery(query);
+        bmobPush.pushMessage(content);
+    }
+
+    @Override
     public boolean onPreTouch(MotionEvent ev) {
         if (commentBox != null && commentBox.isShowing()) {
             commentBox.dismissCommentBox(false);
@@ -402,6 +415,11 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             presenter.addComment(itemPos, momentid, commentAuthorId, commentContent, commentInfos);
             commentBox.clearDraft();
             commentBox.dismissCommentBox(true);
+
+            presenter.addMessage(momentid.getAuthor().getObjectId()
+                    ,momentid.getObjectId()
+                    ,Constants.MESSAGE_SHARE
+                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
         }
     };
 

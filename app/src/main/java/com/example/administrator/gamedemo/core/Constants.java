@@ -32,6 +32,7 @@ public class Constants {
     public static final int  REFRESH_CODE = 24;
     public static final int  FIRSTLOADNUM = 10;
     public static final List<String> strWorkText = Arrays.asList("审核成功","审核中","审核失败");//
+    public static final List<String> strMessageTag = Arrays.asList("关于我","通知");//
 
     public static final String UPLOAD_ING = "ING";
     public static final String UPLOAD_OK = "OK";

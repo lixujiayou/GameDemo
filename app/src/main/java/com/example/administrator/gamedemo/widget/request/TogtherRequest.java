@@ -7,6 +7,7 @@ import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +15,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 
 import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields.AUTHOR_USER;
 import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields.MOMENT;
@@ -31,6 +33,7 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
     private int curPage = 0;
 
     private boolean isReadCache = true;//是否读取缓存
+    private String mKey;
 
     public TogtherRequest() {
     }
@@ -44,6 +47,10 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         this.curPage = page;
         return this;
     }
+    public TogtherRequest setKey(String key) {
+        this.mKey = key;
+        return this;
+    }
 
     public void setCache(boolean isSet){
         this.isReadCache = isSet;
@@ -54,11 +61,13 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         bmobQuery.include(Togther.MomentsFields.AUTHOR_USER
                 + "," + Togther.MomentsFields.HOST
         );
+
+        if(mKey == null || mKey.isEmpty()){
+
+
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
-
-
         if(isReadCache) {
             boolean isCache = bmobQuery.hasCachedResult(Togther.class);
             if (isCache) {
@@ -73,13 +82,35 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         bmobQuery.findObjects(new FindListener<Togther>() {
             @Override
             public void done(List<Togther> list, BmobException e) {
-                if (!ToolUtil.isListEmpty(list)) {
-                    queryCommentAndLikes(list);
-                }else {
+                if(e == null) {
+                    if (!ToolUtil.isListEmpty(list)) {
+                        queryCommentAndLikes(list);
+                    } else {
+                        onResponseSuccess(list, getRequestType());
+                    }
+                }else{
                     onResponseError(e, getRequestType());
                 }
             }
         });
+        }else{
+            bmobQuery.getObject(mKey, new QueryListener<Togther>() {
+                @Override
+                public void done(Togther togther, BmobException e) {
+                    List<Togther> togthers = new ArrayList<Togther>();
+                    if(e == null){
+                        if(togther != null){
+                            togthers.add(togther);
+                            queryCommentAndLikes(togthers);
+                        }else{
+                            onResponseSuccess(togthers, getRequestType());
+                        }
+                    }else{
+                        onResponseError(e, getRequestType());
+                    }
+                }
+            });
+        }
     }
 
    /* private void queryCommentAndLikes(final List<Share> momentsList) {

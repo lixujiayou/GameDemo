@@ -9,15 +9,18 @@ import com.example.administrator.gamedemo.model.CommentImplTogther;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.LikeImpl;
 import com.example.administrator.gamedemo.model.LikeImplTogther;
+import com.example.administrator.gamedemo.model.MyBmobInstallation;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.impl.MessageImpl;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.example.administrator.gamedemo.widget.request.callback.OnCommentChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.OnLikeChangeCallback;
+import com.example.administrator.gamedemo.widget.request.callback.OnMessageCallback;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -25,7 +28,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 
 /**
@@ -39,7 +45,7 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
     private CommentImplTogther commentModel;
     private LikeImplTogther likeModel;
     private Students cUser;
-
+    private MessageImpl message;
     public MomentPresenterTogther() {
         this(null);
     }
@@ -49,6 +55,7 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
         commentModel = new CommentImplTogther();
         likeModel = new LikeImplTogther();
         cUser = BmobUser.getCurrentUser(Students.class);
+        message = new MessageImpl();
     }
 
     @Override
@@ -224,6 +231,33 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
             }
         });
 
+    }
+
+    @Override
+    public void addMessage(final String cUserId, String rId, String type, final String content) {
+        message.addMessage(cUserId, rId, type, content, new OnMessageCallback() {
+            @Override
+            public void onMessage() {
+                BmobQuery<MyBmobInstallation> bmobQuery = new BmobQuery<>();
+                bmobQuery.addWhereEqualTo("uid",cUserId);
+                bmobQuery.findObjects(new FindListener<MyBmobInstallation>() {
+                    @Override
+                    public void done(List<MyBmobInstallation> list, BmobException e) {
+                        if(list.size() > 0){
+                            momentView.onMessageChange(list.get(0).getInstallationId(),content);
+                        }
+                    }
+                });
+
+
+
+            }
+
+            @Override
+            public void onUnMessage() {
+
+            }
+        });
     }
 
 

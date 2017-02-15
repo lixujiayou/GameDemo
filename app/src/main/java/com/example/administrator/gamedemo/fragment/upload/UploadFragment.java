@@ -223,7 +223,6 @@ public abstract class UploadFragment extends BaseFragment{
             momentsRequest.setCache(isReadCache);
             momentsRequest.execute();
             isReadCache = false;
-
         }
     }
     private void showDiaLog(final int position) {

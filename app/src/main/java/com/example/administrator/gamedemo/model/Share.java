@@ -22,6 +22,8 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class Share extends BmobObject {
 
+
+
     public interface MomentsFields {
         String LIKES = "likes";
         String HOST = "hostinfo";

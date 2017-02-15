@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:title="我的上传"
+            app:title="消息"
             app:titleTextColor="@color/white"
             app:navigationIcon="@drawable/icon_cancle"
             />

@@ -112,10 +112,11 @@
             android:layout_marginRight="3dp"
             android:layout_marginLeft="6dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_test_temp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_m_start"
             android:scaleType="matrix"
             android:layout_gravity="center"
+
             />
 
     </LinearLayout>
@@ -132,8 +133,8 @@
             android:layout_marginRight="6dp"
             android:layout_marginLeft="3dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_test_temp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_m_online"
             android:scaleType="matrix"
             />
 
@@ -160,8 +161,8 @@
             android:layout_marginRight="3dp"
             android:layout_marginLeft="6dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_test_temp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_m_time"
                 android:scaleType="matrix"
                 android:layout_gravity="center"
             />
@@ -181,8 +182,8 @@
             android:layout_marginRight="6dp"
             android:layout_marginLeft="3dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_test_temp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_m_help"
             android:scaleType="matrix"
             />
 

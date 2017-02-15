@@ -15,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+
         <com.example.administrator.gamedemo.widget.imageview.CircleLayout
             android:id="@+id/main_circle_layout"
             android:layout_width="match_parent"
@@ -97,6 +99,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/shape_sure_btn_blue_kong"
             />
-</RelativeLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
     </LinearLayout>

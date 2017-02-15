@@ -3,6 +3,7 @@ package com.example.administrator.gamedemo.activity.mine;
 import android.os.Bundle;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.fragment.message.AboutMFragment;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
 
 
@@ -63,15 +64,12 @@ public class MessageActivity extends BaseFragmentActivity{
             }
         });
         myFM = getSupportFragmentManager();
+        list_fragmet.add(AboutMFragment.getInstance());
         list_fragmet.add(UploadFragmentOK.getInstance());
-        list_fragmet.add(UploadFragmentING.getInstance());
-        list_fragmet.add(UploadFragmentNO.getInstance());
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.addTab(tabLayout.newTab().setText(Constants.strWorkText.get(0)));
-        tabLayout.addTab(tabLayout.newTab().setText(Constants.strWorkText.get(1)));
-        tabLayout.addTab(tabLayout.newTab().setText(Constants.strWorkText.get(2)));
-        vp.setOffscreenPageLimit(2);
-        vp.setAdapter(new BaseFragmentAdapterTableLayout(Constants.strWorkText,list_fragmet,myFM));
+        tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(0)));
+        tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(1)));
+        vp.setAdapter(new BaseFragmentAdapterTableLayout(Constants.strMessageTag,list_fragmet,myFM));
 
         tabLayout.setupWithViewPager(vp);
     }

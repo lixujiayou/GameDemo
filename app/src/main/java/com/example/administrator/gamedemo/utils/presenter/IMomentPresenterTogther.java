@@ -25,4 +25,5 @@ public interface IMomentPresenterTogther extends IBasePresenter<IMomentViewTogth
 
     void deleteComment(int viewHolderPos, String commentid, List<CommentInfo> currentCommentList);
 
+    void addMessage(String cUserId,String rId,String type,String content);
 }

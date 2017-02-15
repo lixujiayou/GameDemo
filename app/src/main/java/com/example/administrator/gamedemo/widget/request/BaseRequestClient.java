@@ -3,7 +3,7 @@ package com.example.administrator.gamedemo.widget.request;
 import cn.bmob.v3.exception.BmobException;
 
 /**
- * Created by 大灯泡 on 2016/10/27.
+ * Created by lixu on 2016/10/27.
  * <p>
  * 封装bmob的请求
  */

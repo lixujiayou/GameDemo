@@ -9,8 +9,8 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 public class AboutMessage extends BmobObject{
 
-    public static final String SHARE = "share";
-    public static final String TOGTHER = "togther";
+    public static final String CUSER = "cUsers";
+    public static final String MUSER = "mUsers";
 
     private String content;
     private String type;

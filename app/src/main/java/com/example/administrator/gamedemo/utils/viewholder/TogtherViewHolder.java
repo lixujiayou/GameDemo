@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
@@ -303,6 +304,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
             } else {
                 Logger.d("点赞"+info.getObjectId());
                 momentPresenter.addLike(itemPosition, info.getMomentid(), info.getLikesList());
+
+                momentPresenter.addMessage(info.getAuthor().getObjectId()
+                        ,info.getObjectId()
+                        , Constants.MESSAGE_TOGTHER
+                        ,""+Constants.getInstance().getUser().getNick_name()+"赞了您");
             }
         }
 

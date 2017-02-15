@@ -16,6 +16,7 @@ import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.activity.mine.CollectActivity;
 import com.example.administrator.gamedemo.activity.mine.InviteFriend;
+import com.example.administrator.gamedemo.activity.mine.MessageActivity;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
 import com.example.administrator.gamedemo.activity.mine.UploadActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
@@ -77,9 +78,7 @@ public class MineFragment extends BaseFragment {
         return answerFragmentHolder.instance;
     }
 
-
-
-    @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload,R.id.ll_note,R.id.ll_invite})
+    @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload,R.id.ll_note,R.id.ll_invite,R.id.iv_message})
     public void onClick(View view) {
         Intent gIntent = new Intent();
         switch (view.getId()) {
@@ -104,6 +103,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.ll_invite:
                 gIntent.setClass(mContext, InviteFriend.class);
+                break;
+            case R.id.iv_message:
+                gIntent.setClass(mContext, MessageActivity.class);
                 break;
             default:
                 break;

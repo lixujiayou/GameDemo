@@ -351,7 +351,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                 momentPresenter.addMessage(info.getAuthor().getObjectId()
                         ,info.getObjectId()
                         ,Constants.MESSAGE_SHARE
-                        ,""+Constants.getInstance().getUser().getNick_name()+"赞了您的分享,点击查看");
+                        ,""+Constants.getInstance().getUser().getNick_name()+"赞了您的分享");
             }
         }
 

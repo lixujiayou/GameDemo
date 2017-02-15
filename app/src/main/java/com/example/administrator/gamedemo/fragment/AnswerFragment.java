@@ -14,6 +14,7 @@ import com.example.administrator.gamedemo.activity.answer.AnswerHistoryActivity;
 import com.example.administrator.gamedemo.activity.answer.AnswerListActivity;
 import com.example.administrator.gamedemo.activity.answer.HelpActivity;
 import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
+import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.widget.imageview.MyImageView;
@@ -66,6 +67,7 @@ public class AnswerFragment extends BaseFragment {
 
     @Override
     public void initViews() {
+
         tv_time.setText(Constants.StringData());
 
         ivStart.setOnClickIntent(new MyImageView.OnViewClickListener() {
@@ -80,7 +82,7 @@ public class AnswerFragment extends BaseFragment {
         ivTogther.setOnClickIntent(new MyImageView.OnViewClickListener() {
             @Override
             public void onViewClick(MyImageView view) {
-                Intent pIntent = new Intent(mContext, HelpActivity.class);
+                Intent pIntent = new Intent(mContext, AnswerListActivity.class);
                 startActivityForResult(pIntent, 1);
             }
         });
@@ -88,7 +90,7 @@ public class AnswerFragment extends BaseFragment {
         ivHistory.setOnClickIntent(new MyImageView.OnViewClickListener() {
             @Override
             public void onViewClick(MyImageView view) {
-                Intent pIntent = new Intent(mContext, HelpActivity.class);
+                Intent pIntent = new Intent(mContext, AnswerHistoryActivity.class);
                 startActivityForResult(pIntent, 1);
             }
         });

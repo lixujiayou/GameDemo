@@ -21,5 +21,5 @@ public interface IMomentViewTogther extends IBaseView {
     void onCommentChange(int itemPos, List<CommentInfo> commentInfoList);
 
     void showCommentBox(int itemPos, Togther momentid, CommentWidget commentWidget);
-
+    void onMessageChange(String itemPos,String content);
 }
