@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.fragment.message.AboutMFragment;
+import com.example.administrator.gamedemo.fragment.message.SysMFragment;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
 
 
@@ -65,7 +66,7 @@ public class MessageActivity extends BaseFragmentActivity{
         });
         myFM = getSupportFragmentManager();
         list_fragmet.add(AboutMFragment.getInstance());
-        list_fragmet.add(UploadFragmentOK.getInstance());
+        list_fragmet.add(SysMFragment.getInstance());
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(1)));
@@ -76,7 +77,7 @@ public class MessageActivity extends BaseFragmentActivity{
 
     @Override
     public void initData() {
-
     }
+
 }
 

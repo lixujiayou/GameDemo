@@ -418,7 +418,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
             presenter.addMessage(momentid.getAuthor().getObjectId()
                     ,momentid.getObjectId()
-                    ,Constants.MESSAGE_SHARE
+                    ,Constants.MESSAGE_TOGTHER
                     ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
         }
     };

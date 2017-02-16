@@ -19,7 +19,9 @@
     <com.example.administrator.gamedemo.widget.commentwidget.CommentBox
         android:id="@+id/widget_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
 
     <com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther
         android:id="@+id/widget_comment_togther"

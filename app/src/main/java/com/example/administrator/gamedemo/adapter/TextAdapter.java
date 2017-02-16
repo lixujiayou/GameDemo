@@ -1,33 +1,37 @@
 package com.example.administrator.gamedemo.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.model.AboutMessage;
+import com.example.administrator.gamedemo.model.Message_;
+import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
 /**
- * 关于我的消息，适配器
+ * 一行Text Adapter
  */
-public class AboutMAdapter extends Adapter<ViewHolder> {
+public class TextAdapter extends Adapter<ViewHolder> {
 
     public FootViewHolder mFootViewHolder;
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
     private Context context;
-    private List<AboutMessage> itemsEntities;
+    private List<Message_> itemsEntities;
     private  int[] colorBook;
-    public AboutMAdapter(Context context, List<AboutMessage> itemsEntities) {
+    public TextAdapter(Context context, List<Message_> itemsEntities) {
         this.context = context;
         this.itemsEntities = itemsEntities;
         colorBook = context.getResources().getIntArray(R.array.style_topic);
@@ -74,12 +78,17 @@ public class AboutMAdapter extends Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
-            AboutMessage momentsInfo = itemsEntities.get(position);
+            Message_ momentsInfo = itemsEntities.get(position);
 
-            ((ItemViewHolder) holder).tv_content.setText(momentsInfo.getContent());
-            ((ItemViewHolder) holder).tv_send_person.setText(momentsInfo.getcUsers().getNick_name());
+
+
+            ((ItemViewHolder) holder).tv_content.setText(momentsInfo.getmContent());
             ((ItemViewHolder) holder).tv_time.setText(momentsInfo.getUpdatedAt());
+            ((ItemViewHolder) holder).tv_reply_person.setVisibility(View.GONE);
+            ((ItemViewHolder) holder).tv_send_person.setVisibility(View.GONE);
             ((ItemViewHolder) holder).ll_gone.setVisibility(View.GONE);
+
+
 
             if (onItemClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -108,30 +117,21 @@ public class AboutMAdapter extends Adapter<ViewHolder> {
 
     static class ItemViewHolder extends ViewHolder {
 
-        private LinearLayout ll_gone;
-        private TextView tv_content;
-        private TextView tv_send_person;
-        private TextView tv_time;
+        TextView tv_send_person;//发送人
+        TextView tv_reply_person;//被回复人
+        TextView tv_content;//评论内容
+        TextView tv_time;//评论内容
+        LinearLayout ll_gone;//
+
 
         public ItemViewHolder(View view) {
             super(view);
-            ll_gone = (LinearLayout) findView(ll_gone, R.id.ll_item_gone);
-
-
-            tv_content = (TextView) findView(tv_content, R.id.tv_content);
-
-            tv_send_person = (TextView) findView(tv_send_person, R.id.tv_send_person);
-
-            tv_time = (TextView) findView(tv_time, R.id.tv_time);
+            tv_send_person = (TextView) view.findViewById(R.id.tv_send_person);
+            tv_reply_person = (TextView) view.findViewById(R.id.tv_reply_person);
+            tv_content = (TextView) view.findViewById(R.id.tv_content);
+            tv_time = (TextView) view.findViewById(R.id.tv_time);
+            ll_gone = (LinearLayout) view.findViewById(R.id.ll_item_gone);
         }
-
-        protected final View findView(View view, int resid) {
-            if (resid > 0 && itemView != null && view == null) {
-                return itemView.findViewById(resid);
-            }
-            return view;
-        }
-
     }
 
     static class FootViewHolder extends ViewHolder {
@@ -159,14 +159,13 @@ public class AboutMAdapter extends Adapter<ViewHolder> {
             Logger.d("mFootViewHolder == null ");
         }
     }
-    public void updateData(List<AboutMessage> datas) {
+    public void updateData(List<Message_> datas) {
         this.itemsEntities.clear();
         this.itemsEntities.addAll(datas);
         notifyDataSetChanged();
     }
 
-    public void addMore(List<AboutMessage> datas) {
-        this.itemsEntities.clear();
+    public void addMore(List<Message_> datas) {
         this.itemsEntities.addAll(datas);
         notifyDataSetChanged();
     }

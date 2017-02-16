@@ -104,7 +104,6 @@
         android:text="\t\t参考：太2:10"
         android:textColor="@color/red_pressed"
         android:textSize="@dimen/textsize_16"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:visibility="gone"
 
@@ -120,6 +119,7 @@
     android:background="@color/white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
+
         >
 
 <TextView
@@ -139,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_line"
+            android:visibility="gone"
             >
 
         </android.support.v7.widget.RecyclerView>
@@ -147,9 +148,9 @@
             android:id="@+id/tv_reminder"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_search"
-            android:text="悄悄的告诉您，点击右上方可以讨论哦。"
+            android:text="悄悄的告诉您，点击答案可以选择，点击右上方可以讨论哦\t~"
             android:gravity="center"
-            android:visibility="gone"
+
             />
 </LinearLayout>
 </RelativeLayout>

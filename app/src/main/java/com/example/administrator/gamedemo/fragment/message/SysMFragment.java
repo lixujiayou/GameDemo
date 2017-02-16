@@ -1,25 +1,25 @@
 package com.example.administrator.gamedemo.fragment.message;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.mine.message.AboutActivity;
 import com.example.administrator.gamedemo.adapter.AboutMAdapter;
+import com.example.administrator.gamedemo.adapter.TextAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.AboutMessage;
+import com.example.administrator.gamedemo.model.Message_;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.widget.request.MessageRequest;
+import com.example.administrator.gamedemo.widget.request.MessageSysRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.orhanobut.logger.Logger;
 
@@ -27,17 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bmob.v3.exception.BmobException;
 
 /**
  * @auther lixu
- * Created by lixu on 2017/2/6 0006.
- * 关于我的消息
+ * Created by lixu on 2017/2/16 0016.
+ * 系统消息
  */
-public class AboutMFragment extends BaseFragment {
+public class SysMFragment extends BaseFragment{
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
+
+
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
     @BindView(R.id.swipe_refresh)
@@ -45,23 +46,23 @@ public class AboutMFragment extends BaseFragment {
     @BindView(R.id.rl_hint)
     RelativeLayout rlHint;
 
-    private List<AboutMessage> messageList;
-    private AboutMAdapter aboutMAdapter;
+
+    private List<Message_> messageList;
+
+    private TextAdapter aboutMAdapter;
+
     private LinearLayoutManager mLayoutManager;
-    private MessageRequest messageRequest;
+    private MessageSysRequest messageRequest;
     private boolean isLoad = false;
     private boolean isPrepared;
     private boolean isReadCache = true;
 
-    public AboutMFragment() {
-    }
-
-    public static AboutMFragment getInstance() {
+    public static SysMFragment getInstance() {
         return answerFragmentHolder.instance;
     }
 
     public static class answerFragmentHolder {
-        public static final AboutMFragment instance = new AboutMFragment();
+        public static final SysMFragment instance = new SysMFragment();
     }
 
     @Override
@@ -75,10 +76,9 @@ public class AboutMFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-
-        messageRequest = new MessageRequest();
+        messageRequest = new MessageSysRequest();
         messageList = new ArrayList<>();
-        aboutMAdapter = new AboutMAdapter(mContext, messageList);
+        aboutMAdapter = new TextAdapter(mContext, messageList);
         mLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -126,21 +126,6 @@ public class AboutMFragment extends BaseFragment {
                 initData();
             }
         });
-
-aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
-    @Override
-    public void onItemClick(View view, int position) {
-            Intent mIntent = new Intent(mContext, AboutActivity.class);
-            mIntent.putExtra(AboutActivity.KEYCODE,messageList.get(position).getId());
-            mIntent.putExtra(AboutActivity.TYPECODE,messageList.get(position).getType());
-            startActivityForResult(mIntent,1);
-    }
-
-    @Override
-    public void onItemLongClick(View view, int position) {
-
-    }
-});
     }
 
     @Override
@@ -164,7 +149,6 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
             isReadCache = false;
         }
     }
-
     /**
      * 加载更多
      */
@@ -174,15 +158,11 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
         messageRequest.setRequestType(REQUEST_LOADMORE);
         messageRequest.execute();
     }
-
-
-
-
     //call back block
     //==============================================
-    private SimpleResponseListener<List<AboutMessage>> momentsRequestCallBack = new SimpleResponseListener<List<AboutMessage>>() {
+    private SimpleResponseListener<List<Message_>> momentsRequestCallBack = new SimpleResponseListener<List<Message_>>() {
         @Override
-        public void onSuccess(List<AboutMessage> response, int requestType) {
+        public void onSuccess(List<Message_> response, int requestType) {
             isLoad = false;
             swipeRefresh.setRefreshing(false);
             aboutMAdapter.setLoadStatus(false);
@@ -195,7 +175,6 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         rlHint.setVisibility(View.VISIBLE);
-
                     }
                     break;
                 case REQUEST_LOADMORE:
@@ -217,6 +196,5 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
 
         }
     };
-
 
 }

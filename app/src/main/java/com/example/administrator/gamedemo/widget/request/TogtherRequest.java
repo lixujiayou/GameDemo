@@ -63,8 +63,6 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         );
 
         if(mKey == null || mKey.isEmpty()){
-
-
         bmobQuery.setLimit(count);
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
@@ -99,6 +97,7 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
                 public void done(Togther togther, BmobException e) {
                     List<Togther> togthers = new ArrayList<Togther>();
                     if(e == null){
+                        Logger.d("查询无异常");
                         if(togther != null){
                             togthers.add(togther);
                             queryCommentAndLikes(togthers);
@@ -106,6 +105,7 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
                             onResponseSuccess(togthers, getRequestType());
                         }
                     }else{
+                        Logger.d("查询失败"+e.toString());
                         onResponseError(e, getRequestType());
                     }
                 }
@@ -116,7 +116,6 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
    /* private void queryCommentAndLikes(final List<Share> momentsList) {
         *//**
          * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         * oRz，果然没有自己写服务器来的简单，好吧，都是在下没钱的原因，我的锅
          *//*
         for (int i = 0; i < momentsList.size(); i++) {
             final int currentPos = i;

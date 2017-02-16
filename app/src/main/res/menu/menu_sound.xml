@@ -1,0 +1,19 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item android:id="@+id/action_sound_n"
+        android:title="点击打开声音"
+        android:orderInCategory="90"
+        android:icon="@drawable/sound_no"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_sound_y"
+        android:title="点击静音"
+        android:orderInCategory="90"
+        android:icon="@drawable/sound_y"
+        app:showAsAction="ifRoom" />
+
+</menu>

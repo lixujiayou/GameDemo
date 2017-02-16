@@ -79,7 +79,6 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
     private List<Share> momentsInfoList;
     private List<Togther> togtherList;
 
-
     private ShareRequest momentsRequest;
     private TogtherRequest togtherRequest;
     private MomentPresenter presenter;
@@ -110,11 +109,11 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
         mType = gIntent.getExtras().getString(TYPECODE);
 
         if(mType.equals(Constants.MESSAGE_SHARE)){
-            widgetComment.setVisibility(View.VISIBLE);
-            widgetCommentTogther.setVisibility(View.GONE);
+//            widgetComment.setVisibility(View.VISIBLE);
+//            widgetCommentTogther.setVisibility(View.GONE);
         }else{
-            widgetComment.setVisibility(View.GONE);
-            widgetCommentTogther.setVisibility(View.VISIBLE);
+//            widgetComment.setVisibility(View.GONE);
+//            widgetCommentTogther.setVisibility(View.VISIBLE);
         }
 
         momentsInfoList = new ArrayList<>();
@@ -158,7 +157,7 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
                     .setData(togtherList)
                     .setPresenter(presenterTogther);
             togtherAdapter = builder.build();
-            recycler.setAdapter(adapter);
+            recycler.setAdapter(togtherAdapter);
         }
 
 
@@ -233,10 +232,11 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     @Override
     public void onLoadMore() {
-        momentsRequest.setOnResponseListener(momentsRequestCallBack);
-        momentsRequest.setRequestType(REQUEST_LOADMORE);
-        momentsRequest.setKey(mKey);
-        momentsRequest.execute();
+//        momentsRequest.setOnResponseListener(momentsRequestCallBack);
+//        momentsRequest.setRequestType(REQUEST_LOADMORE);
+//        momentsRequest.setKey(mKey);
+//        momentsRequest.execute();
+        recycler.compelete();
     }
 
     //=============================================================call back
@@ -250,28 +250,20 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
             }else{
                 itemPos = widgetCommentTogther.getDataPos();
             }
+            List<CommentInfo> commentInfos;
+                if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
 
-            if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
-            List<CommentInfo> commentInfos = adapter.findData(itemPos).getCommentList();
+                commentInfos = adapter.findData(itemPos).getCommentList();
+
             presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
-
-            if(mType.equals(Constants.MESSAGE_SHARE)){
-
 
             widgetComment.clearDraft();
             widgetComment.dismissCommentBox(true);
             presenter.addMessage(momentid.getAuthor().getObjectId()
                     ,momentid.getObjectId()
                     , Constants.MESSAGE_SHARE
-                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
-            }else{
-                widgetCommentTogther.clearDraft();
-                widgetCommentTogther.dismissCommentBox(true);
-                presenter.addMessage(momentid.getAuthor().getObjectId()
-                        ,momentid.getObjectId()
-                        , Constants.MESSAGE_TOGTHER
-                        ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
-            }
+                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent+"");
+
         }
     };
 
@@ -286,25 +278,20 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
                 itemPos = widgetCommentTogther.getDataPos();
             }
 
-            if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
-            List<CommentInfo> commentInfos = adapter.findData(itemPos).getCommentList();
-            presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
+            if (itemPos < 0 || itemPos > togtherAdapter.getItemCount()) return;
+            List<CommentInfo> commentInfos = togtherAdapter.findData(itemPos).getCommentList();
 
-            if(mType.equals(Constants.MESSAGE_SHARE)){
-            widgetComment.clearDraft();
-            widgetComment.dismissCommentBox(true);
-            presenter.addMessage(momentid.getAuthor().getObjectId()
-                    ,momentid.getObjectId()
-                    , Constants.MESSAGE_SHARE
-                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
-            }else{
+
+            presenterTogther.addComment(itemPos, togtherList.get(itemPos), commentAuthorId, commentContent, commentInfos);
+
+
                 widgetCommentTogther.clearDraft();
                 widgetCommentTogther.dismissCommentBox(true);
-                presenter.addMessage(momentid.getAuthor().getObjectId()
+            presenterTogther.addMessage(momentid.getAuthor().getObjectId()
                         ,momentid.getObjectId()
                         , Constants.MESSAGE_TOGTHER
                         ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
-            }
+
         }
     };
 
@@ -351,9 +338,12 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
+                        Logger.d("查询到一起"+response.get(0).getObjectId());
                         togtherList.clear();
                         togtherList.addAll(response);
                         togtherAdapter.updateData(response);
+                    }else{
+                        Logger.d("未查询到一起");
                     }
                     break;
                 case REQUEST_LOADMORE:
@@ -383,18 +373,32 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
     @Override
     public void onLikeChange(int itemPos, List<Students> likeUserList) {
         Logger.d("onLikeChange");
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setLikesList(likeUserList);
-            adapter.notifyItemChanged(itemPos);
+        if(mType.equals(Constants.MESSAGE_SHARE)) {
+            Share momentsInfo = adapter.findData(itemPos);
+            if (momentsInfo != null) {
+                momentsInfo.setLikesList(likeUserList);
+                adapter.notifyItemChanged(itemPos);
+            }
+        }else{
+            Togther momentsInfo = togtherAdapter.findData(itemPos);
+            if (momentsInfo != null) {
+                momentsInfo.setLikesList(likeUserList);
+                togtherAdapter.notifyItemChanged(itemPos);
+            }
         }
     }
+
     @Override
     public void onCollectChange(int itemPos, List<Students> collectUserList) {
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setCollectList(collectUserList);
-            adapter.notifyItemChanged(itemPos);
+        if(mType.equals(Constants.MESSAGE_SHARE)) {
+
+            Share momentsInfo = adapter.findData(itemPos);
+
+            if (momentsInfo != null) {
+                momentsInfo.setCollectList(collectUserList);
+                adapter.notifyItemChanged(itemPos);
+            }
+        }else{
         }
         ToastUtil3.showToast(this,"BingGo(*^__^*)");
     }
@@ -417,11 +421,21 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
      */
     @Override
     public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setCommentList(commentInfoList);
-            adapter.notifyItemChanged(itemPos);
+        if(mType.equals(Constants.MESSAGE_SHARE)) {
+            Share momentsInfo = adapter.findData(itemPos);
+            if (momentsInfo != null) {
+                momentsInfo.setCommentList(commentInfoList);
+                adapter.notifyItemChanged(itemPos);
+            }
+        }else{
+            Togther momentsInfo = togtherAdapter.findData(itemPos);
+            if (momentsInfo != null) {
+                momentsInfo.setCommentList(commentInfoList);
+                togtherAdapter.notifyItemChanged(itemPos);
+            }
         }
+
+
     }
 
     @Override

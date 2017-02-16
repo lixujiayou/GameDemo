@@ -114,7 +114,6 @@ public class OnlineAnswerActivity extends BaseActivity {
     private SoftKeyboardStateHelper softKeyboardStateHelper;
     private boolean isShow = false;
 
-
     private int tNum;
 
     @Override
@@ -153,15 +152,16 @@ public class OnlineAnswerActivity extends BaseActivity {
                         isReply = false;
                         if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
                             //获取焦点
-                            ll_write.setVisibility(View.VISIBLE);
-                            et_write.setFocusable(true);
-                            et_write.requestFocus();
-
-                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
-                        }
-                        }else{
+//                            ll_write.setVisibility(View.VISIBLE);
+//                            et_write.setFocusable(true);
+//                            et_write.requestFocus();
+//
+//                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                            inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
+//
                             isSelected();
+
+                        }
                         }
                         break;
                 }
@@ -197,7 +197,7 @@ public class OnlineAnswerActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
 
                 isReply = false;
-                isSelected("我选择了："+mAnswers.get(Randoms[position]));
+                isSelected("ღ："+mAnswers.get(Randoms[position]));
             }
 
             @Override
@@ -253,6 +253,8 @@ public class OnlineAnswerActivity extends BaseActivity {
 
             }
         });
+
+        isHave();
     }
 
     /**
@@ -335,8 +337,6 @@ public class OnlineAnswerActivity extends BaseActivity {
                                 mCommentInfos.add(momentContent);
                                 onlineAdapter.notifyDataSetChanged();
                                 EventBus.getDefault().post(new ReshEvent(ReshEvent.ReshOk));
-
-
                             }else{
                                 ToastUtil3.showToast(OnlineAnswerActivity.this, "评论失败" + e);
                             }
@@ -404,8 +404,11 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void done(BmobException e) {
                 if(e == null){
+                    pDialog.dismiss();
                     mIsSelect = true;
                     sendContent(sContent);
+
+                    recyle_comment.setVisibility(View.VISIBLE);
                     tvResultData.setVisibility(View.VISIBLE);
                     tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
                     setAnswerNum();
@@ -453,12 +456,13 @@ public class OnlineAnswerActivity extends BaseActivity {
         });
     }
 
-    /**
-     * 是否选择过
-     */
-    private void isSelected(){
+
+
+    private void isHave(){
         tNum = 0;
-        showProgressBarDialog(OnlineAnswerActivity.this);
+
+        //showProgressBarDialog(OnlineAnswerActivity.this);
+
         BmobQuery<Students> query = new BmobQuery<>();
         query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
         query.findObjects(new FindListener<Students>() {
@@ -472,10 +476,52 @@ public class OnlineAnswerActivity extends BaseActivity {
                                 tvResultData.setVisibility(View.VISIBLE);
                                 tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
                                 mIsSelect = true;
+
+                                if(pDialog != null) {
+                                    pDialog.dismiss();
+                                }
+
+                                recyle_comment.setVisibility(View.VISIBLE);
+                                tv_tv_reminder.setVisibility(View.GONE);
+                                return;
+                            }
+                        }
+
+                    tNum = object.size();
+                    tvResultData.setVisibility(View.GONE);
+                    recyle_comment.setVisibility(View.GONE);
+                    tv_tv_reminder.setVisibility(View.VISIBLE);
+
+                }else{
+                    ToastUtil3.showToast(OnlineAnswerActivity.this,"哎呀，系统发呆啦");
+                    Logger.d("哎呀"+e.toString());
+                    pDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 是否选择过
+     */
+    private void isSelected(){
+        tNum = 0;
+        showProgressBarDialog(OnlineAnswerActivity.this);
+        BmobQuery<Students> query = new BmobQuery<>();
+        query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
+        query.findObjects(new FindListener<Students>() {
+            @Override
+            public void done(List<Students> object, BmobException e) {
+                if(e==null){
+                    Students students = Constants.getInstance().getUser(OnlineAnswerActivity.this);
+                        for(Students s : object){
+                            if(students.getObjectId().equals(s.getObjectId())){
+                                tvResultData.setVisibility(View.VISIBLE);
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                                mIsSelect = true;
                                 pDialog.dismiss();
 
                                 isReply = false;
-                                if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
                                     //获取焦点
                                     ll_write.setVisibility(View.VISIBLE);
                                     et_write.setFocusable(true);
@@ -483,11 +529,17 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                     inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
-                                }
+
                                 return;
                             }
                         }
+
+                        ToastUtil3.showToast(OnlineAnswerActivity.this,"请答题后再发起讨论哦");
                         tNum = object.size();
+
+                    if(pDialog != null){
+                        pDialog.dismiss();
+                    }
                 }else{
                     ToastUtil3.showToast(OnlineAnswerActivity.this,e.toString());
                     pDialog.dismiss();
@@ -535,7 +587,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         pDialog.dismiss();
         new AlertDialog.Builder(OnlineAnswerActivity.this)
                 .setTitle("提示")
-                .setMessage("您的选择将会被同步到评论中,是否继续")
+                .setMessage("您的选择将会被同步到讨论中,是否继续")
                 .setPositiveButton("继续", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
