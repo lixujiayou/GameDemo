@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <include layout="@layout/toolbar"/>
+    <include layout="@layout/layout_no_network"/>
+
+    <EditText
+        android:id="@+id/et_idea_content"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/shape_sure_btn_blue_kong"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lines="10"
+        android:hint="填写您在使用中遇到的问题或应用的不足"
+        android:textColor="#666666"
+        android:gravity="top"
+        android:paddingTop="6dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        />
+
+    <EditText
+        android:id="@+id/et_idea_tell"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="此处填写您的联系方式"
+        android:paddingTop="6dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#666666"
+        />
+    <Button
+        android:id="@+id/bt_idea_commit"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:text="提交反馈"
+        android:textSize="@dimen/textsize_x"
+        android:textColor="@color/white"
+        android:background="@drawable/blue_button_background"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textsize_xx"
+        android:text="注意：\t联系方式前请注明手机号/微信/QQ等"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        />
+</LinearLayout>

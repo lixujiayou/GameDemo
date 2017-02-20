@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/backround_hui"
     >
-<include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"/>
     <include layout="@layout/layout_no_network"/>
+
     <ListView
         android:id="@+id/lv_history"
         android:layout_width="match_parent"

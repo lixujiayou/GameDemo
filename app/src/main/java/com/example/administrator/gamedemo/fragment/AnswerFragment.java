@@ -16,13 +16,20 @@ import com.example.administrator.gamedemo.activity.answer.HelpActivity;
 import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.bean.Scriptures;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
+import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.imageview.MyImageView;
+import com.example.administrator.gamedemo.widget.request.CoverRequest;
+import com.example.administrator.gamedemo.widget.request.OnResponseListener;
 import com.orhanobut.logger.Logger;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
 
 /**
  * Created by Administrator on 2016/12/8 0008.
@@ -32,6 +39,8 @@ public class AnswerFragment extends BaseFragment {
 
     @BindView(R.id.banner_imageView)
     ImageView bannerImageView;
+    @BindView(R.id.tv_scripture)
+    TextView tvScripture;
 
     @BindView(R.id.iv_start)
     MyImageView ivStart;
@@ -41,6 +50,8 @@ public class AnswerFragment extends BaseFragment {
     MyImageView ivHistory;
     @BindView(R.id.iv_help)
     MyImageView ivHelp;
+
+
 
     @BindView(R.id.tv_time)
     TextView tv_time;
@@ -107,6 +118,31 @@ public class AnswerFragment extends BaseFragment {
     @Override
     public void initData() {
         tv_time.setText(Constants.StringData());
+        CoverRequest coverRequest = new CoverRequest();
+        coverRequest.setOnResponseListener(new OnResponseListener<List<Scriptures>>() {
+            @Override
+            public void onStart(int requestType) {
+
+            }
+
+            @Override
+            public void onSuccess(List<Scriptures> response, int requestType) {
+                Scriptures scripturesTemp = response.get(0);
+                tvScripture.setText(scripturesTemp.getsContent());
+                ImageLoadMnanger.INSTANCE.loadImageToCover(bannerImageView,scripturesTemp.getsImage().getFileUrl());
+            }
+
+            @Override
+            public void onError(BmobException e, int requestType) {
+
+            }
+
+            @Override
+            public void onProgress(int pro) {
+
+            }
+        });
+        coverRequest.execute();
     }
 
 }

@@ -172,7 +172,6 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         if(rl_all == null){
             rl_all = (RelativeLayout) findView(rl_all,R.id.rl_all);
         }
-
             //收藏
             rl_all.setOnClickListener(new View.OnClickListener() {
                 @Override

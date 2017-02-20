@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
+import com.example.administrator.gamedemo.activity.mine.AboutWeActivity;
 import com.example.administrator.gamedemo.activity.mine.CollectActivity;
+import com.example.administrator.gamedemo.activity.mine.FunctionInfoActivity;
+import com.example.administrator.gamedemo.activity.mine.IdeaActivity;
 import com.example.administrator.gamedemo.activity.mine.InviteFriend;
 import com.example.administrator.gamedemo.activity.mine.MessageActivity;
 import com.example.administrator.gamedemo.activity.mine.MineCenterActivity;
@@ -63,6 +66,15 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.ll_upload)
     LinearLayout llUpload;
 
+    @BindView(R.id.ll_mine_about)
+    LinearLayout llMineAbout;
+
+    @BindView(R.id.ll_mine_suggest)
+    LinearLayout llMineSuggest;
+
+    @BindView(R.id.ll_functioninfo)
+    LinearLayout llFunctionInfo;
+
     @BindView(R.id.ll_invite)
     LinearLayout llInvite;
 
@@ -78,7 +90,16 @@ public class MineFragment extends BaseFragment {
         return answerFragmentHolder.instance;
     }
 
-    @OnClick({R.id.ll_mine_center, R.id.ll_together, R.id.ll_collect, R.id.ll_upload,R.id.ll_note,R.id.ll_invite,R.id.iv_message})
+    @OnClick({R.id.ll_mine_center
+            , R.id.ll_together
+            , R.id.ll_collect
+            , R.id.ll_upload
+            ,R.id.ll_note
+            ,R.id.ll_invite
+            ,R.id.iv_message
+            ,R.id.ll_mine_about
+            ,R.id.ll_mine_suggest
+            ,R.id.ll_functioninfo})
     public void onClick(View view) {
         Intent gIntent = new Intent();
         switch (view.getId()) {
@@ -107,10 +128,20 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_message:
                 gIntent.setClass(mContext, MessageActivity.class);
                 break;
-            default:
+            case R.id.ll_mine_about:
+                gIntent.setClass(mContext, AboutWeActivity.class);
                 break;
+            //反馈
+            case R.id.ll_mine_suggest:
+                gIntent.setClass(mContext, IdeaActivity.class);
+                break;
+            //功能介绍
+            case R.id.ll_functioninfo:
+                gIntent.setClass(mContext, FunctionInfoActivity.class);
+                break;
+            default:
+                return;
         }
-
         startActivityForResult(gIntent,1);
     }
 

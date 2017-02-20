@@ -125,6 +125,7 @@ public enum ImageLoadMnanger {
                 ;
     }
 
+
     private BitmapRequestBuilder loadImageToC(ImageView imageView, String url) {
 
         return Glide.with(getImageContext(imageView))
@@ -132,7 +133,7 @@ public enum ImageLoadMnanger {
                 .asBitmap()
                 .placeholder(R.drawable.img_huoer)
                 .error(R.drawable.img_huoer)
-                .thumbnail(0.5f)
+                .thumbnail(0.8f)
                 ;
     }
 

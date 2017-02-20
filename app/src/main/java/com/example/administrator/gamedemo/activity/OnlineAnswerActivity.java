@@ -148,20 +148,16 @@ public class OnlineAnswerActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_write:
-                        if(mIsSelect = true){
-                        isReply = false;
-                        if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
-                            //获取焦点
-//                            ll_write.setVisibility(View.VISIBLE);
-//                            et_write.setFocusable(true);
-//                            et_write.requestFocus();
-//
-//                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                            inputMethodManager.showSoftInput(et_write, InputMethodManager.SHOW_IMPLICIT);
-//
-                            isSelected();
-
-                        }
+                        if(isLogin()) {
+                            if (mIsSelect = true) {
+                                isReply = false;
+                                if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
+                                    isSelected();
+                                }
+                            }
+                        }else{
+                            Intent lIntent = new Intent(OnlineAnswerActivity.this,LoginActivity.class);
+                            startActivityForResult(lIntent,1);
                         }
                         break;
                 }
@@ -224,18 +220,22 @@ public class OnlineAnswerActivity extends BaseActivity {
         onlineAdapter.setOnItemClickListener(new OnlineAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if(isLogin()) {
 
-                CommentInfo commentInfoTemp = mCommentInfos.get(position);
-                personReply = commentInfoTemp.getAuthor();
-
-                if(Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
-                    if(!personReply.getObjectId().equals(Constants.getInstance().getUser(OnlineAnswerActivity.this).getObjectId())){
-                        ppopupEdit(personReply);
-                    }else{
-
-                        deleteCommentPopup.showPopupWindow(commentInfoTemp);
-                    }
+                    CommentInfo commentInfoTemp = mCommentInfos.get(position);
+                    personReply = commentInfoTemp.getAuthor();
+                        if (!personReply.getObjectId().equals(Constants.getInstance().getUser(OnlineAnswerActivity.this).getObjectId())) {
+                            ppopupEdit(personReply);
+                        } else {
+                            deleteCommentPopup.showPopupWindow(commentInfoTemp);
+                        }
+                }else{
+                    Intent lIntent = new Intent(OnlineAnswerActivity.this,LoginActivity.class);
+                    startActivityForResult(lIntent,1);
                 }
+
+
+
             }
 
             @Override

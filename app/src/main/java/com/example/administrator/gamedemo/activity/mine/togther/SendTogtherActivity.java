@@ -296,12 +296,10 @@ public class SendTogtherActivity extends BaseActivity {
 
     public void showProgressBarDialog(final Activity mContext){
         try {
-            if(mContext.hasWindowFocus()){
                 pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
                 pDialog.setTitleText("正在提交数据，请稍等");
                 pDialog.setCancelable(false);
                 pDialog.show();
-            }
         }catch (Exception e){
             Logger.d("ProgressBarDialog的上下文找不到啦！");
         }

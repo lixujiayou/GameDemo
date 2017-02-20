@@ -116,7 +116,7 @@ public class AnswerHistoryActivity extends BaseActivity{
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_sync:
-                        if(cUser != null){
+                        if(isLogin()){
                             showDiaLog();
                         }else{
                             Intent lINtent = new Intent(AnswerHistoryActivity.this, LoginActivity.class);

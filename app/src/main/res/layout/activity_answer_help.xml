@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/beijing"
+        android:background="@color/white"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_1_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -36,7 +36,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
             />
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_2_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -60,14 +60,14 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
             />
 <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_3_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -83,14 +83,14 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_4_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -106,14 +106,14 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
             />
   <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_5_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -129,13 +129,13 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
             />  <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_6_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_login"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -151,8 +151,9 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red_pressed"
+            android:textColor="@color/textcolor_2"
             android:lineSpacingExtra="4dp"
+            android:paddingBottom="60dp"
             />
 
     </LinearLayout>

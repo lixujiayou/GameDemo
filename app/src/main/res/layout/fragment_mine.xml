@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -40,7 +40,9 @@
         android:src="@drawable/icon_mymessage"
         android:layout_alignParentRight="true"
         android:padding="6dp"
-        android:background="@drawable/selector_white_tran"
+        android:background="@drawable/selector_white_tran_tran"
+        android:layout_marginRight="10dp"
+
         />
 
 <LinearLayout
@@ -90,7 +92,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran"
+        android:background="@drawable/selector_white_tran_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -126,7 +128,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran"
+        android:background="@drawable/selector_white_tran_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -162,7 +164,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran"
+        android:background="@drawable/selector_white_tran_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -202,13 +204,57 @@
         android:orientation="vertical"
         >
     <LinearLayout
-        android:id="@+id/ll_note"
+        android:id="@+id/ll_mine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        style="@style/about_item_style"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人中心"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+
+
+ <LinearLayout
+     android:id="@+id/ll_note"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/line_px"
+        android:gravity="center_vertical"
         style="@style/about_item_style"
         >
 
@@ -244,47 +290,7 @@
     </LinearLayout>
 
 <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/item_mine_height"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
-        style="@style/about_item_style"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="功能介绍"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/textsize_16"
-            android:textColor="@color/textcolor_2"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/travel__ic_arrow_search_result"
-            android:layout_marginRight="15dp"
-            />
-
-    </LinearLayout>
-        <LinearLayout
+        android:id="@+id/ll_mine_suggest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
@@ -323,11 +329,55 @@
             android:src="@drawable/travel__ic_arrow_search_result"
             android:layout_marginRight="15dp"
             />
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/item_mine_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/line_px"
+        style="@style/about_item_style"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/xiaoxi"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐给朋友"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/textsize_16"
+            android:textColor="@color/textcolor_2"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/travel__ic_arrow_search_result"
+            android:layout_marginRight="15dp"
+            />
     </LinearLayout>
 
 
 <LinearLayout
-    android:id="@+id/ll_invite"
+        android:id="@+id/ll_functioninfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
@@ -348,7 +398,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="推荐"
+            android:text="功能介绍"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/textsize_16"
             android:textColor="@color/textcolor_2"
@@ -369,6 +419,7 @@
 
     </LinearLayout>
 <LinearLayout
+        android:id="@+id/ll_mine_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
@@ -376,7 +427,7 @@
         android:gravity="center_vertical"
         android:visibility="visible"
         android:layout_marginTop="@dimen/line_px"
-    style="@style/about_item_style"
+        style="@style/about_item_style"
         >
 
         <ImageView
@@ -389,7 +440,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="关于"
+            android:text="关于我们"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/textsize_16"
             android:textColor="@color/textcolor_2"
@@ -409,9 +460,7 @@
             />
 
     </LinearLayout>
-
     </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
-</com.example.administrator.gamedemo.widget.overscroll.OverScrollLayout>
+    </LinearLayout>

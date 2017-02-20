@@ -22,7 +22,6 @@
         android:id="@+id/banner_imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="@drawable/img_huoer"
         android:fitsSystemWindows="false"
         android:scaleType="centerCrop"
@@ -55,6 +54,7 @@
             >
 
             <TextView
+                android:id="@+id/tv_scripture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="敬畏耶和华是智慧的开端，认识至圣者便是聪明。【箴9:10】"

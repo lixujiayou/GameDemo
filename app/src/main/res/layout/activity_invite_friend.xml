@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
 
     <EditText
@@ -28,6 +29,7 @@
         android:hint="标题(建议在10字以内)"
         android:textSize="@dimen/textsize_18"
         android:paddingLeft="10dp"
+        android:visibility="gone"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -37,6 +39,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="4dp"
+        android:visibility="gone"
         />
     <EditText
         android:id="@+id/activity_invite_friend_et_content"
@@ -45,9 +48,10 @@
         android:background="@drawable/backround_shap_kong"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="内容\t(建议在15个字内)"
+        android:hint="邀请语\t(建议在15个字内)"
         android:textSize="@dimen/textsize_18"
         android:paddingLeft="10dp"
+        android:visibility="gone"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -56,6 +60,7 @@
         android:textSize="@dimen/textsize_xx"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="4dp"
+        android:visibility="gone"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,7 +98,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邀请QQ好友"
+                android:text="推荐给QQ好友"
                 android:textSize="@dimen/textsize_actionbar"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"
@@ -155,7 +160,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享到QQ空间"
+                android:text="推荐到QQ空间"
                 android:textSize="@dimen/textsize_actionbar"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"
@@ -215,7 +220,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邀请微信好友"
+                android:text="推荐给微信好友"
                 android:textSize="@dimen/textsize_actionbar"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"
@@ -274,7 +279,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享到朋友圈"
+                android:text="推荐到朋友圈"
                 android:textSize="@dimen/textsize_actionbar"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"
@@ -304,8 +309,8 @@
         android:background="@drawable/blue_button_background"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="@dimen/textsize_x"
         />
 

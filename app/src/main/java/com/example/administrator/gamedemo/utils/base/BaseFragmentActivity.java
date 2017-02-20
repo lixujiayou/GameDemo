@@ -78,7 +78,7 @@ public abstract class BaseFragmentActivity extends AppCompatActivity{
     @Subscribe
     public void onEvent(NetWorkEvent event) {
         if (event.getType() == NetWorkEvent.UNAVAILABLE) {
-            ToastUtil3.showToast(BaseFragmentActivity.this,R.string.no_network);
+          //  ToastUtil3.showToast(BaseFragmentActivity.this,R.string.no_network);
         }
     }
 
