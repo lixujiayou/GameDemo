@@ -186,9 +186,6 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                 showPhotoDialog(itemPosition,data);
             }
         });
-
-
-
     }
 
     /**
