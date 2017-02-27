@@ -65,6 +65,8 @@ public class MineFragment extends BaseFragment {
     LinearLayout llCollect;
     @BindView(R.id.ll_upload)
     LinearLayout llUpload;
+    @BindView(R.id.ll_mine)
+    LinearLayout llMine;
 
     @BindView(R.id.ll_mine_about)
     LinearLayout llMineAbout;
@@ -91,6 +93,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.ll_mine_center
+            ,R.id.ll_mine
             , R.id.ll_together
             , R.id.ll_collect
             , R.id.ll_upload
@@ -103,6 +106,7 @@ public class MineFragment extends BaseFragment {
     public void onClick(View view) {
         Intent gIntent = new Intent();
         switch (view.getId()) {
+            case R.id.ll_mine:
             case R.id.ll_mine_center:
                 if(BmobUser.getCurrentUser() == null){
                     gIntent.setClass(mContext, LoginActivity.class);

@@ -10,12 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+
         >
 
         <com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="-34dp"
+
+            />
+        <ImageView
+            android:id="@+id/iv_load_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_loading"
+            android:layout_marginTop="-30dp"
             />
         <RelativeLayout
             android:id="@+id/rl_hint"
@@ -24,7 +35,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:paddingBottom="80dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_gravity="center"
 
             >

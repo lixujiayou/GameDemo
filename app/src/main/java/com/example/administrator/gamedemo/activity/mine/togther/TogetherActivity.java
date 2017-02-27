@@ -96,14 +96,12 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private static final int GALLERY_REQUEST_CODE = 1450;
 //    @BindView(R.id.swipe_refresh)
 //    SwipeRefreshLayout swipeRefresh;
-
-    @BindView(R.id.main_content)
-    CoordinatorLayout mainContent;
-
     @BindView(R.id.recycler)
      CircleRecyclerView circleRecyclerView;
     @BindView(R.id.widget_comment)
      CommentBoxTogther commentBox;
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
 
     private HostViewHolder hostViewHolder;
     private TogtherAdapter adapter;
@@ -115,6 +113,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private SweetAlertDialog pDialog;
 
     private boolean isReadCache = true;
+    private boolean isOne = true;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther);
@@ -167,8 +166,8 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 .setPresenter(presenter);
         adapter = builder.build();
         circleRecyclerView.setAdapter(adapter);
-
-
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(TogetherActivity.this,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -216,6 +215,9 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
     @Override
     public void onRefresh() {
+        if(!isOne){
+            ivLoadState.setVisibility(View.GONE);
+        }
         togtherRequest.setOnResponseListener(momentsRequestCallBack);
         togtherRequest.setRequestType(REQUEST_REFRESH);
         togtherRequest.setCurPage(0);
@@ -226,6 +228,9 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
     @Override
     public void onLoadMore() {
+        if(!isOne){
+            ivLoadState.setVisibility(View.GONE);
+        }
         togtherRequest.setOnResponseListener(momentsRequestCallBack);
         togtherRequest.setRequestType(REQUEST_LOADMORE);
         togtherRequest.execute();
@@ -237,8 +242,12 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         @Override
         public void onSuccess(List<Togther> response, int requestType) {
             circleRecyclerView.compelete();
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
+
+                    momentsInfoList.clear();
+                    momentsInfoList.addAll(response);
                     if (!ToolUtil.isListEmpty(response)) {
                         adapter.updateData(response);
                     }
@@ -253,6 +262,13 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
             circleRecyclerView.compelete();
+            if(momentsInfoList.size() == 0){
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(TogetherActivity.this,R.mipmap.icon_load_erro));
+                ivLoadState.setVisibility(View.VISIBLE);
+            }else{
+                ToastUtil3.showToast(TogetherActivity.this,"加载失败，请检查网络并重试");
+            }
+            isOne = false;
         }
 
         @Override

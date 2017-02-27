@@ -5,12 +5,12 @@ import cn.bmob.v3.BmobObject;
 /**
  * Created by Administrator on 2016/5/20 0020.
  */
-public class IdeaBean extends BmobObject {
+public class Idea extends BmobObject {
 
     private String content;
     private String phone_;
 
-    public IdeaBean() {
+    public Idea() {
         super();
     }
 

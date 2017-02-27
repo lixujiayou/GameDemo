@@ -1,20 +1,9 @@
 package com.example.administrator.gamedemo.widget.request;
 
-import android.text.TextUtils;
+import com.example.administrator.gamedemo.model.bean.Idea;
 
-import com.example.administrator.gamedemo.model.Share;
-import com.example.administrator.gamedemo.model.Students;
-import com.example.administrator.gamedemo.model.bean.IdeaBean;
-import com.example.administrator.gamedemo.utils.ToolUtil;
-import com.orhanobut.logger.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UploadBatchListener;
 
 /**
  * @author lixu
@@ -38,10 +27,10 @@ public class AddIdeaRequest extends BaseRequestClient<String> {
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
-        IdeaBean ideaBean = new IdeaBean();
-        ideaBean.setContent(iContent);
-        ideaBean.setPhone_(iTell);
-        ideaBean.save(new SaveListener<String>() {
+        Idea idea = new Idea();
+        idea.setContent(iContent);
+        idea.setPhone_(iTell);
+        idea.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if(e == null){

@@ -68,4 +68,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="margin_horizontal">16dp</dimen>
     <dimen name="margin_horizontal_small">2dp</dimen>
+
 </resources>

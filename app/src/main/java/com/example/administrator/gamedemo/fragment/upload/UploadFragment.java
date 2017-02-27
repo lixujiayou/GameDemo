@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -93,6 +94,9 @@ public abstract class UploadFragment extends BaseFragment{
     TextView tv_hint_1;
     @BindView(R.id.tv_hint_2)
     TextView tv_hint_2;
+
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
 
     @BindView(R.id.ll_toobar)
     LinearLayout ll_toobar;
@@ -187,6 +191,9 @@ public abstract class UploadFragment extends BaseFragment{
         });
 
 
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
+
         isReadCache = true;
         isFirst = true;
         isPrepared = true;
@@ -197,6 +204,7 @@ public abstract class UploadFragment extends BaseFragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                ivLoadState.setVisibility(View.GONE);
                 isFirst = true;
                 initData();
             }
@@ -304,6 +312,7 @@ public abstract class UploadFragment extends BaseFragment{
             isLoad = false;
             swipeRefreshLayout.setRefreshing(false);
             adapter.setLoadStatus(false);
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
@@ -337,6 +346,12 @@ public abstract class UploadFragment extends BaseFragment{
             super.onError(e, requestType);
             swipeRefreshLayout.setRefreshing(false);
             Logger.d("错误" + e.toString());
+            if(momentsInfoList ==null || momentsInfoList.size() == 0){
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_loading));
+                ivLoadState.setVisibility(View.VISIBLE);
+            }else{
+                ToastUtil3.showToast(mContext,"加载失败，请检查网络并重试。");
+            }
         }
 
         @Override

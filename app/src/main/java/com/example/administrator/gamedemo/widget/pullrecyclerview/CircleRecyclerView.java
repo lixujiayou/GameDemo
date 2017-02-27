@@ -140,7 +140,7 @@ public class CircleRecyclerView extends FrameLayout {
         }
         LayoutParams iconParam = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         iconParam.leftMargin = UIHelper.dipToPx(12);
-
+      //  iconParam.topMargin =  UIHelper.dipToPx(30);
         addView(recyclerView, RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.MATCH_PARENT);
         addView(refreshIcon, iconParam);
 

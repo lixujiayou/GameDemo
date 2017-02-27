@@ -18,7 +18,7 @@
         android:layout_marginRight="10dp"
         android:lines="10"
         android:hint="填写您在使用中遇到的问题或应用的不足"
-        android:textColor="#666666"
+        android:textColor="@color/textcolor_2"
         android:gravity="top"
         android:paddingTop="6dp"
         android:paddingLeft="6dp"
@@ -36,7 +36,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textColor="#666666"
+        android:textColor="@color/textcolor_2"
         />
     <Button
         android:id="@+id/bt_idea_commit"

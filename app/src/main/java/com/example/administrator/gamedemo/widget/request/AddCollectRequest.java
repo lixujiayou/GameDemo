@@ -4,6 +4,7 @@ import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
@@ -53,9 +54,13 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
         Share info = new Share();
         info.setObjectId(momentsId);
 
-        Students userInfo = new Students();
-        userInfo.setObjectId(userid);
-        collectUserList.add(userInfo);
+      //  Students userInfo = new Students();
+        // userInfo.setObjectId(userid);
+        if(collectUserList == null){
+            collectUserList = new ArrayList<>();
+        }
+
+        collectUserList.add(cUser);
 
         info.setCollectList(collectUserList);
 
@@ -73,8 +78,8 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
 
         BmobRelation relation = new BmobRelation();
         relation.add(info);
-        userInfo.setFavorite(relation);
-        userInfo.update(new UpdateListener() {
+        cUser.setFavorite(relation);
+        cUser.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
 

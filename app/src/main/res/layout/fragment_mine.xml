@@ -39,9 +39,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_mymessage"
         android:layout_alignParentRight="true"
-        android:padding="6dp"
+        android:padding="10dp"
         android:background="@drawable/selector_white_tran_tran"
-        android:layout_marginRight="10dp"
+
 
         />
 

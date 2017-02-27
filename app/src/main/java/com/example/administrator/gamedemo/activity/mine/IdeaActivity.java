@@ -58,11 +58,7 @@ public class IdeaActivity extends BaseActivity {
         String ideaContent = etIdeaContent.getText().toString().trim();
         String ideaTell = etIdeaTell.getText().toString().trim();
 
-        if(ideaContent != null || !ideaContent.isEmpty()){
-            ToastUtil3.showToast(IdeaActivity.this,"请填写内容");
-            return;
-        }else if(ideaTell != null || !ideaTell.isEmpty()){
-            ToastUtil3.showToast(IdeaActivity.this,"请填写联系方式");
+        if(isKong(ideaContent,ideaTell)){
             return;
         }
 
@@ -74,12 +70,27 @@ public class IdeaActivity extends BaseActivity {
 
     }
 
+
+    private boolean isKong(String ideaContent ,String ideaTell){
+        if(ideaContent == null || ideaContent.isEmpty()){
+            ToastUtil3.showToast(IdeaActivity.this,"请填写问题内容");
+            return true;
+        }
+        if(ideaTell == null || ideaTell.isEmpty()){
+            ToastUtil3.showToast(IdeaActivity.this,"请填写您的联系方式");
+            return true;
+        }
+
+        return false;
+    }
+
     //call back block
     //==============================================
     private SimpleResponseListener<String> momentsRequestCallBack = new SimpleResponseListener<String>() {
         @Override
         public void onSuccess(String response, int requestType) {
             ToastUtil3.showToast(IdeaActivity.this,"提交成功");
+            finish();
             pDialog.dismiss();
         }
 

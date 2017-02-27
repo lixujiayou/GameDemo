@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.fragment.message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.administrator.gamedemo.R;
@@ -44,6 +46,9 @@ public class AboutMFragment extends BaseFragment {
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.rl_hint)
     RelativeLayout rlHint;
+
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
 
     private List<AboutMessage> messageList;
     private AboutMAdapter aboutMAdapter;
@@ -118,12 +123,20 @@ public class AboutMFragment extends BaseFragment {
         isPrepared = true;
         swipeRefresh.setColorSchemeResources(R.color.colorAccent);
         swipeRefresh.setRefreshing(true);
+
+
+
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
+
         initData();
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                ivLoadState.setVisibility(View.GONE);
                 isFirst = true;
                 initData();
+
             }
         });
 
@@ -145,6 +158,7 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
 
     @Override
     public void initData() {
+
         if (!isPrepared || !isVisible || !isFirst) {
             if(swipeRefresh != null){
                 if(swipeRefresh.isRefreshing()){
@@ -186,6 +200,7 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
             isLoad = false;
             swipeRefresh.setRefreshing(false);
             aboutMAdapter.setLoadStatus(false);
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
@@ -208,8 +223,14 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
             swipeRefresh.setRefreshing(false);
-            ToastUtil3.showToast(mContext, "获取消息失败,请检查网络并重试");
+
             Logger.d("错误" + e.toString());
+            if(messageList == null || messageList.size() == 0){
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_load_erro));
+                ivLoadState.setVisibility(View.VISIBLE);
+            }else{
+                ToastUtil3.showToast(mContext, "获取消息失败,请检查网络并重试");
+            }
         }
 
         @Override

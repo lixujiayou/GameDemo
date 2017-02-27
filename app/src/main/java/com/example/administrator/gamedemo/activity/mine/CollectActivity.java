@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -59,6 +60,9 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     @BindView(R.id.rl_hint)
     RelativeLayout rl_hint;
 
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
+
     private HostViewHolder hostViewHolder;
     private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
@@ -68,6 +72,7 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
 
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
+    private boolean isOne = true;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -107,6 +112,10 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
                 .setPresenter(presenter);
         adapter = builder.build();
         circleRecyclerView.setAdapter(adapter);
+
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(CollectActivity.this,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -152,29 +161,39 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     @Override
     public void onRefresh() {
         Logger.d("发起请求-----");
-        momentsRequest.setOnResponseListener(momentsRequestCallBack);
-        momentsRequest.setRequestType(REQUEST_REFRESH);
-        momentsRequest.setCurPage(0);
-        momentsRequest.setCache(false);
-        momentsRequest.setIsCollect(true);
-        momentsRequest.execute();
-        isReadCache = false;
+        if(!isOne) {
+            ivLoadState.setVisibility(View.GONE);
+        }
+
+            momentsRequest.setOnResponseListener(momentsRequestCallBack);
+            momentsRequest.setRequestType(REQUEST_REFRESH);
+            momentsRequest.setCurPage(0);
+            momentsRequest.setCache(false);
+            momentsRequest.setIsCollect(true);
+            momentsRequest.execute();
+            isReadCache = false;
+
     }
 
     @Override
     public void onLoadMore() {
-        momentsRequest.setOnResponseListener(momentsRequestCallBack);
-        momentsRequest.setRequestType(REQUEST_LOADMORE);
-        momentsRequest.execute();
+        if(!isOne) {
+            ivLoadState.setVisibility(View.GONE);
+        }
+            momentsRequest.setOnResponseListener(momentsRequestCallBack);
+            momentsRequest.setRequestType(REQUEST_LOADMORE);
+            momentsRequest.execute();
+
     }
 
     //call back block
     //==============================================
-    private boolean isOne = true;
+
     private SimpleResponseListener<List<Share>> momentsRequestCallBack = new SimpleResponseListener<List<Share>>() {
         @Override
         public void onSuccess(List<Share> response, int requestType) {
             circleRecyclerView.compelete();
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
@@ -201,7 +220,14 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
             circleRecyclerView.compelete();
-        }
+            isOne = false;
+            if(momentsInfoList == null || momentsInfoList.size() == 0) {
+                ivLoadState.setVisibility(View.VISIBLE);
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(CollectActivity.this, R.mipmap.icon_load_erro));
+            }else{
+                ToastUtil3.showToast(CollectActivity.this,"查询失败，请检查网络并重试。");
+            }
+            }
 
         @Override
         public void onProgress(int pro) {

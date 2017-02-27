@@ -177,6 +177,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                 @Override
                 public void onClick(View view) {
                     showPhotoDialog(itemPosition,data);
+                    Logger.d("收藏----rl_all");
                 }
             });
 
@@ -184,6 +185,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
             @Override
             public void onClick(View view) {
                 showPhotoDialog(itemPosition,data);
+                Logger.d("收藏----userText");
             }
         });
     }

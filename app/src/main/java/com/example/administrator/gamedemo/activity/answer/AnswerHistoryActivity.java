@@ -179,6 +179,7 @@ public class AnswerHistoryActivity extends BaseActivity{
                 ToastUtil3.showToast(AnswerHistoryActivity.this,"未发现新增记录，无需同步");
                 return;
             }
+
             new BmobBatch().insertBatch(mAnswerHistoriesTemp).doBatch(new QueryListListener<BatchResult>() {
                 @Override
                 public void done(List<BatchResult> o, BmobException e) {

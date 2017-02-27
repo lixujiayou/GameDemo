@@ -74,6 +74,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     CommentBox commentBox;
     @BindView(R.id.iv_add)
      ImageView iv_add;
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
 
     private boolean isPrepared;
 
@@ -89,6 +91,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     private MomentPresenter presenter;
     // private List<Share> responseTemp;
     private boolean isReadCache = true;
+    private boolean isOne = true;
 
     public ShareFragment() {
     }
@@ -160,6 +163,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 //        toolbar.setTitle(R.string.main_share);
         isFirst = true;
         isPrepared = true;
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
         initData();
 
     }
@@ -224,16 +229,23 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     @Override
     public void onRefresh() {
-        momentsRequest.setOnResponseListener(momentsRequestCallBack);
-        momentsRequest.setRequestType(REQUEST_REFRESH);
-        momentsRequest.setCurPage(0);
-        momentsRequest.setCache(isReadCache);
-        momentsRequest.execute();
-        isReadCache = false;
+        if(!isOne) {
+            ivLoadState.setVisibility(View.GONE);
+        }
+            momentsRequest.setOnResponseListener(momentsRequestCallBack);
+            momentsRequest.setRequestType(REQUEST_REFRESH);
+            momentsRequest.setCurPage(0);
+            momentsRequest.setCache(isReadCache);
+            momentsRequest.execute();
+            isReadCache = false;
+
     }
 
     @Override
     public void onLoadMore() {
+        if(!isOne) {
+            ivLoadState.setVisibility(View.GONE);
+        }
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
         momentsRequest.execute();
@@ -241,25 +253,16 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
 
     //call back block
     //==============================================
-    private boolean isOne = true;
     private SimpleResponseListener<List<Share>> momentsRequestCallBack = new SimpleResponseListener<List<Share>>() {
         @Override
         public void onSuccess(List<Share> response, int requestType) {
             circleRecyclerView.compelete();
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
                         momentsInfoList.clear();
                         momentsInfoList.addAll(response);
-//                        if(isOne){
-//                            BmobInitHelper bb = new BmobInitHelper();
-//                            bb.addComments(response);
-//                            isOne = false;
-//                        }
-
-
-                        Logger.i("第一条动态ID   >>>   " + response.get(0).getMomentid());
-                        //     hostViewHolder.loadHostData(Constants.getInstance().getUser());
                         adapter.updateData(response);
                     }
                     break;
@@ -275,6 +278,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
             circleRecyclerView.compelete();
+            isOne = false;
+                if (momentsInfoList == null || momentsInfoList.size() == 0) {
+                    ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_load_erro));
+                    ivLoadState.setVisibility(View.VISIBLE);
+                }
         }
 
         @Override
@@ -468,7 +476,11 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             int itemPos = commentBox.getDataPos();
             if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
             List<CommentInfo> commentInfos = adapter.findData(itemPos).getCommentList();
-            presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
+            try {
+                presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
+            }catch (Exception e){
+                ToastUtil3.showToast(mContext,"抱歉，系统发了一会儿呆");
+            }
             commentBox.clearDraft();
             commentBox.dismissCommentBox(true);
 

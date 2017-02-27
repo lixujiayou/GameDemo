@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.activity.answer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,6 +67,10 @@ public class AnswerListActivity extends BaseActivity{
 
     @BindView(R.id.ll_toobar)
     LinearLayout ll_toobar;
+
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
+
     private boolean isReadCache = true;
     private boolean isLoad = false;
     @Override
@@ -149,10 +155,15 @@ public class AnswerListActivity extends BaseActivity{
         isReadCache = true;
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
+
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(AnswerListActivity.this,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
+
         initData();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                ivLoadState.setVisibility(View.GONE);
                 isReadCache = false;
                 initData();
             }
@@ -208,6 +219,7 @@ public class AnswerListActivity extends BaseActivity{
         public void onSuccess(List<MomentsInfo> response, int requestType) {
             swipeRefreshLayout.setRefreshing(false);
             adapter.setLoadStatus(false);
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
@@ -232,6 +244,12 @@ public class AnswerListActivity extends BaseActivity{
             super.onError(e, requestType);
             swipeRefreshLayout.setRefreshing(false);
             Logger.d("错误" + e.toString());
+            if(momentsInfoList == null || momentsInfoList.size() == 0) {
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(AnswerListActivity.this, R.mipmap.icon_load_erro));
+                ivLoadState.setVisibility(View.VISIBLE);
+            }else{
+                ToastUtil3.showToast(AnswerListActivity.this,"加载失败，请检查网络并重试");
+            }
         }
 
         @Override
