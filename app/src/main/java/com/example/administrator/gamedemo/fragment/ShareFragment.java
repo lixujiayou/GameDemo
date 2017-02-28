@@ -267,8 +267,8 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
                     }
                     break;
                 case REQUEST_LOADMORE:
-                    momentsInfoList.clear();
-                    momentsInfoList.addAll(response);
+                   /* momentsInfoList.clear();
+                    momentsInfoList.addAll(response);*/
                     adapter.addMore(response);
                     break;
             }

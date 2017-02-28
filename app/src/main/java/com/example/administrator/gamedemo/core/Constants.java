@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 
 import com.example.administrator.gamedemo.R;
@@ -50,6 +51,16 @@ public class Constants {
      */
     public static final String SYNC_OK= "SYNCOK";
     public static final String SYNC_NO= "SYNCNO";
+
+    // 文件分隔符
+    public static final String FILE_SEPARATOR = "/";
+
+    // 外存sdcard存放路径
+    public static final String FILE_PATH = Environment.getExternalStorageDirectory()
+            + FILE_SEPARATOR
+            +"bibleAsk" + FILE_SEPARATOR;
+    public static final String FILENAME = "autoapk.apk";
+    public static final String FILE_NAME = FILE_PATH + FILENAME;
 
     public Constants(){
 
@@ -434,7 +445,7 @@ public class Constants {
             mWay ="星期六";
         }
 
-        Logger.d("当前时间为"+mYear + "/" + mMonth + "/" + mDay+"/" + mWay);
+
 
         return mYear + "/" + mMonth + "/" + mDay+"/" + mWay;
     }

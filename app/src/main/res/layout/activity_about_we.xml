@@ -12,127 +12,71 @@
 
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-
-
-<LinearLayout
-    android:id="@+id/activity_tellwe_ll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
-    android:visibility="gone"
-    >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="\t\t要收的庄稼多，做工的人少。所以，你们当求庄稼的主打发工人出去收他的庄稼"
-        android:layout_gravity="center_vertical"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#848442"
-        />
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="【路10：2下】"
-    android:gravity="right"
-    android:layout_gravity="center"
-    android:textSize="@dimen/textsize_actionbar"
-    android:textColor="#848442"
-    />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="\t\t我又听见主的声音说：“我可以差遣谁呢？谁肯为我去呢？”"
-        android:layout_gravity="center_vertical"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#848442"
-        android:layout_marginTop="16dp"
-        />
-    <TextView
+    <LinearLayout
+        android:id="@+id/temp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="【赛6：8上】"
-        android:gravity="right"
-        android:layout_gravity="center"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#848442"
-        />
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/activity_tellwe_ll_tellwe"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="\t\t我说：“我在这里，请差遣我！”"
-        android:layout_gravity="center_vertical"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#848442"
-        android:layout_marginTop="16dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="【赛6：8下】"
-        android:gravity="right"
-        android:layout_gravity="center"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#848442"
-        />
-</LinearLayout>
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t我实实在在地告诉你们，一粒麦子不落在地里死了，仍旧是一粒，若是死了，就结出许多子粒来。"
+            android:textSize="@dimen/textsize_actionbar"
+            android:textStyle="bold"
+            android:textColor="@color/textcolor_1"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="【约12:24】"
+            android:gravity="right"
+            android:textSize="@dimen/textsize_actionbar"
+            android:textColor="@color/textcolor_1"
+            />
+
+    </LinearLayout>
+
 
 
 
 <LinearLayout
     android:id="@+id/activity_tellwe_ll_tellwe"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_below="@+id/activity_tellwe_ll"
-    android:layout_marginTop="40dp"
+
+    android:layout_marginRight="20dp"
     android:layout_marginLeft="20dp"
-    >
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="【联系我们】"
-        android:textSize="@dimen/textsize_actionbar"
-        android:textColor="#666666"
-        android:visibility="gone"
-        />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="6"
     >
 
 
-</LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="6"
+
+
         >
 
         <TextView
@@ -141,7 +85,7 @@
             android:layout_weight="1"
             android:text="QQ\t:"
             android:textSize="@dimen/textsize_actionbar"
-            android:textColor="#666666"
+            android:textColor="@color/textcolor_1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             />
@@ -151,71 +95,67 @@
             android:layout_weight="5"
             android:text="599878311"
             android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textcolor_1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:textStyle="bold"
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
 
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="QQ交流群:"
+            android:textSize="@dimen/textsize_actionbar"
+            android:textColor="@color/textcolor_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="142590430"
+            android:textSize="20sp"
+            android:textColor="@color/textcolor_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/activity_tellwe_ll_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="6"
         >
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="邮箱:"
             android:textSize="@dimen/textsize_actionbar"
-            android:textColor="#666666"
+            android:textColor="@color/textcolor_1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             />
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="15662770998@163.com"
+            android:text="bibleAsk@163.com"
             android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textcolor_1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:textStyle="bold"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="6"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="QQ群:"
-            android:textSize="@dimen/textsize_actionbar"
-            android:textColor="#666666"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="142590430"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -249,29 +189,7 @@
             />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="80dp"
-        android:layout_marginRight="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\t我实实在在地告诉你们，一粒麦子不落在地里死了，仍旧是一粒，若是死了，就结出许多子粒来。"
-            android:textSize="@dimen/textsize_actionbar"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="【约12:24】"
-            android:gravity="right"
-            android:textSize="@dimen/textsize_actionbar"
-            />
 
-    </LinearLayout>
 
 </LinearLayout>
 
@@ -307,7 +225,7 @@
 
 </RelativeLayout>
 
-</LinearLayout>
 
-    </ScrollView>
+
+
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.fragment.ShareFragment;
 import com.example.administrator.gamedemo.model.CommentInfo;
@@ -180,7 +182,14 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                     Logger.d("收藏----rl_all");
                 }
             });
-
+        userText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                showPhotoDialog(itemPosition,data);
+                Logger.d("收藏----OnTouchL");
+                return false;
+            }
+        });
         userText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -326,6 +335,11 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private View.OnClickListener onMenuButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             Share info = (Share) v.getTag(R.id.momentinfo_data_tag_id);
             if (info != null) {
                 commentPopup.updateMomentInfo(info);
@@ -339,6 +353,7 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
 
         @Override
         public void onLikeClick(View v, @NonNull Share info, boolean hasLiked) {
+            if(Constants.getInstance().getUser() != null){
             if (hasLiked) {
                 Logger.d("取消点赞");
                 momentPresenter.unLike(itemPosition, info.getMomentid(), info.getLikesList());
@@ -351,14 +366,21 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                         ,Constants.MESSAGE_SHARE
                         ,""+Constants.getInstance().getUser().getNick_name()+"赞了您的分享");
             }
+            }else{
+                Intent lIntent = new Intent(mContext, LoginActivity.class);
+                mContext.startActivity(lIntent);
+            }
         }
 
         @Override
         public void onCommentClick(View v, @NonNull Share info) {
-
-            Logger.d("评论");
-            momentPresenter.showCommentBox(itemPosition, info, null);
-
+            if(Constants.getInstance().getUser() != null) {
+                Logger.d("评论");
+                momentPresenter.showCommentBox(itemPosition, info, null);
+            }else{
+                Intent lIntent = new Intent(mContext, LoginActivity.class);
+                mContext.startActivity(lIntent);
+            }
 
         }
     };
@@ -384,6 +406,11 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private View.OnClickListener onCommentWidgetClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             if (!(v instanceof CommentWidget)) return;
             CommentInfo commentInfo = ((CommentWidget) v).getData();
             if (commentInfo == null) return;
@@ -398,6 +425,11 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     private DeleteCommentPopup.OnDeleteCommentClickListener onDeleteCommentClickListener=new DeleteCommentPopup.OnDeleteCommentClickListener() {
         @Override
         public void onDelClick(CommentInfo commentInfo) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             try {
                 momentPresenter.deleteComment(itemPosition, commentInfo.getCommentid(), momentsInfo.getCommentList());
                 deleteCommentPopup.dismiss();
@@ -413,6 +445,12 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
     View view_2;
     helpdialog_item_2 hi_2 = null;
     private void showPhotoDialog(final int itemPositionTemp, final Share dataTemp) {
+        if(Constants.getInstance().getUser() == null) {
+            Intent lIntent = new Intent(mContext,LoginActivity.class);
+            mContext.startActivity(lIntent);
+            return;
+        }
+
         if(hi_2==null){
             hi_2= new helpdialog_item_2();
             view_2 = LayoutInflater.from(mContext).inflate(R.layout.popup_delete_comment, null);

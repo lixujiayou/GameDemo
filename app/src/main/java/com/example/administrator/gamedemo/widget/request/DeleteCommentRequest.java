@@ -25,7 +25,7 @@ public class DeleteCommentRequest extends BaseRequestClient<String> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         if (TextUtils.isEmpty(commentid)) {
-            onResponseError(new BmobException("评论ID为空"), getRequestType());
+            onResponseError(new BmobException("请先登录"), getRequestType());
             return;
         }
         CommentInfo commentInfo = new CommentInfo();

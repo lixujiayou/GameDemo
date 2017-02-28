@@ -15,12 +15,12 @@
        android:orientation="vertical"
        >
       <include layout="@layout/toolbar"/>
-  <!-- <android.support.design.widget.CoordinatorLayout
+   <android.support.design.widget.CoordinatorLayout
        android:id="@+id/main_content"
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:layout_weight="1"
-       >-->
+       >
 
 
 
@@ -31,12 +31,13 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-       android:layout_marginTop="-50dp"
        >
+
+
    </com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView>
 
 
-   <!--</android.support.design.widget.CoordinatorLayout>-->
+   </android.support.design.widget.CoordinatorLayout>
 
    <com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther
        android:id="@+id/widget_comment"

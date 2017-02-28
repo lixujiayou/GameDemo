@@ -297,7 +297,7 @@ public class SendShareActivity extends BaseActivity {
             if(mContext.hasWindowFocus()){
                 pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
                 pDialog.setTitleText("正在提交数据，请稍等");
-                pDialog.setCancelable(false);
+                pDialog.setCancelable(true);
                 pDialog.show();
             }
         }catch (Exception e){

@@ -57,7 +57,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/icon_user_default"
+        android:src="@mipmap/icon_default"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         />
@@ -97,7 +97,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_mymessage"
+            android:src="@drawable/icon_mine_togther"
             android:layout_gravity="center"
             android:gravity="center"
             />
@@ -133,7 +133,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_mymessage"
+            android:src="@drawable/icon_mine_collect"
             android:layout_gravity="center"
             android:gravity="center"
             />
@@ -169,7 +169,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_mymessage"
+            android:src="@drawable/icon_mine_upload"
             android:layout_gravity="center"
             android:gravity="center"
             />
@@ -212,6 +212,7 @@
         android:gravity="center_vertical"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/about_item_style"
+        android:visibility="gone"
         >
 
         <ImageView
@@ -253,16 +254,17 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/line_px"
         android:gravity="center_vertical"
-        style="@style/about_item_style"
+       android:background="@drawable/ripple_bg"
+         android:layout_marginTop="@dimen/activity_vertical_margin"
+         style="@style/about_item_style"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
+            android:src="@drawable/icon_mine_diary"
             />
 
         <TextView
@@ -297,7 +299,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/about_item_style"
         >
 
@@ -305,7 +307,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
+            android:src="@drawable/icon_mine_idea"
             />
 
         <TextView
@@ -349,7 +351,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
+            android:src="@drawable/icon_mine_share"
             />
 
         <TextView
@@ -392,7 +394,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
+            android:src="@drawable/icon_mine_show"
             />
 
         <TextView
@@ -434,13 +436,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/xiaoxi"
+            android:src="@drawable/icon_mine_tellwe"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="关于我们"
+            android:text="联系我们"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/textsize_16"
             android:textColor="@color/textcolor_2"

@@ -17,7 +17,7 @@ public class AboutWeActivity extends BaseActivity{
 
     @Override
     public void initViews() {
-        mToolbar.setTitle("关于我们");
+        mToolbar.setTitle("联系我们");
         mToolbar.setNavigationIcon(R.drawable.icon_cancle);
 
 

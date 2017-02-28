@@ -78,9 +78,7 @@ public class AnswerFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-
-        tv_time.setText(Constants.StringData());
-
+//        tv_time.setText(Constants.StringData());
         ivStart.setOnClickIntent(new MyImageView.OnViewClickListener() {
             @Override
             public void onViewClick(MyImageView view) {
@@ -113,12 +111,15 @@ public class AnswerFragment extends BaseFragment {
                 startActivityForResult(pIntent, 1);
             }
         });
+        initData();
     }
 
     @Override
     public void initData() {
-        tv_time.setText(Constants.StringData());
+
+        Logger.d("开始开始1111");
         CoverRequest coverRequest = new CoverRequest();
+        Logger.d("开始开始查询");
         coverRequest.setOnResponseListener(new OnResponseListener<List<Scriptures>>() {
             @Override
             public void onStart(int requestType) {
@@ -127,14 +128,17 @@ public class AnswerFragment extends BaseFragment {
 
             @Override
             public void onSuccess(List<Scriptures> response, int requestType) {
-                Scriptures scripturesTemp = response.get(0);
-                tvScripture.setText(scripturesTemp.getsContent());
-                ImageLoadMnanger.INSTANCE.loadImageToCover(bannerImageView,scripturesTemp.getsImage().getFileUrl());
-            }
+                Logger.d("查询失败"+response.size());
+                if(response != null && response.size() > 0) {
+                    Scriptures scripturesTemp = response.get(0);
+                    tvScripture.setText(scripturesTemp.getsContent());
+                    ImageLoadMnanger.INSTANCE.loadImageToCover(bannerImageView, scripturesTemp.getsImage().getFileUrl());
+                }
+                }
 
             @Override
             public void onError(BmobException e, int requestType) {
-
+                Logger.d("查询失败"+e.toString());
             }
 
             @Override
@@ -143,6 +147,8 @@ public class AnswerFragment extends BaseFragment {
             }
         });
         coverRequest.execute();
+
+        tv_time.setText(Constants.StringData());
     }
 
 }

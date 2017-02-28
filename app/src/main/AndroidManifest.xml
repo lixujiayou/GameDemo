@@ -277,7 +277,7 @@
 
 
 
-        <service
+       <!-- <service
             android:label="PushService"
             android:name="cn.bmob.push.lib.service.PushService"
             android:process=":bmobpush"
@@ -287,26 +287,26 @@
             </intent-filter>
         </service>
 
-        <!-- 用于进程保活 -->
+        &lt;!&ndash; 用于进程保活 &ndash;&gt;
         <service
             android:name="cn.bmob.push.lib.service.PushNotifyService"
             android:process=":bmobpush" >
         </service>
 
         <receiver android:name="cn.bmob.push.PushReceiver">
-            <intent-filter><!--优先级加最高-->
-                <!-- 系统启动完成后会调用 -->
+            <intent-filter>&lt;!&ndash;优先级加最高&ndash;&gt;
+                &lt;!&ndash; 系统启动完成后会调用 &ndash;&gt;
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <!-- 解锁完成后会调用 -->
+                &lt;!&ndash; 解锁完成后会调用 &ndash;&gt;
                 <action android:name="android.intent.action.USER_PRESENT"/>
-                <!-- 监听网络连通性 -->
+                &lt;!&ndash; 监听网络连通性 &ndash;&gt;
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
 
 
-        <!-- 第四部中创建的消息接收器，在这里进行注册 -->
+        &lt;!&ndash; 第四部中创建的消息接收器，在这里进行注册 &ndash;&gt;
         <receiver android:name=".server.MyPushMessageReceiver">
             <intent-filter >
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
@@ -314,17 +314,17 @@
         </receiver>
 
 
-        <!-- 接收心跳和唤醒的广播，要和PushService运行在同个进程 -->
+        &lt;!&ndash; 接收心跳和唤醒的广播，要和PushService运行在同个进程 &ndash;&gt;
         <receiver
             android:name="cn.bmob.push.PushNotifyReceiver"
             android:process=":bmobpush" >
             <intent-filter>
-                <!-- 接收心跳广播的action -->
+                &lt;!&ndash; 接收心跳广播的action &ndash;&gt;
                 <action android:name="cn.bmob.push.action.HEARTBEAT" />
-                <!-- 接收唤醒广播的action -->
+                &lt;!&ndash; 接收唤醒广播的action &ndash;&gt;
                 <action android:name="cn.bmob.push.action.NOTIFY" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
 
 
     </application>

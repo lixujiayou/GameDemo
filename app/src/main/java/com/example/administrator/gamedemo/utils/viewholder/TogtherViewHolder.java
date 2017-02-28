@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.utils.viewholder;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
@@ -252,11 +254,20 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
 
     @Override
     public void onChildViewAdded(View parent, View child) {
-
+        if(Constants.getInstance().getUser() == null) {
+            Intent lIntent = new Intent(mContext,LoginActivity.class);
+            mContext.startActivity(lIntent);
+            return;
+        }
     }
 
     @Override
     public void onChildViewRemoved(View parent, View child) {
+        if(Constants.getInstance().getUser() == null) {
+            Intent lIntent = new Intent(mContext,LoginActivity.class);
+            mContext.startActivity(lIntent);
+            return;
+        }
         if (child instanceof CommentWidget) COMMENT_TEXT_POOL.put((CommentWidget) child);
     }
 
@@ -285,6 +296,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
     private View.OnClickListener onMenuButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             Togther info = (Togther) v.getTag(R.id.momentinfo_data_tag_id);
             if (info != null) {
                 commentPopup.updateMomentInfo(info);
@@ -298,6 +314,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
 
         @Override
         public void onLikeClick(View v, @NonNull Togther info, boolean hasLiked) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             if (hasLiked) {
                 Logger.d("取消点赞"+info.getObjectId());
                 momentPresenter.unLike(itemPosition, info.getMomentid(), info.getLikesList());
@@ -314,7 +335,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
 
         @Override
         public void onCommentClick(View v, @NonNull Togther info) {
-
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             Logger.d("评论");
             momentPresenter.showCommentBox(itemPosition, info, null);
 
@@ -342,6 +367,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
     private View.OnClickListener onCommentWidgetClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             if (!(v instanceof CommentWidget)) return;
             CommentInfo commentInfo = ((CommentWidget) v).getData();
             if (commentInfo == null) return;
@@ -356,6 +386,11 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
     private DeleteCommentPopup.OnDeleteCommentClickListener onDeleteCommentClickListener=new DeleteCommentPopup.OnDeleteCommentClickListener() {
         @Override
         public void onDelClick(CommentInfo commentInfo) {
+            if(Constants.getInstance().getUser() == null) {
+                Intent lIntent = new Intent(mContext,LoginActivity.class);
+                mContext.startActivity(lIntent);
+                return;
+            }
             try {
                 momentPresenter.deleteComment(itemPosition, commentInfo.getCommentid(), momentsInfo.getCommentList());
                 deleteCommentPopup.dismiss();

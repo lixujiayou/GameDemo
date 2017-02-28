@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/backround_hui"/>
+
   <LinearLayout
       android:id="@+id/main_bottome"
       android:layout_width="match_parent"
@@ -28,6 +29,7 @@
       android:weightSum="3"
       android:layout_alignParentBottom="true"
       android:background="@color/white"
+
       >
       <LinearLayout
           android:id="@+id/ll_main_answer"
@@ -39,9 +41,10 @@
           android:gravity="center"
           >
           <ImageView
+              android:id="@+id/icon_m_answer"
               android:layout_width="30dp"
               android:layout_height="30dp"
-              android:src="@drawable/icon_answer"
+              android:src="@drawable/icon_answer_p"
               android:layout_gravity="center"
               android:gravity="center"
               />
@@ -68,6 +71,7 @@
           android:gravity="center"
           >
           <ImageView
+              android:id="@+id/icon_m_share"
               android:layout_width="30dp"
               android:layout_height="30dp"
               android:src="@drawable/icon_share"
@@ -96,6 +100,7 @@
           android:gravity="center"
           >
           <ImageView
+              android:id="@+id/icon_m_mine"
               android:layout_width="30dp"
               android:layout_height="30dp"
               android:src="@drawable/icon_mine"

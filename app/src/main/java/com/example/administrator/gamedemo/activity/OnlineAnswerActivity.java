@@ -191,9 +191,13 @@ public class OnlineAnswerActivity extends BaseActivity {
         oneAnswerAdapter.setOnItemClickListener(new OneAnswerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
-                isReply = false;
-                isSelected("ღ："+mAnswers.get(Randoms[position]));
+                if(isLogin()) {
+                    isReply = false;
+                    isSelected("ღ：" + mAnswers.get(Randoms[position]));
+                }else{
+                Intent lIntent = new Intent(OnlineAnswerActivity.this,LoginActivity.class);
+                startActivityForResult(lIntent,1);
+            }
             }
 
             @Override
@@ -224,7 +228,7 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                     CommentInfo commentInfoTemp = mCommentInfos.get(position);
                     personReply = commentInfoTemp.getAuthor();
-                        if (!personReply.getObjectId().equals(Constants.getInstance().getUser(OnlineAnswerActivity.this).getObjectId())) {
+                        if (!personReply.getObjectId().equals(Constants.getInstance().getUser().getObjectId())) {
                             ppopupEdit(personReply);
                         } else {
                             deleteCommentPopup.showPopupWindow(commentInfoTemp);
@@ -253,8 +257,13 @@ public class OnlineAnswerActivity extends BaseActivity {
 
             }
         });
+        if(isLogin()) {
 
-        isHave();
+            isHave();
+
+        }else{
+            tv_tv_reminder.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -432,6 +441,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         query.findObjects(new FindListener<Students>() {
             @Override
             public void done(List<Students> object, BmobException e) {
+                pDialog.dismiss();
                 if(e==null){
                     Students students = Constants.getInstance().getUser(OnlineAnswerActivity.this);
 
@@ -469,8 +479,8 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void done(List<Students> object, BmobException e) {
                 if(e==null){
-                    Students students = Constants.getInstance().getUser(OnlineAnswerActivity.this);
-
+                    Students students = Constants.getInstance().getUser();
+                    recyle_comment.setVisibility(View.GONE);
                         for(Students s : object){
                             if(students.getObjectId().equals(s.getObjectId())){
                                 tvResultData.setVisibility(View.VISIBLE);
@@ -489,7 +499,7 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                     tNum = object.size();
                     tvResultData.setVisibility(View.GONE);
-                    recyle_comment.setVisibility(View.GONE);
+
                     tv_tv_reminder.setVisibility(View.VISIBLE);
 
                 }else{
@@ -612,7 +622,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         try {
                 pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
                 pDialog.setTitleText("正在连接服务器...");
-                pDialog.setCancelable(false);
+                pDialog.setCancelable(true);
                 pDialog.show();
         }catch (Exception e){
             Logger.d("ProgressBarDialog的上下文找不到啦！");

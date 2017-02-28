@@ -119,6 +119,7 @@ public class AnswerHistoryActivity extends BaseActivity{
                         if(isLogin()){
                             showDiaLog();
                         }else{
+                            ToastUtil3.showToast(AnswerHistoryActivity.this,"登录后才能进行云备份哦");
                             Intent lINtent = new Intent(AnswerHistoryActivity.this, LoginActivity.class);
                             startActivityForResult(lINtent,1);
                         }

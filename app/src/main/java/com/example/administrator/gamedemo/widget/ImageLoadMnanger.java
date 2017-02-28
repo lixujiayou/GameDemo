@@ -90,7 +90,21 @@ public enum ImageLoadMnanger {
                 .into(imageView)
         ;
     }
- public void loadCicleImage(Fragment fragment,ImageView imageView,String imgUrl){
+
+    //头像
+ public void loadIconImage(Fragment fragment,ImageView imageView,String imgUrl){
+        Glide.with(fragment)
+                .load(imgUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .bitmapTransform(new CropCircleTransformation(getImageContext(imageView)))
+                .placeholder(R.mipmap.icon_default)
+                .error(R.mipmap.icon_default)
+                .thumbnail(0.2f)
+                .into(imageView)
+        ;
+    }
+
+    public void loadCicleImage(Fragment fragment,ImageView imageView,String imgUrl){
         Glide.with(fragment)
                 .load(imgUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -142,7 +156,7 @@ public enum ImageLoadMnanger {
         Glide.with(fragment)
                 .load(imgUrl)
                 .asBitmap()
-                .placeholder(R.drawable.ic_loading_small)
+                .placeholder(R.mipmap.icon_user_default)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

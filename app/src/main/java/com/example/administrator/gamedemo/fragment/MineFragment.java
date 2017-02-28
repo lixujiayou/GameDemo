@@ -195,10 +195,10 @@ public class MineFragment extends BaseFragment {
         Students students = Constants.getInstance().getUser();
         if (students != null) {
             if (students.getUser_icon() != null) {
-                ImageLoadMnanger.INSTANCE.loadCicleImage(this, iv_icon, students.getUser_icon().getFileUrl());
+                ImageLoadMnanger.INSTANCE.loadIconImage(this, iv_icon, students.getUser_icon().getFileUrl());
                 ImageLoadMnanger.INSTANCE.steDimImage(this, students.getUser_icon().getFileUrl(), iv_dim);
             } else {
-                iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_user_default));
+                iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_default));
                 iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 10, false));
             }
             if (students.getNick_name() != null) {

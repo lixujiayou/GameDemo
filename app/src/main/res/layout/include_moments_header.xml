@@ -38,7 +38,7 @@
         android:layout_alignTop="@id/avatar"
         android:background="@drawable/selector_white_tran"
         android:layout_centerInParent="true"
-
+        android:visibility="gone"
         />
 
     <com.example.administrator.gamedemo.widget.ClickShowMoreLayout

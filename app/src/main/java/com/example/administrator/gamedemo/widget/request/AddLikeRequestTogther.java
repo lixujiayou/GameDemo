@@ -1,5 +1,6 @@
 package com.example.administrator.gamedemo.widget.request;
 
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
 import com.orhanobut.logger.Logger;
@@ -22,8 +23,11 @@ public class AddLikeRequestTogther extends BaseRequestClient<Boolean> {
     private Students cUser;
     public AddLikeRequestTogther(String momentsId) {
         this.momentsId = momentsId;
-        cUser = BmobUser.getCurrentUser(Students.class);
-        this.userid = cUser.getObjectId();
+        cUser = Constants.getInstance().getUser();
+        if(cUser != null){
+            this.userid = cUser.getObjectId();
+        }
+
     }
 
     public String getMomentsId() {
