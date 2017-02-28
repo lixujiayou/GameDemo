@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -72,6 +73,8 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     @BindView(R.id.widget_comment_togther)
     CommentBoxTogther widgetCommentTogther;
+    @BindView(R.id.iv_load_state)
+    ImageView ivLoadState;
 
     private CircleMomentsAdapter adapter;
     private TogtherAdapter togtherAdapter;
@@ -88,6 +91,7 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
     private  HostViewHolder hostViewHolder;
     private String mKey;
     private String mType;
+    private boolean isOne;//可判断下拉刷新时是否显示动画
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_about_me);
@@ -160,6 +164,8 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
             recycler.setAdapter(togtherAdapter);
         }
 
+        ivLoadState.setImageDrawable(ContextCompat.getDrawable(AboutActivity.this,R.mipmap.icon_loading));
+        ivLoadState.setVisibility(View.VISIBLE);
 
     }
 
@@ -209,6 +215,9 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     @Override
     public void onRefresh() {
+        if(!isOne){
+            ivLoadState.setVisibility(View.GONE);
+        }
         if(mType.equals(Constants.MESSAGE_SHARE)) {
             momentsRequest.setOnResponseListener(momentsRequestCallBack);
             momentsRequest.setRequestType(REQUEST_REFRESH);
@@ -232,6 +241,9 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     @Override
     public void onLoadMore() {
+        if(!isOne){
+            ivLoadState.setVisibility(View.GONE);
+        }
 //        momentsRequest.setOnResponseListener(momentsRequestCallBack);
 //        momentsRequest.setRequestType(REQUEST_LOADMORE);
 //        momentsRequest.setKey(mKey);
@@ -297,11 +309,11 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     //call back block
     //==============================================
-    private boolean isOne = true;
     private SimpleResponseListener<List<Share>> momentsRequestCallBack = new SimpleResponseListener<List<Share>>() {
         @Override
         public void onSuccess(List<Share> response, int requestType) {
             recycler.compelete();
+            ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
@@ -322,6 +334,10 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
             recycler.compelete();
+            if(momentsInfoList == null || momentsInfoList.size() == 0){
+                ivLoadState.setImageDrawable(ContextCompat.getDrawable(AboutActivity.this,R.mipmap.icon_load_erro));
+                ivLoadState.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
