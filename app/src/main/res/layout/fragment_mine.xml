@@ -40,9 +40,7 @@
         android:src="@drawable/icon_mymessage"
         android:layout_alignParentRight="true"
         android:padding="10dp"
-        android:background="@drawable/selector_white_tran_tran"
-
-
+        android:background="@drawable/ripple_bg_tran"
         />
 
 <LinearLayout
@@ -51,7 +49,9 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:orientation="vertical"
+    android:background="@drawable/ripple_bg_tran"
     >
+
     <ImageView
         android:id="@+id/rv_icon"
         android:layout_width="90dp"
@@ -72,10 +72,8 @@
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-
         />
 </LinearLayout>
-
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -92,7 +90,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran_tran"
+        android:background="@drawable/ripple_bg_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -128,7 +126,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran_tran"
+        android:background="@drawable/ripple_bg_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -164,7 +162,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/selector_white_tran_tran"
+        android:background="@drawable/ripple_bg_tran"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -193,7 +191,7 @@
 
 
 
-<ScrollView
+<com.example.administrator.gamedemo.utils.base.BounceScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="3"
@@ -463,6 +461,6 @@
 
     </LinearLayout>
     </LinearLayout>
-    </ScrollView>
+    </com.example.administrator.gamedemo.utils.base.BounceScrollView>
 </LinearLayout>
     </LinearLayout>

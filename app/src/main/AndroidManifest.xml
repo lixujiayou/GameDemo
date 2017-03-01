@@ -121,6 +121,7 @@
 
         <!--开始答题页面-->
         <activity android:name=".activity.answer.Starting"
+            android:theme="@style/AppTheme.NoActionBar.Immerse"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"

@@ -6,7 +6,7 @@
 
     <include layout="@layout/toolbar"/>
     <include layout="@layout/layout_no_network"/>
-    <ScrollView
+    <com.example.administrator.gamedemo.utils.base.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -157,5 +157,5 @@
             />
 
     </LinearLayout>
-    </ScrollView>
+    </com.example.administrator.gamedemo.utils.base.BounceScrollView>
 </LinearLayout>

@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <ScrollView
+    <com.example.administrator.gamedemo.utils.base.BounceScrollView
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -156,7 +156,7 @@
 </RelativeLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </com.example.administrator.gamedemo.utils.base.BounceScrollView>
     <LinearLayout
         android:id="@+id/ll_write"
         android:layout_width="match_parent"

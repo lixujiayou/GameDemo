@@ -233,8 +233,8 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
             lp.height =statusHeight;
         }
 
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
-        iv_anim.startAnimation(animation);
+       /* Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
+        iv_anim.startAnimation(animation);*/
     }
 
     /**

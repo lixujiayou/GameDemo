@@ -92,7 +92,7 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
                 readllyGo.start();
 
                 ready_d.show();
-
+/*
                 AnimatorSet animatorSet3 = new AnimatorSet();
                 animatorSet3.playTogether(animatorD, animatorE, animatorF);
                 animatorSet3.setDuration(3*1000);
@@ -127,23 +127,23 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
                     public void onAnimationRepeat(Animator animator) {
 
                     }
-                });
+                });*/
 
                 //overridePendingTransition(inAnim, outAnim);
 
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        while (num_ <= 3) {
-//                            try {
-//                                Thread.sleep(800);
-//                                ih.sendEmptyMessage(0);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                }).start();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (num_ <= 3) {
+                            try {
+                                Thread.sleep(500);
+                                ih.sendEmptyMessage(0);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
             }
         });
 

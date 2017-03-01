@@ -17,6 +17,7 @@ import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.bean.Scriptures;
+import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.imageview.MyImageView;
@@ -79,6 +80,9 @@ public class AnswerFragment extends BaseFragment {
     @Override
     public void initViews() {
 //        tv_time.setText(Constants.StringData());
+
+        UIHelper.getScreenHeightPix(mContext);
+
         ivStart.setOnClickIntent(new MyImageView.OnViewClickListener() {
             @Override
             public void onViewClick(MyImageView view) {

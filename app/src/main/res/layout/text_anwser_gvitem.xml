@@ -3,18 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-
+    android:layout_gravity="center"
     >
 <TextView
     android:id="@+id/answer_item_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="第一个答案"
     android:textSize="22sp"
-    android:textColor="#B54200"
+    android:textColor="@color/textcolor_1"
     android:gravity="center"
     android:layout_gravity="center"
-    android:layout_margin="15dip"
+    android:layout_margin="6dip"
 
     />
 

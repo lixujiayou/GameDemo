@@ -39,6 +39,7 @@ public class InviteFriend extends BaseActivity {
     private int cuNum = 1;
     private IWXAPI api;
     private Tencent mTencent;
+    private String apkUrl = "http://f4.market.xiaomi.com/download/AppStore/0c167956377ca4f1c1d2478ad2a9c6a9cb2ab8800/com.example.administrator.gamedemo.apk";
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class InviteFriend extends BaseActivity {
                 rb_qz.setChecked(false);
                 rb_wx.setChecked(false);
                 rb_pyq.setChecked(true);
-                cuNum = 3;
+                cuNum = 4;
             }
         });
     }
@@ -156,7 +157,7 @@ public class InviteFriend extends BaseActivity {
     private void TuiJianToWX(){
 
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.example.administrator.gamedemo";
+        webpage.webpageUrl = apkUrl;
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = invite_title;
         msg.description = invite_content;
@@ -175,7 +176,7 @@ public class InviteFriend extends BaseActivity {
      */
     private void TuiJianToFriend(){
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.example.administrator.gamedemo";
+        webpage.webpageUrl = apkUrl;
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = invite_title;
         msg.description = invite_content;
@@ -198,8 +199,8 @@ public class InviteFriend extends BaseActivity {
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, R.drawable.ic_launcher);
         params.putString(QQShare.SHARE_TO_QQ_TITLE, invite_title);
         params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  invite_content);
-        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://android.myapp.com/myapp/detail.htm?apkName=com.example.administrator.gamedemo");
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://file.bmob.cn/M03/1E/78/oYYBAFcHYt6AaWTTAABArgK6VGo182.png");
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  apkUrl);
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://bmob-cdn-1767.b0.upaiyun.com/2017/03/01/efbdf7b4401ef431808e57b204cd6fc5.png");
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "圣经问答");
         //params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, "其他附加功能");
         mTencent.shareToQQ((Activity) this, params, new BaseUiListener());
@@ -213,8 +214,8 @@ public class InviteFriend extends BaseActivity {
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, R.drawable.ic_launcher);
         params.putString(QQShare.SHARE_TO_QQ_TITLE, invite_title);
         params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  invite_content);
-        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://android.myapp.com/myapp/detail.htm?apkName=com.example.administrator.gamedemo");
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://file.bmob.cn/M03/1E/78/oYYBAFcHYt6AaWTTAABArgK6VGo182.png");
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  apkUrl);
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://bmob-cdn-1767.b0.upaiyun.com/2017/03/01/efbdf7b4401ef431808e57b204cd6fc5.png");
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "圣经问答");
         //params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, "其他附加功能");
         mTencent.shareToQQ((Activity) this, params, new BaseUiListener());

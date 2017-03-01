@@ -149,6 +149,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_write:
                         if(isLogin()) {
+                            et_write.setText("");
                             if (mIsSelect = true) {
                                 isReply = false;
                                 if (Constants.getInstance().isLogin(OnlineAnswerActivity.this)) {
@@ -165,20 +166,18 @@ public class OnlineAnswerActivity extends BaseActivity {
             }
         });
 
-
+    //初始化答题
         if (mMomentsInfo != null) {
             tv_topic.setText("\t\t" + mMomentsInfo.getTopic());
-
             mAnswers.clear();
             mAnswers.addAll(mMomentsInfo.getAnswers());
-
             Randoms = getRandom(mAnswers.size());
-
             oneAnswerAdapter = new OneAnswerAdapter(this, mAnswers, Randoms);
             ryAnswers.setAdapter(oneAnswerAdapter);
             oneAnswerAdapter.notifyDataSetChanged();
         }
 
+        //初始化评论
         if(mMomentsInfo.getCommentList() != null){
             mCommentInfos.clear();
             mCommentInfos.addAll(mMomentsInfo.getCommentList());
@@ -225,7 +224,7 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if(isLogin()) {
-
+                    et_write.setText("");
                     CommentInfo commentInfoTemp = mCommentInfos.get(position);
                     personReply = commentInfoTemp.getAuthor();
                         if (!personReply.getObjectId().equals(Constants.getInstance().getUser().getObjectId())) {
@@ -257,6 +256,7 @@ public class OnlineAnswerActivity extends BaseActivity {
 
             }
         });
+
         if(isLogin()) {
 
             isHave();
@@ -271,6 +271,7 @@ public class OnlineAnswerActivity extends BaseActivity {
      * @param reply
      */
     private void ppopupEdit(Students reply){
+        et_write.setText("");
 //        if(reply != null){
             et_write.setHint("回复："+reply.getNick_name());
             isReply = true;
@@ -323,7 +324,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         ll_write.setVisibility(View.GONE);
-        showProgressBarDialog(OnlineAnswerActivity.this);
+        showProgressBarDialog(OnlineAnswerActivity.this,"正在提交数据...");
 
         momentContent = new CommentInfo();
         momentContent.setContent(content);
@@ -382,7 +383,7 @@ public class OnlineAnswerActivity extends BaseActivity {
             @Override
             public void onDelClick(final CommentInfo commentInfo) {
                 deleteCommentPopup.dismiss();
-                showProgressBarDialog(OnlineAnswerActivity.this);
+                showProgressBarDialog(OnlineAnswerActivity.this,"正在删除...");
                 mMomentsInfo.removeComment(commentInfo);
                 mMomentsInfo.update(new UpdateListener() {
                     @Override
@@ -405,7 +406,7 @@ public class OnlineAnswerActivity extends BaseActivity {
      * 选择答题 并进行关联
      */
     private void selectAnswer(final String sContent){
-        showProgressBarDialog(OnlineAnswerActivity.this);
+        showProgressBarDialog(OnlineAnswerActivity.this,"正在提交答案...");
         BmobRelation relation = new BmobRelation();
         relation.add(Constants.getInstance().getUser(OnlineAnswerActivity.this));
         mMomentsInfo.setLikes(relation);
@@ -419,7 +420,7 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                     recyle_comment.setVisibility(View.VISIBLE);
                     tvResultData.setVisibility(View.VISIBLE);
-                    tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                    tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
                     setAnswerNum();
                 }else{
                     mIsSelect = false;
@@ -435,7 +436,7 @@ public class OnlineAnswerActivity extends BaseActivity {
      */
     private void isSelected(final String sAnswer){
         tNum = 0;
-        showProgressBarDialog(OnlineAnswerActivity.this);
+        showProgressBarDialog(OnlineAnswerActivity.this,"正在初始化数据...");
         BmobQuery<Students> query = new BmobQuery<>();
         query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
         query.findObjects(new FindListener<Students>() {
@@ -449,7 +450,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                             if(students.getObjectId().equals(s.getObjectId())){
                                 ToastUtil3.showToast(OnlineAnswerActivity.this,"您已答过此题,看看讨论吧");
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
                                 mIsSelect = true;
                                 pDialog.dismiss();
                                 return;
@@ -484,7 +485,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                         for(Students s : object){
                             if(students.getObjectId().equals(s.getObjectId())){
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
                                 mIsSelect = true;
 
                                 if(pDialog != null) {
@@ -515,8 +516,9 @@ public class OnlineAnswerActivity extends BaseActivity {
      * 是否选择过
      */
     private void isSelected(){
+        et_write.setText("");
         tNum = 0;
-        showProgressBarDialog(OnlineAnswerActivity.this);
+        showProgressBarDialog(OnlineAnswerActivity.this,"正在初始化数据...");
         BmobQuery<Students> query = new BmobQuery<>();
         query.addWhereRelatedTo("likes", new BmobPointer(mMomentsInfo));
         query.findObjects(new FindListener<Students>() {
@@ -527,7 +529,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                         for(Students s : object){
                             if(students.getObjectId().equals(s.getObjectId())){
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint());
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
                                 mIsSelect = true;
                                 pDialog.dismiss();
 
@@ -601,7 +603,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                 .setPositiveButton("继续", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        showProgressBarDialog(OnlineAnswerActivity.this);
+                      //  showProgressBarDialog(OnlineAnswerActivity.this,"正在提交答案...");
                         selectAnswer(sAnswer);
                         dialogInterface.dismiss();
                     }
@@ -618,15 +620,14 @@ public class OnlineAnswerActivity extends BaseActivity {
                 .show();
     }
     private SweetAlertDialog pDialog;
-    public void showProgressBarDialog(final Activity mContext){
+    public void showProgressBarDialog(final Activity mContext,String msg){
         try {
                 pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
-                pDialog.setTitleText("正在连接服务器...");
+                pDialog.setTitleText(msg);
                 pDialog.setCancelable(true);
                 pDialog.show();
         }catch (Exception e){
             Logger.d("ProgressBarDialog的上下文找不到啦！");
         }
     }
-
 }

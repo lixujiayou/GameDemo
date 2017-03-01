@@ -29,7 +29,6 @@
       android:weightSum="3"
       android:layout_alignParentBottom="true"
       android:background="@color/white"
-
       >
       <LinearLayout
           android:id="@+id/ll_main_answer"
@@ -39,6 +38,7 @@
           android:orientation="vertical"
           android:layout_gravity="center"
           android:gravity="center"
+          android:background="@drawable/ripple_bg"
           >
           <ImageView
               android:id="@+id/icon_m_answer"
@@ -69,6 +69,7 @@
           android:orientation="vertical"
           android:layout_gravity="center"
           android:gravity="center"
+          android:background="@drawable/ripple_bg"
           >
           <ImageView
               android:id="@+id/icon_m_share"
@@ -87,7 +88,7 @@
               android:textSize="@dimen/textsize_14"
               android:layout_gravity="center"
               android:gravity="center"
-              android:textColor="@color/textcolor_3"
+              android:textColor="@color/textcolor_m"
               />
       </LinearLayout>
       <LinearLayout
@@ -98,6 +99,7 @@
           android:orientation="vertical"
           android:layout_gravity="center"
           android:gravity="center"
+          android:background="@drawable/ripple_bg"
           >
           <ImageView
               android:id="@+id/icon_m_mine"
@@ -116,7 +118,7 @@
               android:textSize="@dimen/textsize_14"
               android:layout_gravity="center"
               android:gravity="center"
-              android:textColor="@color/textcolor_3"
+              android:textColor="@color/textcolor_m"
               />
 
       </LinearLayout>

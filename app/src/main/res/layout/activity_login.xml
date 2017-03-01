@@ -86,7 +86,8 @@
         android:paddingLeft="4dip"
         android:paddingRight="4dip"
         android:singleLine="true"
-        android:inputType="textPersonName"
+       android:inputType="textPersonName"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@"
         android:textCursorDrawable="@null"
         >
 
@@ -132,6 +133,7 @@
         android:singleLine="true"
         android:textCursorDrawable="@null"
         android:visibility="gone"
+
         />
 
     <Button

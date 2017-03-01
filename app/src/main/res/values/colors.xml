@@ -58,7 +58,7 @@
     <color name="green_pressed">#30A070</color>
     <color name="purple_normal">#9932CC</color>
     <color name="purple_pressed">#9F79EE</color>
-    <color name="textcolor_m">#5E6379</color>
+    <!--<color name="textcolor_m">#5E6379</color>-->
 
     <!--上传题库色值-->
     <color name="nick">#517fae</color>
@@ -95,6 +95,7 @@
     <color name="textcolor_1">#4a4a4a</color>
     <color name="textcolor_2">#6b6868</color>
     <color name="textcolor_3">#d8d8d8</color>
+    <color name="textcolor_m">#bfbfbf</color>
     <color name="textcolor_4">#7D7D7D</color>
     <color name="photopicker_background">#181819</color>
 
@@ -104,6 +105,7 @@
     <color name="crop__button_text">#666666</color>
     <color name="lightgrey">#ff888888</color>
     <color name="listItemPressedColor">#19000000</color>
+    <color name="listItemPressedColor2">@color/tran_hui_press</color>
     <color name="text_color_green">#009688</color>
     <color name="background_daytime_material_blue">#65dbd5</color>
     <color name="delete_btn_press">#f75549</color>

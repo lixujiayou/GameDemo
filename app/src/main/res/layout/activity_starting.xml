@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_main_main"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_main_main">
 
     <ImageView
         android:id="@+id/activity_starting_iv_backround"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/beijing"
-        android:layout_marginLeft="-50dp"
-        android:layout_marginRight="-300dp"
+
         android:scaleType="centerCrop"
         />
 
@@ -32,6 +31,26 @@
         android:layout_below="@+id/activity_starting_ll_c"
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/starting_tv_main"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="正在答题：摩西五经"
+                android:textSize="@dimen/textsize_actionbar"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="5dip"
+                android:layout_centerInParent="true"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +60,6 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginRight="10dip"
-
             >
 
             <TextView
@@ -54,10 +72,10 @@
                 android:id="@+id/count_down"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="15"
+                android:text="25"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:textColor="#C00024"
+                android:textColor="@color/red_pressed"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -65,7 +83,7 @@
                 android:text="秒"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:textColor="#C00024"
+                android:textColor="@color/red_pressed"
                 />
         </LinearLayout>
 
@@ -77,21 +95,31 @@
             android:orientation="horizontal"
             android:layout_marginRight="10dp"
             >
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="当前得分："
-            android:gravity="center"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_myscore"
                 android:layout_marginLeft="10dip"
+                />
 
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="："
+                    android:textSize="@dimen/textsize_18"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    />
+
             <TextView
                 android:id="@+id/tv_current_score"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="0"
+                android:text="200"
                 android:gravity="center"
-                android:textColor="#C00024"
+                android:textColor="@color/textcolor_2"
                 android:textSize="28sp"
                 />
             <View
@@ -99,25 +127,34 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_s_myselect"
+                android:layout_marginLeft="10dip"
+                />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="您的选择："
+                android:layout_height="wrap_content"
+                android:text="："
+                android:textSize="@dimen/textsize_18"
                 android:gravity="center"
-
+                android:layout_gravity="center"
                 />
+
             <TextView
                 android:id="@+id/tv_nullselect"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="未选择"
                 android:gravity="center"
-                android:textColor="#C00024"
+                android:textColor="@color/textcolor_2"
                 android:textSize="20sp"
                 />
 
         </LinearLayout>
-
 
 
         <ProgressBar
@@ -128,28 +165,37 @@
             android:progressDrawable="@drawable/progressbar_color_2"
             />
 
+    <com.example.administrator.gamedemo.utils.base.BounceScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:elevation="2dp"
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="match_parent"
 
             android:gravity="center"
+            android:layout_gravity="center"
             >
             <TextView
                 android:id="@+id/starting_problem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="爱中，仰望我们主耶稣基督的怜悯，直到永生.出自："
+                android:text="\t\t爱中，仰望我们主耶稣基督的怜悯，直到永生.出自："
                 android:textSize="22sp"
                 android:gravity="center_vertical"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
-                android:textColor="#B54200"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/textcolor_1"
+                android:lineSpacingExtra="2dp"
                 />
 
         </LinearLayout>
 
-
+    </com.example.administrator.gamedemo.utils.base.BounceScrollView>
         <ProgressBar
             android:id="@+id/starting_pb_2"
             android:layout_width="match_parent"
@@ -157,31 +203,37 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/progressbar_color"
             />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="4"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
 
         <GridView
             android:id="@+id/starting_gv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_height="match_parent"
             android:numColumns="2"
+            android:layout_gravity="center"
+            android:gravity="center"
             />
 
+</LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             >
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
+
             <Button
                 android:id="@+id/tv_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="确定"
                 android:gravity="center"
                 android:textSize="22sp"
@@ -191,73 +243,82 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 />
-<View
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    />
+
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.01"
+            android:layout_weight="2"
             android:orientation="horizontal"
             >
-        <TextView
-            android:id="@+id/starting_skip"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="略过SKIP"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="#99006C00"
-            />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="#C6C6C6"
-                android:layout_weight="0.01"
-                android:layout_marginTop="5dip"
-                />
-        <TextView
-            android:id="@+id/tv_help"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="帮助HELP"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="#99A50000"
 
-            />
-            </LinearLayout>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
+            android:background="@drawable/ripple_bg_tran"
             >
 
-            <TextView
-                android:id="@+id/starting_tv_main"
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="摩西五经"
-                android:textSize="20sp"
-                android:textColor="#823F3F"
-                android:layout_marginTop="5dip"
-                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_skip"
                 />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/starting_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳过"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+
+            />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/ripple_bg_tran"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_s_help"
+
+                    />
+
+            <TextView
+            android:id="@+id/tv_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="帮助"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/gplus_color_4"
+                android:layout_marginLeft="8dp"
+            />
+                </LinearLayout>
+            </LinearLayout>
+
+
     </LinearLayout>
 
 
