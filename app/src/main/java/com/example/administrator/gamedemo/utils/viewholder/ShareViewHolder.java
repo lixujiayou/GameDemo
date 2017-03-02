@@ -182,14 +182,24 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
                     Logger.d("收藏----rl_all");
                 }
             });
-        userText.setOnTouchListener(new View.OnTouchListener() {
+        /*userText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 showPhotoDialog(itemPosition,data);
                 Logger.d("收藏----OnTouchL");
                 return false;
             }
+        });*/
+
+        userText.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPhotoDialog(itemPosition,data);
+                Logger.d("收藏---- userText.mTextView.");
+            }
         });
+
+
         userText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

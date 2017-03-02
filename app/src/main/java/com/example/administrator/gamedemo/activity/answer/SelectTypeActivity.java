@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +24,14 @@ import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolBarHelper;
 import com.example.administrator.gamedemo.widget.imageview.CircleImageView;
 import com.example.administrator.gamedemo.widget.imageview.CircleLayout;
+import com.orhanobut.logger.Logger;
 
 
 /**
  * Created by Administrator on 2016-03-07.
  */
 public class SelectTypeActivity extends AppCompatActivity implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener {
-    private TextView selectedTextView;
+//    private TextView selectedTextView;
     private int num_ = 0;
     private Dialog ready_d;
     private boolean sound = true;
@@ -48,8 +50,10 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
 
     private View mView;
     private CircleImageView circleImageView;
+    private LinearLayout llMySelect;
+    private TextView tvMySelect;
 
-
+    private MediaPlayer mMp = new MediaPlayer();//选择音效
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,17 +62,20 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
         mView = findViewById(R.id.view);
         readllyGo = MediaPlayer.create(SelectTypeActivity.this, R.raw.readygo01);
         circleMenu = (CircleLayout)findViewById(R.id.main_circle_layout);
+        llMySelect = (LinearLayout) findViewById(R.id.ll_myselect);
+        tvMySelect = (TextView) findViewById(R.id.tv_myselect);
 
         circleMenu.setOnItemSelectedListener(this);
         circleMenu.setOnItemClickListener(this);
-
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
-
+  //      selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
         circleImageView = (CircleImageView) findViewById(R.id.main_facebook_image);
 
-        selectedTextView.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+
+        mMp = MediaPlayer.create(SelectTypeActivity.this, R.raw.click_sound);
+
+  //      selectedTextView.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+        tvMySelect.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
 
         View dView = getLayoutInflater().inflate(R.layout.dialog_ready,null);
         ready_d = new Dialog(SelectTypeActivity.this, R.style.dialog);
@@ -80,19 +87,34 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
          animatorB = ObjectAnimator.ofFloat(mView, "scaleY", 0.5f, 1.5f, 1f);
          animatorC = ObjectAnimator.ofFloat(mView, "rotation", 0, 270, 90, 180, 0);
 
-        animatorD = ObjectAnimator.ofFloat(selectedTextView, "TranslationX", -300, 300, 0);
-        animatorE = ObjectAnimator.ofFloat(selectedTextView, "scaleY", 0.5f, 1.5f, 1f);
-        animatorF = ObjectAnimator.ofFloat(selectedTextView, "rotation", 0, 270, 90, 180, 0);
 
-        selectedTextView.setOnClickListener(new View.OnClickListener() {
+        llMySelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                num_ = 0;
+                readllyGo.start();
+                ready_d.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (num_ <= 3) {
+                            try {
+                                Thread.sleep(500);
+                                ih.sendEmptyMessage(0);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
+            }
+        });
+        /*selectedTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                num_ = 0;
-                readllyGo.start();
 
-                ready_d.show();
-/*
+*//*
                 AnimatorSet animatorSet3 = new AnimatorSet();
                 animatorSet3.playTogether(animatorD, animatorE, animatorF);
                 animatorSet3.setDuration(3*1000);
@@ -127,26 +149,14 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
                     public void onAnimationRepeat(Animator animator) {
 
                     }
-                });*/
+                });*//*
 
                 //overridePendingTransition(inAnim, outAnim);
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while (num_ <= 3) {
-                            try {
-                                Thread.sleep(500);
-                                ih.sendEmptyMessage(0);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }).start();
+
             }
         });
-
+*/
 
 
 
@@ -161,9 +171,11 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_sound_n:
+                        mMp.setVolume(1,1);
                         sound = true;
                         break;
                     case R.id.action_sound_y:
+                        mMp.setVolume(0,0);
                         sound = false;
                         break;
                 }
@@ -195,7 +207,22 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
 
     @Override
     public void onItemSelected(View view, int position, long id, String name) {
-        selectedTextView.setText(name);
+
+        if(mMp.isPlaying()) {
+
+            try {
+                mMp.stop();
+                mMp.prepare();
+                mMp.start();
+            }catch (Exception e){
+                Logger.d("音乐出错"+e.toString());
+            }
+
+        }else {
+            mMp.start();
+        }
+
+        tvMySelect.setText(name);
         myS = position;
     }
 

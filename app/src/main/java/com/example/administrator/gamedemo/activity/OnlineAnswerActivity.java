@@ -420,7 +420,7 @@ public class OnlineAnswerActivity extends BaseActivity {
 
                     recyle_comment.setVisibility(View.VISIBLE);
                     tvResultData.setVisibility(View.VISIBLE);
-                    tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
+                    tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getAnswers().get(0));
                     setAnswerNum();
                 }else{
                     mIsSelect = false;

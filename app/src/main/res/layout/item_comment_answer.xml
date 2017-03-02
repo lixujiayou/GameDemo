@@ -69,8 +69,7 @@
         android:textColor="@color/textcolor_old"
         android:textSize="18sp"
         android:layout_gravity="center_vertical"
-        android:text="内容"
-
+        android:text=""
         />
 
 </LinearLayout>
@@ -78,15 +77,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         >
 
         <TextView
             android:id="@+id/tv_send_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我"
+            android:text="奥奥"
             android:textSize="@dimen/textsize_16"
             android:textColor="@color/text_comment"
             android:background="@drawable/selector_white_tran"

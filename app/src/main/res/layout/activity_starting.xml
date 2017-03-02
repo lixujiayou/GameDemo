@@ -62,11 +62,22 @@
             android:layout_marginRight="10dip"
             >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/time_down"
+                />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="本题倒计时："
+                android:layout_height="wrap_content"
+                android:text="："
+                android:textSize="@dimen/textsize_18"
                 android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/red_pressed"
                 />
             <TextView
                 android:id="@+id/count_down"
@@ -117,10 +128,10 @@
                 android:id="@+id/tv_current_score"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="200"
+                android:text="0"
                 android:gravity="center"
-                android:textColor="@color/textcolor_2"
-                android:textSize="28sp"
+                android:textColor="@color/textcolor_1"
+                android:textSize="24sp"
                 />
             <View
                 android:layout_width="0dp"
@@ -150,7 +161,7 @@
                 android:layout_height="match_parent"
                 android:text="未选择"
                 android:gravity="center"
-                android:textColor="@color/textcolor_2"
+                android:textColor="@color/textcolor_1"
                 android:textSize="20sp"
                 />
 
@@ -256,6 +267,7 @@
             >
 
         <LinearLayout
+            android:id="@+id/starting_skip"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -274,7 +286,7 @@
                 />
 
         <TextView
-            android:id="@+id/starting_skip"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="跳过"
@@ -286,7 +298,34 @@
 
             />
         </LinearLayout>
+
+
             <LinearLayout
+            android:id="@+id/starting_sound"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/ripple_bg_tran"
+            >
+
+            <ImageView
+                android:id="@+id/iv_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/sound_y_d"
+                />
+
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tv_help"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -302,11 +341,9 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:src="@drawable/icon_s_help"
-
                     />
-
             <TextView
-            android:id="@+id/tv_help"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="帮助"

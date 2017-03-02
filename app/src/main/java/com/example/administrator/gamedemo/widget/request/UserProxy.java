@@ -23,6 +23,7 @@ public class UserProxy {
 	public void signUp(String userName,String password,String email){
 		Students user = new Students();
 		user.setUsername(userName);
+		user.setNick_name(userName);
 		user.setPassword(password);
 		user.setEmail(email);
 		user.signUp(new SaveListener<Students>() {

@@ -40,6 +40,7 @@ import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.utils.TopicUtil;
 import com.example.administrator.gamedemo.widget.database.Sq;
+import com.lidong.photopicker.Image;
 import com.orhanobut.logger.Logger;
 
 
@@ -66,7 +67,10 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
     private List<String[]> problems = new ArrayList<>();
     private int erroNum = 0;
     private GridView answers_gv;
-    private TextView problems_tv,problems_skip,count_down,my_choice,verify,currentMyScore,tv_help,tv_starting_main;
+    private TextView problems_tv,count_down,my_choice,verify,currentMyScore,tv_starting_main;
+    private LinearLayout problems_skip,tv_help,ll_sound;
+    private ImageView ivSound;
+
     private  ProgressBar alwaysplan;
     private  ProgressBar alwaysplan_2;
     private CDHandler CH = new CDHandler();
@@ -97,7 +101,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
     //计算连续错题的个数
     private int cts_false_num = -1;
     private int myScore_temp = 0;
-   private SweetAlertDialog.OnSweetClickListener nextF;
+    private SweetAlertDialog.OnSweetClickListener nextF;
     private SweetAlertDialog.OnSweetClickListener nextT;
     private SweetAlertDialog.OnSweetClickListener nextTimeover;
     private SweetAlertDialog.OnSweetClickListener nextTimeover_2;
@@ -129,6 +133,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
     private ImageView iv_anim;
 
     private int mCurrentSub = 0;
+    private boolean isSound;//似不似有声音
 
     //整体布局，动画使用
     private RelativeLayout rl_main_anim;
@@ -143,9 +148,11 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
     initMusic();
 
     Intent inte = getIntent();
+
      type_num  = inte.getExtras().getInt("type");
-    boolean aa = inte.getExtras().getBoolean("yinliang");
-    if (aa == false) {
+     isSound = inte.getExtras().getBoolean("yinliang");
+
+    if (!isSound) {
         initMusicJingYin();
     }
     switch (type_num){
@@ -261,7 +268,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
         rl_main_anim = (RelativeLayout) findViewById(R.id.rl_main_main);
         answers_gv = (GridView) findViewById(R.id.starting_gv);
         problems_tv = (TextView) findViewById(R.id.starting_problem);
-        problems_skip = (TextView) findViewById(R.id.starting_skip);
+        problems_skip = (LinearLayout) findViewById(R.id.starting_skip);
         alwaysplan = (ProgressBar) findViewById(R.id.starting_pb);
         alwaysplan_2 = (ProgressBar) findViewById(R.id.starting_pb_2);
         count_down = (TextView) findViewById(R.id.count_down);
@@ -269,8 +276,10 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
         verify = (TextView) findViewById(R.id.tv_ok);
         problems_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         currentMyScore = (TextView) findViewById(R.id.tv_current_score);
-        tv_help = (TextView) findViewById(R.id.tv_help);
+        tv_help = (LinearLayout) findViewById(R.id.tv_help);
         tv_starting_main = (TextView) findViewById(R.id.starting_tv_main);
+        ll_sound = (LinearLayout) findViewById(R.id.starting_sound);
+        ivSound = (ImageView) findViewById(R.id.iv_sound);
     }
 
     public void initOnClick(){
@@ -279,6 +288,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
         tv_help.setOnClickListener(this);
         answers_gv.setOnItemClickListener(this);
         verify.setOnClickListener(this);
+        ll_sound.setOnClickListener(this);
     }
 
     //获取随机数
@@ -318,6 +328,8 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
 
     }
     public void initMusicJingYin(){
+        isSound = false;
+        ivSound.setImageDrawable(ContextCompat.getDrawable(Starting.this,R.drawable.sound_no_d));
         starting_m.setVolume(0,0);
         timesmall_m.setVolume(0,0);
         timeover_m.setVolume(0,0);
@@ -328,6 +340,21 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
         right66_m.setVolume(0,0);
         click_m.setVolume(0,0);
         result_m.setVolume(0,0);
+    }
+
+    public void initMusicSound(){
+        isSound = true;
+        ivSound.setImageDrawable(ContextCompat.getDrawable(Starting.this,R.drawable.sound_y_d));
+        starting_m.setVolume(1,1);
+        timesmall_m.setVolume(1,1);
+        timeover_m.setVolume(1,1);
+        right1_m.setVolume(1,1);
+        right2_m.setVolume(1,1);
+        right3_m.setVolume(1,1);
+        right4_m.setVolume(1,1);
+        right66_m.setVolume(1,1);
+        click_m.setVolume(1,1);
+        result_m.setVolume(1,1);
     }
 
     public void initnext(){
@@ -629,6 +656,14 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
             case R.id.bt_helpcancle:
                 click_m.start();
                 dialog_help.dismiss();
+                break;
+            //控制音量
+            case R.id.starting_sound:
+                if(isSound){
+                    initMusicJingYin();
+                }else{
+                    initMusicSound();
+                }
                 break;
         }
     }

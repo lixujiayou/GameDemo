@@ -31,7 +31,7 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
 
     private int preState;
 
-    private TextView mTextView;
+    public TextView mTextView;
     private TextView mClickToShow;
 
     private int textColor;
@@ -58,7 +58,7 @@ public class ClickShowMoreLayout extends LinearLayout implements View.OnClickLis
         super(context, attrs, defStyleAttr);
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ClickShowMoreLayout);
         textColor = a.getColor(R.styleable.ClickShowMoreLayout_text_color, 0xff1a1a1a);
-        textSize = a.getDimensionPixelSize(R.styleable.ClickShowMoreLayout_text_size, 14);
+        textSize = a.getDimensionPixelSize(R.styleable.ClickShowMoreLayout_text_size, 15);
         showLine = a.getInt(R.styleable.ClickShowMoreLayout_show_line, 8);
         clickText = a.getString(R.styleable.ClickShowMoreLayout_click_text);
         if (TextUtils.isEmpty(clickText)) clickText = "全文";

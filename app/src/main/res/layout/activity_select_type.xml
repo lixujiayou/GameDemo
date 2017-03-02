@@ -75,6 +75,39 @@
 
         </com.example.administrator.gamedemo.widget.imageview.CircleLayout>
 
+<LinearLayout
+    android:id="@+id/ll_myselect"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/about_item_style"
+    android:minHeight="@dimen/height_actionbar"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:gravity="center"
+    android:layout_gravity="center"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hand_right"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/tv_myselect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="四福音"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginLeft="6dp"
+        />
+
+</LinearLayout>
+
+
         <TextView
             android:id="@+id/main_selected_textView_temp"
             android:layout_width="wrap_content"
@@ -98,6 +131,7 @@
             android:textColor="#009EB9"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/shape_sure_btn_blue_kong"
+android:visibility="invisible"
             />
     <View
         android:id="@+id/view"
