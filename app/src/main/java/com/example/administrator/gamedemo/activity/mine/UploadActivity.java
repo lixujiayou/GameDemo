@@ -50,6 +50,7 @@ public class UploadActivity extends BaseFragmentActivity{
 
     @Override
     public void initViews() {
+        mToolbar.setTitle("我的上传");
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

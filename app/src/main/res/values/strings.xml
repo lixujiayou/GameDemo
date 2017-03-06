@@ -63,17 +63,17 @@
     <string name="spread">展开</string>
 
 
-    <string name="help_1_title">1、答题中，没做完15道题就结束了，为什么？</string>
+    <string name="help_1_title">\t\t问：答题中，没做完15道题就结束了，为什么？</string>
     <string name="help_1_content">\t\t答：无论在什么情况下，连续答错两道题自动结算成绩。注意：不是累计哦。</string>
-    <string name="help_2_title">2、我答完了15道题，为什么得分比中途结束的成绩少？</string>
+    <string name="help_2_title">\t\t问：我答完了15道题，为什么得分比中途结束的成绩少？</string>
     <string name="help_2_content">\t\t答：分数计算方法：\n\t\t\t\t初始化（开始）时，答对一题加100，答错一题减90。\n\t\t\t\t连续答对时加分规律：+100,+200,+300...\n\t\t\t\t连续答错时减分规律：-90，-180\n\t\t\t\t打破连对或连错将恢复初始化。\n\t\t所以，最后的得分多少不只在于答了多少题哦。</string>
-    <string name="help_3_title">3、答题中怎样暂停倒计时？</string>
+    <string name="help_3_title">\t\t问：答题中怎样暂停倒计时？</string>
     <string name="help_3_content">\t\t答：为防止暂停后查找答案的情况出现，现无法直接暂停。但选择当前题的答案并确定时，时间是不会变的，则可以视为暂停。</string>
-    <string name="help_4_title">4、错题记录在哪？</string>
+    <string name="help_4_title">\t\t问：错题记录在哪？</string>
     <string name="help_4_content">\t\t答：时间轴，这里包括您的答题记录，点击每条记录时就发现错题喽。</string>
-    <string name="help_5_title">5、在另一个手机登录我的账号时，时间轴都没了。</string>
+    <string name="help_5_title">\t\t问：在另一个手机登录我的账号时，时间轴都没了。</string>
     <string name="help_5_content">\t\t答：请点击时间轴的右上角第二个符号，可以将时间轴同步到账号的云端，在其它手机登录账号时则可以同步。 \n\t\t提示：右上角第一个符号是删除哦。</string>
-    <string name="help_6_title">6、“一起答”里面为什么是空的？</string>
+    <string name="help_6_title">\t\t问：“一起答”里面为什么是空的？</string>
     <string name="help_6_content">\t\t答：“一起答”是需要联网的哦。在网络不流畅的情况也可能会导致加载缓慢。</string>
 
 </resources>

@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment{
 
-
     public View mView;
     public Context mContext;
     private int layoutID;

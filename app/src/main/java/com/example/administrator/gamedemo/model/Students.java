@@ -27,8 +27,8 @@ public class Students extends BmobUser{
 
     }
 
-//    private String username;
-//    private String password;
+
+    private boolean isManage;//管理员权限
     private String avatar;
     private BmobFile cover;
     private BmobFile user_icon;
@@ -164,5 +164,13 @@ public class Students extends BmobUser{
 
     public void setMessage(BmobRelation message) {
         this.message = message;
+    }
+
+    public boolean isManage() {
+        return isManage;
+    }
+
+    public void setManage(boolean manage) {
+        isManage = manage;
     }
 }

@@ -85,7 +85,6 @@ public class MyImageView extends ImageView
 	public boolean onTouchEvent(MotionEvent event)
 	{
 
-		Logger.d("点击"+event.getAction());
 		switch (event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:

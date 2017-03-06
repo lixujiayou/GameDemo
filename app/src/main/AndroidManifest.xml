@@ -31,7 +31,7 @@
         android:theme="@style/AppBaseTheme"
         android:name=".core.MyApplication"
         >
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.LogoActivity"
             android:theme="@style/AppTheme.NoActionBar.Immerse"
             >
             <intent-filter>
@@ -39,6 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar.Immerse"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
 
         <!--在线答题页面-->
         <activity android:name=".activity.OnlineAnswerActivity"

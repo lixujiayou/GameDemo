@@ -181,6 +181,17 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
             isFirst = false;
             initKeyboardHeightObserver();
         }
+
+        Students cUserTemp = Constants.getInstance().getUser();
+        if(cUserTemp!= null){
+            if(cUserTemp.isManage()){
+                iv_add.setVisibility(View.VISIBLE);
+            }else{
+                iv_add.setVisibility(View.GONE);
+            }
+        }else{
+            iv_add.setVisibility(View.GONE);
+        }
     }
 
 

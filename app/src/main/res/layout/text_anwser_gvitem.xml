@@ -11,11 +11,10 @@
     android:layout_height="match_parent"
     android:text="第一个答案"
     android:textSize="22sp"
-    android:textColor="@color/textcolor_1"
+    android:textColor="@color/red"
     android:gravity="center"
     android:layout_gravity="center"
-    android:layout_margin="6dip"
-
+    android:layout_margin="4dip"
     />
 
 </LinearLayout>

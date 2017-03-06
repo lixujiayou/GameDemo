@@ -274,7 +274,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
         count_down = (TextView) findViewById(R.id.count_down);
         my_choice = (TextView) findViewById(R.id.tv_nullselect);
         verify = (TextView) findViewById(R.id.tv_ok);
-        problems_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+//        problems_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);   //给TextView加下划线
         currentMyScore = (TextView) findViewById(R.id.tv_current_score);
         tv_help = (LinearLayout) findViewById(R.id.tv_help);
         tv_starting_main = (TextView) findViewById(R.id.starting_tv_main);

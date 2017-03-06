@@ -84,9 +84,13 @@ public class SendTogtherActivity extends BaseActivity {
                     case R.id.action_send_whrite:
                         String text = et_togther.getText().toString();
                         if(text.trim() == null || text.length() == 0){
-                            ToastUtil3.showToast(SendTogtherActivity.this,"请填写文字内容");
+                            ToastUtil3.showToast(SendTogtherActivity.this,"请填写发布内容");
                         }else {
-                            commitTogther(text);
+                            if(text.length() > 500){
+                                ToastUtil3.showToast(SendTogtherActivity.this,"字数已超出限制500字，请修改后发布");
+                            }else {
+                                commitTogther(text);
+                            }
                         }
                         break;
                     default:

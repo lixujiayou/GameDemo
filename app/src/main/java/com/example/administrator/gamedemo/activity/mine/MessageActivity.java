@@ -65,11 +65,15 @@ public class MessageActivity extends BaseFragmentActivity{
             }
         });
         myFM = getSupportFragmentManager();
-        list_fragmet.add(AboutMFragment.getInstance());
+
         list_fragmet.add(SysMFragment.getInstance());
+        list_fragmet.add(AboutMFragment.getInstance());
+
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(0)));
+
         tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(1)));
+        tabLayout.addTab(tabLayout.newTab().setText(Constants.strMessageTag.get(0)));
+
         vp.setAdapter(new BaseFragmentAdapterTableLayout(Constants.strMessageTag,list_fragmet,myFM));
 
         tabLayout.setupWithViewPager(vp);

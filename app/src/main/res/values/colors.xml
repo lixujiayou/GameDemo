@@ -43,7 +43,7 @@
     <color name="blackround_nwhite">#F8F8F8</color>
     <color name="btn_qing">#7ED321</color>
     <color name="btn_qing_s">#6FC40E</color>
-    <color name="pink">#F63F56</color>
+    <color name="pink">#F63F56</color>f
     <color name="search_backround">#EDEEF3</color>
     <color name="floor_status_no">#D5DDF1</color>
     <color name="floor_status_ing">#FF2D47</color>
@@ -97,6 +97,7 @@
     <color name="textcolor_3">#d8d8d8</color>
     <color name="textcolor_m">#bfbfbf</color>
     <color name="textcolor_4">#7D7D7D</color>
+    <color name="textcolor_7">#232321</color>
     <color name="photopicker_background">#181819</color>
 
     <color name="crop__selector_pressed">#1a000000</color>

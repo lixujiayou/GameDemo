@@ -292,7 +292,13 @@ public class AnswerHistoryActivity extends BaseActivity{
                                     lv_history.setVisibility(View.VISIBLE);
                                     ToastUtil3.showToast(AnswerHistoryActivity.this,"清理成功");
                                 }else{
-                                    ToastUtil3.showToast(AnswerHistoryActivity.this,"清理失败");
+                                    db.delete("user1", null, null);
+                                    mAnswerHistories.clear();
+                                    mAnswerHistories.addAll(getAllscore());
+                                    historyAdapter.notifyDataSetChanged();
+                                    rl_hint.setVisibility(View.GONE);
+                                    lv_history.setVisibility(View.VISIBLE);
+                                    ToastUtil3.showToast(AnswerHistoryActivity.this,"已清空本地缓存，云端记录清空失败");
                                     Logger.d("清理失败" + s.toString());
                                 }
                             }
@@ -311,7 +317,13 @@ public class AnswerHistoryActivity extends BaseActivity{
                     }
                 }else{
                     dimssProgressDialog();
-                    ToastUtil3.showToast(AnswerHistoryActivity.this, "初始化数据失败，请检查网络并重试");
+                    db.delete("user1", null, null);
+                    mAnswerHistories.clear();
+                    mAnswerHistories.addAll(getAllscore());
+                    historyAdapter.notifyDataSetChanged();
+                    rl_hint.setVisibility(View.GONE);
+                    lv_history.setVisibility(View.VISIBLE);
+                    ToastUtil3.showToast(AnswerHistoryActivity.this,"已清空本地缓存，云端记录清空失败");
                     Logger.d("初始化数据失败" + s.toString());
                 }
             }

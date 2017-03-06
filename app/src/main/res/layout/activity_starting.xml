@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rl_main_main">
+    android:id="@+id/rl_main_main"
+    android:background="@drawable/bg"
+    >
 
     <ImageView
         android:id="@+id/activity_starting_iv_backround"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/beijing"
-
-        android:scaleType="centerCrop"
+        android:src="@drawable/bg"
+        android:visibility="gone"
         />
 
     <LinearLayout
@@ -46,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:text="正在答题：摩西五经"
                 android:textSize="@dimen/textsize_actionbar"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:layout_marginTop="5dip"
                 android:layout_centerInParent="true"
                 />
@@ -59,7 +60,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginRight="10dip"
             >
 
             <ImageView
@@ -68,6 +68,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:src="@drawable/time_down"
+                android:visibility="gone"
                 />
 
             <TextView
@@ -78,23 +79,25 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/red_pressed"
+                android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/count_down"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="25"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:gravity="center"
-                android:textColor="@color/red_pressed"
+                android:textColor="@color/gplus_color_4"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="秒"
                 android:textSize="20sp"
-                android:gravity="center"
-                android:textColor="@color/red_pressed"
+                android:gravity="right"
+                android:textColor="@color/red"
+                android:visibility="gone"
                 />
         </LinearLayout>
 
@@ -104,7 +107,6 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:orientation="horizontal"
-            android:layout_marginRight="10dp"
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -113,6 +115,7 @@
                 android:layout_gravity="center"
                 android:src="@drawable/icon_myscore"
                 android:layout_marginLeft="10dip"
+                android:visibility="gone"
                 />
 
                 <TextView
@@ -122,16 +125,18 @@
                     android:textSize="@dimen/textsize_18"
                     android:gravity="center"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     />
 
             <TextView
                 android:id="@+id/tv_current_score"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="0"
+                android:text="2500"
                 android:gravity="center"
-                android:textColor="@color/textcolor_1"
-                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:layout_marginLeft="10dp"
                 />
             <View
                 android:layout_width="0dp"
@@ -145,6 +150,7 @@
                 android:layout_gravity="center"
                 android:src="@drawable/icon_s_myselect"
                 android:layout_marginLeft="10dip"
+                android:visibility="gone"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -153,6 +159,7 @@
                 android:textSize="@dimen/textsize_18"
                 android:gravity="center"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 />
 
             <TextView
@@ -161,8 +168,9 @@
                 android:layout_height="match_parent"
                 android:text="未选择"
                 android:gravity="center"
-                android:textColor="@color/textcolor_1"
+                android:textColor="@color/white"
                 android:textSize="20sp"
+                android:layout_marginRight="10dp"
                 />
 
         </LinearLayout>
@@ -200,7 +208,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/textcolor_1"
+                android:textColor="@color/red"
                 android:lineSpacingExtra="2dp"
                 />
 
@@ -266,62 +274,10 @@
             android:orientation="horizontal"
             >
 
-        <LinearLayout
-            android:id="@+id/starting_skip"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@drawable/ripple_bg_tran"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_skip"
-                />
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="跳过"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginLeft="8dp"
-
-            />
-        </LinearLayout>
 
 
-            <LinearLayout
-            android:id="@+id/starting_sound"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@drawable/ripple_bg_tran"
-            >
-
-            <ImageView
-                android:id="@+id/iv_sound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:src="@drawable/sound_y_d"
-                />
 
 
-        </LinearLayout>
 
 
             <LinearLayout
@@ -353,14 +309,60 @@
                 android:layout_marginLeft="8dp"
             />
                 </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/starting_sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/ripple_bg_tran"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sound_y_d"
+                    />
+
+
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/starting_skip"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/ripple_bg_tran"
+                >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_skip"
+                    />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳过"
+                    android:textSize="20sp"
+                    android:textColor="@color/gplus_color_4"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    />
+            </LinearLayout>
+            </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-
 </RelativeLayout>

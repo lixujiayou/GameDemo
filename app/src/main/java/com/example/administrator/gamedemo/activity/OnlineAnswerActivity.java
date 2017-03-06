@@ -124,8 +124,15 @@ public class OnlineAnswerActivity extends BaseActivity {
     @Override
     public void initViews() {
 
-        Intent gIntent = getIntent();
-        mMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra("topic");
+//        Intent gIntent = getIntent();
+//        mMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra("topic");
+        mMomentsInfo = Constants.getInstance().getMomentsInfo();
+        if(mMomentsInfo == null){
+            ToastUtil3.showToast(OnlineAnswerActivity.this,"这道题走丢啦，请重试");
+            finish();
+        }
+
+
         initDeleteWidget();
 
         mLayoutManager = new LinearLayoutManager(this);

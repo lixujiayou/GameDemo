@@ -200,13 +200,13 @@ public abstract class ShareViewHolder extends BaseRecyclerViewHolder<Share> impl
         });
 
 
-        userText.setOnClickListener(new View.OnClickListener() {
+        /*userText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPhotoDialog(itemPosition,data);
                 Logger.d("收藏----userText");
             }
-        });
+        });*/
     }
 
     /**

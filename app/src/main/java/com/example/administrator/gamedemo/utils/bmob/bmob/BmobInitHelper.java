@@ -26,7 +26,7 @@ import cn.bmob.v3.listener.FindListener;
 
 
 /**
- * Created by 大灯泡 on 2016/10/28.
+ * Created by lixu on 2016/10/28.
  * <p>
  * 为bmob数据库初始化的工具类
  */

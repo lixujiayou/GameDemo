@@ -200,7 +200,7 @@ public abstract class UploadFragment extends BaseFragment{
         setmType();
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setRefreshing(true);
-        initData();
+    //    initData();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -213,6 +213,7 @@ public abstract class UploadFragment extends BaseFragment{
 
     @Override
     public void initData() {
+        Logger.d("isPrepared=="+isPrepared+"isVisible=="+isVisible+"isFirst=="+isFirst);
         if (!isPrepared || !isVisible || !isFirst) {
             if(swipeRefreshLayout != null){
                 if(swipeRefreshLayout.isRefreshing()){

@@ -86,7 +86,8 @@ public class SendShareActivity extends BaseActivity {
                         if(text.trim() == null || text.length() == 0){
                             ToastUtil3.showToast(SendShareActivity.this,"请填写文字内容");
                         }else {
-                            commitTogther(text);
+                                commitTogther(text);
+
                         }
                         break;
                     default:

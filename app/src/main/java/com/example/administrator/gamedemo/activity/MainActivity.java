@@ -129,13 +129,23 @@ public class MainActivity extends BaseFragmentActivity {
         allbike_temp.findObjects(new FindListener<version>() {
             @Override
             public void done(List<version> list, BmobException e) {
-                int v_n = list.get(0).getVersion_num();
-                BmobFile bApk = list.get(0).getApk();
-                apkUrl = bApk.getUrl();
-                if(v_n > versionCode){
-                    TiShiUpdate();
-                }
+                if(e == null){
+                    try {
+                        int v_n = list.get(0).getVersion_num();
+                        BmobFile bApk = list.get(0).getApk();
+                        apkUrl = bApk.getUrl();
+                        if (v_n > versionCode) {
+                            TiShiUpdate();
+                        }
+                    }catch (Exception e1){
+
+                    }
+
+
             }
+
+            }
+
         });
     }
 

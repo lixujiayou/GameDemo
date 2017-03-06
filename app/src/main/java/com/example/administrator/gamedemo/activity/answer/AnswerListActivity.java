@@ -109,11 +109,12 @@ public class AnswerListActivity extends BaseActivity{
         adapter.setOnItemClickListener(new UploadAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("topic",momentsInfoList.get(position));
+                Constants.getInstance().setMomentsInfo(momentsInfoList.get(position));
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("topic",momentsInfoList.get(position));
                 Intent gIntent = new Intent(AnswerListActivity.this, OnlineAnswerActivity.class);
 
-                gIntent.putExtras(bundle);
+//                gIntent.putExtras(bundle);
                 startActivityForResult(gIntent,1);
             }
 

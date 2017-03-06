@@ -487,6 +487,7 @@
         android:layout_marginBottom="@dimen/margintop_6dp"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
+        android:visibility="gone"
         >
         <CheckBox
             android:id="@+id/cb_agree"

@@ -155,11 +155,11 @@ public class SendAnswerActivity extends BaseActivity {
                         mAnser4 = etSendAnswerN3.getText().toString().trim();
                         mPs = etSendPs.getText().toString().trim();
                         if (!isEmpty()) {
-                            if (isAgree) {
+                            //if (isAgree) {
                                 showDiaLog();
-                            } else {
+                            /*} else {
                                 ToastUtil3.showToast(SendAnswerActivity.this, "请阅读并同意《圣经问答APP》上传规范");
-                            }
+                            }*/
                         }
                         break;
                 }

@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
+import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.orhanobut.logger.Logger;
 
@@ -43,7 +44,6 @@ public class Constants {
 
     public static final int GOLOGIN = 22;
 
-
     public static final String MESSAGE_SHARE = "mShare";
     public static final String MESSAGE_TOGTHER = "mTogther";
     /**
@@ -62,6 +62,9 @@ public class Constants {
     public static final String FILENAME = "autoapk.apk";
     public static final String FILE_NAME = FILE_PATH + FILENAME;
 
+
+    private MomentsInfo momentsInfo;
+
     public Constants(){
 
     }
@@ -75,6 +78,13 @@ public class Constants {
         public static final Constants instance = new Constants();
     }
 
+    public MomentsInfo getMomentsInfo() {
+        return momentsInfo;
+    }
+
+    public void setMomentsInfo(MomentsInfo momentsInfo) {
+        this.momentsInfo = momentsInfo;
+    }
 
     public Students getUser(Context mContext){
         Students bmobUser = BmobUser.getCurrentUser(Students.class);
