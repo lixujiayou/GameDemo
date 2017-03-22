@@ -111,7 +111,7 @@ public class AddShareRequest extends BaseRequestClient<String> {
                     public void onProgress(int i, int i1, int i2, int i3) {
                         // setProgressDialogText(String.valueOf(i3));
                         onResponseProgress(i3);
-                        Logger.d("当前上传进度：" + i3);
+
                     }
 
                     @Override

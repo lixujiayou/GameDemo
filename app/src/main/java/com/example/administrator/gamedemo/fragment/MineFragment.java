@@ -84,7 +84,7 @@ public class MineFragment extends BaseFragment {
     LinearLayout ll_note;
 
     private boolean isPrepared;
-
+    private  boolean isFirst = true;//是否第一次加载数据
     public MineFragment() {
     }
 

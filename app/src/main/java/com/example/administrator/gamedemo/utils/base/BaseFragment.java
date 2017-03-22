@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment{
     public Context mContext;
     private int layoutID;
     public boolean isVisible; //Fragment显示隐藏状态
-    public static boolean isFirst;//是否第一次加载数据
+ //   public static boolean isFirst;//是否第一次加载数据
     public LayoutInflater mInflater;
     @Nullable
     @Override

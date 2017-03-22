@@ -10,16 +10,17 @@ import java.util.List;
 
 
 /**
- * Created by 大灯泡 on 2016/12/7.
+ * Created by lixu on 2016/12/7.
  */
 
 public interface IMomentViewTogther extends IBaseView {
-
 
     void onLikeChange(int itemPos, List<Students> likeUserList);
 
     void onCommentChange(int itemPos, List<CommentInfo> commentInfoList);
 
     void showCommentBox(int itemPos, Togther momentid, CommentWidget commentWidget);
+
     void onMessageChange(String itemPos,String content);
+
 }

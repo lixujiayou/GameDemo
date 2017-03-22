@@ -42,6 +42,7 @@ public class LogoActivity extends Activity implements OnClickListener {
 	    iv.setOnClickListener(this);
 	    skip = (Button) findViewById(R.id.skip);
 	    skip.setOnClickListener(this);
+		startTimer();
 
 	}
 	
@@ -57,7 +58,7 @@ public class LogoActivity extends Activity implements OnClickListener {
 	 * ��timer
 	 */
 	private void startTimer() {
-				mTimer = new CountDownTimer(4000,1000) {
+				mTimer = new CountDownTimer(3000,1000) {
 					@Override
 					public void onTick(long l) {
 

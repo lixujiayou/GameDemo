@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -236,6 +237,13 @@ public class SendAnswerActivity extends BaseActivity {
                 }
 
                 @Override
+                public void onError(BmobException e, int requestType) {
+                    super.onError(e, requestType);
+                    pDialog.dismiss();
+                    ToastUtil3.showToast(SendAnswerActivity.this,"上传失败，请检查网络并重试。");
+                }
+
+                @Override
                 public void onProgress(int pro) {
 
                 }
@@ -360,8 +368,8 @@ public class SendAnswerActivity extends BaseActivity {
     public void showProgressBarDialog(){
         try {
                 pDialog = new SweetAlertDialog(SendAnswerActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                pDialog.setTitleText("正在提交数据...");
-                pDialog.setCancelable(false);
+                pDialog.setTitleText("正在上传审核...");
+                pDialog.setCancelable(true);
                 pDialog.show();
 
         }catch (Exception e){

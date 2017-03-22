@@ -457,7 +457,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                             if(students.getObjectId().equals(s.getObjectId())){
                                 ToastUtil3.showToast(OnlineAnswerActivity.this,"您已答过此题,看看讨论吧");
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getAnswers().get(0));
                                 mIsSelect = true;
                                 pDialog.dismiss();
                                 return;
@@ -492,7 +492,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                         for(Students s : object){
                             if(students.getObjectId().equals(s.getObjectId())){
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getAnswers().get(0));
                                 mIsSelect = true;
 
                                 if(pDialog != null) {
@@ -536,7 +536,7 @@ public class OnlineAnswerActivity extends BaseActivity {
                         for(Students s : object){
                             if(students.getObjectId().equals(s.getObjectId())){
                                 tvResultData.setVisibility(View.VISIBLE);
-                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getCommentList().get(0));
+                                tvResultData.setText("\t\t参考:" + mMomentsInfo.getHint()+"\n\t\t正确答案:"+mMomentsInfo.getAnswers().get(0));
                                 mIsSelect = true;
                                 pDialog.dismiss();
 

@@ -41,7 +41,6 @@ import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
-import com.example.administrator.gamedemo.utils.viewholder.AnswerViewHolder;
 import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
@@ -103,6 +102,8 @@ public abstract class UploadFragment extends BaseFragment{
 
     public String mType = Constants.UPLOAD_OK;
     private boolean isLoad = false;
+    private  boolean isFirst = true;//是否第一次加载数据
+    private int cSize = 0;
     protected abstract void setmType();
 
     @Override
@@ -175,11 +176,12 @@ public abstract class UploadFragment extends BaseFragment{
                     //如果正在下拉刷新中，删除上拉的布局 并屏蔽上拉
                     boolean isRefreshing = swipeRefreshLayout.isRefreshing();
                     if (isRefreshing) {
-                        adapter.notifyItemRemoved(adapter.getItemCount());
+                    //    adapter.notifyItemRemoved(adapter.getItemCount());
+                        adapter.setLoadStatus(false);
                         return;
                     }else{
                         //滑动到底部，开始加载更多
-                        if(momentsInfoList.size() >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
+                        if(cSize >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更 多
                             if (!isLoad) {                                      //是否在加载中
                                 adapter.setLoadStatus(true);
                                 loadMore();
@@ -220,7 +222,6 @@ public abstract class UploadFragment extends BaseFragment{
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
-
             return;
         } else {
             isFirst = false;
@@ -317,10 +318,12 @@ public abstract class UploadFragment extends BaseFragment{
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
+                        cSize = response.size();
                         circleRecyclerView.setVisibility(View.VISIBLE);
                         rl_hint.setVisibility(View.GONE);
                         adapter.updateData(response);
                     }else{
+                        cSize = 0;
                         circleRecyclerView.setVisibility(View.GONE);
                         rl_hint.setVisibility(View.VISIBLE);
                         if(mType.equals(Constants.UPLOAD_OK)){
@@ -336,7 +339,12 @@ public abstract class UploadFragment extends BaseFragment{
                     }
                     break;
                 case REQUEST_LOADMORE:
-
+                    if(response!=null) {
+                        cSize = response.size();
+                        Logger.d("加载更多后" + response.size());
+                    }else{
+                        cSize = 0;
+                    }
                     adapter.addMore(response);
                     break;
             }

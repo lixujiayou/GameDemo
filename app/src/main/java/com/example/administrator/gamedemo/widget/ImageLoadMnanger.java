@@ -90,7 +90,16 @@ public enum ImageLoadMnanger {
                 .into(imageView)
         ;
     }
+    private BitmapRequestBuilder loadImageByNormalConfig(ImageView imageView, String url) {
 
+        return Glide.with(getImageContext(imageView))
+                .load(url)
+                .asBitmap()
+                .placeholder(R.drawable.ic_loading_small)
+                .error(R.drawable.ic_loading_no)
+                .thumbnail(0.5f)
+                ;
+    }
     //头像
  public void loadIconImage(Fragment fragment,ImageView imageView,String imgUrl){
         Glide.with(fragment)
@@ -128,16 +137,7 @@ public enum ImageLoadMnanger {
     }
 
 
-    private BitmapRequestBuilder loadImageByNormalConfig(ImageView imageView, String url) {
 
-        return Glide.with(getImageContext(imageView))
-                .load(url)
-                .asBitmap()
-                .placeholder(R.drawable.ic_loading_small)
-                .error(R.drawable.ic_loading_no)
-                .thumbnail(0.5f)
-                ;
-    }
 
 
     private BitmapRequestBuilder loadImageToC(ImageView imageView, String url) {

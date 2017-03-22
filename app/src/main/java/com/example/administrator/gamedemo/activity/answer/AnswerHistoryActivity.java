@@ -275,9 +275,10 @@ public class AnswerHistoryActivity extends BaseActivity{
         bmobQuery.findObjects(new FindListener<AnswerHistory>() {
             @Override
             public void done(List<AnswerHistory> list, BmobException e) {
+                if(e == null) {
                 List<BmobObject> list_temp = new ArrayList<BmobObject>();
                 list_temp.addAll(list);
-                if(e == null) {
+
                     if (!ToolUtil.isListEmpty(list)) {
                         new BmobBatch().deleteBatch(list_temp).doBatch(new QueryListListener<BatchResult>() {
                             @Override

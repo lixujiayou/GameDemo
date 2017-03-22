@@ -68,7 +68,6 @@ public class Students extends BmobUser{
         this.password = password;
     }*/
 
-
     public String getAvatar() {
         return avatar;
     }
@@ -156,7 +155,6 @@ public class Students extends BmobUser{
     public void setFavid(ArrayList<String> favid) {
         this.favid = favid;
     }
-
 
     public BmobRelation getMessage() {
         return message;

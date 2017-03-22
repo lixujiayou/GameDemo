@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_main_main"
-    android:background="@drawable/bg"
-    >
+    android:background="@drawable/bg">
 
     <ImageView
         android:id="@+id/activity_starting_iv_backround"
@@ -132,7 +132,7 @@
                 android:id="@+id/tv_current_score"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="2500"
+                android:text="0"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="26sp"
@@ -222,25 +222,27 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/progressbar_color"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            >
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="4"
-    android:layout_gravity="center"
-    android:gravity="center"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_centerInParent="true"
     >
 
         <GridView
             android:id="@+id/starting_gv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:numColumns="2"
-            android:layout_gravity="center"
-            android:gravity="center"
             />
 
 </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -350,6 +352,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:src="@drawable/icon_skip"
+
                     />
 
                 <TextView

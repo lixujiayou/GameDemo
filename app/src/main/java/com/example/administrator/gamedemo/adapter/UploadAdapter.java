@@ -79,7 +79,7 @@ public class UploadAdapter extends Adapter<ViewHolder> {
             MomentsInfo momentsInfo = itemsEntities.get(position);
 
             if(momentsInfo.getAuthor().getUser_icon() != null){
-                ImageLoadMnanger.INSTANCE.loadRoundImage(((ItemViewHolder) holder).rv_cover, momentsInfo.getAuthor().getUser_icon().getFileUrl());
+                ImageLoadMnanger.INSTANCE.loadImage(((ItemViewHolder) holder).rv_cover, momentsInfo.getAuthor().getUser_icon().getFileUrl());
             }
 
             ((ItemViewHolder) holder).tv_name.setText(momentsInfo.getAuthor().getNick_name());

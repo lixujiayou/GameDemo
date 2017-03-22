@@ -65,7 +65,7 @@ public class SysMFragment extends BaseFragment{
     public static SysMFragment getInstance() {
         return answerFragmentHolder.instance;
     }
-
+    private  boolean isFirst = true;//是否第一次加载数据
     public static class answerFragmentHolder {
         public static final SysMFragment instance = new SysMFragment();
     }

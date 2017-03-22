@@ -92,7 +92,7 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
     // private List<Share> responseTemp;
     private boolean isReadCache = true;
     private boolean isOne = true;
-
+    private  boolean isFirst = true;//是否第一次加载数据
     public ShareFragment() {
     }
 
@@ -167,6 +167,16 @@ public class ShareFragment extends BaseFragment implements onRefreshListener2, I
         ivLoadState.setVisibility(View.VISIBLE);
         initData();
 
+        Students cUserTemp = Constants.getInstance().getUser();
+        if(cUserTemp!= null){
+            if(cUserTemp.isManage()){
+                iv_add.setVisibility(View.VISIBLE);
+            }else{
+                iv_add.setVisibility(View.GONE);
+            }
+        }else{
+            iv_add.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -236,6 +236,13 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         togtherRequest.execute();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        togtherRequest = null;
+    }
+
     //call back block
     //==============================================
     private SimpleResponseListener<List<Togther>> momentsRequestCallBack = new SimpleResponseListener<List<Togther>>() {

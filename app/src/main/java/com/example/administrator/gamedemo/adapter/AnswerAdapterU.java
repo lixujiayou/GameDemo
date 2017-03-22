@@ -2,16 +2,15 @@ package com.example.administrator.gamedemo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewAdapter;
-import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewHolder;
-import com.example.administrator.gamedemo.utils.viewholder.TopicBaseViewHolder;
-import com.orhanobut.logger.Logger;
+import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
+import com.example.administrator.gamedemo.utils.viewholder.TogtherViewHolder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,22 +19,27 @@ import java.util.List;
 
 
 /**
- * Created by lixu on 2016/11/1.
+ * Created by lixu on 2016/12/27.
  * <p>
- * 问题adapter
+ * 一起adapter
  */
 
-public class AnswersAdapter extends BaseRecyclerViewAdapter<MomentsInfo> {
-    private SparseArray<ViewHoldernfo> viewHolderKeyArray;
+public class AnswerAdapterU extends BaseRecyclerViewAdapter<MomentsInfo> {
 
-    private AnswersAdapter(@NonNull Context context,
+
+    private SparseArray<ViewHoldernfo> viewHolderKeyArray;
+    private MomentPresenterTogther momentPresenter;
+
+
+    private AnswerAdapterU(@NonNull Context context,
                            @NonNull List<MomentsInfo> datas) {
         super(context, datas);
     }
 
-    private AnswersAdapter(Builder builder) {
+    private AnswerAdapterU(Builder builder) {
         this(builder.context, builder.datas);
         this.viewHolderKeyArray = builder.viewHolderKeyArray;
+        this.momentPresenter = builder.momentPresenter;
     }
 
     @Override
@@ -49,11 +53,14 @@ public class AnswersAdapter extends BaseRecyclerViewAdapter<MomentsInfo> {
     }
 
     @Override
-    protected BaseRecyclerViewHolder getViewHolder(ViewGroup parent, View rootView, int viewType) {
+    protected TogtherViewHolder getViewHolder(ViewGroup parent, View rootView, int viewType) {
         ViewHoldernfo viewHoldernfo = viewHolderKeyArray.get(viewType);
-        Logger.d("getViewHolder");
         if (viewHoldernfo != null) {
-            return createCircleViewHolder(context, parent, viewHoldernfo);
+            TogtherViewHolder circleBaseViewHolder = createCircleViewHolder(context, parent, viewHoldernfo);
+            if (circleBaseViewHolder != null) {
+                circleBaseViewHolder.setPresenter(momentPresenter);
+            }
+            return circleBaseViewHolder;
         }
         return null;
     }
@@ -62,13 +69,14 @@ public class AnswersAdapter extends BaseRecyclerViewAdapter<MomentsInfo> {
         private Context context;
         private SparseArray<ViewHoldernfo> viewHolderKeyArray = new SparseArray<>();
         private List<T> datas;
+        private MomentPresenterTogther momentPresenter;
 
         public Builder(Context context) {
             this.context = context;
             datas = new ArrayList<>();
         }
 
-        public Builder<T> addType(Class<? extends TopicBaseViewHolder> viewHolderClass,
+        public Builder<T> addType(Class<? extends TogtherViewHolder> viewHolderClass,
                                   int viewType,
                                   int layoutResId) {
             final ViewHoldernfo info = new ViewHoldernfo();
@@ -84,31 +92,44 @@ public class AnswersAdapter extends BaseRecyclerViewAdapter<MomentsInfo> {
             return this;
         }
 
-        public AnswersAdapter build() {
-            return new AnswersAdapter(this);
+        public Builder<T> setPresenter(MomentPresenterTogther presenter) {
+            this.momentPresenter = presenter;
+            return this;
+        }
+
+        public AnswerAdapterU build() {
+            return new AnswerAdapterU(this);
         }
     }
+
 
     /**
      * vh的信息类
      */
     private static final class ViewHoldernfo {
-        public Class<? extends TopicBaseViewHolder> holderClass;
+        public Class<? extends TogtherViewHolder> holderClass;
         public int viewType;
         public int layoutResID;
     }
 
-    private TopicBaseViewHolder createCircleViewHolder(Context context, ViewGroup viewGroup, ViewHoldernfo viewHoldernfo) {
+    private TogtherViewHolder createCircleViewHolder(Context context, ViewGroup viewGroup, ViewHoldernfo viewHoldernfo) {
         if (viewHoldernfo == null) {
             throw new NullPointerException("木有这个viewholder信息哦");
         }
-        Class<? extends TopicBaseViewHolder> className = viewHoldernfo.holderClass;
-        Logger.d("class  >>>  " + className);
+        Class<? extends TogtherViewHolder> className = viewHoldernfo.holderClass;
         Constructor constructor = null;
         try {
             constructor = className.getConstructor(Context.class, ViewGroup.class, int.class);
-            return (TopicBaseViewHolder) constructor.newInstance(context, viewGroup, viewHoldernfo.layoutResID);
-        } catch (Exception e) {
+            return (TogtherViewHolder) constructor.newInstance(context, viewGroup, viewHoldernfo.layoutResID);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         return null;

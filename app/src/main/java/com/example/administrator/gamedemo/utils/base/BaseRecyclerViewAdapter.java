@@ -98,12 +98,14 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     }
 
     public void updateData(List<T> datas) {
+        Logger.d("刷新数据="+datas.size());
         this.datas.clear();
         this.datas.addAll(datas);
         notifyDataSetChanged();
     }
 
     public void addMore(List<T> datas) {
+        Logger.d("更多数据="+datas.size());
         this.datas.addAll(datas);
         notifyDataSetChanged();
     }

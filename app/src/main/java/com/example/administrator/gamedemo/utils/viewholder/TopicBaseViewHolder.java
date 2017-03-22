@@ -31,8 +31,6 @@ import java.util.List;
  */
 public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<MomentsInfo> implements BaseMomentVH<MomentsInfo>, ViewGroup.OnHierarchyChangeListener {
 
-
-
     protected ImageView rv_cover;     //封面
     protected TextView tv_topic; //问题
 
@@ -64,6 +62,7 @@ public abstract class TopicBaseViewHolder extends BaseRecyclerViewHolder<Moments
     }
 
     private void onBindMutualDataToViews(final MomentsInfo data) {
+        Logger.d("到这儿了"+data.getTopic());
         //header
         if(data.getAuthor().getUser_icon() != null){
             ImageLoadMnanger.INSTANCE.loadRoundImage(rv_cover, data.getAuthor().getUser_icon().getFileUrl());

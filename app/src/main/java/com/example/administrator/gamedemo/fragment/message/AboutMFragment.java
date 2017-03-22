@@ -57,7 +57,7 @@ public class AboutMFragment extends BaseFragment {
     private boolean isLoad = false;
     private boolean isPrepared;
     private boolean isReadCache = true;
-
+    private  boolean isFirst = true;//是否第一次加载数据
     public AboutMFragment() {
     }
 

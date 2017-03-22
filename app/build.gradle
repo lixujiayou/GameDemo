@@ -44,7 +44,7 @@ dependencies {
     //over scroller helper
     compile 'me.everything:overscroll-decor-android:1.0.3'
     //bmob
-    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile 'cn.bmob.android:bmob-sdk:3.5.3'
     //okhttp（选填）：为解决弱网情况下SDK请求失败及响应慢的问题，自`V3.4.3版本`开始使用`okhttp`优化SDK的网络框架。
     compile 'com.github.razerdp:BasePopup:v1.5.0'
     //朋友圈图片控件

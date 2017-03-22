@@ -29,7 +29,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Constants {
 
-    public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //BMOBID
+    //public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //BMOBID
+    public static final String BmobId = "21bfb1f1037b3963aaa2fe01bee1bc68"; //BMOBID测试
     public static final String LoggerTAG = "qzzzzzzz";
     public static final int  REFRESH_CODE = 24;
     public static final int  FIRSTLOADNUM = 10;

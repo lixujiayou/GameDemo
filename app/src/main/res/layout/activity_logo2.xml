@@ -109,9 +109,10 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dip"
-            android:text="天国近了,我们当悔改"
+            android:text="扎根于圣经\t建基于祷告"
             android:textColor="@color/abc_secondary_text_material_light"
             android:textSize="@dimen/textsize_z"
+            android:lines="1"
             />
 
         <ProgressBar

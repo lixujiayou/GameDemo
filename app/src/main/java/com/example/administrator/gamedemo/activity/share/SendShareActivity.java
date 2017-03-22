@@ -181,11 +181,10 @@ public class SendShareActivity extends BaseActivity {
             }
             @Override
             public void onProgress(int pro) {
-                setProgressDialogText("已上传%"+pro);
+                setProgressDialogText("已上传"+pro+"%");
             }
         });
         addTogtherRequest.execute();
-
     }
 
     @Override
@@ -295,12 +294,12 @@ public class SendShareActivity extends BaseActivity {
 
     public void showProgressBarDialog(final Activity mContext){
         try {
-            if(mContext.hasWindowFocus()){
+
                 pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
                 pDialog.setTitleText("正在提交数据，请稍等");
                 pDialog.setCancelable(true);
                 pDialog.show();
-            }
+
         }catch (Exception e){
             Logger.d("ProgressBarDialog的上下文找不到啦！");
         }

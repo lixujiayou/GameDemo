@@ -22,12 +22,31 @@ import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
 import com.example.administrator.gamedemo.activity.SendAnswerActivity;
 import com.example.administrator.gamedemo.activity.mine.UploadActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.SendTogtherActivity;
+import com.example.administrator.gamedemo.adapter.AnswerAdapterU;
+import com.example.administrator.gamedemo.adapter.AnswersAdapter;
+import com.example.administrator.gamedemo.adapter.TogtherAdapter;
 import com.example.administrator.gamedemo.adapter.UploadAdapter;
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.core.MomentsType;
+import com.example.administrator.gamedemo.model.AnswerHistory;
+import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
+import com.example.administrator.gamedemo.utils.presenter.MomentPresenterAnswer;
+import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
+import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
+import com.example.administrator.gamedemo.utils.viewholder.AnswerViewHolder;
+import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVHTogther;
+import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVHAnswer;
+import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVHTogther;
+import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVHTogther;
+import com.example.administrator.gamedemo.utils.viewholder.TopicBaseViewHolder;
+import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVHTogther;
+import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.example.administrator.gamedemo.widget.request.MomentsRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.orhanobut.logger.Logger;
@@ -42,7 +61,7 @@ import cn.bmob.v3.exception.BmobException;
  * @auther lixu
  * Created by lixu on 2017/1/4 0004.
  */
-public class AnswerListActivity extends BaseActivity{
+public class AnswerListActivity extends BaseActivity implements IMomentViewTogther {
 
     @BindView(R.id.recycler)
     RecyclerView circleRecyclerView;
@@ -57,7 +76,8 @@ public class AnswerListActivity extends BaseActivity{
     private MomentsRequest momentsRequest;
     private List<MomentsInfo> momentsInfoList;
     // private List<Share> responseTemp;
-    private UploadAdapter adapter;
+    //private UploadAdapter adapter;
+    private AnswersAdapter adapter;
     @BindView(R.id.rl_hint)
     RelativeLayout rl_hint;
     @BindView(R.id.tv_hint_1)
@@ -73,6 +93,7 @@ public class AnswerListActivity extends BaseActivity{
 
     private boolean isReadCache = true;
     private boolean isLoad = false;
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.fragment_upload);
@@ -83,22 +104,26 @@ public class AnswerListActivity extends BaseActivity{
         mToolbar.setTitle("一起答");
         mToolbar.setNavigationIcon(R.drawable.icon_cancle);
         setSupportActionBar(mToolbar);
-//        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem menuItem) {
-//                switch (menuItem.getItemId()) {
-//                    case R.id.action_jiahao:
-//                        Intent gIntent = new Intent(AnswerListActivity.this,SendAnswerActivity.class);
-//                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
-//                        startActivityForResult(gIntent,1);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
+
+
         mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
+        circleRecyclerView.setLayoutManager(mLayoutManager);
+        circleRecyclerView.setHasFixedSize(true);
+        circleRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        AnswersAdapter.Builder<MomentsInfo> builder = new AnswersAdapter.Builder<>(this);
+        builder.addType(AnswerViewHolder.class, MomentsType.EMPTY_CONTENT, R.layout.item_problem)
+                .addType(AnswerViewHolder.class, MomentsType.MULTI_IMAGES, R.layout.item_problem)
+                .addType(AnswerViewHolder.class, MomentsType.TEXT_ONLY, R.layout.item_problem)
+                .addType(AnswerViewHolder.class, MomentsType.WEB, R.layout.item_problem)
+                .setData(momentsInfoList);
+        adapter = builder.build();
+        circleRecyclerView.setAdapter(adapter);
+
+        /*mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
         circleRecyclerView.setLayoutManager(mLayoutManager);
         circleRecyclerView.setHasFixedSize(true);
         circleRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -150,7 +175,7 @@ public class AnswerListActivity extends BaseActivity{
                     }
                 }
             }
-        });
+        });*/
 
 
         isReadCache = true;
@@ -219,11 +244,14 @@ public class AnswerListActivity extends BaseActivity{
         @Override
         public void onSuccess(List<MomentsInfo> response, int requestType) {
             swipeRefreshLayout.setRefreshing(false);
-            adapter.setLoadStatus(false);
+        //    adapter.setLoadStatus(false);
             ivLoadState.setVisibility(View.GONE);
+            Logger.d("到这儿了吗"+requestType);
             switch (requestType) {
                 case REQUEST_REFRESH:
+                    Logger.d("到这儿了吗");
                     if (!ToolUtil.isListEmpty(response)) {
+                        Logger.d("到这儿了吗=="+response.size());
                         circleRecyclerView.setVisibility(View.VISIBLE);
                         rl_hint.setVisibility(View.GONE);
                         adapter.updateData(response);
@@ -273,5 +301,25 @@ public class AnswerListActivity extends BaseActivity{
         // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
         getMenuInflater().inflate(R.menu.menu_togther, menu);
         return true;
+    }
+
+    @Override
+    public void onLikeChange(int itemPos, List<Students> likeUserList) {
+
+    }
+
+    @Override
+    public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
+
+    }
+
+    @Override
+    public void showCommentBox(int itemPos, Togther momentid, CommentWidget commentWidget) {
+
+    }
+
+    @Override
+    public void onMessageChange(String itemPos, String content) {
+
     }
 }

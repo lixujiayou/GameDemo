@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.base_image.RoundedImageView;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.imageview.ForceClickImageView;
@@ -27,10 +28,9 @@ import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
  *
  */
 
-public class AnswerViewHolder extends TopicBaseViewHolder {
+public class AnswerViewHolder extends TopicBaseViewHolder  implements BaseMomentVH<MomentsInfo>, ViewGroup.OnHierarchyChangeListener{
 
     private ImageView rv_cover;
-
 
     public AnswerViewHolder(Context context, ViewGroup viewGroup, int layoutResId) {
         super(context, viewGroup, layoutResId);
