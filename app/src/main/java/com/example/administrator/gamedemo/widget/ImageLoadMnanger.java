@@ -112,6 +112,18 @@ public enum ImageLoadMnanger {
                 .into(imageView)
         ;
     }
+    //头像圆
+    public void loadIconImage(Context context,ImageView imageView,String imgUrl){
+        Glide.with(context)
+                .load(imgUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .bitmapTransform(new CropCircleTransformation(getImageContext(imageView)))
+                .placeholder(R.mipmap.icon_default)
+                .error(R.mipmap.icon_default)
+                .thumbnail(0.2f)
+                .into(imageView)
+        ;
+    }
 
     public void loadCicleImage(Fragment fragment,ImageView imageView,String imgUrl){
         Glide.with(fragment)

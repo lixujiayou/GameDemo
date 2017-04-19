@@ -3,8 +3,9 @@ package com.example.administrator.gamedemo.model;
 import com.example.administrator.gamedemo.widget.request.AddLikeRequestTogther;
 import com.example.administrator.gamedemo.widget.request.OnResponseListener;
 import com.example.administrator.gamedemo.widget.request.callback.OnLikeChangeCallback;
-import com.example.administrator.gamedemo.widget.request.callback.UnLikeRequest;
+
 import com.example.administrator.gamedemo.widget.request.callback.UnLikeRequestTogther;
+import com.orhanobut.logger.Logger;
 
 import cn.bmob.v3.exception.BmobException;
 
@@ -21,16 +22,17 @@ public class LikeImplTogther implements ILike {
     public void addLike(String momentid, final OnLikeChangeCallback onLikeChangeCallback) {
         if (onLikeChangeCallback == null) return;
         AddLikeRequestTogther request = new AddLikeRequestTogther(momentid);
-        request.setOnResponseListener(new OnResponseListener<Boolean>() {
+
+        request.setOnResponseListener(new OnResponseListener<String>() {
             @Override
             public void onStart(int requestType) {
 
             }
 
             @Override
-            public void onSuccess(Boolean response, int requestType) {
-                if (response) {
-                    onLikeChangeCallback.onLike();
+            public void onSuccess(String response, int requestType) {
+                if (response != null) {
+                    onLikeChangeCallback.onLike(response);
                 }
             }
 
@@ -54,7 +56,6 @@ public class LikeImplTogther implements ILike {
         request.setOnResponseListener(new OnResponseListener<Boolean>() {
             @Override
             public void onStart(int requestType) {
-
             }
 
             @Override

@@ -39,15 +39,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-
-
-        app:contentPadding="4dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,6 +47,7 @@
             android:orientation="vertical"
             android:background="@color/white"
             android:gravity="center"
+
             >
 
             <TextView
@@ -63,14 +56,14 @@
                 android:layout_height="wrap_content"
                 android:text="\t\t敬畏耶和华是智慧的开端，认识至圣者便是聪明。【箴9:10】"
                 android:textSize="@dimen/textsize_18"
-                android:textColor="@color/textcolor_1"
+                android:textColor="@color/black"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:lineSpacingExtra="4dp"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_gravity="center"
-                android:typeface="serif"
+                android:typeface="monospace"
                 />
 
 
@@ -85,14 +78,9 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:lineSpacingExtra="4dp"
-                android:textColor="@color/textcolor_m"
-                android:typeface="serif"
+                android:textColor="@color/textcolor_1"
                 />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,6 +92,7 @@
         >
 
     <LinearLayout
+        android:id="@+id/iv_start"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -111,35 +100,36 @@
         android:gravity="center"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="3dp"
+        android:background="@drawable/ripple_bg"
         >
 
-        <com.example.administrator.gamedemo.widget.imageview.MyImageView
-            android:id="@+id/iv_start"
+        <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_m_start"
-            android:scaleType="matrix"
+            android:src="@drawable/icon_m_start"
             android:layout_gravity="center"
-
+            android:scaleType="fitXY"
             />
 
     </LinearLayout>
         <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+            android:id="@+id/iv_togther"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-
             android:layout_marginLeft="3dp"
             android:layout_marginRight="6dp"
+            android:background="@drawable/ripple_bg"
         >
 
-        <com.example.administrator.gamedemo.widget.imageview.MyImageView
-            android:id="@+id/iv_togther"
+        <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_m_online"
+            android:src="@drawable/icon_m_start"
             android:scaleType="matrix"
             />
 
@@ -154,6 +144,7 @@
         android:weightSum="2"
         >
     <LinearLayout
+        android:id="@+id/iv_history"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -161,13 +152,14 @@
         android:gravity="center"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="3dp"
+        android:background="@drawable/ripple_bg"
         >
 
-            <com.example.administrator.gamedemo.widget.imageview.MyImageView
-            android:id="@+id/iv_history"
+            <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_m_time"
+                android:src="@drawable/icon_m_start"
                 android:scaleType="matrix"
                 android:layout_gravity="center"
             />
@@ -175,20 +167,22 @@
 
     </LinearLayout>
         <LinearLayout
+            android:id="@+id/iv_help"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/ripple_bg"
         >
 
-        <com.example.administrator.gamedemo.widget.imageview.MyImageView
-            android:id="@+id/iv_help"
+        <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_m_help"
+            android:src="@drawable/icon_m_start"
             android:scaleType="matrix"
             />
 

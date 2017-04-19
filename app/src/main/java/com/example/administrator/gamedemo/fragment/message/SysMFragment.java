@@ -86,6 +86,7 @@ public class SysMFragment extends BaseFragment{
         aboutMAdapter = new TextAdapter(mContext, messageList);
         mLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setBackgroundResource(R.color.colorAccent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(aboutMAdapter);

@@ -8,10 +8,14 @@ import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
+import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +42,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     private boolean isCollect = false;
     private Students cUser;
     private String single;
-
+    private static boolean isFirstRequest = true;
     public ShareRequest() {
         cUser = Constants.getInstance().getUser();
     }
@@ -69,117 +73,101 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         cUser = Constants.getInstance().getUser();
-        Logger.d("开始查询-------1");
-        if(!isCollect){
-            Logger.d("开始查询------2");
+        if(StringUtil.isEmpty(single)) {
+            if (!isCollect) {
+                BmobQuery<Share> query = new BmobQuery<>();
 
-            BmobQuery<Share> bmobQuery = new BmobQuery<>();
-            bmobQuery.order("-createdAt");
-            bmobQuery.include("students" + "," + "hostinfo");
+                query.include(Share.MomentsFields.AUTHOR_USER);
+                query.setLimit(count);
+                query.setSkip(curPage * count);
 
-            if(single == null || single.isEmpty()) {
-                bmobQuery.setLimit(count);
-                bmobQuery.setSkip(curPage * count);
-                Logger.d(count+"count开始查询-------curPage"+curPage);
+                query.order("-createdAt");
+                query.setCachePolicy(isFirstRequest ? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK : BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
-                Logger.d("开始查询-------");
-                bmobQuery.findObjects(new FindListener<Share>() {
+                query.findObjects(new FindListener<Share>() {
                     @Override
-                    public void done(List<Share> list, BmobException e) {
-                        Logger.d("查询完成");
-                        if(e == null) {
-                            if (!ToolUtil.isListEmpty(list)) {
-                                Logger.d(list.size() + "循环查询评论总条数" + list.size());
-                                queryCommentAndLikes(list);
+                    public void done(List<Share> object, BmobException e) {
+                        if (e == null) {
+                            if (!ToolUtil.isListEmpty(object)) {
+                                Logger.d("查询SHARE==" + object.size());
+                                queryCommentAndLikes(object);
                             } else {
-                                Logger.d("循环查询评论总条数空");
-                                onResponseSuccess(list, getRequestType());
+                                Logger.d("查询SHARE没有数据");
+                                onResponseSuccess(object, getRequestType());
                             }
-                        }else{
-                            Logger.d("循环查询评论总条数空失败");
-                            onResponseError(e,requestType);
-                        }
-                    }
-                });
-            }else{
-//                if(isReadCache) {
-//                    boolean isCache = bmobQuery.hasCachedResult(Share.class);
-//                    if (isCache) {
-//                        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-//                    } else {
-//                        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-//                    }
-//                }else{
-//                    bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-//                }
-//
-//                bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
-                bmobQuery.getObject(single, new QueryListener<Share>() {
-                    @Override
-                    public void done(Share share, BmobException e) {
-                        List<Share> shares = new ArrayList<Share>();
-
-                        if(e == null){
-                            if(share == null){
-                                onResponseSuccess(shares, getRequestType());
-                            }else{
-                                shares.add(share);
-                                queryCommentAndLikes(shares);
-                            }
-                        }else{
+                        } else {
                             onResponseError(e, getRequestType());
+                            Logger.d("查询SHARE异常" + e.toString());
                         }
                     }
+
                 });
+            } else {
 
+                // 查询喜欢这个帖子的所有用户，因此查询的是用户表
+                BmobQuery<Share> query = new BmobQuery<Share>();
+
+                //likes是Post表中的字段，用来存储所有喜欢该帖子的用户
+                query.addWhereRelatedTo(Students.UserFields.FAV, new BmobPointer(cUser));
+                query.include(Share.MomentsFields.AUTHOR_USER
+                );
+                query.setLimit(count);
+                query.setSkip(curPage * count);
+
+                query.order("-createdAt");
+                query.setCachePolicy(isFirstRequest ? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK : BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+
+                query.findObjects(new FindListener<Share>() {
+
+                    @Override
+                    public void done(List<Share> object, BmobException e) {
+                        if (e == null) {
+                            if (!ToolUtil.isListEmpty(object)) {
+                                Logger.d("查询SHARE==" + object.size());
+                                queryCommentAndLikes(object);
+                            } else {
+                                Logger.d("查询SHARE没有数据");
+                                onResponseSuccess(object, getRequestType());
+                            }
+                        } else {
+                            onResponseError(e, getRequestType());
+                            Logger.d("查询SHARE异常" + e.toString());
+                        }
+                    }
+
+                });
             }
-
-
-
-
-        }else {
-
-            // 查询喜欢这个帖子的所有用户，因此查询的是用户表
-            BmobQuery<Share> query = new BmobQuery<Share>();
-
-            //likes是Post表中的字段，用来存储所有喜欢该帖子的用户
-            query.addWhereRelatedTo(Students.UserFields.FAV, new BmobPointer(cUser));
-            query.include(Share.MomentsFields.AUTHOR_USER
-                    + "," + Share.MomentsFields.HOST
-            );
+        }else{
+            /**
+             * 定位到一个分享
+             */
+            BmobQuery<Share> query = new BmobQuery<>();
+            query.include(Share.MomentsFields.AUTHOR_USER);
             query.setLimit(count);
             query.setSkip(curPage * count);
 
             query.order("-createdAt");
-            if (isReadCache) {
-                boolean isCache = query.hasCachedResult(Share.class);
-                if (isCache) {
-                    query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                } else {
-                    query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-            } else {
-                query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-            }
-            query.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
-            query.findObjects(new FindListener<Share>() {
-
+            query.setCachePolicy(isFirstRequest ? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK : BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+            query.getObject(single, new QueryListener<Share>() {
                 @Override
-                public void done(List<Share> object, BmobException e) {
-                    if (e == null) {
-                        if (!ToolUtil.isListEmpty(object)) {
-                            queryCommentAndLikes(object);
-                        } else {
-                            onResponseSuccess(object, getRequestType());
+                public void done(Share share, BmobException e) {
+                    if(e == null){
+
+                        List<Share> shares = new ArrayList<Share>();
+                        if(share == null){
+                            onResponseSuccess(shares, getRequestType());
+                            return;
                         }
-                    } else {
+
+                        shares.add(share);
+                        queryCommentAndLikes(shares);
+
+                    }else{
                         onResponseError(e, getRequestType());
                     }
                 }
-
             });
         }
-
 
 
     }
@@ -192,115 +180,68 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         if(ToolUtil.isListEmpty(momentsList)){
             onResponseSuccess(momentsList, getRequestType());
         }
-        for (int i = 0; i < momentsList.size(); i++) {
-            Logger.d(momentsList.size()+"循环查询评论"+i);
-            final int currentPos = i;
-            final Share momentsInfo = momentsList.get(i);
-            BmobQuery<Students> likesQuery = new BmobQuery<>();
-            likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
-            likesQuery.addWhereRelatedTo(Share.MomentsFields.AUTHOR_COLLECT, new BmobPointer(momentsInfo));
 
-            likesQuery.order("-createdAt");
+        final List<CommentInfo> commentInfoList = new ArrayList<>();
 
-            if(isReadCache) {
-                boolean isCache = likesQuery.hasCachedResult(Students.class);
-                if (isCache) {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                } else {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-            }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-            }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
-            likesQuery.findObjects(new FindListener<Students>() {
-                @Override
-                public void done(List<Students> list, BmobException e) {
-                    if (!ToolUtil.isListEmpty(list)) {
-                        momentsInfo.setLikesList(list);
-                    }
-                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
-                    commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
-                    commentQuery.addWhereEqualTo("moment", momentsInfo);
-                    commentQuery.order("-createdAt");
-
-                    if(isReadCache) {
-                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
-                        if (isCache) {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                        } else {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                        }
-                    }else{
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-                    }
-                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存5天
-                    commentQuery.findObjects(new FindListener<CommentInfo>() {
-                        @Override
-                        public void done(List<CommentInfo> list, BmobException e) {
-                            if (!ToolUtil.isListEmpty(list)) {
-                                momentsInfo.setCommentList(list);
-                            }else{
-                            }
-
-                            if (e == null) {
-                                Logger.d("查询当前位置"+currentPos);
-                                if (currentPos == momentsList.size() - 1) {
-                                    onResponseSuccess(momentsList, getRequestType());
-                                    curPage++;
-                                }
-                            } else {
-                                onResponseError(e, getRequestType());
-                            }
-                        }
-                    });
-                }
-            });
+        BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
+        commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
+        List<String> id = new ArrayList<>();
+        for (Share momentsInfo : momentsList) {
+            id.add(momentsInfo.getObjectId());
         }
+
+        commentQuery.addWhereContainedIn(CommentInfo.CommentFields.MOMENT, id);
+        commentQuery.order("createdAt");
+        commentQuery.setLimit(1000);//默认只有100条数据，最多1000条
+        commentQuery.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        commentQuery.findObjects(new FindListener<CommentInfo>() {
+            @Override
+            public void done(List<CommentInfo> list, BmobException e) {
+                if(e == null) {
+                    if (!ToolUtil.isListEmpty(list)) {
+                        Logger.d("查询评论=="+list.size());
+                        commentInfoList.addAll(list);
+                    }
+                    mergeData(commentInfoList, momentsList, e);
+                }else{
+                    Logger.d("查询评论异常"+e.toString());
+                    onResponseError(e, getRequestType());
+                }
+            }
+        });
 
     }
 
-    /*Share mMomentsInfo;
-    int controlI = 0;
-    private void queryCollect(final List<Share> momentsList) {
-        *//**
-         * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         *//*
-        controlI = 0;
-        for (int i = 0; i < momentsList.size(); i++) {
-            mMomentsInfo = momentsList.get(i);
-            BmobQuery<Students> likesQuery = new BmobQuery<>();
-            likesQuery.addWhereRelatedTo(Share.MomentsFields.AUTHOR_COLLECT, new BmobPointer(mMomentsInfo));
-            likesQuery.order("-createdAt");
 
-            if(isReadCache) {
-                boolean isCache = likesQuery.hasCachedResult(Students.class);
-                if (isCache) {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                } else {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-            }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-            }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
-            likesQuery.findObjects(new FindListener<Students>() {
-                @Override
-                public void done(List<Students> list, BmobException e) {
-                    Logger.d("得到收藏时的顺序"+controlI);
+    private void mergeData(List<CommentInfo> commentInfoList, List<Share> momentsList, BmobException e) {
 
-                    mMomentsInfo.setCollectList(list);
-                    queryCommentAndLikes(mMomentsInfo);
-
-                    if(controlI == momentsList.size() - 1){
-                        onResponseSuccess(momentsList, getRequestType());
-                                    curPage++;
-                    }
-                    controlI += 1;
-                }
-            });
+        if (e != null) {
+            onResponseError(e, getRequestType());
+            return;
+        }
+        if (ToolUtil.isListEmpty(momentsList)) {
+            onResponseError(new BmobException("动态数据为空"), getRequestType());
+            return;
+        }
+        curPage++;
+        HashMap<String, Share> map = new HashMap<>();
+        for (Share momentsInfo : momentsList) {
+            map.put(momentsInfo.getMomentid(), momentsInfo);
         }
 
+        for (CommentInfo commentInfo : commentInfoList) {
+            Share info = map.get(commentInfo.getMoment().getMomentid());
+            if (info != null) {
+                info.addComment(commentInfo);
+            }
+        }
+        Logger.d("查询SHARE返回"+momentsList.size());
+        onResponseSuccess(momentsList, getRequestType());
+    }
 
-    }*/
+    @Override
+    protected void onResponseSuccess(List<Share> response, int requestType) {
+        super.onResponseSuccess(response, requestType);
+        isFirstRequest = false;
+    }
 }

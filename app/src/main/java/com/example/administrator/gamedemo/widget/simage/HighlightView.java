@@ -42,7 +42,7 @@ import com.example.administrator.gamedemo.R;
  * image, another is screen. computeLayout() uses matrix to map from image
  * space to screen space.
  */
-class HighlightView {
+public class HighlightView {
 
     public static final int GROW_NONE        = (1 << 0);
     public static final int GROW_LEFT_EDGE   = (1 << 1);

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by lixu on 2016/12/27.
  * <p>
- * 一起adapter
+ *
  */
 
 public class AnswerAdapterU extends BaseRecyclerViewAdapter<MomentsInfo> {

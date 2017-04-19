@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.widget.simage.ClipView_2;
 
 import java.io.IOException;
 

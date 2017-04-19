@@ -54,9 +54,11 @@ public class SendShareActivity extends BaseActivity {
 
     @BindView(R.id.gridView)
     GridView gridView;
-
     @BindView(R.id.et_togther)
     EditText et_togther;
+    @BindView(R.id.et_togther_title)
+    EditText et_title;
+
     private List<String> picList;
     private ArrayList<String> imagePaths = new ArrayList<>();
     private ImageCaptureManager captureManager; // 相机拍照处理类
@@ -69,7 +71,7 @@ public class SendShareActivity extends BaseActivity {
     private SweetAlertDialog eDialog;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_togther_write);
+        setContentView(R.layout.activity_share_write);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class SendShareActivity extends BaseActivity {
                     case R.id.action_send_whrite:
                         String text = et_togther.getText().toString();
                         if(text.trim() == null || text.length() == 0){
-                            ToastUtil3.showToast(SendShareActivity.this,"请填写文字内容");
+                            ToastUtil3.showToast(SendShareActivity.this,"请填写内容");
                         }else {
                                 commitTogther(text);
 
@@ -150,6 +152,7 @@ public class SendShareActivity extends BaseActivity {
         AddShareRequest addTogtherRequest = new AddShareRequest();
         addTogtherRequest.setAuthId(Constants.getInstance().getUser(SendShareActivity.this).getObjectId());
         addTogtherRequest.addText(togtherText);
+        addTogtherRequest.setTitle(et_title.getText().toString());
         if(imagePaths.contains("000000")) {
             imagePaths.remove("000000");
         }

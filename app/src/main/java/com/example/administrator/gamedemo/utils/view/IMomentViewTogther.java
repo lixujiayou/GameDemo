@@ -4,6 +4,7 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public interface IMomentViewTogther extends IBaseView {
 
-    void onLikeChange(int itemPos, List<Students> likeUserList);
+    void onLikeChange(int itemPos, List<LikesInfo> likeUserList);
 
     void onCommentChange(int itemPos, List<CommentInfo> commentInfoList);
 

@@ -83,6 +83,7 @@ public class CropImageActivity extends MonitoredActivity {
             finish();
             return;
         }
+
         startCrop();
     }
 
@@ -90,7 +91,6 @@ public class CropImageActivity extends MonitoredActivity {
         imageView = (CropImageView)findViewById( R.id.crop_image);
         imageView.context = this;
         imageView.setRecycler( new ImageViewTouchBase.Recycler() {
-
             @Override
             public void recycle(Bitmap b) {
                 b.recycle();

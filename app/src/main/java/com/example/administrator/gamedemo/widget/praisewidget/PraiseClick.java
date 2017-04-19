@@ -1,6 +1,7 @@
 package com.example.administrator.gamedemo.widget.praisewidget;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.view.View;
@@ -33,13 +34,14 @@ public class PraiseClick extends ClickableSpanEx {
     @Override
     public void onClick(View widget) {
         if (mPraiseInfo!=null)
-            UIHelper.ToastMessage("当前用户名是： " + mPraiseInfo.getNick_name() + "   它的ID是： " + mPraiseInfo.getUsername());
+            UIHelper.ToastMessage("当前用户名是： " + mPraiseInfo.getNick_name() + "   它的ID是： " + mPraiseInfo.getObjectId());
     }
 
     @Override
     public void updateDrawState(TextPaint ds) {
         super.updateDrawState(ds);
         ds.setTextSize(textSize);
+        ds.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
 

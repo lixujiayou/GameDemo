@@ -10,6 +10,7 @@ import com.example.administrator.gamedemo.model.LikeImplTogther;
 import com.example.administrator.gamedemo.model.MyBmobInstallation;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.model.impl.MessageImpl;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
@@ -95,17 +96,21 @@ public class MomentPresenterAnswer implements IMomentPresenterAnswer {
     }*/
 
     @Override
-    public void addLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
+    public void addLike(final int viewHolderPos, final String momentid, final List<LikesInfo> currentLikeUserList) {
         likeModel.addLike(momentid, new OnLikeChangeCallback() {
             @Override
-            public void onLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
+            public void onLike(String likeId) {
+                List<LikesInfo> resultLikeList = new ArrayList<>();
                 if (!ToolUtil.isListEmpty(currentLikeUserList)) {
                     resultLikeList.addAll(currentLikeUserList);
                 }
                 boolean hasLocalLiked = findPosByObjid(resultLikeList, Constants.getInstance().getUser().getObjectId()) > -1;
                 if (!hasLocalLiked) {
-                    resultLikeList.add(0, Constants.getInstance().getUser());
+                    LikesInfo likesInfo = new LikesInfo();
+                    likesInfo.setTogtherid(momentid);
+                    likesInfo.setObjectId(likeId);
+                    likesInfo.setUserid(Constants.getInstance().getUser().getObjectId());
+                    resultLikeList.add(0, likesInfo);
                 }
                 if (momentView != null) {
                     momentView.onLikeChange(viewHolderPos, resultLikeList);
@@ -146,16 +151,16 @@ public class MomentPresenterAnswer implements IMomentPresenterAnswer {
     }*/
 
     @Override
-    public void unLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
+    public void unLike(final int viewHolderPos, String momentid, final List<LikesInfo> currentLikeUserList) {
         likeModel.unLike(momentid, new OnLikeChangeCallback() {
             @Override
-            public void onLike() {
+            public void onLike(String likeId) {
 
             }
 
             @Override
             public void onUnLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
+                List<LikesInfo> resultLikeList = new ArrayList<>();
                 if (!ToolUtil.isListEmpty(currentLikeUserList)) {
                     resultLikeList.addAll(currentLikeUserList);
                 }

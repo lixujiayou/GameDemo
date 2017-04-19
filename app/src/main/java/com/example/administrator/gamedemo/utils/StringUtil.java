@@ -14,6 +14,13 @@ public class StringUtil {
         return !TextUtils.isEmpty(originStr);
     }
 
+    public static boolean isEmpty(String str){
+        if(str == null || str.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
 
     public static boolean noEmpty(String... originStr) {
         boolean noEmpty = true;

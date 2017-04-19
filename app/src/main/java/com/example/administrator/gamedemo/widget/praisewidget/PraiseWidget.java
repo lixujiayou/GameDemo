@@ -13,13 +13,13 @@ import android.util.LruCache;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.widget.CustomImageSpan;
-import com.example.administrator.gamedemo.widget.SpannableStringBuilderAllVer;
 import com.example.administrator.gamedemo.widget.span.ClickableSpanEx;
+import com.example.administrator.gamedemo.widget.span.SpannableStringBuilderCompat;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
-
 
 /**
  * Created by 大灯泡 on 2016/2/21.
@@ -37,12 +37,12 @@ public class PraiseWidget extends TextView {
     //默认点击背景
     private int clickBg = 0x00000000;
 
-    private List<Students> datas;
+    private List<LikesInfo> datas;
 
-    private static final LruCache<String, SpannableStringBuilderAllVer> praiseCache
-            = new LruCache<String, SpannableStringBuilderAllVer>(50) {
+    private static final LruCache<String, SpannableStringBuilderCompat> praiseCache
+            = new LruCache<String, SpannableStringBuilderCompat>(50) {
         @Override
-        protected int sizeOf(String key, SpannableStringBuilderAllVer value) {
+        protected int sizeOf(String key, SpannableStringBuilderCompat value) {
             return 1;
         }
     };
@@ -75,7 +75,7 @@ public class PraiseWidget extends TextView {
         setTextSize(textSize);
     }
 
-    public void setDatas(List<Students> datas) {
+    public void setDatas(List<LikesInfo> datas) {
         this.datas = datas;
     }
 
@@ -90,29 +90,29 @@ public class PraiseWidget extends TextView {
         }
     }
 
-    private void createSpanStringBuilder(List<Students> datas) {
+    private void createSpanStringBuilder(List<LikesInfo> datas) {
         if (datas == null || datas.size() == 0) return;
         String key = Integer.toString(datas.hashCode() + datas.size());
-        SpannableStringBuilderAllVer spanStrBuilder = praiseCache.get(key);
+        SpannableStringBuilderCompat spanStrBuilder = praiseCache.get(key);
         if (spanStrBuilder == null) {
             CustomImageSpan icon = new CustomImageSpan(getContext(), iconRes);
             //因为spanstringbuilder不支持直接append span，所以通过spanstring转换
             SpannableString iconSpanStr = new SpannableString(" ");
             iconSpanStr.setSpan(icon, 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
-            spanStrBuilder = new SpannableStringBuilderAllVer(iconSpanStr);
+            spanStrBuilder = new SpannableStringBuilderCompat(iconSpanStr);
             //给出两个空格，点赞图标后
             spanStrBuilder.append(" ");
             for (int i = 0; i < datas.size(); i++) {
-                PraiseClick praiseClick = new PraiseClick.Builder(getContext(), datas.get(i)).setTextSize(textSize)
+                PraiseClick praiseClick = new PraiseClick.Builder(getContext(), datas.get(i).getUserInfo()).setTextSize(textSize)
                                                                                              .setColor(textColor)
                                                                                              .setClickEventColor(clickBg)
                                                                                              .build();
                 try {
-                    spanStrBuilder.append(datas.get(i).getNick_name(), praiseClick, 0);
+                    spanStrBuilder.append(datas.get(i).getUserInfo().getNick_name(), praiseClick, 0);
                 }catch (NullPointerException e){
                     e.printStackTrace();
-                    Log.e(TAG, "praiseStudents是空的哦");
+                    Log.e(TAG, "praiseUserInfo是空的哦");
                 }
                 if (i != datas.size() - 1) spanStrBuilder.append(", ");
                 else spanStrBuilder.append("\0");

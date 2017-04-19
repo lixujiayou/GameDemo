@@ -27,7 +27,6 @@ import com.example.administrator.gamedemo.activity.OnlineAnswerActivity;
 import com.example.administrator.gamedemo.activity.SendAnswerActivity;
 import com.example.administrator.gamedemo.activity.share.SendShareActivity;
 import com.example.administrator.gamedemo.adapter.AnswersAdapter;
-import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
 import com.example.administrator.gamedemo.adapter.UploadAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
@@ -39,19 +38,10 @@ import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
-import com.example.administrator.gamedemo.utils.view.IMomentView;
-import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVH;
-import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
-import com.example.administrator.gamedemo.widget.commentwidget.CommentBox;
-import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
-import com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView;
-import com.example.administrator.gamedemo.widget.pullrecyclerview.interfaces.onRefreshListener2;
+
+
 import com.example.administrator.gamedemo.widget.request.MomentsRequest;
-import com.example.administrator.gamedemo.widget.request.ShareRequest;
+
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.orhanobut.logger.Logger;
 

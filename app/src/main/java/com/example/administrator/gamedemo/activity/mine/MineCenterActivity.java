@@ -244,21 +244,6 @@ public class MineCenterActivity extends BaseActivity {
                 case REQUEST_CROP_PHOTO:  //剪切图片返回
                     Logger.d("返回"+data.getData().getPath());
                     handleCrop( resultCode, data);
-//                    if (resultCode == RESULT_OK) {
-//                        final Uri uri = data.getData();
-//                        if (uri == null) {
-//                            return;
-//                        }
-//                        String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
-//                        Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
-//                        if (type == 1) {
-//                            headImage1.setImageBitmap(bitMap);
-//                        } else {
-//                            headImage2.setImageBitmap(bitMap);
-//                        }
-                        //此处后面可以将bitMap转为二进制上传后台网络
-                        //......
- //                   }
                     break;
             }
         }

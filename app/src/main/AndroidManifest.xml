@@ -104,6 +104,11 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+        <!--分享详情-->
+        <activity android:name=".activity.share.ShareInfoActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
 
         <!--收藏-->
         <activity android:name=".activity.mine.CollectActivity"

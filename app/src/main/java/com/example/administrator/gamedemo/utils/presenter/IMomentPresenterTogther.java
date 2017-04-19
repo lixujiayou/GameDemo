@@ -4,6 +4,7 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
 
@@ -17,9 +18,9 @@ import java.util.List;
 public interface IMomentPresenterTogther extends IBasePresenter<IMomentViewTogther> {
 
 
-    void addLike(int viewHolderPos, String momentid, List<Students> currentLikeUserList);
+    void addLike(int viewHolderPos, String momentid, List<LikesInfo> currentLikeUserList);
 
-    void unLike(int viewHolderPos, String momentid, List<Students> currentLikeUserList);
+    void unLike(int viewHolderPos, String momentid, List<LikesInfo> currentLikeUserList);
 
     void addComment(int viewHolderPos, Togther momentid, Students replyUserid, String commentContent, List<CommentInfo> currentCommentList);
 

@@ -5,7 +5,7 @@
     android:layout_height="@dimen/height_search">
     <TextView
         android:id="@+id/tv_more"
-        android:background="@color/white"
+        android:background="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_x"
         android:layout_gravity="center"

@@ -7,12 +7,12 @@ import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentImpl;
 import com.example.administrator.gamedemo.model.CommentImplTogther;
 import com.example.administrator.gamedemo.model.CommentInfo;
-import com.example.administrator.gamedemo.model.LikeImpl;
 import com.example.administrator.gamedemo.model.LikeImplTogther;
 import com.example.administrator.gamedemo.model.MyBmobInstallation;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.model.impl.MessageImpl;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
@@ -64,52 +64,31 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
         return this;
     }
 
-
-
     @Override
     public IBasePresenter<IMomentViewTogther> unbindView() {
         return this;
     }
 
-    //=============================================================动作控制
-   /* @Override
-    public void addLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
-        likeModel.addLike(momentid, new OnLikeChangeCallback() {
-            @Override
-            public void onLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
-                if (!ToolUtil.isListEmpty(currentLikeUserList)) {
-                    resultLikeList.addAll(currentLikeUserList);
-                }
-                boolean hasLocalLiked = findPosByObjid(resultLikeList, cUser.getObjectId()) > -1;
-                if (!hasLocalLiked) {
-                    resultLikeList.add(0, cUser);
-                }
-                if (momentView != null) {
-                    momentView.onLikeChange(viewHolderPos, resultLikeList);
-                }
-            }
-
-            @Override
-            public void onUnLike() {
-
-            }
-
-        });
-    }*/
 
     @Override
-    public void addLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
+    public void addLike(final int viewHolderPos, final String momentid, final List<LikesInfo> currentLikeUserList) {
         likeModel.addLike(momentid, new OnLikeChangeCallback() {
             @Override
-            public void onLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
+            public void onLike(String likeId) {
+                List<LikesInfo> resultLikeList = new ArrayList<>();
                 if (!ToolUtil.isListEmpty(currentLikeUserList)) {
                     resultLikeList.addAll(currentLikeUserList);
                 }
                 boolean hasLocalLiked = findPosByObjid(resultLikeList, Constants.getInstance().getUser().getObjectId()) > -1;
                 if (!hasLocalLiked) {
-                    resultLikeList.add(0, Constants.getInstance().getUser());
+
+                    LikesInfo likesInfo = new LikesInfo();
+                    likesInfo.setTogtherid(momentid);
+                    likesInfo.setObjectId(likeId);
+                    likesInfo.setUserInfo(Constants.getInstance().getUser());
+
+                    resultLikeList.add(0, likesInfo);
+
                 }
                 if (momentView != null) {
                     momentView.onLikeChange(viewHolderPos, resultLikeList);
@@ -118,48 +97,20 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
 
             @Override
             public void onUnLike() {
-
             }
         });
     }
 
-    /*@Override
-    public void unLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
-        likeModel.unLike(momentid, new OnLikeChangeCallback() {
-            @Override
-            public void onLike() {
-
-            }
-
-            @Override
-            public void onUnLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
-                if (!ToolUtil.isListEmpty(currentLikeUserList)) {
-                    resultLikeList.addAll(currentLikeUserList);
-                }
-                final int localLikePos = findPosByObjid(resultLikeList,cUser.getObjectId());
-                if (localLikePos > -1) {
-                    resultLikeList.remove(localLikePos);
-                }
-                if (momentView != null) {
-                    momentView.onLikeChange(viewHolderPos, resultLikeList);
-                }
-            }
-
-        });
-    }*/
-
     @Override
-    public void unLike(final int viewHolderPos, String momentid, final List<Students> currentLikeUserList) {
+    public void unLike(final int viewHolderPos, String momentid, final List<LikesInfo> currentLikeUserList) {
         likeModel.unLike(momentid, new OnLikeChangeCallback() {
             @Override
-            public void onLike() {
-
+            public void onLike(String likeId) {
             }
 
             @Override
             public void onUnLike() {
-                List<Students> resultLikeList = new ArrayList<Students>();
+                List<LikesInfo> resultLikeList = new ArrayList<>();
                 if (!ToolUtil.isListEmpty(currentLikeUserList)) {
                     resultLikeList.addAll(currentLikeUserList);
                 }
@@ -171,7 +122,6 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
                     momentView.onLikeChange(viewHolderPos, resultLikeList);
                 }
             }
-
         });
     }
 
@@ -273,11 +223,11 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
      *
      * @return -1:找不到
      */
-    private int findPosByObjid(List<? extends BmobObject> objectList, String id) {
+    private int findPosByObjid(List<LikesInfo> objectList, String id) {
         int result = -1;
         if (ToolUtil.isListEmpty(objectList)) return result;
         for (int i = 0; i < objectList.size(); i++) {
-            BmobObject object = objectList.get(i);
+            BmobObject object = objectList.get(i).getUserInfo();
             if (TextUtils.equals(object.getObjectId(), id)) {
                 result = i;
                 break;

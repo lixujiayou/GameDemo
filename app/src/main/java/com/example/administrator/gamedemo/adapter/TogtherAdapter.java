@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewAdapter;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
 import com.example.administrator.gamedemo.utils.viewholder.TogtherViewHolder;
 

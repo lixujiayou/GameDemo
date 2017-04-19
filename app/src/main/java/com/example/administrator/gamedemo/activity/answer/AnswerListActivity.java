@@ -33,6 +33,7 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -77,7 +78,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
     private List<MomentsInfo> momentsInfoList;
     // private List<Share> responseTemp;
     //private UploadAdapter adapter;
-    private AnswersAdapter adapter;
+    private UploadAdapter adapter;
     @BindView(R.id.rl_hint)
     RelativeLayout rl_hint;
     @BindView(R.id.tv_hint_1)
@@ -94,6 +95,8 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
     private boolean isReadCache = true;
     private boolean isLoad = false;
 
+    private int cLoadNum;//当前加载数据条数
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.fragment_upload);
@@ -107,23 +110,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
         momentsInfoList = new ArrayList<>();
         momentsRequest = new MomentsRequest();
 
-
         mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
-        circleRecyclerView.setLayoutManager(mLayoutManager);
-        circleRecyclerView.setHasFixedSize(true);
-        circleRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        AnswersAdapter.Builder<MomentsInfo> builder = new AnswersAdapter.Builder<>(this);
-        builder.addType(AnswerViewHolder.class, MomentsType.EMPTY_CONTENT, R.layout.item_problem)
-                .addType(AnswerViewHolder.class, MomentsType.MULTI_IMAGES, R.layout.item_problem)
-                .addType(AnswerViewHolder.class, MomentsType.TEXT_ONLY, R.layout.item_problem)
-                .addType(AnswerViewHolder.class, MomentsType.WEB, R.layout.item_problem)
-                .setData(momentsInfoList);
-        adapter = builder.build();
-        circleRecyclerView.setAdapter(adapter);
-
-        /*mLayoutManager = new LinearLayoutManager(AnswerListActivity.this);
         circleRecyclerView.setLayoutManager(mLayoutManager);
         circleRecyclerView.setHasFixedSize(true);
         circleRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -166,7 +153,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
                         return;
                     }else{
                         //滑动到底部，开始加载更多
-                        if(momentsInfoList.size() >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
+                        if(cLoadNum >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
                             if (!isLoad) {                                      //是否在加载中
                                 adapter.setLoadStatus(true);
                                 loadMore();
@@ -175,7 +162,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
                     }
                 }
             }
-        });*/
+        });
 
 
         isReadCache = true;
@@ -221,6 +208,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
 
     @Override
     public void initData() {
+        isLoad = true;
         swipeRefreshLayout.setRefreshing(true);
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_REFRESH);
@@ -234,6 +222,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
      * 加载更多
      */
     private void loadMore(){
+        isLoad = true;
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
         momentsRequest.execute();
@@ -243,19 +232,18 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
     private SimpleResponseListener<List<MomentsInfo>> momentsRequestCallBack = new SimpleResponseListener<List<MomentsInfo>>() {
         @Override
         public void onSuccess(List<MomentsInfo> response, int requestType) {
+            isLoad = false;
             swipeRefreshLayout.setRefreshing(false);
-        //    adapter.setLoadStatus(false);
             ivLoadState.setVisibility(View.GONE);
-            Logger.d("到这儿了吗"+requestType);
             switch (requestType) {
                 case REQUEST_REFRESH:
-                    Logger.d("到这儿了吗");
                     if (!ToolUtil.isListEmpty(response)) {
-                        Logger.d("到这儿了吗=="+response.size());
+                        cLoadNum = response.size();
                         circleRecyclerView.setVisibility(View.VISIBLE);
                         rl_hint.setVisibility(View.GONE);
                         adapter.updateData(response);
                     }else{
+                        cLoadNum = 0;
                         circleRecyclerView.setVisibility(View.GONE);
                         rl_hint.setVisibility(View.VISIBLE);
                             tv_hint_1.setText(R.string.upload);
@@ -263,6 +251,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
                     }
                     break;
                 case REQUEST_LOADMORE:
+                    cLoadNum = response.size();
                     adapter.addMore(response);
                     break;
             }
@@ -271,6 +260,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
         @Override
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
+            isLoad = false;
             swipeRefreshLayout.setRefreshing(false);
             Logger.d("错误" + e.toString());
             if(momentsInfoList == null || momentsInfoList.size() == 0) {
@@ -304,7 +294,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
     }
 
     @Override
-    public void onLikeChange(int itemPos, List<Students> likeUserList) {
+    public void onLikeChange(int itemPos, List<LikesInfo> likeUserList) {
 
     }
 

@@ -5,14 +5,20 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
+
+import com.example.administrator.gamedemo.activity.share.ShareInfoActivity;
 import com.example.administrator.gamedemo.adapter.TogtherAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
@@ -20,23 +26,19 @@ import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
+
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
-import com.example.administrator.gamedemo.utils.view.IMomentView;
+
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
-import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVHTogther;
-import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentBox;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
@@ -51,47 +53,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import cn.bmob.v3.BmobInstallation;
-import cn.bmob.v3.BmobPushManager;
-import cn.bmob.v3.BmobQuery;
+
 import cn.bmob.v3.exception.BmobException;
 
 /**
  * @auther lixu
  * Created by lixu on 2017/2/14 0014.
  */
-public class AboutActivity extends BaseActivity implements onRefreshListener2, IMomentView,IMomentViewTogther, CircleRecyclerView.OnPreDispatchTouchListener {
+public class AboutActivity extends BaseActivity implements IMomentViewTogther {
     private static final int REQUEST_REFRESH = 0x10;
     private static final int REQUEST_LOADMORE = 0x11;
     public static final String KEYCODE = "KEYCODE";
     public static final String TYPECODE = "TYPECODE";
+
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+
+
     @BindView(R.id.recycler)
-    CircleRecyclerView recycler;
-    @BindView(R.id.widget_comment)
-    CommentBox widgetComment;
+    RecyclerView recycler;
 
     @BindView(R.id.widget_comment_togther)
     CommentBoxTogther widgetCommentTogther;
     @BindView(R.id.iv_load_state)
     ImageView ivLoadState;
 
-    private CircleMomentsAdapter adapter;
     private TogtherAdapter togtherAdapter;
 
-    private List<Share> momentsInfoList;
     private List<Togther> togtherList;
 
     private ShareRequest momentsRequest;
     private TogtherRequest togtherRequest;
-    private MomentPresenter presenter;
+
     private MomentPresenterTogther presenterTogther;
-    // private List<Share> responseTemp;
     private boolean isReadCache = true;
-    private  HostViewHolder hostViewHolder;
+    private LinearLayoutManager linearLayoutManager;
+
     private String mKey;
     private String mType;
     private boolean isOne;//可判断下拉刷新时是否显示动画
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_about_me);
@@ -104,7 +106,7 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
         mToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recycler.getRecyclerView().smoothScrollToPosition(0);
+                recycler.smoothScrollToPosition(0);
             }
         });
 
@@ -112,112 +114,33 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
         mKey = gIntent.getExtras().getString(KEYCODE);
         mType = gIntent.getExtras().getString(TYPECODE);
 
-        if(mType.equals(Constants.MESSAGE_SHARE)){
-//            widgetComment.setVisibility(View.VISIBLE);
-//            widgetCommentTogther.setVisibility(View.GONE);
-        }else{
-//            widgetComment.setVisibility(View.GONE);
-//            widgetCommentTogther.setVisibility(View.VISIBLE);
-        }
-
-        momentsInfoList = new ArrayList<>();
         togtherList = new ArrayList<>();
 
         momentsRequest = new ShareRequest();
         togtherRequest = new TogtherRequest();
 
-        presenter = new MomentPresenter(this);
-        presenterTogther = new MomentPresenterTogther(this);
-
-        hostViewHolder = new HostViewHolder(this);
-
-        recycler.setOnRefreshListener(this);
-        recycler.setOnPreDispatchTouchListener(this);
-
-        recycler.addHeaderView(hostViewHolder.getView());
-
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-            widgetComment.setOnCommentSendClickListener(onCommentSendClickListener);
-        }else {
-            widgetCommentTogther.setOnCommentSendClickListener(onCommentSendClickListenerTogther);
-        }
-
-        if(mType.equals(Constants.MESSAGE_SHARE)){
-            CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(this);
-            builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content_share)
-                    .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image_share)
-                    .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text_share)
-                    .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web_share)
-                    .setData(momentsInfoList)
-                    .setPresenter(presenter);
-            adapter = builder.build();
-            recycler.setAdapter(adapter);
-        }else{
+        swipeRefreshLayout.setRefreshing(true);
+        linearLayoutManager = new LinearLayoutManager(AboutActivity.this);
+        recycler.setLayoutManager(linearLayoutManager);
+        recycler.setHasFixedSize(true);
+        recycler.setItemAnimator(new DefaultItemAnimator());
+        if(mType.equals(Constants.MESSAGE_TOGTHER)){
+            presenterTogther = new MomentPresenterTogther(this);
             TogtherAdapter.Builder<Togther> builder = new TogtherAdapter.Builder<>(this);
-            builder.addType(EmptyMomentsVHTogther.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content_share)
-                    .addType(MultiImageMomentsVHTogther.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image_share)
-                    .addType(TextOnlyMomentsVHTogther.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text_share)
-                    .addType(WebMomentsVHTogther.class, MomentsType.WEB, R.layout.moments_web_share)
+            builder.addType(EmptyMomentsVHTogther.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content)
+                    .addType(MultiImageMomentsVHTogther.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image)
+                    .addType(TextOnlyMomentsVHTogther.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text)
+                    .addType(WebMomentsVHTogther.class, MomentsType.WEB, R.layout.moments_web)
                     .setData(togtherList)
                     .setPresenter(presenterTogther);
             togtherAdapter = builder.build();
             recycler.setAdapter(togtherAdapter);
         }
-
-        ivLoadState.setImageDrawable(ContextCompat.getDrawable(AboutActivity.this,R.mipmap.icon_loading));
-        ivLoadState.setVisibility(View.VISIBLE);
-
     }
 
     @Override
     public void initData() {
         isReadCache = true;
-        recycler.autoRefresh();
-        initKeyboardHeightObserver();
-    }
-
-    // TODO: 2016/12/13 进一步优化对齐功能
-    private void initKeyboardHeightObserver() {
-        //观察键盘弹出与消退
-        KeyboardControlMnanager.observerKeyboardVisibleChange(this, new KeyboardControlMnanager.OnKeyboardStateChangeListener() {
-            View anchorView;
-
-            @Override
-            public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
-             //   keyHeight = keyboardHeight;
-                int commentType;
-                if(mType.equals(Constants.MESSAGE_SHARE)) {
-                    commentType = widgetComment.getCommentType();
-                }else{
-                    commentType= widgetCommentTogther.getCommentType();
-                }
-
-
-                if (isVisible) {
-          //          commentBox.setMinimumHeight(keyboardHeight - 56);
-//                        commentBox.setMinimumHeight(keyboardHeight);
-                    //定位评论框到view
-                    anchorView = alignCommentBoxToView(commentType);
-                } else {
-                    //定位到底部
-
-                    if(mType.equals(Constants.MESSAGE_SHARE)){
-                        widgetComment.dismissCommentBox(false);
-                    }else{
-                        widgetCommentTogther.dismissCommentBox(false);
-                    }
-                    alignCommentBoxToViewWhenDismiss(commentType, anchorView);
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void onRefresh() {
-        if(!isOne){
-            ivLoadState.setVisibility(View.GONE);
-        }
         if(mType.equals(Constants.MESSAGE_SHARE)) {
             momentsRequest.setOnResponseListener(momentsRequestCallBack);
             momentsRequest.setRequestType(REQUEST_REFRESH);
@@ -225,107 +148,34 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
             momentsRequest.setKey(mKey);
             momentsRequest.setCache(isReadCache);
             momentsRequest.execute();
-            isReadCache = false;
         }else{
-            togtherRequest.setOnResponseListener(momentsRequestCallBackTogther);
+            togtherRequest.setOnResponseListener(TogtherRequestCallBack);
             togtherRequest.setRequestType(REQUEST_REFRESH);
             togtherRequest.setCurPage(0);
             togtherRequest.setKey(mKey);
             togtherRequest.setCache(isReadCache);
             togtherRequest.execute();
-            isReadCache = false;
         }
-
-
+        isReadCache = false;
+        initKeyboardHeightObserver();
     }
 
-    @Override
-    public void onLoadMore() {
-        if(!isOne){
-            ivLoadState.setVisibility(View.GONE);
-        }
-//        momentsRequest.setOnResponseListener(momentsRequestCallBack);
-//        momentsRequest.setRequestType(REQUEST_LOADMORE);
-//        momentsRequest.setKey(mKey);
-//        momentsRequest.execute();
-        recycler.compelete();
-    }
-
-    //=============================================================call back
-    private CommentBox.OnCommentSendClickListener onCommentSendClickListener = new CommentBox.OnCommentSendClickListener() {
-        @Override
-        public void onCommentSendClick(View v, Share momentid, Students commentAuthorId, String commentContent) {
-            if (TextUtils.isEmpty(commentContent)) return;
-            int itemPos;
-            if(mType.equals(Constants.MESSAGE_SHARE)) {
-                 itemPos = widgetComment.getDataPos();
-            }else{
-                itemPos = widgetCommentTogther.getDataPos();
-            }
-            List<CommentInfo> commentInfos;
-                if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
-
-                commentInfos = adapter.findData(itemPos).getCommentList();
-
-            presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
-
-            widgetComment.clearDraft();
-            widgetComment.dismissCommentBox(true);
-            presenter.addMessage(momentid.getAuthor().getObjectId()
-                    ,momentid.getObjectId()
-                    , Constants.MESSAGE_SHARE
-                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent+"");
-
-        }
-    };
-
-    private CommentBoxTogther.OnCommentSendClickListener onCommentSendClickListenerTogther = new CommentBoxTogther.OnCommentSendClickListener() {
-        @Override
-        public void onCommentSendClick(View v, Togther momentid, Students commentAuthorId, String commentContent) {
-            if (TextUtils.isEmpty(commentContent)) return;
-            int itemPos;
-            if(mType.equals(Constants.MESSAGE_SHARE)) {
-                 itemPos = widgetComment.getDataPos();
-            }else{
-                itemPos = widgetCommentTogther.getDataPos();
-            }
-
-            if (itemPos < 0 || itemPos > togtherAdapter.getItemCount()) return;
-            List<CommentInfo> commentInfos = togtherAdapter.findData(itemPos).getCommentList();
-
-
-            presenterTogther.addComment(itemPos, togtherList.get(itemPos), commentAuthorId, commentContent, commentInfos);
-
-
-                widgetCommentTogther.clearDraft();
-                widgetCommentTogther.dismissCommentBox(true);
-            presenterTogther.addMessage(momentid.getAuthor().getObjectId()
-                        ,momentid.getObjectId()
-                        , Constants.MESSAGE_TOGTHER
-                        ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
-
-        }
-    };
-
-    //call back block
     //==============================================
     private SimpleResponseListener<List<Share>> momentsRequestCallBack = new SimpleResponseListener<List<Share>>() {
         @Override
         public void onSuccess(List<Share> response, int requestType) {
-            recycler.compelete();
+            swipeRefreshLayout.setRefreshing(false);
             ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
                     if (!ToolUtil.isListEmpty(response)) {
-                        momentsInfoList.clear();
-                        momentsInfoList.addAll(response);
-                        adapter.updateData(response);
+                        Constants.getInstance().setMShare(response.get(0));
+                        Intent gIntent = new Intent(AboutActivity.this, ShareInfoActivity.class);
+                        startActivityForResult(gIntent,1);
                     }
                     break;
                 case REQUEST_LOADMORE:
-                    momentsInfoList.clear();
-                    momentsInfoList.addAll(response);
-                    adapter.addMore(response);
+
                     break;
             }
         }
@@ -333,8 +183,38 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
         @Override
         public void onError(BmobException e, int requestType) {
             super.onError(e, requestType);
-            recycler.compelete();
-            if(momentsInfoList == null || momentsInfoList.size() == 0){
+            swipeRefreshLayout.setRefreshing(false);
+            ToastUtil3.showToast(AboutActivity.this,"数据异常,请稍后重试");
+            finish();
+        }
+
+        @Override
+        public void onProgress(int pro) {
+        }
+    };
+    //=============================================================View's method
+
+    private SimpleResponseListener<List<Togther>> TogtherRequestCallBack = new SimpleResponseListener<List<Togther>>() {
+        @Override
+        public void onSuccess(List<Togther> response, int requestType) {
+            swipeRefreshLayout.setRefreshing(false);
+            ivLoadState.setVisibility(View.GONE);
+            switch (requestType) {
+                case REQUEST_REFRESH:
+                    if (!ToolUtil.isListEmpty(response)) {
+                        togtherAdapter.updateData(response);
+                    }
+                    break;
+                case REQUEST_LOADMORE:
+                    break;
+            }
+        }
+
+        @Override
+        public void onError(BmobException e, int requestType) {
+            super.onError(e, requestType);
+            swipeRefreshLayout.setRefreshing(false);
+            if(togtherList == null || togtherList.size() == 0){
                 ivLoadState.setImageDrawable(ContextCompat.getDrawable(AboutActivity.this,R.mipmap.icon_load_erro));
                 ivLoadState.setVisibility(View.VISIBLE);
             }
@@ -345,182 +225,26 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
         }
     };
+    // TODO: 2016/12/13 进一步优化对齐功能
+    private void initKeyboardHeightObserver() {
+        //观察键盘弹出与消退
+        KeyboardControlMnanager.observerKeyboardVisibleChange(this, new KeyboardControlMnanager.OnKeyboardStateChangeListener() {
+            View anchorView;
 
-
-    private SimpleResponseListener<List<Togther>> momentsRequestCallBackTogther = new SimpleResponseListener<List<Togther>>() {
-        @Override
-        public void onSuccess(List<Togther> response, int requestType) {
-            recycler.compelete();
-            switch (requestType) {
-                case REQUEST_REFRESH:
-                    if (!ToolUtil.isListEmpty(response)) {
-                        Logger.d("查询到一起"+response.get(0).getObjectId());
-                        togtherList.clear();
-                        togtherList.addAll(response);
-                        togtherAdapter.updateData(response);
-                    }else{
-                        Logger.d("未查询到一起");
-                    }
-                    break;
-                case REQUEST_LOADMORE:
-                    togtherList.clear();
-                    togtherList.addAll(response);
-                    togtherAdapter.addMore(response);
-                    break;
+            @Override
+            public void onKeyboardChange(int keyboardHeight, boolean isVisible) {
+                int commentType = widgetCommentTogther.getCommentType();
+                if (isVisible) {
+                    //定位评论框到view
+                    anchorView = alignCommentBoxToView(commentType);
+                } else {
+                    //定位到底部
+                    widgetCommentTogther.dismissCommentBox(false);
+                    alignCommentBoxToViewWhenDismiss(commentType, anchorView);
+                }
             }
-        }
-
-        @Override
-        public void onError(BmobException e, int requestType) {
-            super.onError(e, requestType);
-            recycler.compelete();
-        }
-
-        @Override
-        public void onProgress(int pro) {
-
-        }
-    };
-
-
-    //=============================================================View's method
-
-
-    @Override
-    public void onLikeChange(int itemPos, List<Students> likeUserList) {
-        Logger.d("onLikeChange");
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-            Share momentsInfo = adapter.findData(itemPos);
-            if (momentsInfo != null) {
-                momentsInfo.setLikesList(likeUserList);
-                adapter.notifyItemChanged(itemPos);
-            }
-        }else{
-            Togther momentsInfo = togtherAdapter.findData(itemPos);
-            if (momentsInfo != null) {
-                momentsInfo.setLikesList(likeUserList);
-                togtherAdapter.notifyItemChanged(itemPos);
-            }
-        }
+        });
     }
-
-    @Override
-    public void onCollectChange(int itemPos, List<Students> collectUserList) {
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-
-            Share momentsInfo = adapter.findData(itemPos);
-
-            if (momentsInfo != null) {
-                momentsInfo.setCollectList(collectUserList);
-                adapter.notifyItemChanged(itemPos);
-            }
-        }else{
-        }
-        ToastUtil3.showToast(this,"BingGo(*^__^*)");
-    }
-
-    @Override
-    public void onMessageChange(String itemPos, String content) {
-        Logger.d("推送目标人："+itemPos+"推送内容:"+content);
-        BmobPushManager bmobPush = new BmobPushManager();
-        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
-        query.addWhereEqualTo("installationId", itemPos);
-        bmobPush.setQuery(query);
-        bmobPush.pushMessage(content);
-    }
-
-    /**
-     * 点击发送
-     *
-     * @param itemPos
-     * @param commentInfoList
-     */
-    @Override
-    public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-            Share momentsInfo = adapter.findData(itemPos);
-            if (momentsInfo != null) {
-                momentsInfo.setCommentList(commentInfoList);
-                adapter.notifyItemChanged(itemPos);
-            }
-        }else{
-            Togther momentsInfo = togtherAdapter.findData(itemPos);
-            if (momentsInfo != null) {
-                momentsInfo.setCommentList(commentInfoList);
-                togtherAdapter.notifyItemChanged(itemPos);
-            }
-        }
-
-
-    }
-
-    @Override
-    public void showCommentBox(int itemPos, final Togther momentid, CommentWidget commentWidget) {
-        Logger.d("showCommentBox");
-
-        if (commentWidget == null) {
-            Logger.d("commentWidget == null--itemPos=" + itemPos);
-        } else {
-            Logger.d("commentWidget != null--itemPos==" + itemPos);
-        }
-
-
-        widgetCommentTogther.setDataPos(itemPos);
-        widgetCommentTogther.setCommentWidget(commentWidget);
-        widgetCommentTogther.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
-
-    }
-
-    /**
-     * 点击评论
-     *
-     * @param itemPos
-     * @param momentid
-     * @param commentWidget
-     */
-    @Override
-    public void showCommentBox(int itemPos, Share momentid, CommentWidget commentWidget) {
-        Logger.d("showCommentBox");
-
-        if (commentWidget == null) {
-            Logger.d("commentWidget == null--itemPos=" + itemPos);
-        } else {
-            Logger.d("commentWidget != null--itemPos==" + itemPos);
-        }
-
-
-        widgetComment.setDataPos(itemPos);
-        widgetComment.setCommentWidget(commentWidget);
-        widgetComment.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
-    }
-
-
-
-    @Override
-    public boolean onPreTouch(MotionEvent ev) {
-
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-
-            if (widgetComment != null && widgetComment.isShowing()) {
-                widgetComment.dismissCommentBox(false);
-                return true;
-            }
-
-        }else{
-
-            if (widgetCommentTogther != null && widgetCommentTogther.isShowing()) {
-                widgetCommentTogther.dismissCommentBox(false);
-                return true;
-            }
-
-        }
-
-
-        return false;
-    }
-
-    //=============================================================tool method
-
     int[] momentsViewLocation;
     int[] commentWidgetLocation;
     int[] commentBoxViewLocation;
@@ -533,42 +257,27 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
      */
     private View alignCommentBoxToView(int commentType) {
         // FIXME: 2016/12/13 有可能会获取不到itemView，特别是当view没有完全visible的时候。。。。暂无办法解决
-        int firstPos = recycler.findFirstVisibleItemPosition();
-        int itemPos;
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-            itemPos = widgetComment.getDataPos() - firstPos + recycler.getHeaderViewCount();
-        }else{
-            itemPos = widgetCommentTogther.getDataPos() - firstPos + recycler.getHeaderViewCount();
-        }
-
-
-        final View itemView = recycler.getRecyclerView().getChildAt(itemPos);
+        int firstPos = linearLayoutManager.findFirstVisibleItemPosition();
+        int itemPos = widgetCommentTogther.getDataPos() - firstPos;
+        final View itemView = recycler.getChildAt(itemPos);
         if (itemView == null) {
-            Logger.e("获取不到itemView，pos = " + itemPos);
+            Logger.d("获取不到itemView，pos = " + itemPos);
             return null;
         }
-        if (commentType == CommentBox.CommentType.TYPE_CREATE) {
+        if (commentType == CommentBoxTogther.CommentType.TYPE_CREATE) {
             //对齐到动态底部
             int scrollY = calcuateMomentsViewOffset(itemView);
-            recycler.getRecyclerView().smoothScrollBy(0, scrollY);
+            recycler.smoothScrollBy(0, scrollY);
             return itemView;
         } else {
             //对齐到对应的评论
-            CommentWidget commentWidget;
-            if(mType.equals(Constants.MESSAGE_SHARE)) {
-                commentWidget = widgetComment.getCommentWidget();
-            }else{
-                commentWidget = widgetCommentTogther.getCommentWidget();
-            }
-
-
+            CommentWidget commentWidget = widgetCommentTogther.getCommentWidget();
             if (commentWidget == null) return null;
-
-
             int scrollY = calcuateCommentWidgetOffset(commentWidget);
-            recycler.getRecyclerView().smoothScrollBy(0, scrollY );
+            recycler.smoothScrollBy(0, scrollY);
             return commentWidget;
         }
+
     }
 
     /**
@@ -579,30 +288,16 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
      */
     private void alignCommentBoxToViewWhenDismiss(int commentType, View anchorView) {
         if (anchorView == null) return;
-        int decorViewHeight = this.getWindow().getDecorView().getHeight();
+        int decorViewHeight = getWindow().getDecorView().getHeight();
         int alignScrollY;
-        if (commentType == CommentBox.CommentType.TYPE_CREATE) {
-
-            if(mType.equals(Constants.MESSAGE_SHARE)) {
-
-
-                alignScrollY = decorViewHeight - anchorView.getBottom() - widgetComment.getHeight();
-            }else{
-                alignScrollY = decorViewHeight - anchorView.getBottom() - widgetCommentTogther.getHeight();
-            }
-
+        if (commentType == CommentBoxTogther.CommentType.TYPE_CREATE) {
+            alignScrollY = decorViewHeight - anchorView.getBottom() - widgetCommentTogther.getHeight();
         } else {
             Rect rect = new Rect();
             anchorView.getGlobalVisibleRect(rect);
-
-            if(mType.equals(Constants.MESSAGE_SHARE)) {
-                alignScrollY = decorViewHeight - rect.bottom - widgetComment.getHeight();
-            }else{
-                alignScrollY = decorViewHeight - rect.bottom - widgetCommentTogther.getHeight();
-            }
-
+            alignScrollY = decorViewHeight - rect.bottom - widgetCommentTogther.getHeight();
         }
-        recycler.getRecyclerView().smoothScrollBy(0, -alignScrollY);
+        recycler.smoothScrollBy(0, -alignScrollY);
     }
 
     /**
@@ -620,7 +315,6 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     /**
      * 计算动态评论的偏移
-     *
      * @param momentsView
      * @return
      */
@@ -633,38 +327,77 @@ public class AboutActivity extends BaseActivity implements onRefreshListener2, I
 
     /**
      * 获取评论框的顶部（因为getTop不准确，因此采取 getLocationInWindow ）
-     *
      * @return
      */
     private int getCommentBoxViewTopInWindow() {
         if (commentBoxViewLocation == null) commentBoxViewLocation = new int[2];
-        if(mType.equals(Constants.MESSAGE_SHARE)) {
-            if (widgetComment == null) return 0;
-            if (commentBoxViewLocation[1] != 0) return commentBoxViewLocation[1];
-            widgetComment.getLocationInWindow(commentBoxViewLocation);
-        }else{
-            if (widgetCommentTogther == null) return 0;
-            if (commentBoxViewLocation[1] != 0) return commentBoxViewLocation[1];
-            widgetCommentTogther.getLocationInWindow(commentBoxViewLocation);
-        }
+        if (widgetCommentTogther == null) return 0;
+        if (commentBoxViewLocation[1] != 0) return commentBoxViewLocation[1];
+        widgetCommentTogther.getLocationInWindow(commentBoxViewLocation);
         return commentBoxViewLocation[1];
     }
 
-    private static class HostViewHolder {
-        private View rootView;
-        private ImageView friend_wall_pic;
 
-        public HostViewHolder(Context context) {
-            this.rootView = LayoutInflater.from(context).inflate(R.layout.circle_host_header_share, null);
-            this.friend_wall_pic = (ImageView) rootView.findViewById(R.id.friend_wall_pic);
-            this.rootView.setVisibility(View.GONE);
+
+
+    //=============================================================call back
+    private CommentBoxTogther.OnCommentSendClickListener onCommentSendClickListener = new CommentBoxTogther.OnCommentSendClickListener() {
+        @Override
+        public void onCommentSendClick(View v, Togther momentid, Students commentAuthorId, String commentContent) {
+            if (TextUtils.isEmpty(commentContent)) return;
+            int itemPos = widgetCommentTogther.getDataPos();
+            if (itemPos < 0 || itemPos > togtherAdapter.getItemCount()) return;
+            List<CommentInfo> commentInfos = togtherAdapter.findData(itemPos).getCommentList();
+            presenterTogther.addComment(itemPos, momentid, commentAuthorId, commentContent, commentInfos);
+            widgetCommentTogther.clearDraft();
+            widgetCommentTogther.dismissCommentBox(true);
+
+            presenterTogther.addMessage(momentid.getAuthor().getObjectId()
+                    ,momentid.getObjectId()
+                    ,Constants.MESSAGE_TOGTHER
+                    ,""+Constants.getInstance().getUser().getNick_name()+"说："+commentContent);
         }
-
-
-        public View getView() {
-            return rootView;
+    };
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            finish();
         }
-
     }
 
+    @Override
+    public void onLikeChange(int itemPos, List<LikesInfo> likeUserList) {
+        Togther momentsInfo = togtherAdapter.findData(itemPos);
+        if (momentsInfo != null) {
+            if(!ToolUtil.isListEmpty(likeUserList)) {
+                Logger.d(likeUserList.get(0).getUserInfo().getUsername() + "新增评论：" + likeUserList.get(0).getObjectId());
+            }else{
+                Logger.d("新增评论清空");
+            }
+            momentsInfo.setLikesList(likeUserList);
+            togtherAdapter.notifyItemChanged(itemPos);
+        }
+    }
+
+    @Override
+    public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
+        Togther momentsInfo = togtherAdapter.findData(itemPos);
+        if (momentsInfo != null) {
+            momentsInfo.setCommentList(commentInfoList);
+            togtherAdapter.notifyItemChanged(itemPos);
+        }
+    }
+
+    @Override
+    public void showCommentBox(int itemPos, Togther momentid, CommentWidget commentWidget) {
+        widgetCommentTogther.setDataPos(itemPos);
+        widgetCommentTogther.setCommentWidget(commentWidget);
+        widgetCommentTogther.toggleCommentBox(momentid, commentWidget == null ? null : commentWidget.getData(), false);
+    }
+
+    @Override
+    public void onMessageChange(String itemPos, String content) {
+
+    }
 }

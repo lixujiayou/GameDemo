@@ -45,6 +45,9 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
     }
     @Override
     public int getItemCount() {
+        if(itemsEntities == null){
+            return 0;
+        }
         return itemsEntities.size() == 0 ? 0 : itemsEntities.size();
     }
 
@@ -65,9 +68,9 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
         if(itemTemp.getReply() != null){
             ((ItemViewHolder) holder).ll_gone.setVisibility(View.VISIBLE);
                 ((ItemViewHolder) holder).tv_reply_person.setText(itemTemp.getReply().getNick_name());
-            }else{
+        }else{
                 ((ItemViewHolder) holder).ll_gone.setVisibility(View.GONE);
-            }
+        }
 
         if(itemTemp.getContent() != null){
             ((ItemViewHolder) holder).tv_content.setText(itemTemp.getContent());

@@ -1,13 +1,16 @@
 package com.example.administrator.gamedemo.widget.request;
 
 import com.example.administrator.gamedemo.model.CommentInfo;
-import com.example.administrator.gamedemo.model.MomentsInfo;
+import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
+import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +34,7 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
 
     private int count = 10;
     private int curPage = 0;
-
+    private static boolean isFirstRequest = true;
     private boolean isReadCache = true;//是否读取缓存
     private String mKey;
 
@@ -57,47 +60,42 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
     }
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
-        BmobQuery<Togther> bmobQuery = new BmobQuery<>();
-        bmobQuery.include(Togther.MomentsFields.AUTHOR_USER
-                + "," + Togther.MomentsFields.HOST
-        );
 
-        if(mKey == null || mKey.isEmpty()){
-        bmobQuery.setLimit(count);
-        bmobQuery.setSkip(curPage * count);
-        bmobQuery.order("-createdAt");
-        if(isReadCache) {
-            boolean isCache = bmobQuery.hasCachedResult(Togther.class);
-            if (isCache) {
-                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-            } else {
-                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-            }
-        }else{
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        }
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
-        bmobQuery.findObjects(new FindListener<Togther>() {
+        if(StringUtil.isEmpty(mKey)){
+            BmobQuery<Togther> query = new BmobQuery<>();
+            query.order("-createdAt");
+            query.include(Togther.MomentsFields.AUTHOR_USER+ "," + Togther.MomentsFields.HOST);
+            query.setLimit(count);
+            query.setSkip(curPage * count);
+
+            query.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+
+        query.findObjects(new FindListener<Togther>() {
             @Override
             public void done(List<Togther> list, BmobException e) {
                 if(e == null) {
                     if (!ToolUtil.isListEmpty(list)) {
                         queryCommentAndLikes(list);
-                    } else {
+                    }else{
                         onResponseSuccess(list, getRequestType());
                     }
                 }else{
+
                     onResponseError(e, getRequestType());
                 }
             }
         });
         }else{
-            bmobQuery.getObject(mKey, new QueryListener<Togther>() {
+            BmobQuery<Togther> query2 = new BmobQuery<Togther>();
+            //query2.include(Togther.MomentsFields.AUTHOR_USER+ "," + Togther.MomentsFields.HOST);
+            //query2.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+            query2.getObject(mKey, new QueryListener<Togther>() {
                 @Override
                 public void done(Togther togther, BmobException e) {
-                    List<Togther> togthers = new ArrayList<Togther>();
+                    List<Togther> togthers = new ArrayList<>();
+                    Logger.d("查询关于完成----1");
                     if(e == null){
-                        Logger.d("查询无异常");
+                        Logger.d("查询关于完成----2");
                         if(togther != null){
                             togthers.add(togther);
                             queryCommentAndLikes(togthers);
@@ -105,7 +103,6 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
                             onResponseSuccess(togthers, getRequestType());
                         }
                     }else{
-                        Logger.d("查询失败"+e.toString());
                         onResponseError(e, getRequestType());
                     }
                 }
@@ -113,115 +110,110 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         }
     }
 
-   /* private void queryCommentAndLikes(final List<Share> momentsList) {
-        *//**
-         * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         *//*
-        for (int i = 0; i < momentsList.size(); i++) {
-            final int currentPos = i;
-            final Share momentsInfo = momentsList.get(i);
-            BmobQuery<Students> likesQuery = new BmobQuery<>();
-            likesQuery.order("-createdAt");
-            likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
-            likesQuery.findObjects(new FindListener<Students>() {
-                @Override
-                public void done(List<Students> list, BmobException e) {
-                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
-                    commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
-                    commentQuery.addWhereEqualTo("moment", momentsInfo);
-                    commentQuery.order("-createdAt");
-                    commentQuery.findObjects(new FindListener<CommentInfo>() {
-                        @Override
-                        public void done(List<CommentInfo> list, BmobException e) {
-                            if (!ToolUtil.isListEmpty(list)) {
-                                momentsInfo.setCommentList(list);
-                            }
-
-                            if (e == null) {
-                                if (currentPos == momentsList.size() - 1) {
-                                    onResponseSuccess(momentsList, getRequestType());
-                                    curPage++;
-                                }
-
-                            } else {
-                                onResponseError(e, getRequestType());
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }*/
     private void queryCommentAndLikes(final List<Togther> momentsList) {
         /**
          * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
          * oRz，果然没有自己写服务器来的简单，好吧，都是在下没钱的原因，我的锅
-         *
          */
-        for (int i = 0; i < momentsList.size(); i++) {
-            final int currentPos = i;
-            final Togther momentsInfo = momentsList.get(i);
-            BmobQuery<Students> likesQuery = new BmobQuery<>();
-            likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
-            //根据更新时间降序
-            //文档:http://docs.bmob.cn/data/Android/b_developdoc/doc/index.html#查询数据
-            //排序子目录
-            likesQuery.order("-createdAt");
+        final List<CommentInfo> commentInfoList = new ArrayList<>();
+        final List<LikesInfo> likesInfoList = new ArrayList<>();
 
+        final boolean[] isCommentRequestFin = {false};
+        final boolean[] isLikesRequestFin = {false};
 
-            if(isReadCache) {
-                boolean isCache = likesQuery.hasCachedResult(Students.class);
-                if (isCache) {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                } else {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-            }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-            }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
-
-            likesQuery.findObjects(new FindListener<Students>() {
-                @Override
-                public void done(List<Students> list, BmobException e) {
-                    if (!ToolUtil.isListEmpty(list)) {
-                        momentsInfo.setLikesList(list);
-                    }
-                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
-                    commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
-                    commentQuery.addWhereEqualTo("moment", momentsInfo);
-                    commentQuery.order("-createdAt");
-
-                    if(isReadCache) {
-                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
-                        if (isCache) {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                        } else {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                        }
-                    }else{
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-                    }
-                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
-
-                    commentQuery.findObjects(new FindListener<CommentInfo>() {
-                        @Override
-                        public void done(List<CommentInfo> list, BmobException e) {
-                            if (!ToolUtil.isListEmpty(list)) {
-                                momentsInfo.setCommentList(list);
-                            }
-                            if (e == null) {
-                                if (currentPos == momentsList.size() - 1) {
-                                    onResponseSuccess(momentsList, getRequestType());
-                                    curPage++;
-                                }
-                            } else {
-                                onResponseError(e, getRequestType());
-                            }
-                        }
-                    });
-                }
-            });
+        BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
+        commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
+        List<String> id = new ArrayList<>();
+        for (Togther momentsInfo : momentsList) {
+            id.add(momentsInfo.getObjectId());
         }
+        commentQuery.addWhereContainedIn(CommentInfo.CommentFields.TOGTHER, id);
+        commentQuery.order("createdAt");
+        commentQuery.setLimit(1000);//默认只有100条数据，最多1000条
+
+        commentQuery.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        commentQuery.findObjects(new FindListener<CommentInfo>() {
+            @Override
+            public void done(List<CommentInfo> list, BmobException e) {
+                if(e == null) {
+                    isCommentRequestFin[0] = true;
+                    if (!ToolUtil.isListEmpty(list)) {
+                        Logger.d("共查询评论多少条："+list.size());
+                        commentInfoList.addAll(list);
+                    }
+                    mergeData(isCommentRequestFin[0], isLikesRequestFin[0], commentInfoList, likesInfoList, momentsList, e);
+                }else{
+
+                    onResponseError(e, getRequestType());
+                }
+            }
+        });
+
+        BmobQuery<LikesInfo> likesInfoBmobQuery = new BmobQuery<>();
+        likesInfoBmobQuery.include(LikesInfo.LikesField.TOGTHERID + "," + LikesInfo.LikesField.USERID);
+        likesInfoBmobQuery.addWhereContainedIn(LikesInfo.LikesField.TOGTHERID, id);
+        likesInfoBmobQuery.order("createdAt");
+        likesInfoBmobQuery.setLimit(1000);
+        likesInfoBmobQuery.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        likesInfoBmobQuery.findObjects(new FindListener<LikesInfo>() {
+            @Override
+            public void done(List<LikesInfo> list, BmobException e) {
+                if(e == null) {
+                    isLikesRequestFin[0] = true;
+                    if (!ToolUtil.isListEmpty(list)) {
+
+                        likesInfoList.addAll(list);
+
+                    }
+                    mergeData(isCommentRequestFin[0], isLikesRequestFin[0], commentInfoList, likesInfoList, momentsList, e);
+                }else{
+
+                    onResponseError(e, getRequestType());
+                }
+            }
+        });
     }
+
+    private void mergeData(boolean isCommentRequestFin,
+                           boolean isLikeRequestFin,
+                           List<CommentInfo> commentInfoList,
+                           List<LikesInfo> likesInfoList,
+                           List<Togther> momentsList,
+                           BmobException e) {
+
+        if (!isCommentRequestFin || !isLikeRequestFin) return;
+
+        if (e != null) {
+            onResponseError(e, getRequestType());
+            return;
+        }
+
+        if (ToolUtil.isListEmpty(momentsList)) {
+            onResponseError(new BmobException("动态数据为空"), getRequestType());
+            return;
+        }
+        curPage++;
+
+        for(int i = 0;i < commentInfoList.size();i++){
+            CommentInfo cCommentInfo = commentInfoList.get(i);
+            for(int ii = 0;ii < momentsList.size();ii++){
+                if(momentsList.get(ii).getObjectId().equals(cCommentInfo.getTogther().getObjectId())){
+                    momentsList.get(ii).addComment(cCommentInfo);
+                }
+            }
+        }
+
+        for(int i = 0;i < likesInfoList.size();i++){
+            LikesInfo cLikeInfo = likesInfoList.get(i);
+            for(int ii = 0;ii < momentsList.size();ii++){
+                if(momentsList.get(ii).getObjectId().equals(cLikeInfo.getTogtherid().getObjectId())){
+                    momentsList.get(ii).addLikes(cLikeInfo);
+                }
+            }
+        }
+        onResponseSuccess(momentsList, getRequestType());
+        isFirstRequest = false;
+    }
+
+
 }

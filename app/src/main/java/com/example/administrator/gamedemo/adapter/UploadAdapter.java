@@ -79,11 +79,16 @@ public class UploadAdapter extends Adapter<ViewHolder> {
             MomentsInfo momentsInfo = itemsEntities.get(position);
 
             if(momentsInfo.getAuthor().getUser_icon() != null){
-                ImageLoadMnanger.INSTANCE.loadImage(((ItemViewHolder) holder).rv_cover, momentsInfo.getAuthor().getUser_icon().getFileUrl());
+                ImageLoadMnanger.INSTANCE.loadIconImage(context,((ItemViewHolder) holder).rv_cover, momentsInfo.getAuthor().getUser_icon().getFileUrl());
+            }
+            if(momentsInfo.getAuthor().getNick_name() != null) {
+                ((ItemViewHolder) holder).tv_name.setText(momentsInfo.getAuthor().getNick_name());
+            }else{
+                ((ItemViewHolder) holder).tv_name.setText(momentsInfo.getAuthor().getUsername());
             }
 
-            ((ItemViewHolder) holder).tv_name.setText(momentsInfo.getAuthor().getNick_name());
             ((ItemViewHolder) holder).tv_topic.setText(momentsInfo.getTopic());
+
             try {
                 ((ItemViewHolder) holder).cv.setCardBackgroundColor(colorBook[momentsInfo.getColor()]);
             }catch (Exception e){
@@ -164,7 +169,7 @@ public class UploadAdapter extends Adapter<ViewHolder> {
             if (isLoading) {
                 mFootViewHolder.tv_state.setText(R.string.load_ing);
             } else {
-                mFootViewHolder.tv_state.setText(null);
+                mFootViewHolder.tv_state.setText("");
             }
         }else{
             Logger.d("mFootViewHolder == null ");

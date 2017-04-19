@@ -76,4 +76,10 @@
     <string name="help_6_title">\t\t问：“一起答”里面为什么是空的？</string>
     <string name="help_6_content">\t\t答：“一起答”是需要联网的哦。在网络不流畅的情况也可能会导致加载缓慢。</string>
 
+    <string name="got_titletext">Who Will Ride The Third Dragon In \'Game Of Thrones\' Season 7?</string>
+    <string name="got_image_url">http://cdn.idigitaltimes.com/sites/idigitaltimes.com/files/styles/image_embed/public/2016/04/29/game-thrones-daenerys-dragon-drogon.jpg</string>
+    <string name="got_subtext">Game of Thrones season 7 will kick off a new age of Game of Thrones, with the show becoming a true epic fantasy for the first time. Don’t worry, it will remain a high political drama too, but the war between ice and fire isn’t far off now, and Daenerys Targaryen seems destined to lead the fight</string>
+    <string name="got_summarytext">You\'ve shown interest in Game of Thrones series</string>
+
+
 </resources>

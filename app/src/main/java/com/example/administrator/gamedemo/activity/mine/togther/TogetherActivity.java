@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -26,55 +22,39 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.activity.LoginActivity;
-import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
 import com.example.administrator.gamedemo.adapter.TogtherAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
 import com.example.administrator.gamedemo.model.CommentInfo;
-import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
+
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
-import com.example.administrator.gamedemo.utils.view.IMomentView;
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
-import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVHTogther;
-import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVH;
 import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVHTogther;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
-import com.example.administrator.gamedemo.widget.commentwidget.CommentBox;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
 import com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView;
 import com.example.administrator.gamedemo.widget.pullrecyclerview.interfaces.onRefreshListener2;
-import com.example.administrator.gamedemo.widget.request.MomentsRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.example.administrator.gamedemo.widget.request.TogtherRequest;
 import com.example.administrator.gamedemo.widget.simage.Crop;
 import com.orhanobut.logger.Logger;
-
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobPushManager;
@@ -94,14 +74,15 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private static final int REQUEST_LOADMORE = 0x11;
     private static final int CAMERA_REQUEST_CODE = 1458;
     private static final int GALLERY_REQUEST_CODE = 1450;
+
 //    @BindView(R.id.swipe_refresh)
 //    SwipeRefreshLayout swipeRefresh;
+
     @BindView(R.id.recycler)
-     CircleRecyclerView circleRecyclerView;
+    CircleRecyclerView circleRecyclerView;
     @BindView(R.id.widget_comment)
-     CommentBoxTogther commentBox;
-    @BindView(R.id.iv_load_state)
-    ImageView ivLoadState;
+    CommentBoxTogther commentBox;
+
 
     private HostViewHolder hostViewHolder;
     private TogtherAdapter adapter;
@@ -111,9 +92,9 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     private MomentPresenterTogther presenter;
     private File mTempDir;//修改封面 选取的图片路径
     private SweetAlertDialog pDialog;
-
     private boolean isReadCache = true;
     private boolean isOne = true;
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_togther);
@@ -123,7 +104,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     public void initViews() {
         momentsInfoList = new ArrayList<>();
         togtherRequest = new TogtherRequest();
-
         mTempDir = new File( Environment.getExternalStorageDirectory(),"bibleAsk");
         if(!mTempDir.exists()){
             mTempDir.mkdirs();
@@ -166,8 +146,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 .setPresenter(presenter);
         adapter = builder.build();
         circleRecyclerView.setAdapter(adapter);
-        ivLoadState.setImageDrawable(ContextCompat.getDrawable(TogetherActivity.this,R.mipmap.icon_loading));
-        ivLoadState.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -216,7 +195,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     @Override
     public void onRefresh() {
         if(!isOne){
-            ivLoadState.setVisibility(View.GONE);
+
         }
         togtherRequest.setOnResponseListener(momentsRequestCallBack);
         togtherRequest.setRequestType(REQUEST_REFRESH);
@@ -228,14 +207,15 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
     @Override
     public void onLoadMore() {
-        if(!isOne){
-            ivLoadState.setVisibility(View.GONE);
+
+        if(momentsRequestCallBack == null || togtherRequest == null){
+            return;
         }
+
         togtherRequest.setOnResponseListener(momentsRequestCallBack);
         togtherRequest.setRequestType(REQUEST_LOADMORE);
         togtherRequest.execute();
     }
-
 
     @Override
     protected void onDestroy() {
@@ -249,7 +229,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         @Override
         public void onSuccess(List<Togther> response, int requestType) {
             circleRecyclerView.compelete();
-            ivLoadState.setVisibility(View.GONE);
+
             switch (requestType) {
                 case REQUEST_REFRESH:
 
@@ -270,8 +250,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             super.onError(e, requestType);
             circleRecyclerView.compelete();
             if(momentsInfoList.size() == 0){
-                ivLoadState.setImageDrawable(ContextCompat.getDrawable(TogetherActivity.this,R.mipmap.icon_load_erro));
-                ivLoadState.setVisibility(View.VISIBLE);
             }else{
                 ToastUtil3.showToast(TogetherActivity.this,"加载失败，请检查网络并重试");
             }
@@ -280,17 +258,21 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
 
         @Override
         public void onProgress(int pro) {
-
         }
     };
 
 
     //=============================================================View's method
     @Override
-    public void onLikeChange(int itemPos, List<Students> likeUserList) {
+    public void onLikeChange(int itemPos, List<LikesInfo> likeUserList) {
         Togther momentsInfo = adapter.findData(itemPos);
         if (momentsInfo != null) {
-            momentsInfo.setLikesList(likeUserList);
+            if(!ToolUtil.isListEmpty(likeUserList)) {
+                Logger.d(likeUserList.get(0).getUserInfo().getUsername() + "新增评论：" + likeUserList.get(0).getObjectId());
+            }else{
+                Logger.d("新增评论清空");
+            }
+                momentsInfo.setLikesList(likeUserList);
             adapter.notifyItemChanged(itemPos);
         }
     }
@@ -314,11 +296,11 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
     @Override
     public void onMessageChange(String itemPos, String content) {
         Logger.d("推送目标人："+itemPos+"推送内容:"+content);
-        BmobPushManager bmobPush = new BmobPushManager();
+       /* BmobPushManager bmobPush = new BmobPushManager();
         BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
         query.addWhereEqualTo("installationId", itemPos);
         bmobPush.setQuery(query);
-        bmobPush.pushMessage(content);
+        bmobPush.pushMessage(content);*/
     }
 
     @Override
@@ -655,7 +637,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
         });
 
     }
-
 
 
     public void showProgressBarDialog(final Activity mContext){

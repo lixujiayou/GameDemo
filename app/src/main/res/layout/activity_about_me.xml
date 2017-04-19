@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include layout="@layout/toolbar"/>
+
     <include layout="@layout/layout_no_network"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
-        <com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView
-            android:id="@+id/recycler"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
             <ImageView
                 android:id="@+id/iv_load_state"
                 android:layout_width="wrap_content"
@@ -28,21 +41,18 @@
                 android:layout_above="@+id/temp"
                 android:layout_centerHorizontal="true"
                 />
+
             <View
                 android:id="@+id/temp"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_centerInParent="true"
                 />
+
         </RelativeLayout>
     </FrameLayout>
 
-    <com.example.administrator.gamedemo.widget.commentwidget.CommentBox
-        android:id="@+id/widget_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
+
 
     <com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther
         android:id="@+id/widget_comment_togther"

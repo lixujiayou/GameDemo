@@ -124,12 +124,11 @@ public class OnlineAnswerActivity extends BaseActivity {
     @Override
     public void initViews() {
 
-//        Intent gIntent = getIntent();
-//        mMomentsInfo = (MomentsInfo) gIntent.getSerializableExtra("topic");
         mMomentsInfo = Constants.getInstance().getMomentsInfo();
         if(mMomentsInfo == null){
-            ToastUtil3.showToast(OnlineAnswerActivity.this,"这道题走丢啦，请重试");
+            ToastUtil3.showToast(OnlineAnswerActivity.this,"数据异常，请重试");
             finish();
+            return;
         }
 
 
@@ -173,7 +172,7 @@ public class OnlineAnswerActivity extends BaseActivity {
             }
         });
 
-    //初始化答题
+        //初始化答题
         if (mMomentsInfo != null) {
             tv_topic.setText("\t\t" + mMomentsInfo.getTopic());
             mAnswers.clear();
@@ -637,4 +636,5 @@ public class OnlineAnswerActivity extends BaseActivity {
             Logger.d("ProgressBarDialog的上下文找不到啦！");
         }
     }
+
 }

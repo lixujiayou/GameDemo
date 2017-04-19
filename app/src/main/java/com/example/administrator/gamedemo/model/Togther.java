@@ -2,9 +2,12 @@ package com.example.administrator.gamedemo.model;
 
 import android.text.TextUtils;
 
+import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToolUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +34,11 @@ public class Togther extends BmobObject {
     private Students students;
     private Students hostinfo;
     private BmobRelation likes;
-    private List<Students> likesList;
+    private List<LikesInfo> likesList;
     private List<CommentInfo> commentList;
 
     private String text;
     private List<BmobFile> pics;
-   // private MomentContent content;
 
     public Togther() {
     }
@@ -65,11 +67,11 @@ public class Togther extends BmobObject {
         this.likes = likes;
     }
 
-    public List<Students> getLikesList() {
+    public List<LikesInfo> getLikesList() {
         return likesList;
     }
 
-    public void setLikesList(List<Students> likesList) {
+    public void setLikesList(List<LikesInfo> likesList) {
         this.likesList = likesList;
     }
 
@@ -83,7 +85,13 @@ public class Togther extends BmobObject {
 
 
 
-
+    public void addLikes(LikesInfo likesInfo) {
+        if (likesInfo == null) return;
+        if (this.likesList == null){
+            this.likesList = new ArrayList<>();
+        }
+        this.likesList.add(likesInfo);
+    }
 
     public int getMomentType() {
         if (pics == null && StringUtil.noEmpty(text)) {
@@ -93,6 +101,7 @@ public class Togther extends BmobObject {
     }
 
     public void addComment(CommentInfo commentInfo){
+
         if(this.commentList == null){
             this.commentList = new ArrayList<>();
         }
@@ -108,11 +117,21 @@ public class Togther extends BmobObject {
             }
         }
     }
-
+    public String getLikesObjectid() {
+        String momentid = getMomentid();
+        String userid = Constants.getInstance().getUser().getObjectId();
+        if (!ToolUtil.isListEmpty(likesList)) {
+            for (LikesInfo likesInfo : likesList) {
+                if (TextUtils.equals(momentid, likesInfo.getTogtherid().getObjectId()) && TextUtils.equals(userid, likesInfo.getUserid())) {
+                    return likesInfo.getObjectId();
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * 获取动态的类型
-     *
      * @return
      */
     public int getMomentType_() {
@@ -152,14 +171,7 @@ public class Togther extends BmobObject {
 
     }
 
-    public void addPicture(BmobFile pic) {
-        if (pics == null) {
-            pics = new ArrayList<>();
-        }
-        if (pics.size() < 9) {
-            pics.add(pic);
-        }
-    }
+
 
 
 }

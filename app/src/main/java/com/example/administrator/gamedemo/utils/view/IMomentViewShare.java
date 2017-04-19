@@ -15,10 +15,6 @@ import java.util.List;
 public interface IMomentViewShare extends IBaseView {
 
 
-    void onLikeChange(int itemPos, List<Students> likeUserList);
-
     void onCommentChange(int itemPos, List<CommentInfo> commentInfoList);
-
-    void showCommentBox(int itemPos, String momentid, CommentWidget commentWidget);
 
 }

@@ -6,6 +6,7 @@ import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
@@ -33,6 +34,7 @@ public class AddTogtherRequest extends BaseRequestClient<String> {
     private String hostId;
     private Togther togther;
     private List<String> picList;
+    private List<LikesInfo> likesUserId;
    // private List<Students> likesUserId;
     private String[] pics;
     public AddTogtherRequest() {
@@ -42,6 +44,9 @@ public class AddTogtherRequest extends BaseRequestClient<String> {
     public AddTogtherRequest setAuthId(String authId) {
         this.authId = authId;
         return this;
+    }
+    public void setLikesUserId(List<LikesInfo> mLikesUserId){
+        this.likesUserId = mLikesUserId;
     }
 
     public AddTogtherRequest setHostId(String hostId) {
@@ -129,6 +134,7 @@ public class AddTogtherRequest extends BaseRequestClient<String> {
         Students author = new Students();
         author.setObjectId(authId);
         togther.setAuthor(author);
+        togther.setLikesList(likesUserId);
 
         if(list != null) {
             togther.setPics(list);

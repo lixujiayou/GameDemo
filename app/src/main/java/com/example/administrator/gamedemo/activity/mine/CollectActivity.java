@@ -13,22 +13,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.administrator.gamedemo.R;
-import com.example.administrator.gamedemo.adapter.CircleMomentsAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.core.MomentsType;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.view.IMomentView;
-import com.example.administrator.gamedemo.utils.viewholder.EmptyMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.MultiImageMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.TextOnlyMomentsVH;
-import com.example.administrator.gamedemo.utils.viewholder.WebMomentsVH;
+
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentBox;
 import com.example.administrator.gamedemo.widget.commentwidget.CommentWidget;
@@ -64,10 +60,8 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     ImageView ivLoadState;
 
     private HostViewHolder hostViewHolder;
-    private CircleMomentsAdapter adapter;
     private List<Share> momentsInfoList;
     private ShareRequest momentsRequest;
-    private MomentPresenter presenter;
     private boolean isReadCache = false;
 
     private static final int REQUEST_REFRESH = 0x10;
@@ -88,7 +82,6 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
         momentsInfoList = new ArrayList<>();
         momentsRequest = new ShareRequest();
 
-        presenter = new MomentPresenter(this);
 
         circleRecyclerView.setOnRefreshListener(this);
         circleRecyclerView.setOnPreDispatchTouchListener(this);
@@ -103,15 +96,9 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
 
         commentBox.setOnCommentSendClickListener(onCommentSendClickListener);
 
-        CircleMomentsAdapter.Builder<Share> builder = new CircleMomentsAdapter.Builder<>(this);
-        builder.addType(EmptyMomentsVH.class, MomentsType.EMPTY_CONTENT, R.layout.moments_empty_content_share)
-                .addType(MultiImageMomentsVH.class, MomentsType.MULTI_IMAGES, R.layout.moments_multi_image_share)
-                .addType(TextOnlyMomentsVH.class, MomentsType.TEXT_ONLY, R.layout.moments_only_text_share)
-                .addType(WebMomentsVH.class, MomentsType.WEB, R.layout.moments_web_share)
-                .setData(momentsInfoList)
-                .setPresenter(presenter);
-        adapter = builder.build();
-        circleRecyclerView.setAdapter(adapter);
+
+
+
 
         ivLoadState.setImageDrawable(ContextCompat.getDrawable(CollectActivity.this,R.mipmap.icon_loading));
         ivLoadState.setVisibility(View.VISIBLE);
@@ -202,7 +189,6 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
                         momentsInfoList.clear();
                         momentsInfoList.addAll(response);
 
-                        adapter.updateData(response);
                     }else{
                         rl_hint.setVisibility(View.VISIBLE);
                         //circleRecyclerView.setVisibility(View.GONE);
@@ -211,7 +197,6 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
                 case REQUEST_LOADMORE:
                     momentsInfoList.clear();
                     momentsInfoList.addAll(response);
-                    adapter.addMore(response);
                     break;
             }
         }
@@ -240,22 +225,13 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
 
 
     @Override
-    public void onLikeChange(int itemPos, List<Students> likeUserList) {
+    public void onLikeChange(int itemPos, List<LikesInfo> likeUserList) {
         Logger.d("onLikeChange");
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setLikesList(likeUserList);
-            adapter.notifyItemChanged(itemPos);
-        }
+
     }
     @Override
     public void onCollectChange(int itemPos, List<Students> collectUserList) {
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setCollectList(collectUserList);
-            adapter.notifyItemChanged(itemPos);
-        }
-        ToastUtil3.showToast(CollectActivity.this,"BingGo(*^__^*)");
+
     }
 
     @Override
@@ -274,11 +250,7 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
      */
     @Override
     public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
-        Share momentsInfo = adapter.findData(itemPos);
-        if (momentsInfo != null) {
-            momentsInfo.setCommentList(commentInfoList);
-            adapter.notifyItemChanged(itemPos);
-        }
+
     }
 
     /**
@@ -412,19 +384,9 @@ public class CollectActivity extends BaseActivity implements onRefreshListener2,
     private CommentBox.OnCommentSendClickListener onCommentSendClickListener = new CommentBox.OnCommentSendClickListener() {
         @Override
         public void onCommentSendClick(View v, Share momentid, Students commentAuthorId, String commentContent) {
-            if (TextUtils.isEmpty(commentContent)) return;
-            int itemPos = commentBox.getDataPos();
-            if (itemPos < 0 || itemPos > adapter.getItemCount()) return;
-            List<CommentInfo> commentInfos = adapter.findData(itemPos).getCommentList();
-            presenter.addComment(itemPos, momentsInfoList.get(itemPos), commentAuthorId, commentContent, commentInfos);
-            commentBox.clearDraft();
-            commentBox.dismissCommentBox(true);
 
 
-            presenter.addMessage(momentid.getAuthor().getObjectId()
-                    ,momentid.getObjectId()
-                    , Constants.MESSAGE_SHARE
-                    ,""+Constants.getInstance().getUser().getNick_name()+"评论了您的...点击查看");
+
 
         }
     };

@@ -199,7 +199,7 @@ public class MineFragment extends BaseFragment {
                 ImageLoadMnanger.INSTANCE.steDimImage(this, students.getUser_icon().getFileUrl(), iv_dim);
             } else {
                 iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_default));
-                iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 10, false));
+                iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 20, false));
             }
             if (students.getNick_name() != null) {
                 tv_name.setText(students.getNick_name());

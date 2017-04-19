@@ -3,6 +3,7 @@ package com.example.administrator.gamedemo.model;
 import android.text.TextUtils;
 
 import com.example.administrator.gamedemo.core.MomentsType;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
@@ -25,28 +26,20 @@ public class Share extends BmobObject {
 
 
     public interface MomentsFields {
-        String LIKES = "likes";
-        String HOST = "hostinfo";
-        String COMMENTS = "commentList";
 
+        String COMMENTS = "comments";
         String AUTHOR_USER = "students";
-        String AUTHOR_COLLECT = "collectInfo";
     }
 
     private Students students;
-    private Students hostinfo;
 
-    private BmobRelation likes;
-
-    private List<Students> likesList;
-    private List<Students> collectList;
     private List<CommentInfo> commentList;
 
     private String text;
+    private String title;
     private List<BmobFile> pics;
 
 
-   // private MomentContent content;
 
 
     public Share() {
@@ -64,44 +57,15 @@ public class Share extends BmobObject {
         return getObjectId();
     }
 
-    public Students getHostinfo() {
-        return hostinfo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setHostinfo(Students hostinfo) {
-        this.hostinfo = hostinfo;
-    }
-
-    public void setLikesBmobRelation(BmobRelation likes) {
-        this.likes = likes;
-    }
-
-    public List<Students> getLikesList() {
-        return likesList;
-    }
-
-    public void setLikesList(List<Students> likesList) {
-        this.likesList = likesList;
-    }
-
-    public List<CommentInfo> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<CommentInfo> commentList) {
-        this.commentList = commentList;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 
-
-
-
-    public int getMomentType() {
-        if (pics == null && StringUtil.noEmpty(text)) {
-            return MomentsType.EMPTY_CONTENT;
-        }
-        return getMomentType_();
-    }
 
     public void addComment(CommentInfo commentInfo){
         if(this.commentList == null){
@@ -112,36 +76,16 @@ public class Share extends BmobObject {
         }
     }
 
-    public void removeComment(CommentInfo commentInfo){
-        if(commentInfo != null) {
-            if(this.commentList != null) {
-                this.commentList.remove(commentInfo);
-            }
-        }
-    }
-
-    public List<Students> getCollectList() {
-        return collectList;
+    public List<CommentInfo> getCommentList(){
+        return commentList;
     }
 
     public void setCollectList(List<Students> collectList) {
-        this.collectList = collectList;
+
     }
 
-    /**
-     * 获取动态的类型
-     *
-     * @return
-     */
-    public int getMomentType_() {
-        int type = MomentsType.TEXT_ONLY;
-        //图片列表为空，则只能是文字或者web
-        if (ToolUtil.isListEmpty(pics)) {
-                type = MomentsType.TEXT_ONLY;
-        } else {
-            type = MomentsType.MULTI_IMAGES;
-        }
-        return type;
+    public void setCommentList(List<CommentInfo> commentList) {
+        this.commentList = commentList;
     }
 
     public String getText() {
@@ -169,31 +113,4 @@ public class Share extends BmobObject {
         return true;
 
     }
-
-    public void addPicture(BmobFile pic) {
-        if (pics == null) {
-            pics = new ArrayList<>();
-        }
-        if (pics.size() < 9) {
-            pics.add(pic);
-        }
-    }
-
-
-  public void addCollect(Students students) {
-        if (collectList == null) {
-            collectList = new ArrayList<>();
-        }
-        collectList.add(students);
-    }
-
- public void removeCollect(Students students) {
-        if (collectList == null || collectList.size() == 0) {
-            Logger.d("没有就不要删了");
-           return;
-        }
-        collectList.remove(students);
-    }
-
-
 }

@@ -44,18 +44,17 @@ public class AnswerFragment extends BaseFragment {
     TextView tvScripture;
 
     @BindView(R.id.iv_start)
-    MyImageView ivStart;
+    LinearLayout ivStart;
     @BindView(R.id.iv_togther)
-    MyImageView ivTogther;
+    LinearLayout ivTogther;
     @BindView(R.id.iv_history)
-    MyImageView ivHistory;
+    LinearLayout ivHistory;
     @BindView(R.id.iv_help)
-    MyImageView ivHelp;
-
-
+    LinearLayout ivHelp;
 
     @BindView(R.id.tv_time)
     TextView tv_time;
+
     public AnswerFragment() {
     }
 
@@ -79,75 +78,64 @@ public class AnswerFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-//        tv_time.setText(Constants.StringData());
-
         UIHelper.getScreenHeightPix(mContext);
-
-        ivStart.setOnClickIntent(new MyImageView.OnViewClickListener() {
+        ivStart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewClick(MyImageView view) {
+            public void onClick(View view) {
                 Intent sIntent = new Intent(getActivity(), SelectTypeActivity.class);
                 sIntent.putExtra("yinliang", true);
                 startActivity(sIntent);
             }
         });
 
-        ivTogther.setOnClickIntent(new MyImageView.OnViewClickListener() {
+        ivTogther.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewClick(MyImageView view) {
+            public void onClick(View view) {
                 Intent pIntent = new Intent(mContext, AnswerListActivity.class);
                 startActivityForResult(pIntent, 1);
             }
         });
 
-        ivHistory.setOnClickIntent(new MyImageView.OnViewClickListener() {
+        ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewClick(MyImageView view) {
+            public void onClick(View view) {
                 Intent pIntent = new Intent(mContext, AnswerHistoryActivity.class);
                 startActivityForResult(pIntent, 1);
             }
         });
 
-        ivHelp.setOnClickIntent(new MyImageView.OnViewClickListener() {
+        ivHelp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewClick(MyImageView view) {
+            public void onClick(View view) {
                 Intent pIntent = new Intent(mContext, HelpActivity.class);
                 startActivityForResult(pIntent, 1);
             }
         });
+
         initData();
     }
 
     @Override
     public void initData() {
-
-        Logger.d("开始开始1111");
         CoverRequest coverRequest = new CoverRequest();
-        Logger.d("开始开始查询");
         coverRequest.setOnResponseListener(new OnResponseListener<List<Scriptures>>() {
             @Override
             public void onStart(int requestType) {
-
             }
-
             @Override
             public void onSuccess(List<Scriptures> response, int requestType) {
-                Logger.d("查询失败"+response.size());
                 if(response != null && response.size() > 0) {
                     Scriptures scripturesTemp = response.get(0);
                     tvScripture.setText(scripturesTemp.getsContent());
                     ImageLoadMnanger.INSTANCE.loadImageToCover(bannerImageView, scripturesTemp.getsImage().getFileUrl());
                 }
                 }
-
             @Override
             public void onError(BmobException e, int requestType) {
                 Logger.d("查询失败"+e.toString());
             }
-
             @Override
             public void onProgress(int pro) {
-
             }
         });
         coverRequest.execute();

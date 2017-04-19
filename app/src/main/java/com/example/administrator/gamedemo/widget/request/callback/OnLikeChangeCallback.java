@@ -8,7 +8,7 @@ package com.example.administrator.gamedemo.widget.request.callback;
 
 public interface OnLikeChangeCallback {
 
-    void onLike();
+    void onLike(String likeId);
 
     void onUnLike();
 

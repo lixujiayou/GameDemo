@@ -27,6 +27,7 @@ public class AddShareRequest extends BaseRequestClient<String> {
     private String[] pics;
     private String authId;
     private String hostId;
+    private String mTitle;
     //private MomentContent momentContent;
     private Share share;
     private List<Students> likesUserId;
@@ -38,6 +39,10 @@ public class AddShareRequest extends BaseRequestClient<String> {
 
     public AddShareRequest setAuthId(String authId) {
         this.authId = authId;
+        return this;
+    }
+    public AddShareRequest setTitle(String title){
+        this.mTitle = title;
         return this;
     }
 
@@ -86,12 +91,11 @@ public class AddShareRequest extends BaseRequestClient<String> {
 //                                }
 //                            });
 //                        }
-//
 //                    }
 //                }
 //            });
-//
 //        }
+
         if (checkValided()) {
             if(picList == null || picList.size() == 0){
                 insertObject(null, requestType);
@@ -132,7 +136,7 @@ public class AddShareRequest extends BaseRequestClient<String> {
         Students author = new Students();
         author.setObjectId(authId);
         share.setAuthor(author);
-
+        share.setTitle(mTitle);
         if(list != null) {
             share.setPics(list);
         }

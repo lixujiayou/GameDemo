@@ -67,9 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textcolor_old"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_gravity="center_vertical"
-        android:text=""
+        android:text="试试"
         />
 
 </LinearLayout>

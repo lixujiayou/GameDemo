@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
 import com.example.administrator.gamedemo.widget.request.AddTogtherRequest;
@@ -149,11 +150,11 @@ public class SendTogtherActivity extends BaseActivity {
     }
 
     private void commitTogther(String togtherText) {
-
         showProgressBarDialog(SendTogtherActivity.this);
         AddTogtherRequest addTogtherRequest = new AddTogtherRequest();
         addTogtherRequest.setAuthId(Constants.getInstance().getUser(SendTogtherActivity.this).getObjectId());
         addTogtherRequest.addText(togtherText);
+        addTogtherRequest.setLikesUserId(new ArrayList<LikesInfo>());
         if(imagePaths.contains("000000")) {
             imagePaths.remove("000000");
         }
@@ -186,7 +187,7 @@ public class SendTogtherActivity extends BaseActivity {
 
             @Override
             public void onProgress(int pro) {
-                setProgressDialogText("已上传%"+pro);
+                setProgressDialogText("已上传"+pro+"%");
             }
         });
         addTogtherRequest.execute();

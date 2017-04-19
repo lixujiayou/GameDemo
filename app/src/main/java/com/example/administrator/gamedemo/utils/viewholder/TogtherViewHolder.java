@@ -20,12 +20,12 @@ import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.SimpleObjectPool;
 import com.example.administrator.gamedemo.utils.TimeUtil;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.utils.base.BaseRecyclerViewHolder;
-import com.example.administrator.gamedemo.utils.presenter.MomentPresenter;
 import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
 import com.example.administrator.gamedemo.widget.ClickShowMoreLayout;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
@@ -36,6 +36,7 @@ import com.example.administrator.gamedemo.widget.popup.DeleteCommentPopup;
 import com.example.administrator.gamedemo.widget.praisewidget.PraiseWidget;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,9 +130,9 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
     private void onBindMutualDataToViews(Togther data) {
         //header
         if(data.getAuthor().getUser_icon() != null) {
-            ImageLoadMnanger.INSTANCE.loadRoundImage( avatar, data.getAuthor().getUser_icon().getFileUrl());
+            ImageLoadMnanger.INSTANCE.loadIconImage(mContext,avatar, data.getAuthor().getUser_icon().getFileUrl());
         }else{
-            avatar.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_loading_small));
+            avatar.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_default));
         }
 
         nick.setText(data.getAuthor().getNick_name());
@@ -154,9 +155,9 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
      * 添加点赞
      *
      * @param likesList
-     * @return ture=显示点赞，false=不显示点赞
+     * @return ture=显示点赞，false = 不显示点赞
      */
-    private boolean addLikes(List<Students> likesList) {
+    private boolean addLikes(List<LikesInfo> likesList) {
         if (ToolUtil.isListEmpty(likesList)) {
             return false;
         }
@@ -164,12 +165,10 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
         return true;
     }
 
-
     private int commentPaddintRight = UIHelper.dipToPx(8f);
 
     /**
      * 添加评论
-     *
      * @param commentList
      * @return ture=显示评论，false=不显示评论
      */
@@ -320,8 +319,8 @@ public abstract class TogtherViewHolder extends BaseRecyclerViewHolder<Togther> 
                 return;
             }
             if (hasLiked) {
-                Logger.d("取消点赞"+info.getObjectId());
-                momentPresenter.unLike(itemPosition, info.getMomentid(), info.getLikesList());
+                Logger.d("取消点赞"+info.getLikesObjectid());
+                momentPresenter.unLike(itemPosition, info.getLikesObjectid(), info.getLikesList());
             } else {
                 Logger.d("点赞"+info.getObjectId());
                 momentPresenter.addLike(itemPosition, info.getMomentid(), info.getLikesList());

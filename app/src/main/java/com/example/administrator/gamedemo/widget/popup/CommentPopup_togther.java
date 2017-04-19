@@ -19,6 +19,7 @@ import com.example.administrator.gamedemo.R;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.widget.weakhandler.WeakHandler;
@@ -168,8 +169,8 @@ public class CommentPopup_togther extends BasePopupWindow implements View.OnClic
         this.mMomentsInfo = info;
          hasLiked = false;
         if (!ToolUtil.isListEmpty(info.getLikesList())) {
-            for (Students userInfo : info.getLikesList()) {
-                if (TextUtils.equals(userInfo.getObjectId(), Constants.getInstance().getUser(mContext).getObjectId())) {
+            for (LikesInfo userInfo : info.getLikesList()) {
+                if (TextUtils.equals(userInfo.getUserInfo().getObjectId(), Constants.getInstance().getUser(mContext).getObjectId())) {
                     hasLiked = true;
                     break;
                 }

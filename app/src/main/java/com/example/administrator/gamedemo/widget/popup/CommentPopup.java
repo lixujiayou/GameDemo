@@ -22,6 +22,7 @@ import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.widget.weakhandler.WeakHandler;
@@ -168,11 +169,11 @@ public class CommentPopup extends BasePopupWindow implements View.OnClickListene
     }
 
 
-    public void updateMomentInfo(@NonNull Share info) {
+   /* public void updateMomentInfo(@NonNull Share info) {
         this.mMomentsInfo = info;
          hasLiked = false;
         if (!ToolUtil.isListEmpty(info.getLikesList())) {
-            for (Students userInfo : info.getLikesList()) {
+            for (LikesInfo userInfo : info.getLikesList()) {
                 if(Constants.getInstance().getUser()!= null){
                     if (TextUtils.equals(userInfo.getObjectId(), Constants.getInstance().getUser().getObjectId())) {
                         hasLiked = true;
@@ -185,7 +186,7 @@ public class CommentPopup extends BasePopupWindow implements View.OnClickListene
             }
         }
         mLikeText.setText(hasLiked ? "取消" : "赞");
-    }
+    }*/
 
 
     //=============================================================InterFace

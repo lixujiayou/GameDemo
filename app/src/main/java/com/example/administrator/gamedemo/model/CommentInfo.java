@@ -19,6 +19,7 @@ public class CommentInfo extends BmobObject {
         String MOMENT = "moment";
         String CONTENT = "content";
         String AUTHOR_USER = "author";
+        String TOGTHER = "togther";
     }
 
 

@@ -1,62 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-   <include layout="@layout/layout_no_network"
-       />
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       >
-      <include layout="@layout/toolbar"/>
-   <android.support.design.widget.CoordinatorLayout
-       android:id="@+id/main_content"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-       >
+      <com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView
+          android:id="@+id/recycler"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"
+          >
+      </com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView>
 
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/height_actionbar"
+          android:background="@color/colorPrimary"
+          app:layout_scrollFlags="scroll|enterAlways"
+          style="?actionBarStyle"
+          app:popupTheme="@style/AppTheme.PopupOverlay"
+          android:elevation="0dp"
+          />
 
+      <include layout="@layout/layout_no_network"
+          />
+  </FrameLayout>
 
+    <com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther
+        android:id="@+id/widget_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-
-   <com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView
-       android:id="@+id/recycler"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       app:layout_behavior="@string/appbar_scrolling_view_behavior"
-       >
-
-
-   </com.example.administrator.gamedemo.widget.pullrecyclerview.CircleRecyclerView>
-
-
-   </android.support.design.widget.CoordinatorLayout>
-
-   <com.example.administrator.gamedemo.widget.commentwidget.CommentBoxTogther
-       android:id="@+id/widget_comment"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-   </LinearLayout>
-   <ImageView
-       android:id="@+id/iv_load_state"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:src="@mipmap/icon_loading"
-       android:layout_above="@+id/temp"
-       android:layout_centerHorizontal="true"
-       />
-   <View
-       android:id="@+id/temp"
-       android:layout_width="wrap_content"
-       android:layout_height="1dp"
-       android:layout_centerInParent="true"
-       />
-
-</RelativeLayout>
+</LinearLayout>
