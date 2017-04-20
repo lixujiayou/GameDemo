@@ -50,6 +50,7 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="5dip"
                 android:layout_centerInParent="true"
+
                 />
         </LinearLayout>
 
@@ -89,6 +90,7 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textColor="@color/gplus_color_4"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -182,22 +184,23 @@
             android:layout_height="6dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/progressbar_color_2"
+
             />
 
-    <com.example.administrator.gamedemo.utils.base.BounceScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:gravity="center"
         android:layout_gravity="center"
-        android:elevation="2dp"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:gravity="center"
             android:layout_gravity="center"
+            android:orientation="vertical"
             >
             <TextView
                 android:id="@+id/starting_problem"
@@ -205,23 +208,27 @@
                 android:layout_height="match_parent"
                 android:text="\t\t爱中，仰望我们主耶稣基督的怜悯，直到永生.出自："
                 android:textSize="22sp"
-                android:gravity="center_vertical"
+                android:gravity = "center_vertical"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/red"
                 android:lineSpacingExtra="2dp"
+                android:typeface="monospace"
                 />
 
         </LinearLayout>
 
-    </com.example.administrator.gamedemo.utils.base.BounceScrollView>
+</ScrollView>
+
         <ProgressBar
             android:id="@+id/starting_pb_2"
             android:layout_width="match_parent"
             android:layout_height="6dp"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/progressbar_color"
+             android:progressDrawable="@drawable/progressbar_color"
+
             />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -300,7 +307,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/icon_s_help"
                     />
-            <TextView
+                <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

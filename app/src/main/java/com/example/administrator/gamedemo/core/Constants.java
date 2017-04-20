@@ -64,7 +64,7 @@ public class Constants {
     public static final String FILENAME = "autoapk.apk";
     public static final String FILE_NAME = FILE_PATH + FILENAME;
 
-
+    private String CoverImageUrl = "";//封面URi
     private MomentsInfo momentsInfo;
     private Share mShare;
     public Constants(){
@@ -80,6 +80,13 @@ public class Constants {
         public static final Constants instance = new Constants();
     }
 
+    public String getCoverImageUrl() {
+        return CoverImageUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        CoverImageUrl = coverImageUrl;
+    }
 
     public void setMShare(Share share){
         this.mShare = share;

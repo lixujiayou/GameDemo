@@ -224,7 +224,6 @@
 
         <!--与我相关详情-->
         <activity android:name=".activity.mine.message.AboutActivity"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />

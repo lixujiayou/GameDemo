@@ -70,12 +70,12 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/title"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/icon_logo_white" />
 
         <TextView
             android:id="@+id/title"
@@ -84,9 +84,9 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dip"
-            android:text="@string/app_name"
+            android:text="扎根于圣经\t建基于祷告"
             android:textColor="@color/white"
-            android:textSize="22.0dip" />
+            android:textSize="@dimen/textsize_16" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,10 +108,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dip"
-            android:text="扎根于圣经\t建基于祷告"
-            android:textColor="@color/abc_secondary_text_material_light"
-            android:textSize="@dimen/textsize_z"
+            android:layout_marginBottom="2dp"
+            android:text="圣经问答\tV3.0.0\tBeta"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_14"
             android:lines="1"
             />
 

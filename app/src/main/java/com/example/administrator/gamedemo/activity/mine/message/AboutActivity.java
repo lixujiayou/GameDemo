@@ -136,11 +136,20 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
             togtherAdapter = builder.build();
             recycler.setAdapter(togtherAdapter);
         }
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
+
+        initKeyboardHeightObserver();
     }
 
     @Override
     public void initData() {
-        isReadCache = true;
         if(mType.equals(Constants.MESSAGE_SHARE)) {
             momentsRequest.setOnResponseListener(momentsRequestCallBack);
             momentsRequest.setRequestType(REQUEST_REFRESH);
@@ -157,7 +166,6 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
             togtherRequest.execute();
         }
         isReadCache = false;
-        initKeyboardHeightObserver();
     }
 
     //==============================================
@@ -175,10 +183,10 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
                     }
                     break;
                 case REQUEST_LOADMORE:
-
                     break;
             }
         }
+
 
         @Override
         public void onError(BmobException e, int requestType) {
@@ -245,10 +253,11 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
             }
         });
     }
+
+
     int[] momentsViewLocation;
     int[] commentWidgetLocation;
     int[] commentBoxViewLocation;
-
     /**
      * 定位评论框到点击的view
      *

@@ -17,7 +17,7 @@
     <string name="upload_ok_1">暂时没有审核成功记录哦</string>
     <string name="upload_ok_2">点击右上角上传吧</string>
     <string name="upload_no_1">暂时没有审核失败记录哦</string>
-    <string name="upload_no_2">上传的答题不符合《圣经问答APP》上传规范则审核失败</string>
+    <string name="upload_no_2"></string>
 
     <string name="upload">暂时没有任何答题</string>
     <string name="upload_2">可点击右上角上传答题</string>

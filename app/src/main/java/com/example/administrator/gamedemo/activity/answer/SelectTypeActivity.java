@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -31,7 +32,7 @@ import com.orhanobut.logger.Logger;
  * Created by Administrator on 2016-03-07.
  */
 public class SelectTypeActivity extends AppCompatActivity implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener {
-//    private TextView selectedTextView;
+//  private TextView selectedTextView;
     private int num_ = 0;
     private Dialog ready_d;
     private boolean sound = true;
@@ -70,7 +71,6 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
   //      selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
         circleImageView = (CircleImageView) findViewById(R.id.main_facebook_image);
-
 
         mMp = MediaPlayer.create(SelectTypeActivity.this, R.raw.click_sound);
 
@@ -152,8 +152,6 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
                 });*//*
 
                 //overridePendingTransition(inAnim, outAnim);
-
-
             }
         });
 */
@@ -162,7 +160,8 @@ public class SelectTypeActivity extends AppCompatActivity implements CircleLayou
 
 
         mToolbar.setNavigationIcon(R.drawable.icon_cancle);
-        mToolbar.setTitle("选择答题范围");
+        mToolbar.setTitle("答题范围");
+        mToolbar.setTitleTextColor(ContextCompat.getColor(SelectTypeActivity.this,R.color.white));
 
         /*把 toolbar 设置到Activity 中*/
         setSupportActionBar(mToolbar);

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/height_actionbar"
         android:layout_width="match_parent"
         android:id="@+id/id_tool_bar"
         android:background="?attr/colorPrimary"
@@ -15,7 +15,7 @@
         android:subtitleTextColor="@color/white"
         app:subtitleTextColor="@color/white"
         app:titleTextColor="@color/white"
-        android:elevation="4dp"
+        android:elevation="0dp"
 
         >
     </android.support.v7.widget.Toolbar>

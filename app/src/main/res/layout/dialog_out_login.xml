@@ -17,7 +17,7 @@
         android:text="相册选取"
         android:textSize="@dimen/textsize_x"
         android:gravity="center"
-        android:textColor="@color/textcolor_m"
+        android:textColor="@color/textcolor_1"
         />
 
     <TextView
@@ -35,7 +35,7 @@
         android:paddingTop="15dip"
         android:text="相机拍照"
         android:textSize="@dimen/textsize_x"
-        android:textColor="@color/textcolor_m"
+        android:textColor="@color/textcolor_1"
         android:gravity="center"
         />
 

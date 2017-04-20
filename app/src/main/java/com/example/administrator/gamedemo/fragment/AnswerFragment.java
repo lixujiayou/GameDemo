@@ -2,6 +2,7 @@ package com.example.administrator.gamedemo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.administrator.gamedemo.activity.answer.SelectTypeActivity;
 import com.example.administrator.gamedemo.activity.mine.togther.TogetherActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.bean.Scriptures;
+import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.UIHelper;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
 import com.example.administrator.gamedemo.widget.ImageLoadMnanger;
@@ -55,6 +57,8 @@ public class AnswerFragment extends BaseFragment {
     @BindView(R.id.tv_time)
     TextView tv_time;
 
+    @BindView(R.id.tv_notice)
+    TextView tvNotice;
     public AnswerFragment() {
     }
 
@@ -126,7 +130,14 @@ public class AnswerFragment extends BaseFragment {
             public void onSuccess(List<Scriptures> response, int requestType) {
                 if(response != null && response.size() > 0) {
                     Scriptures scripturesTemp = response.get(0);
-                    tvScripture.setText(scripturesTemp.getsContent());
+                    tvScripture.setText("\t"+scripturesTemp.getsContent());
+                    if(!StringUtil.isEmpty(scripturesTemp.getsNotice())){
+                        tvNotice.setVisibility(View.VISIBLE);
+                        tvNotice.setText(scripturesTemp.getsNotice());
+                    }else{
+                        tvNotice.setVisibility(View.GONE);
+                    }
+                    Constants.getInstance().setCoverImageUrl(scripturesTemp.getsImage().getFileUrl());
                     ImageLoadMnanger.INSTANCE.loadImageToCover(bannerImageView, scripturesTemp.getsImage().getFileUrl());
                 }
                 }

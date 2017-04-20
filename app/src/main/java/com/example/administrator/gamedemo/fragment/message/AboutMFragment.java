@@ -47,9 +47,6 @@ public class AboutMFragment extends BaseFragment {
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.rl_hint)
     RelativeLayout rlHint;
-
-
-
     @BindView(R.id.iv_load_state)
     ImageView ivLoadState;
 

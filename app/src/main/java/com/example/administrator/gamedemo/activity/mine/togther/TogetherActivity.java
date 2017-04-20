@@ -32,6 +32,7 @@ import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.KeyboardControlMnanager;
+import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -445,7 +446,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             this.message_avatar = (ImageView) rootView.findViewById(R.id.message_avatar);
             this.message_detail = (TextView) rootView.findViewById(R.id.message_detail);
 
-            this.friend_wall_pic.setOnClickListener(new View.OnClickListener() {
+            /*this.friend_wall_pic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //切换封面
@@ -453,7 +454,7 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                         showPhotoDialog();
                     }
                 }
-            });
+            });*/
 
             this.friend_avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -472,11 +473,12 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             if (hostInfo == null){
                 hostid.setText("未登陆");
             }else {
-                if(hostInfo.getCover() != null){
-                    ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, hostInfo.getCover().getFileUrl());
-                }else{
-                    ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, null);
+                if(!StringUtil.isEmpty(Constants.getInstance().getCoverImageUrl())){
+                    ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, Constants.getInstance().getCoverImageUrl());
                 }
+                /*if(hostInfo.getCover() != null){
+                    ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, hostInfo.getCover().getFileUrl());
+                }*/
 
                 if(hostInfo.getUser_icon() != null){
                     ImageLoadMnanger.INSTANCE.loadImage(friend_avatar, hostInfo.getUser_icon().getFileUrl());

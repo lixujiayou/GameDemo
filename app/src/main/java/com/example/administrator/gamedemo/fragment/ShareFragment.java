@@ -158,7 +158,11 @@ public class ShareFragment extends BaseFragment  {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getFirstData();
+                if(!isLoad) {
+                    getFirstData();
+                }else{
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
         circleRecyclerView.setOnTouchListener(new View.OnTouchListener() {
@@ -185,20 +189,26 @@ public class ShareFragment extends BaseFragment  {
                 if (lastVisibleItemPosition + 1 == mAdapter.getItemCount()) {
                     //如果正在下拉刷新中，删除上拉的布局 并屏蔽上拉
                     boolean isRefreshing = swipeRefreshLayout.isRefreshing();
-                    if (isRefreshing) {
-                        mAdapter.notifyItemRemoved(mAdapter.getItemCount());
-                        return;
-                    } else {
-                        //滑动到底部，开始加载更多
-                        if (mCLoadCount >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
-                            if (!isLoad) {                                      //是否在加载中
-                                mAdapter.setLoadStatus(true);
-                               getMoreData();
+
+
+                        if (isRefreshing) {
+                            mAdapter.notifyItemRemoved(mAdapter.getItemCount());
+                            return;
+                        } else {
+                            //滑动到底部，开始加载更多
+                            if (mCLoadCount >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
+                                if (!isLoad) {                                      //是否在加载中
+                                    mAdapter.setLoadStatus(true);
+                                    getMoreData();
+                                }
+                            } else {
+                                mAdapter.setLoadStatus(false);
                             }
-                        }else{
-                            mAdapter.setLoadStatus(false);
                         }
-                    }
+
+
+
+
                 }
             }
         });

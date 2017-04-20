@@ -54,7 +54,7 @@
                 android:id="@+id/tv_scripture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\t\t敬畏耶和华是智慧的开端，认识至圣者便是聪明。【箴9:10】"
+                android:text="\t敬畏耶和华是智慧的开端，认识至圣者便是聪明。【箴9:10】"
                 android:textSize="@dimen/textsize_18"
                 android:textColor="@color/black"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -62,7 +62,7 @@
                 android:lineSpacingExtra="4dp"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:typeface="monospace"
                 />
 
@@ -101,15 +101,14 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="3dp"
         android:background="@drawable/ripple_bg"
+        android:orientation="vertical"
         >
 
         <ImageView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_m_start"
             android:layout_gravity="center"
-            android:scaleType="fitXY"
             />
 
     </LinearLayout>
@@ -129,8 +128,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_m_start"
-            android:scaleType="matrix"
+            android:src="@drawable/icon_m_online"
             />
 
     </LinearLayout>
@@ -159,8 +157,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:src="@drawable/icon_m_start"
-                android:scaleType="matrix"
+                android:src="@drawable/icon_m_time"
+
                 android:layout_gravity="center"
             />
 
@@ -179,16 +177,24 @@
         >
 
         <ImageView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_m_start"
-            android:scaleType="matrix"
+            android:src="@drawable/icon_m_help"
             />
 
     </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:text=""
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
 
+        />
 </LinearLayout>
 </com.example.administrator.gamedemo.utils.base.BounceScrollView>
 </LinearLayout>

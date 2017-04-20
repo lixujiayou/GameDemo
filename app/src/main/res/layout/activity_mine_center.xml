@@ -51,7 +51,7 @@
             android:id="@+id/iv_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_loading_small"
+            android:src="@mipmap/icon_default"
             />
 
         <ImageView
@@ -96,8 +96,8 @@
            android:id="@+id/atv_mobile"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="15662770999"
-           android:layout_marginRight="15dp"
+           android:text=""
+           android:layout_marginRight="6dp"
            />
         <ImageView
             android:layout_width="wrap_content"
@@ -140,8 +140,8 @@
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nick15662770999"
-            android:layout_marginLeft="6dp"
+            android:text=""
+            android:layout_marginRight="6dp"
             />
         <ImageView
             android:layout_width="wrap_content"
@@ -223,7 +223,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="敬畏耶和华是智慧的开端，认识至圣者便是聪明。"
+            android:text=""
             android:layout_marginLeft="6dp"
             android:lines="1"
             android:paddingLeft="@dimen/activity_horizontal_margin"

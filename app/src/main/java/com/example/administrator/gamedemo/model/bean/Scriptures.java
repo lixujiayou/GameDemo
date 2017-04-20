@@ -9,8 +9,9 @@ import cn.bmob.v3.datatype.BmobFile;
  * 每日经文
  */
 public class Scriptures extends BmobObject{
-    private String sContent;
-    private BmobFile sImage;
+    private String sContent; //经文
+    private BmobFile sImage;//图片
+    private String sNotice;//公告 万不得已不会用
     public Scriptures(){}
 
 
@@ -28,5 +29,13 @@ public class Scriptures extends BmobObject{
 
     public void setsImage(BmobFile sImage) {
         this.sImage = sImage;
+    }
+
+    public String getsNotice() {
+        return sNotice;
+    }
+
+    public void setsNotice(String sNotice) {
+        this.sNotice = sNotice;
     }
 }

@@ -687,11 +687,7 @@ public class Starting extends Activity implements View.OnClickListener,AdapterVi
                         MoveAnim(moveImageView, startLocation, endLocation, aw_sq[position], answers_gv);
                     }
                 }, 50L);
-
-
     }
-
-
 
     class answersAdapter extends BaseAdapter{
         String[] a;

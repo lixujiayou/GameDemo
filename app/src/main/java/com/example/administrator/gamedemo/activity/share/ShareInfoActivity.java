@@ -177,14 +177,16 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
         mCommentInfoList = mShare.getCommentList();
         if (ToolUtil.isListEmpty(mCommentInfoList)) {
             tvReminder.setVisibility(View.VISIBLE);
-            recylerComment.setVisibility(View.GONE);
+        //    recylerComment.setVisibility(View.GONE);
         }
             mLayoutManager = new LinearLayoutManager(this);
             recylerComment.setLayoutManager(mLayoutManager);
             recylerComment.setItemAnimator(new DefaultItemAnimator());
             onlineAdapter = new OnlineAdapter(ShareInfoActivity.this, mCommentInfoList);
             recylerComment.setAdapter(onlineAdapter);
-            bounceScrollView.setScrollY(0);
+
+         bounceScrollView.setVerticalScrollbarPosition(0);
+         //   bounceScrollView.setScrollY(0);
 
         onlineAdapter.setOnItemClickListener(new OnlineAdapter.OnItemClickListener() {
             @Override
@@ -267,7 +269,6 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
                 if(!isReplySend){
                     cMser = mCommentInfoList.get(downNum).getAuthor();
                 }
-                Logger.d("启动评论");
                 shareRequest.addComment(0,mShare,cMser,edCommentContent.getText().toString(),mCommentInfoList);
 
                 //使键盘消失
@@ -283,18 +284,26 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
     @Override
     public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
 
-        tvReminder.setVisibility(View.GONE);
-        recylerComment.setVisibility(View.VISIBLE);
+        if(!ToolUtil.isListEmpty(commentInfoList)) {
+            tvReminder.setVisibility(View.GONE);
+            recylerComment.setVisibility(View.VISIBLE);
+            Logger.d("评论完成后"+commentInfoList.size());
+        }else{
+            tvReminder.setVisibility(View.VISIBLE);
+            Logger.d("评论完成后null");
+        }
+
         if(mCommentInfoList != null) {
             mCommentInfoList.clear();
         }else{
             mCommentInfoList = new ArrayList<>();
         }
+
         mCommentInfoList.addAll(commentInfoList);
-        mShare.setCommentList(commentInfoList);
-        Constants.getInstance().getmShare().setCommentList(commentInfoList);
         onlineAdapter.notifyDataSetChanged();
 
+        mShare.setCommentList(commentInfoList);
+        Constants.getInstance().getmShare().setCommentList(commentInfoList);
     }
 
 

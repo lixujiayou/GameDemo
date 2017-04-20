@@ -264,9 +264,7 @@ public class OnlineAnswerActivity extends BaseActivity {
         });
 
         if(isLogin()) {
-
             isHave();
-
         }else{
             tv_tv_reminder.setVisibility(View.VISIBLE);
         }

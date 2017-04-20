@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.gamedemo.R;
+import com.example.administrator.gamedemo.activity.mine.UploadActivity;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.utils.StringUtil;
@@ -230,7 +231,10 @@ public class SendAnswerActivity extends BaseActivity {
 
                     ToastUtil3.showToast(SendAnswerActivity.this, response);
                     Logger.d(response);
-
+                    if(cType.equals(SEND)){
+                        Intent sIntent = new Intent(SendAnswerActivity.this, UploadActivity.class);
+                        startActivity(sIntent);
+                    }
                     setResult(Constants.REFRESH_CODE);
                     finish();
 

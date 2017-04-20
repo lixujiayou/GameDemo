@@ -103,9 +103,7 @@ public class MineCenterActivity extends BaseActivity {
         if(students != null) {
 
             if(students.getUser_icon() != null){
-                ImageLoadMnanger.INSTANCE.loadImage(ivIcon,students.getUser_icon().getFileUrl());
-            }else{
-                ivIcon.setImageDrawable(ContextCompat.getDrawable(MineCenterActivity.this,R.mipmap.icon_user_default));
+                ImageLoadMnanger.INSTANCE.loadIconImage(MineCenterActivity.this,ivIcon,students.getUser_icon().getFileUrl());
             }
 
             atvMobile.setText(students.getUsername());

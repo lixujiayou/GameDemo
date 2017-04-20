@@ -55,7 +55,7 @@ public class LogoActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * ��timer
+	 *
 	 */
 	private void startTimer() {
 				mTimer = new CountDownTimer(3000,1000) {

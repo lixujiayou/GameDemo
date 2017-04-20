@@ -196,9 +196,15 @@ public abstract class UploadFragment extends BaseFragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ivLoadState.setVisibility(View.GONE);
-                isFirst = true;
-                initData();
+                if(!isLoad) {
+                    ivLoadState.setVisibility(View.GONE);
+                    isFirst = true;
+                    initData();
+                }else{
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+
+
             }
         });
     }

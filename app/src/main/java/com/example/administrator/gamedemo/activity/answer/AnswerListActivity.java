@@ -122,11 +122,7 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
             @Override
             public void onItemClick(View view, int position) {
                 Constants.getInstance().setMomentsInfo(momentsInfoList.get(position));
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("topic",momentsInfoList.get(position));
                 Intent gIntent = new Intent(AnswerListActivity.this, OnlineAnswerActivity.class);
-
-//                gIntent.putExtras(bundle);
                 startActivityForResult(gIntent,1);
             }
 
@@ -176,9 +172,13 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ivLoadState.setVisibility(View.GONE);
-                isReadCache = false;
-                initData();
+                if(!isLoad) {
+                    ivLoadState.setVisibility(View.GONE);
+                    isReadCache = false;
+                    initData();
+                }else{
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
 
