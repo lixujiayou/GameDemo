@@ -79,7 +79,7 @@ public class NotesListActivity extends BaseActivity implements RevealBackgroundV
 
     @Override
     public void initViews() {
-        mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);
+        mToolbar.setNavigationIcon(R.drawable.icon_cancle);
 
     }
 

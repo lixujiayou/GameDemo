@@ -22,49 +22,23 @@ import com.example.administrator.gamedemo.R;
  */
 
 public class ToastUtil3 {
+    private static Handler handler = new Handler(Looper.getMainLooper());
 
+
+    private static Object synObj = new Object();
+    private static View view;
     private static String oldMsg;
    // protected static Toast toast   = null;
     private static long oneTime=0;
     private static long twoTime=0;
     private static TextView tv_toast;
     private static Toast toast;
-    public static void showToast(Context context, String s){
 
+    public static void showToast(Context context, String s){
         if(s.equals("No cache data") || s.contains("No cache data")){
             return;
         }
-
-        if(toast == null){
-
-            LayoutInflater inflater = LayoutInflater.from(context);
-            View toastView = inflater.inflate(R.layout.layout_toast, null);
-            tv_toast = (TextView) toastView.findViewById(R.id.tv_toast);
-
-            Toast toast = new Toast(context);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(toastView);                //设置自定义view
-            toast.setGravity(Gravity.CENTER, 0, 0);  //控制显示到屏幕中间
-            tv_toast.setText(s);
-            toast.show();
-
-            oneTime= System.currentTimeMillis();
-        }else{
-            twoTime= System.currentTimeMillis();
-            if(s.equals(oldMsg)){
-                if(twoTime-oneTime> Toast.LENGTH_SHORT){
-                    toast.show();
-                }
-            }else{
-
-//                toast.cancel();
-                oldMsg = s;
-                tv_toast.setText(s);
-//                toast.setText(s);
-                toast.show();
-            }
-        }
-        oneTime=twoTime;
+        showMessage(context,s,Toast.LENGTH_SHORT);
     }
 
 
@@ -72,12 +46,29 @@ public class ToastUtil3 {
         showToast(context, context.getString(resId));
     }
 
-
-
-
-
-
-
-
+    public static void showMessage(final Context act, final String msg,
+                                   final int len) {
+        new Thread(new Runnable() {
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (synObj) {
+                            if (toast != null) {
+//                                toast.cancel();
+                                toast.setView(view);
+                                toast.setText(msg);
+                                toast.setDuration(len);
+                            } else {
+                                toast = Toast.makeText(act, msg, len);
+                                view  = toast.getView();
+                            }
+                            toast.show();
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
 
 }

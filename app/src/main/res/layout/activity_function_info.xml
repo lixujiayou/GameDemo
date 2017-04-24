@@ -5,5 +5,9 @@
  <include layout="@layout/toolbar"/>
  <include layout="@layout/layout_no_network"/>
 
+<com.example.administrator.gamedemo.utils.base.BaseWebView
+    android:id="@+id/wb_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></com.example.administrator.gamedemo.utils.base.BaseWebView>
 
 </LinearLayout>
