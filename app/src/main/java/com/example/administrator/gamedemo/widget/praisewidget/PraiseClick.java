@@ -33,8 +33,9 @@ public class PraiseClick extends ClickableSpanEx {
 
     @Override
     public void onClick(View widget) {
-        if (mPraiseInfo!=null)
+        /*if (mPraiseInfo!=null)
             UIHelper.ToastMessage("当前用户名是： " + mPraiseInfo.getNick_name() + "   它的ID是： " + mPraiseInfo.getObjectId());
+   */
     }
 
     @Override

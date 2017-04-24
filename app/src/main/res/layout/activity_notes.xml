@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_white" />
+            layout="@layout/toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

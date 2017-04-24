@@ -56,7 +56,6 @@
         <!--上传题库界面-->
         <activity android:name=".activity.SendAnswerActivity"
             android:theme="@style/AppBlackTheme"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />

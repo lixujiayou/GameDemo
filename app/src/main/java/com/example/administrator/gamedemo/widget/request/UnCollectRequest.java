@@ -20,6 +20,7 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
     private String momentsId;
     private String userid;
     private List<Students> collectUserList;
+
     public UnCollectRequest(String momentsId,List<Students> collectUserList) {
         this.momentsId = momentsId;
         this.userid = Constants.getInstance().getUser().getObjectId();
@@ -43,6 +44,7 @@ public class UnCollectRequest extends BaseRequestClient<Boolean> {
         this.userid = userid;
         return this;
     }
+
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {

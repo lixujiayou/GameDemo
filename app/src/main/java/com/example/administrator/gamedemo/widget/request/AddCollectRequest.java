@@ -29,24 +29,15 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
         this.userid = cUser.getObjectId();
         this.collectUserList = collectUserList;
     }
-
     public String getMomentsId() {
         return momentsId;
     }
 
-    public AddCollectRequest setMomentsId(String momentsId) {
-        this.momentsId = momentsId;
-        return this;
-    }
 
     public String getUserid() {
         return userid;
     }
 
-    public AddCollectRequest setUserid(String userid) {
-        this.userid = userid;
-        return this;
-    }
 
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
@@ -54,8 +45,6 @@ public class AddCollectRequest extends BaseRequestClient<Boolean> {
         Share info = new Share();
         info.setObjectId(momentsId);
 
-      //  Students userInfo = new Students();
-        // userInfo.setObjectId(userid);
         if(collectUserList == null){
             collectUserList = new ArrayList<>();
         }

@@ -25,7 +25,7 @@ import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields
 import static com.example.administrator.gamedemo.model.CommentInfo.CommentFields.REPLY_USER;
 
 /**
- * Created by 大灯泡 on 2016/10/27.
+ * Created by lixu on 2016/10/27.
  * <p>
  * 朋友圈时间线请求
  */
@@ -87,8 +87,8 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
         });
         }else{
             BmobQuery<Togther> query2 = new BmobQuery<Togther>();
-            //query2.include(Togther.MomentsFields.AUTHOR_USER+ "," + Togther.MomentsFields.HOST);
-            //query2.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+            query2.include(Togther.MomentsFields.AUTHOR_USER+ "," + Togther.MomentsFields.HOST);
+            query2.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             query2.getObject(mKey, new QueryListener<Togther>() {
                 @Override
                 public void done(Togther togther, BmobException e) {
@@ -166,6 +166,7 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
 
                     }
                     mergeData(isCommentRequestFin[0], isLikesRequestFin[0], commentInfoList, likesInfoList, momentsList, e);
+
                 }else{
 
                     onResponseError(e, getRequestType());

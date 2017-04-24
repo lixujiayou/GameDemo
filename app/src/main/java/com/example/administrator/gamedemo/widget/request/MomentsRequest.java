@@ -7,10 +7,13 @@ import com.example.administrator.gamedemo.model.MomentsInfo;
 import com.example.administrator.gamedemo.model.CommentInfo;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
+import com.example.administrator.gamedemo.model.Togther;
+import com.example.administrator.gamedemo.model.bean.LikesInfo;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.bmob.bmob.BmobInitHelper;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +56,6 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         this.curPage = page;
         return this;
     }
-
     public void setCache(boolean isSet){
         this.isReadCache = isSet;
     }
@@ -74,19 +76,7 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         }else{
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,Constants.UPLOAD_OK);
         }
-
-        if(isReadCache) {
-            boolean isCache = bmobQuery.hasCachedResult(MomentsInfo.class);
-            if (isCache) {
-                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-            } else {
-                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-            }
-        }else{
-            bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        }
-        bmobQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(2));//此表示缓存2天
-
+        bmobQuery.setCachePolicy(!isReadCache? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.findObjects(new FindListener<MomentsInfo>() {
             @Override
             public void done(List<MomentsInfo> list, BmobException e) {
@@ -100,66 +90,100 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
     }
 
     private void queryCommentAndLikes(final List<MomentsInfo> momentsList) {
-        /**
-         * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
-         * oRz，果然没有自己写服务器来的简单，好吧，都是在下没钱的原因，我的锅
-         */
-        for (int i = 0; i < momentsList.size(); i++) {
-            final int currentPos = i;
-            final MomentsInfo momentsInfo = momentsList.get(i);
+
+        final List<Students> studentsList = new ArrayList<>();
+        final List<CommentInfo> commentInfoList = new ArrayList<>();
+
+        final boolean[] isStudentsRequestFin = {false};
+        final boolean[] isCommentRequestFin = {false};
+
+        List<String> id = new ArrayList<>();
+        for (MomentsInfo momentsInfo : momentsList) {
+            id.add(momentsInfo.getObjectId());
+        }
+
             BmobQuery<Students> likesQuery = new BmobQuery<>();
             likesQuery.order("-createdAt");
-            likesQuery.addWhereRelatedTo("likes", new BmobPointer(momentsInfo));
-
-            if(isReadCache) {
-                boolean isCache = likesQuery.hasCachedResult(Students.class);
-                if (isCache) {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                } else {
-                    likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-                }
-            }else{
-                likesQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-            }
-            likesQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
+            likesQuery.addWhereRelatedTo("likes", new BmobPointer(id));
+            likesQuery.setCachePolicy(!isReadCache? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             likesQuery.findObjects(new FindListener<Students>() {
                 @Override
                 public void done(List<Students> list, BmobException e) {
-                    BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
-                    commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
-                    commentQuery.addWhereEqualTo("moment", momentsInfo);
-                    commentQuery.order("-createdAt");
-
-                    if(isReadCache) {
-                        boolean isCache = commentQuery.hasCachedResult(CommentInfo.class);
-                        if (isCache) {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-                        } else {
-                            commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+                    if (e == null) {
+                        isStudentsRequestFin[0] = true;
+                        if (!ToolUtil.isListEmpty(list)) {
+                            studentsList.addAll(list);
                         }
-                    }else{
-                        commentQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+                        mergeData(isStudentsRequestFin[0], isCommentRequestFin[0], studentsList, commentInfoList, momentsList, e);
+                    } else {
+                        onResponseError(e, getRequestType());
                     }
-                    commentQuery.setMaxCacheAge(TimeUnit.DAYS.toMillis(5));//此表示缓存5天
-
-                    commentQuery.findObjects(new FindListener<CommentInfo>() {
-                        @Override
-                        public void done(List<CommentInfo> list, BmobException e) {
-                            if (!ToolUtil.isListEmpty(list)) {
-                                momentsInfo.setCommentList(list);
-                            }
-                            if (e == null) {
-                                if (currentPos == momentsList.size() - 1) {
-                                    onResponseSuccess(momentsList, getRequestType());
-                                    curPage++;
-                                }
-                            } else {
-                                onResponseError(e, getRequestType());
-                            }
-                        }
-                    });
                 }
             });
-        }
+
+        BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
+        commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
+        commentQuery.addWhereEqualTo("moment", id);
+        commentQuery.order("-createdAt");
+        commentQuery.setCachePolicy(!isReadCache? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        commentQuery.findObjects(new FindListener<CommentInfo>() {
+            @Override
+            public void done(List<CommentInfo> list, BmobException e) {
+
+                if (e == null) {
+                    isCommentRequestFin[0] = true;
+                    if (!ToolUtil.isListEmpty(list)) {
+                        commentInfoList.addAll(list);
+                    }
+                    mergeData(isStudentsRequestFin[0], isCommentRequestFin[0], studentsList, commentInfoList, momentsList, e);
+
+                } else {
+                    onResponseError(e, getRequestType());
+                }
+            }
+        });
+
     }
+
+    private void mergeData(boolean isCommentRequestFin,
+                           boolean isLikeRequestFin,
+                           List<Students> commentInfoList,
+                           List<CommentInfo> likesInfoList,
+                           List<MomentsInfo> momentsList,
+                           BmobException e) {
+
+        if (!isCommentRequestFin || !isLikeRequestFin) return;
+
+        if (e != null) {
+            onResponseError(e, getRequestType());
+            return;
+        }
+
+        if (ToolUtil.isListEmpty(momentsList)) {
+            onResponseError(new BmobException("没有查询到数据"), getRequestType());
+            return;
+        }
+        curPage++;
+
+        for(int i = 0;i < commentInfoList.size();i++){
+            Students cCommentInfo = commentInfoList.get(i);
+            for(int ii = 0;ii < momentsList.size();ii++){
+                if(momentsList.get(ii).getObjectId().equals(cCommentInfo.getObjectId())){
+                    momentsList.get(ii).addLikes(cCommentInfo);
+                }
+            }
+        }
+
+        for(int i = 0;i < likesInfoList.size();i++){
+            CommentInfo cLikeInfo = likesInfoList.get(i);
+            for(int ii = 0;ii < momentsList.size();ii++){
+                if(momentsList.get(ii).getObjectId().equals(cLikeInfo.getObjectId())){
+                    momentsList.get(ii).addComment(cLikeInfo);
+                }
+            }
+        }
+        onResponseSuccess(momentsList, getRequestType());
+ //       isFirstRequest = false;
+    }
+
 }

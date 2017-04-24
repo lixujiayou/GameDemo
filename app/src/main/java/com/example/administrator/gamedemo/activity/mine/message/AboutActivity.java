@@ -69,8 +69,6 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-
-
     @BindView(R.id.recycler)
     RecyclerView recycler;
 
@@ -144,7 +142,7 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
                 initData();
             }
         });
-
+        widgetCommentTogther.setOnCommentSendClickListener(onCommentSendClickListener);
         initKeyboardHeightObserver();
     }
 
@@ -407,6 +405,5 @@ public class AboutActivity extends BaseActivity implements IMomentViewTogther {
 
     @Override
     public void onMessageChange(String itemPos, String content) {
-
     }
 }

@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.6"
+
         >
 
     <ImageView
@@ -24,10 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/img_huoer"
-        android:fitsSystemWindows="false"
-        android:scaleType="centerCrop"
-
         />
+
 </LinearLayout>
 <com.example.administrator.gamedemo.utils.base.BounceScrollView
     android:layout_width="match_parent"
@@ -47,7 +46,6 @@
             android:orientation="vertical"
             android:background="@color/white"
             android:gravity="center"
-
             >
 
             <TextView
@@ -181,7 +179,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_m_help"
             />
-
     </LinearLayout>
     </LinearLayout>
     <TextView
@@ -193,7 +190,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="20dp"
-
         />
 </LinearLayout>
 </com.example.administrator.gamedemo.utils.base.BounceScrollView>

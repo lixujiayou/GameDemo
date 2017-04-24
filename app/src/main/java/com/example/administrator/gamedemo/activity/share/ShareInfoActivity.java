@@ -1,6 +1,5 @@
 package com.example.administrator.gamedemo.activity.share;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -21,10 +19,10 @@ import com.example.administrator.gamedemo.activity.LoginActivity;
 import com.example.administrator.gamedemo.adapter.OnlineAdapter;
 import com.example.administrator.gamedemo.core.Constants;
 import com.example.administrator.gamedemo.model.CommentInfo;
-import com.example.administrator.gamedemo.model.ReshEvent;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.utils.MyEditText;
+import com.example.administrator.gamedemo.utils.StringUtil;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseActivity;
@@ -72,6 +70,9 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
     @BindView(R.id.ll_write)
     LinearLayout llWrite;
 
+    @BindView(R.id.tvTemp)
+    TextView tvTemp;
+
     @BindView(R.id.swipe_refresh)
     BounceScrollView bounceScrollView;
     private Share mShare;
@@ -81,9 +82,9 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
     private LinearLayoutManager mLayoutManager;
     private SharePresenter shareRequest;
 
-
+    private boolean isCollect;
     private boolean isReplySend;
-    private int downNum;//锁定点击的评论
+    private int downNum = 0;//锁定点击的评论
     //键盘监控
     private SoftKeyboardStateHelper softKeyboardStateHelper;
     private boolean isShow = false;//键盘是否弹出
@@ -115,6 +116,29 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
                             startActivityForResult(lIntent, 1);
                         }
                         break;
+                    case R.id.action_send_collect:
+                        if(Constants.getInstance().isLogin(ShareInfoActivity.this)) {
+
+                            List<Students> studentsList = mShare.getCollectList();
+
+                            if(studentsList == null) {
+                                studentsList = new ArrayList<>();
+                            }
+
+                            if(isCollect && !ToolUtil.isListEmpty(studentsList)){
+                                shareRequest.unCollect(0,mShare,cUser,mShare.getCollectList());
+                                mShare.getCollectList().remove(cUser);
+                                isCollect = false;
+                            }else {
+                                shareRequest.addCollect(0, mShare, cUser, mShare.getCollectList());
+                                List<Students> studentsList1 = new ArrayList<>();
+                                studentsList1.add(cUser);
+                                mShare.setCollectList(studentsList1);
+                                isCollect = true;
+                            }
+                            invalidateOptionsMenu(); //重新绘制menu
+                        }
+                        break;
                 }
                 return true;
             }
@@ -128,6 +152,27 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
             finish();
             return;
         }
+
+        isCollect = false;
+        if(!ToolUtil.isListEmpty(mShare.getCollectList())){
+            for(Students cU : mShare.getCollectList()){
+                if(cU.getObjectId().equals(cUser.getObjectId())){
+                    isCollect = true;
+                    invalidateOptionsMenu(); //重新绘制menu
+                }
+            }
+        }
+
+        tvTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recylerComment.getVisibility() == View.GONE){
+                    recylerComment.setVisibility(View.VISIBLE);
+                }else{
+                    recylerComment.setVisibility(View.GONE);
+                }
+            }
+        });
 
         shareRequest = new SharePresenter(ShareInfoActivity.this);
         softKeyboardStateHelper = new SoftKeyboardStateHelper(findViewById(R.id.ll_activity_online));
@@ -144,9 +189,6 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
                 isShow = false;
             }
         });
-
-
-
 
         recylerComment.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -171,21 +213,28 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
 
     @Override
     public void initData() {
-        tvTopic.setText("\t\t" + mShare.getTitle());
+        if(StringUtil.isEmpty(mShare.getTitle())){
+            tvTopic.setVisibility(View.GONE);
+        }else {
+            tvTopic.setVisibility(View.VISIBLE);
+            tvTopic.setText("\t\t" + mShare.getTitle());
+        }
         tvContent.setText("\t\t" + mShare.getText());
 
         mCommentInfoList = mShare.getCommentList();
         if (ToolUtil.isListEmpty(mCommentInfoList)) {
             tvReminder.setVisibility(View.VISIBLE);
-        //    recylerComment.setVisibility(View.GONE);
+            mCommentInfoList = new ArrayList<>();
         }
+
+
             mLayoutManager = new LinearLayoutManager(this);
             recylerComment.setLayoutManager(mLayoutManager);
             recylerComment.setItemAnimator(new DefaultItemAnimator());
             onlineAdapter = new OnlineAdapter(ShareInfoActivity.this, mCommentInfoList);
             recylerComment.setAdapter(onlineAdapter);
 
-         bounceScrollView.setVerticalScrollbarPosition(0);
+            bounceScrollView.setVerticalScrollbarPosition(0);
          //   bounceScrollView.setScrollY(0);
 
         onlineAdapter.setOnItemClickListener(new OnlineAdapter.OnItemClickListener() {
@@ -244,18 +293,28 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
         deleteCommentPopup.setOnDeleteCommentClickListener(new DeleteCommentPopup.OnDeleteCommentClickListener() {
             @Override
             public void onDelClick(final CommentInfo commentInfo) {
-                shareRequest.deleteComment(0,mCommentInfoList.get(downNum).getObjectId(),mCommentInfoList);
+                shareRequest.deleteComment(downNum,mCommentInfoList.get(downNum).getObjectId(),mCommentInfoList);
                 deleteCommentPopup.dismiss();
             }
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.menu_send_whrite, menu);
+        getMenuInflater().inflate(R.menu.menu_share_info, menu);
         return true;
+    }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (isCollect) {
+            menu.findItem(R.id.action_send_collect).setIcon(R.drawable.icon_collect_y);
+        } else {
+            menu.findItem(R.id.action_send_collect).setIcon(R.drawable.icon_collect_n);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -269,7 +328,7 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
                 if(!isReplySend){
                     cMser = mCommentInfoList.get(downNum).getAuthor();
                 }
-                shareRequest.addComment(0,mShare,cMser,edCommentContent.getText().toString(),mCommentInfoList);
+                shareRequest.addComment(downNum,mShare,cMser,edCommentContent.getText().toString(),mCommentInfoList);
 
                 //使键盘消失
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -284,26 +343,26 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
     @Override
     public void onCommentChange(int itemPos, List<CommentInfo> commentInfoList) {
 
-        if(!ToolUtil.isListEmpty(commentInfoList)) {
-            tvReminder.setVisibility(View.GONE);
-            recylerComment.setVisibility(View.VISIBLE);
-            Logger.d("评论完成后"+commentInfoList.size());
-        }else{
-            tvReminder.setVisibility(View.VISIBLE);
-            Logger.d("评论完成后null");
-        }
+        mShare.setCommentList(commentInfoList);
+        Constants.getInstance().getmShare().setCommentList(commentInfoList);
 
         if(mCommentInfoList != null) {
             mCommentInfoList.clear();
         }else{
             mCommentInfoList = new ArrayList<>();
         }
-
         mCommentInfoList.addAll(commentInfoList);
-        onlineAdapter.notifyDataSetChanged();
 
-        mShare.setCommentList(commentInfoList);
-        Constants.getInstance().getmShare().setCommentList(commentInfoList);
+        if(!ToolUtil.isListEmpty(commentInfoList)) {
+            tvReminder.setVisibility(View.GONE);
+
+           if(commentInfoList.size() == 1){
+               recylerComment.setAdapter(onlineAdapter);
+               return;
+           }
+        }
+        onlineAdapter.notifyItemChanged(itemPos);
+//        onlineAdapter.notifyDataSetChanged();
     }
 
 

@@ -154,6 +154,8 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
                                 adapter.setLoadStatus(true);
                                 loadMore();
                             }
+                        }else {
+                            adapter.setLoadStatus(false);
                         }
                     }
                 }
@@ -246,8 +248,8 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
                         cLoadNum = 0;
                         circleRecyclerView.setVisibility(View.GONE);
                         rl_hint.setVisibility(View.VISIBLE);
-                            tv_hint_1.setText(R.string.upload);
-                            tv_hint_2.setText(R.string.upload_2);
+                        tv_hint_1.setText(R.string.upload);
+                        tv_hint_2.setText(R.string.upload_2);
                     }
                     break;
                 case REQUEST_LOADMORE:

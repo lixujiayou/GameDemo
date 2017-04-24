@@ -176,6 +176,8 @@ public abstract class UploadFragment extends BaseFragment{
                                 adapter.setLoadStatus(true);
                                 loadMore();
                             }
+                        }else {
+                            adapter.setLoadStatus(false);
                         }
                     }
                 }
@@ -231,6 +233,7 @@ public abstract class UploadFragment extends BaseFragment{
             isReadCache = false;
         }
     }
+
     private void showDiaLog(final int position) {
         try {
             new AlertDialog.Builder(mContext)
@@ -300,6 +303,7 @@ public abstract class UploadFragment extends BaseFragment{
         momentsRequest.setOnResponseListener(momentsRequestCallBack);
         momentsRequest.setRequestType(REQUEST_LOADMORE);
         momentsRequest.setmType(mType);
+        momentsRequest.setCache(isReadCache);
         momentsRequest.execute();
     }
     //call back block
@@ -351,7 +355,7 @@ public abstract class UploadFragment extends BaseFragment{
             super.onError(e, requestType);
             swipeRefreshLayout.setRefreshing(false);
             Logger.d("错误" + e.toString());
-            if(momentsInfoList ==null || momentsInfoList.size() == 0){
+            if(ToolUtil.isListEmpty(momentsInfoList)){
                 ivLoadState.setImageDrawable(ContextCompat.getDrawable(mContext,R.mipmap.icon_loading));
                 ivLoadState.setVisibility(View.VISIBLE);
             }else{

@@ -1,5 +1,4 @@
 package com.example.administrator.gamedemo.activity.mine;
-
 import android.os.Bundle;
 
 import com.example.administrator.gamedemo.R;

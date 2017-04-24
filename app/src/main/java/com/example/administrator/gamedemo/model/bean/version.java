@@ -9,8 +9,9 @@ import cn.bmob.v3.datatype.BmobFile;
  */
 public class version extends BmobObject{
 
-    private BmobFile apk;
-    private int version_num;
+    private BmobFile apk;   //apk
+    private int version_num;//版本号
+    private String updateInfo; //更新详情
 
     public version() {
     }
@@ -29,5 +30,13 @@ public class version extends BmobObject{
 
     public void setVersion_num(int version_num) {
         this.version_num = version_num;
+    }
+
+    public String getUpdateInfo() {
+        return updateInfo;
+    }
+
+    public void setUpdateInfo(String updateInfo) {
+        this.updateInfo = updateInfo;
     }
 }

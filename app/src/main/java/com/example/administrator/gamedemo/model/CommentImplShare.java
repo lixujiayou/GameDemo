@@ -3,9 +3,6 @@ package com.example.administrator.gamedemo.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.administrator.gamedemo.utils.presenter.IBasePresenter;
-import com.example.administrator.gamedemo.utils.presenter.ISharePresenter;
-import com.example.administrator.gamedemo.utils.view.IShareView;
 import com.example.administrator.gamedemo.widget.request.AddShareCommentRequest;
 import com.example.administrator.gamedemo.widget.request.DeleteCommentRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;

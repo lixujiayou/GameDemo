@@ -20,6 +20,6 @@ public interface IMessage {
     /**
      * 删除消息
      */
-    void unMessage(String userId,String rId,String type , String content,OnMessageCallback onMessageCallback);
+    void unMessage(String messageId,OnMessageCallback onMessageCallback);
 
 }

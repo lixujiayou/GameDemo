@@ -72,34 +72,45 @@
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/title"
+            android:layout_above="@+id/title3"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/icon_logo_white" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/title3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dip"
-            android:text="扎根于圣经\t建基于祷告"
+            android:text="扎根于圣经"
             android:textColor="@color/white"
-            android:textSize="@dimen/textsize_16" />
+            android:textSize="@dimen/textsize_18"
+            android:layout_above="@+id/title2"
+            android:layout_marginTop="-18dp"
+            />
 
         <TextView
+            android:id="@+id/title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dip"
-            android:text="V3.0.0"
+            android:text="建基于祷告"
             android:textColor="@color/white"
-            android:layout_below="@+id/title"
-            android:textSize="22.0dip"
-            android:visibility="gone"
+
+            android:textSize="@dimen/textsize_18"
+            android:visibility="visible"
+            android:layout_above="@+id/title"
             />
+
+        <View
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:id="@+id/title_text"
@@ -110,7 +121,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="2dp"
             android:text="圣经问答\tV3.0.0\tBeta"
-            android:textColor="@color/black"
+            android:textColor="@color/textcolor_1"
             android:textSize="@dimen/textsize_14"
             android:lines="1"
             />

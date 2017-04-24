@@ -15,7 +15,7 @@
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/gameover"
+    android:src="@mipmap/gameover"
     android:scaleType="fitCenter"
     />
         </LinearLayout>
@@ -47,7 +47,7 @@
         android:layout_below="@+id/view5"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
-        android:layout_marginTop="-130dip"
+        android:layout_marginTop="-230dip"
         android:textColor="#FF0000"
         />
 </RelativeLayout>

@@ -81,8 +81,12 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
         ((ItemViewHolder) holder).tv_reply_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getLayoutPosition();
-                onItemClickListener.onReplyClick(holder.itemView,position);
+                try {
+                    int position = holder.getLayoutPosition();
+                    onItemClickListener.onReplyClick(holder.itemView, position);
+                }catch (Exception e){
+                    Logger.d("点击异常"+e.toString());
+                }
             }
         });
 
@@ -90,8 +94,12 @@ public class OnlineAdapter extends Adapter<ViewHolder> {
         ((ItemViewHolder) holder).tv_send_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getLayoutPosition();
-                onItemClickListener.onSendClick(holder.itemView,position);
+                try {
+                    int position = holder.getLayoutPosition();
+                    onItemClickListener.onSendClick(holder.itemView, position);
+                }catch (Exception e){
+                    Logger.d("点击异常"+e.toString());
+                }
             }
         });
 

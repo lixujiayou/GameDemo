@@ -34,6 +34,7 @@ public class Share extends BmobObject {
     private Students students;
 
     private List<CommentInfo> commentList;
+    private List<Students> collectList;    //收藏
 
     private String text;
     private String title;
@@ -80,12 +81,18 @@ public class Share extends BmobObject {
         return commentList;
     }
 
-    public void setCollectList(List<Students> collectList) {
 
-    }
 
     public void setCommentList(List<CommentInfo> commentList) {
         this.commentList = commentList;
+    }
+
+    public List<Students> getCollectList() {
+        return collectList;
+    }
+
+    public void setCollectList(List<Students> collectList) {
+        this.collectList = collectList;
     }
 
     public String getText() {

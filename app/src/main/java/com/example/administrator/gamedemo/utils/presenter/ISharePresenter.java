@@ -20,5 +20,10 @@ public interface ISharePresenter extends IBasePresenter<IShareView> {
 
     void deleteComment(int viewHolderPos, String commentid, List<CommentInfo> currentCommentList);
 
+    //收藏
+    void addCollect(int viewHolderPos,Share momentid, Students students,List<Students> collects);
+
+    //取消收藏
+    void unCollect(int viewHolderPos,Share momentid, Students students,List<Students> collects);
 
 }

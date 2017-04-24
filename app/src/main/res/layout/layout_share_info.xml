@@ -49,6 +49,7 @@
                             android:text="\t\t卡收购哪里开始弄了个？"
                             android:lineSpacingExtra="4dp"
                             android:textStyle="bold"
+
                             />
 
                         <TextView
@@ -80,6 +81,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvTemp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:minHeight="@dimen/height_search"

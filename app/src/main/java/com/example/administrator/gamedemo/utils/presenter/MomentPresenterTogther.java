@@ -198,14 +198,26 @@ public class MomentPresenterTogther implements IMomentPresenterTogther {
                         }
                     }
                 });
-
-
-
             }
 
             @Override
             public void onUnMessage() {
 
+            }
+        });
+    }
+
+    @Override
+    public void deleteMessage(String messageId) {
+        message.unMessage(messageId, new OnMessageCallback() {
+            @Override
+            public void onMessage() {
+
+            }
+
+            @Override
+            public void onUnMessage() {
+            //删除我的消息后回调
             }
         });
     }

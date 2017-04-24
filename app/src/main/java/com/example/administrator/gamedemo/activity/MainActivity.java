@@ -88,6 +88,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private int versionCode;//当前版本号
     private String apkUrl = "";//更新下载路径
+    private String mUpdateInfo = "";//更新内容
     private DownLoadCompleteReceiver ompleteReceiver;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -109,7 +110,6 @@ public class MainActivity extends BaseFragmentActivity {
             transaction.show(answerFragment);
         }
         transaction.commit();
-
         ompleteReceiver = new DownLoadCompleteReceiver();
         /** register download success broadcast **/
         registerReceiver(ompleteReceiver,
@@ -134,18 +134,15 @@ public class MainActivity extends BaseFragmentActivity {
                         int v_n = list.get(0).getVersion_num();
                         BmobFile bApk = list.get(0).getApk();
                         apkUrl = bApk.getUrl();
+                        mUpdateInfo = list.get(0).getUpdateInfo();
+
                         if (v_n > versionCode) {
                             TiShiUpdate();
                         }
                     }catch (Exception e1){
-
                     }
-
-
             }
-
             }
-
         });
     }
 
@@ -199,29 +196,6 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
-
-  /*  @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        // 动态设置ToolBar状态
-        switch (vp.getCurrentItem()) {
-            case 0:
-                setSupportActionBar(AnswerFragment.getInstance().toolbar);
-                menu.findItem(R.id.action_share).setVisible(false);
-                menu.findItem(R.id.action_message).setVisible(false);
-                break;
-            case 1:
-                setSupportActionBar(ShareFragment.getInstance().toolbar);
-                menu.findItem(R.id.action_share).setVisible(true);
-                menu.findItem(R.id.action_message).setVisible(false);
-                break;
-            case 2:
-             //   setSupportActionBar(MineFragment.getInstance().toolbar);
-                menu.findItem(R.id.action_share).setVisible(false);
-                menu.findItem(R.id.action_message).setVisible(true);
-                break;
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }*/
 
 
     private void changePage(int postion) {
@@ -297,7 +271,7 @@ public class MainActivity extends BaseFragmentActivity {
     private void TiShiUpdate(){
         new AlertDialog.Builder(this)
                 .setTitle("更新提醒:")
-                .setMessage("《圣经问答APP》有新版本，请更新。")
+                .setMessage("《圣经问答APP》有新版本;\n更新内容：\n\t\t"+mUpdateInfo)
                 .setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

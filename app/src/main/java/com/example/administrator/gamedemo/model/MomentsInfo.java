@@ -1,6 +1,7 @@
 package com.example.administrator.gamedemo.model;
 
 import com.example.administrator.gamedemo.core.MomentsType;
+import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.orhanobut.logger.Logger;
 
 import java.io.Serializable;
@@ -74,6 +75,13 @@ public class MomentsInfo extends BmobObject implements Serializable{
 
     public void setLikesList(List<Students> likesList) {
         this.likesList = likesList;
+    }
+
+    public void addLikes(Students students){
+        if(ToolUtil.isListEmpty(likesList)){
+            this.likesList = new ArrayList<>();
+        }
+        this.likesList.add(students);
     }
 
     public List<CommentInfo> getCommentList() {

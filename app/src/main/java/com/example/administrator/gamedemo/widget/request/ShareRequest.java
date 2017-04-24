@@ -69,7 +69,6 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         this.isReadCache = isSet;
     }
 
-
     @Override
     protected void executeInternal(final int requestType, boolean showDialog) {
         cUser = Constants.getInstance().getUser();
@@ -106,7 +105,6 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
 
                 // 查询喜欢这个帖子的所有用户，因此查询的是用户表
                 BmobQuery<Share> query = new BmobQuery<Share>();
-
                 //likes是Post表中的字段，用来存储所有喜欢该帖子的用户
                 query.addWhereRelatedTo(Students.UserFields.FAV, new BmobPointer(cUser));
                 query.include(Share.MomentsFields.AUTHOR_USER
@@ -177,11 +175,16 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         /**
          * 因为bmob不支持在查询时把关系表也一起填充查询，因此需要手动再查一次，同时分页也要手动实现。。
          */
+
+        final List<CommentInfo> commentInfoList = new ArrayList<>();
+        final List<Students> collectList = new ArrayList<>();
+
+        final boolean[] isCommentRequestFin = {false};
+        final boolean[] isLikesRequestFin = {false};
+
         if(ToolUtil.isListEmpty(momentsList)){
             onResponseSuccess(momentsList, getRequestType());
         }
-
-        final List<CommentInfo> commentInfoList = new ArrayList<>();
 
         BmobQuery<CommentInfo> commentQuery = new BmobQuery<>();
         commentQuery.include(MOMENT + "," + REPLY_USER + "," + AUTHOR_USER);
@@ -210,6 +213,31 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
             }
         });
 
+/*
+        BmobQuery<Students> likesInfoBmobQuery = new BmobQuery<>();
+        likesInfoBmobQuery.include(Students. + "," + LikesInfo.LikesField.USERID);
+        likesInfoBmobQuery.addWhereContainedIn(, id);
+        likesInfoBmobQuery.order("createdAt");
+        likesInfoBmobQuery.setLimit(1000);
+        likesInfoBmobQuery.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        likesInfoBmobQuery.findObjects(new FindListener<Students>() {
+            @Override
+            public void done(List<Students> list, BmobException e) {
+                if(e == null) {
+                    isLikesRequestFin[0] = true;
+                    if (!ToolUtil.isListEmpty(list)) {
+
+                        collectList.addAll(list);
+
+                    }
+                    mergeData(isCommentRequestFin[0], isLikesRequestFin[0], commentInfoList, likesInfoList, momentsList, e);
+                }else{
+
+                    onResponseError(e, getRequestType());
+                }
+            }
+        });*/
+
     }
 
 
@@ -237,6 +265,7 @@ public class ShareRequest extends BaseRequestClient<List<Share>> {
         }
         Logger.d("查询SHARE返回"+momentsList.size());
         onResponseSuccess(momentsList, getRequestType());
+        isFirstRequest = false;
     }
 
     @Override

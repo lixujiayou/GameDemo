@@ -1,5 +1,7 @@
 package com.example.administrator.gamedemo.fragment.message;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +24,7 @@ import com.example.administrator.gamedemo.model.AboutMessage;
 import com.example.administrator.gamedemo.utils.ToastUtil3;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.base.BaseFragment;
+import com.example.administrator.gamedemo.utils.presenter.MomentPresenterTogther;
 import com.example.administrator.gamedemo.widget.request.MessageRequest;
 import com.example.administrator.gamedemo.widget.request.SimpleResponseListener;
 import com.orhanobut.logger.Logger;
@@ -58,6 +61,9 @@ public class AboutMFragment extends BaseFragment {
     private boolean isPrepared;
     private boolean isReadCache = true;
     private  boolean isFirst = true;//是否第一次加载数据
+    private int cLoadSize = 0;//本次加载
+    private MomentPresenterTogther momentPresenter;
+
     public AboutMFragment() {
     }
 
@@ -80,7 +86,7 @@ public class AboutMFragment extends BaseFragment {
 
     @Override
     public void initViews() {
-
+        momentPresenter = new MomentPresenterTogther();
         messageRequest = new MessageRequest();
         messageList = new ArrayList<>();
         aboutMAdapter = new AboutMAdapter(mContext, messageList);
@@ -89,7 +95,6 @@ public class AboutMFragment extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(aboutMAdapter);
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -108,7 +113,7 @@ public class AboutMFragment extends BaseFragment {
                         return;
                     } else {
                         //滑动到底部，开始加载更多
-                        if (messageList.size() >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
+                        if (cLoadSize >= Constants.FIRSTLOADNUM) { // 最少要有10条才能触发加载更多
                             if (!isLoad) {                                      //是否在加载中
                                 aboutMAdapter.setLoadStatus(true);
                                 loadMore();
@@ -133,14 +138,17 @@ public class AboutMFragment extends BaseFragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ivLoadState.setVisibility(View.GONE);
-                isFirst = true;
-                initData();
-
+                if(!isLoad) {
+                    ivLoadState.setVisibility(View.GONE);
+                    isFirst = true;
+                    initData();
+                }else{
+                    swipeRefresh.setRefreshing(false);
+                }
             }
         });
 
-aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
+    aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
     @Override
     public void onItemClick(View view, int position) {
             Intent mIntent = new Intent(mContext, AboutActivity.class);
@@ -150,10 +158,35 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
     }
 
     @Override
-    public void onItemLongClick(View view, int position) {
+    public void onItemLongClick(View view, final int position) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("删除提示")
+                .setMessage("确定删除本条消息？")
+                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        momentPresenter.deleteMessage(messageList.get(position).getObjectId());
 
+                        messageList.remove(position);
+                        aboutMAdapter.notifyItemRemoved(position);
+
+                        dialogInterface.dismiss();
+
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
     }
 });
+
+
+
     }
 
     @Override
@@ -203,6 +236,7 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
             ivLoadState.setVisibility(View.GONE);
             switch (requestType) {
                 case REQUEST_REFRESH:
+                    cLoadSize = response.size();
                     if (!ToolUtil.isListEmpty(response)) {
                         recyclerView.setVisibility(View.VISIBLE);
                         rlHint.setVisibility(View.GONE);
@@ -210,10 +244,10 @@ aboutMAdapter.setOnItemClickListener(new AboutMAdapter.OnItemClickListener() {
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         rlHint.setVisibility(View.VISIBLE);
-
                     }
                     break;
                 case REQUEST_LOADMORE:
+                    cLoadSize = response.size();
                     aboutMAdapter.addMore(response);
                     break;
             }

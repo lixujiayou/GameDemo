@@ -3,15 +3,18 @@ package com.example.administrator.gamedemo.utils.presenter;
 import android.text.TextUtils;
 
 import com.example.administrator.gamedemo.core.Constants;
+import com.example.administrator.gamedemo.model.CollectImpl;
 import com.example.administrator.gamedemo.model.CommentImplShare;
 import com.example.administrator.gamedemo.model.CommentImplTogther;
 import com.example.administrator.gamedemo.model.CommentInfo;
+import com.example.administrator.gamedemo.model.ICollect;
 import com.example.administrator.gamedemo.model.Share;
 import com.example.administrator.gamedemo.model.Students;
 import com.example.administrator.gamedemo.model.Togther;
 import com.example.administrator.gamedemo.utils.ToolUtil;
 import com.example.administrator.gamedemo.utils.view.IMomentViewTogther;
 import com.example.administrator.gamedemo.utils.view.IShareView;
+import com.example.administrator.gamedemo.widget.request.callback.OnCollectChangeCallback;
 import com.example.administrator.gamedemo.widget.request.callback.OnCommentChangeCallback;
 import com.orhanobut.logger.Logger;
 
@@ -26,10 +29,12 @@ import java.util.List;
 public class SharePresenter implements ISharePresenter {
     private IShareView momentView;
     private CommentImplShare commentModel;
+    private CollectImpl collect;//收藏
 
     public SharePresenter(IShareView mMomentView){
         this.momentView = mMomentView;
         commentModel = new CommentImplShare();
+        collect = new CollectImpl();
     }
 
     @Override
@@ -62,7 +67,6 @@ public class SharePresenter implements ISharePresenter {
              commentModel.deleteComment(commentid, new OnCommentChangeCallback() {
             @Override
             public void onAddComment(CommentInfo response) {
-
             }
 
             @Override
@@ -88,6 +92,42 @@ public class SharePresenter implements ISharePresenter {
             }
         });
 
+    }
+
+    @Override
+    public void addCollect(int viewHolderPos, Share momentid, Students students,List<Students> collects) {
+        if(momentid == null){
+            return;
+        }
+        collect.addCollect(momentid.getObjectId(), collects, new OnCollectChangeCallback() {
+            @Override
+            public void onCollect() {
+
+            }
+
+            @Override
+            public void onUnCollect() {
+
+            }
+        });
+    }
+
+    @Override
+    public void unCollect(int viewHolderPos, Share momentid, Students students,List<Students> collects) {
+        if(momentid == null){
+            return;
+        }
+        collect.unCollect(momentid.getObjectId(), collects, new OnCollectChangeCallback() {
+            @Override
+            public void onCollect() {
+
+            }
+
+            @Override
+            public void onUnCollect() {
+
+            }
+        });
     }
 
     @Override

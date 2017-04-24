@@ -82,7 +82,7 @@ public class UploadActivity extends BaseFragmentActivity{
         tabLayout.addTab(tabLayout.newTab().setText(Constants.strWorkText.get(2)));
         vp.setOffscreenPageLimit(2);
         vp.setAdapter(new BaseFragmentAdapterTableLayout(Constants.strWorkText,list_fragmet,myFM));
-
+        vp.setCurrentItem(1);
         tabLayout.setupWithViewPager(vp);
     }
 

@@ -72,12 +72,16 @@ public class ShareFragment extends BaseFragment  {
     RelativeLayout rlBar;
     @BindView(R.id.recycler)
     RecyclerView circleRecyclerView;
+
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.widget_comment)
     CommentBox commentBox;
+
     @BindView(R.id.iv_add)
      ImageView iv_add;
+
     @BindView(R.id.iv_load_state)
     ImageView ivLoadState;
 
@@ -96,6 +100,7 @@ public class ShareFragment extends BaseFragment  {
     private  boolean isFirst = true;//是否第一次加载数据
     private boolean isLoad ;//是否正在加载数据
     private int mCLoadCount = 0;//本次加载了多少条
+
     public ShareFragment() {
     }
 
@@ -165,7 +170,7 @@ public class ShareFragment extends BaseFragment  {
                 }
             }
         });
-        circleRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+        /*circleRecyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (commentBox != null && commentBox.isShowing()) {
@@ -174,7 +179,7 @@ public class ShareFragment extends BaseFragment  {
                 }
                 return false;
             }
-        });
+        });*/
 
         circleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
