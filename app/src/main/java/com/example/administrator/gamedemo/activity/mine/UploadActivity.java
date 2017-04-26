@@ -57,9 +57,11 @@ public class UploadActivity extends BaseFragmentActivity{
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_jiahao:
-                        Intent gIntent = new Intent(UploadActivity.this, SendAnswerActivity.class);
-                        gIntent.putExtra(SendAnswerActivity.INTENT,SendAnswerActivity.SEND);
-                        startActivityForResult(gIntent,1);
+                        if(Constants.getInstance().getUser(UploadActivity.this) != null) {
+                            Intent gIntent = new Intent(UploadActivity.this, SendAnswerActivity.class);
+                            gIntent.putExtra(SendAnswerActivity.INTENT, SendAnswerActivity.SEND);
+                            startActivityForResult(gIntent, 1);
+                        }
                         break;
                 }
                 return true;
@@ -88,7 +90,6 @@ public class UploadActivity extends BaseFragmentActivity{
 
     @Override
     public void initData() {
-
     }
 
     @Override
@@ -103,7 +104,7 @@ public class UploadActivity extends BaseFragmentActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Constants.REFRESH_CODE){
             UploadFragmentING.getInstance().initData();
-            vp.setCurrentItem(1);
+        //    vp.setCurrentItem(1);
         }
     }
 }

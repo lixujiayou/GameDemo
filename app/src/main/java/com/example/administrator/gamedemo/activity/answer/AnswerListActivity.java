@@ -283,7 +283,6 @@ public class AnswerListActivity extends BaseActivity implements IMomentViewTogth
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 || resultCode == Constants.REFRESH_CODE ){
-            isReadCache = false;
             initData();
         }
     }

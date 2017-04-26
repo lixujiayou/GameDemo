@@ -19,6 +19,7 @@ public class LogoActivity extends Activity implements OnClickListener {
 	private boolean inited = false;
 
 	private CountDownTimer mTimer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

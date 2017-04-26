@@ -111,6 +111,9 @@ public class SendAnswerActivity extends BaseActivity {
         setContentView(R.layout.activity_add_answer);
     }
 
+    /**
+     * 一起分享，一起讨论，一起交流神的恩典！
+     */
     @Override
     public void initViews() {
         mToolbar.setNavigationIcon(R.drawable.icon_cancle_black);

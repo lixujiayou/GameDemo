@@ -207,7 +207,7 @@ public class MineFragment extends BaseFragment {
                 tv_name.setText("前去编辑我的昵称");
             }
         }else{
-            iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_user_default));
+            iv_icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.icon_default));
             iv_dim.setImageBitmap(Constants.doBlur(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_user_default), 10, false));
             tv_name.setText("点击登录");
         }

@@ -860,7 +860,7 @@ public void timeStop_dialog(){
         final TextView tv = (TextView) view_d.findViewById(R.id.tv_gameover_chenghao);
 
         tv_mtscore.setText("得分："+myScore);
-         if(myScore >=9600){
+         if(myScore >= 9600){
             tv.setText("在路上");
         }
         else if(myScore >=7600 && myScore<9600){

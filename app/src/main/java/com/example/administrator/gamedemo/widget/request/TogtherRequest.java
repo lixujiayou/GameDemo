@@ -86,9 +86,8 @@ public class TogtherRequest extends BaseRequestClient<List<Togther>> {
             }
         });
         }else{
-            BmobQuery<Togther> query2 = new BmobQuery<Togther>();
+            BmobQuery<Togther> query2 = new BmobQuery<>();
             query2.include(Togther.MomentsFields.AUTHOR_USER+ "," + Togther.MomentsFields.HOST);
-            query2.setCachePolicy(isFirstRequest? BmobQuery.CachePolicy.CACHE_ELSE_NETWORK: BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
             query2.getObject(mKey, new QueryListener<Togther>() {
                 @Override
                 public void done(Togther togther, BmobException e) {

@@ -121,7 +121,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="2dp"
             android:text="圣经问答\tV3.0.0\tBeta"
-            android:textColor="@color/textcolor_1"
+            android:textColor="@color/text_comment"
             android:textSize="@dimen/textsize_14"
             android:lines="1"
             />

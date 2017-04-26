@@ -117,7 +117,7 @@ public class ShareInfoActivity extends BaseActivity implements IShareView {
                         }
                         break;
                     case R.id.action_send_collect:
-                        if(Constants.getInstance().isLogin(ShareInfoActivity.this)) {
+                        if(Constants.getInstance().getUser(ShareInfoActivity.this) != null) {
 
                             List<Students> studentsList = mShare.getCollectList();
 

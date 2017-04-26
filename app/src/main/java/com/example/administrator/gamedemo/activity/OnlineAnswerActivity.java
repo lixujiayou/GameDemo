@@ -188,6 +188,10 @@ public class OnlineAnswerActivity extends BaseActivity {
             mCommentInfos.clear();
             mCommentInfos.addAll(mMomentsInfo.getCommentList());
             onlineAdapter.notifyDataSetChanged();
+
+          //  recyle_comment.setAdapter(onlineAdapter);
+
+
             tv_tv_reminder.setVisibility(View.GONE);
         }else{
             tv_tv_reminder.setVisibility(View.VISIBLE);

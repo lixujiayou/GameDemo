@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
- <include layout="@layout/toolbar"/>
- <include layout="@layout/layout_no_network"/>
-
-<com.example.administrator.gamedemo.utils.base.BaseWebView
-    android:id="@+id/wb_info"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></com.example.administrator.gamedemo.utils.base.BaseWebView>
+    android:layout_height="match_parent"
+    >
+
+    <com.example.administrator.gamedemo.utils.base.BaseWebView
+       android:id="@+id/wb_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.example.administrator.gamedemo.utils.base.BaseWebView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+  <include layout="@layout/toolbar"/>
+
+  <include layout="@layout/layout_no_network"/>
+
 
 </LinearLayout>
+</FrameLayout>

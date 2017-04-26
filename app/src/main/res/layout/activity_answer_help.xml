@@ -19,15 +19,111 @@
         android:background="@color/white"
         >
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共分圣经问答、分享、一起三个模块。"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\t1、本地答题：
+	\n\t\t共分为 圣经、摩西五经、大小先知书、历史诗歌书、四福音、新约书信六大类。
+    \n\t\t规则：每次答题共有15道，答对一题加100分，连续答对第二题加200分，依次；答错一题减90分，连续答错第二题减180分并结算成绩答题结束；跳过一题减50分。
+    \n\t\t暂停：暂不提供直接暂停功能；选择答案并点击确定后系统不会计时，可视为暂停，喝茶喽~
+    \n\t\t时间：每道题有25秒的时间，若只选择答案未点击确定时，系统会自动识别选择的答案是否正确。
+    \n\t\t锦囊：去掉两个错误答案*1，重新计时*2，每次答题后初始化。
+    \n\t\t称号：
+	\n\t\t\t\t≥9600      在路上
+	\n\t\t\t\t≥7600 ＆ ＜9600  摸爬滚打
+	\n\t\t\t\t≥3600 ＆ ＜7600  跌跌撞撞
+	\n\t\t\t\t≥2000 ＆ ＜3600  还差一点
+	\n\t\t\t\t＜2000       云里雾里
+  \n\t\t答题记录：时间轴不仅记录了答题的分数、时间等，还有错题哦~
+"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\t2、在线答题
+  \n\t\t上传：在线答题页面点击右上角可以上传答题，但要经过审核。
+  \n\t\t规则：每道题只有一次回答的机会，并且选择的答案会出现在讨论列表里；答题后还可以点击右上角和大家一起讨论。
+  \n\t\t查看：所有自己上传的答题都会出现在“我的”→“上传”，共分为审核成功、审核中、审核失败三项，且审核失败会给出原因及建议，可根据失败原因修改后再次提交。"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\t3、分享
+	\n\t\t不定期更新分享内容，有专门的审阅团队维护。
+	\n\t\t欢迎弟兄姊妹投稿，可发至邮箱bibleAsk@163.com，并注明出处。"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\t4、一起：
+  \n\t\t位置：“我的”→“一起”"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\t还有笔记、收藏等功能大家一起来探索吧~"
+            android:textColor="@color/textcolor_1"
+            android:textSize="@dimen/textsize_18"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:lineSpacingExtra="4dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_px"
+            android:background="@color/line_q"
+            android:layout_marginTop="8dp"
+            />
+        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_1_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="50dp"
             android:lineSpacingExtra="4dp"
             />
         <TextView
@@ -52,7 +148,7 @@
             android:layout_height="wrap_content"
             android:text="@string/help_2_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
@@ -81,7 +177,7 @@
             android:layout_height="wrap_content"
             android:text="@string/help_3_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
@@ -105,12 +201,13 @@
             android:background="@color/backround_hui"
             android:layout_marginTop="8dp"
             />
+        
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_4_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
@@ -139,7 +236,7 @@
             android:layout_height="wrap_content"
             android:text="@string/help_5_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
@@ -168,7 +265,7 @@
             android:layout_height="wrap_content"
             android:text="@string/help_6_title"
             android:textColor="@color/textcolor_1"
-            android:textSize="@dimen/textsize_login"
+            android:textSize="@dimen/textsize_18"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
@@ -185,9 +282,13 @@
             android:layout_marginTop="6dp"
             android:textColor="@color/textcolor_7"
             android:lineSpacingExtra="4dp"
-            android:paddingBottom="60dp"
+
             />
 
+
+
+
+    
     </LinearLayout>
     </com.example.administrator.gamedemo.utils.base.BounceScrollView>
 </LinearLayout>

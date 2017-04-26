@@ -70,7 +70,7 @@ public class MomentsRequest extends BaseRequestClient<List<MomentsInfo>> {
         bmobQuery.setSkip(curPage * count);
         bmobQuery.order("-createdAt");
 
-        if(mType!=null && mType.toString().length() > 0){
+        if(mType != null && mType.toString().length() > 0){
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.RP,mType);
             bmobQuery.addWhereEqualTo(MomentsInfo.MomentsFields.AUTHOR_USER,new BmobPointer(cUser));
         }else{

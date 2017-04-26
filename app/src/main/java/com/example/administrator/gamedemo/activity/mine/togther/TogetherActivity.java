@@ -119,8 +119,10 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_jiahao:
-                        Intent gIntent = new Intent(TogetherActivity.this,SendTogtherActivity.class);
-                        startActivityForResult(gIntent,1);
+                        if(Constants.getInstance().getUser(TogetherActivity.this) != null) {
+                            Intent gIntent = new Intent(TogetherActivity.this, SendTogtherActivity.class);
+                            startActivityForResult(gIntent, 1);
+                        }
                         break;
                 }
                 return true;
@@ -476,9 +478,6 @@ public class TogetherActivity extends BaseActivity implements onRefreshListener2
                 if(!StringUtil.isEmpty(Constants.getInstance().getCoverImageUrl())){
                     ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, Constants.getInstance().getCoverImageUrl());
                 }
-                /*if(hostInfo.getCover() != null){
-                    ImageLoadMnanger.INSTANCE.loadImageToCover(friend_wall_pic, hostInfo.getCover().getFileUrl());
-                }*/
 
                 if(hostInfo.getUser_icon() != null){
                     ImageLoadMnanger.INSTANCE.loadImage(friend_avatar, hostInfo.getUser_icon().getFileUrl());

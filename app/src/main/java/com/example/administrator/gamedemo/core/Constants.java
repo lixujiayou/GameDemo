@@ -33,6 +33,10 @@ public class Constants {
     //public static final String BmobId = "95246b6418bbbe7f25241c33f8d414be"; //BMOBID
     public static final String BmobId = "21bfb1f1037b3963aaa2fe01bee1bc68"; //BMOBID测试
     public static final String LoggerTAG = "qzzzzzzz";
+
+    public static final int CONTROLNUM = 1;//管理员权限
+
+
     public static final int  REFRESH_CODE = 24;
     public static final int  FIRSTLOADNUM = 10;
     public static final List<String> strWorkText = Arrays.asList("审核成功","审核中","审核失败");//

@@ -28,7 +28,7 @@ public class Students extends BmobUser{
     }
 
 
-    private boolean isManage;//管理员权限
+    private int isManage;//管理员权限   //0:非管理员  1：管理员
     private String avatar;
     private BmobFile cover;
     private BmobFile user_icon;
@@ -164,11 +164,11 @@ public class Students extends BmobUser{
         this.message = message;
     }
 
-    public boolean isManage() {
+    public int getIsManage() {
         return isManage;
     }
 
-    public void setManage(boolean manage) {
-        isManage = manage;
+    public void setIsManage(int isManage) {
+        this.isManage = isManage;
     }
 }

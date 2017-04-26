@@ -297,7 +297,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:visibility="visible"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/about_item_style"
         >
 
@@ -341,7 +341,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:visibility="visible"
-        android:layout_marginTop="@dimen/line_px"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/about_item_style"
         >
 
@@ -349,7 +349,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/icon_mine_share"
+            android:src="@drawable/icon_mine_show"
             />
 
         <TextView
@@ -383,9 +383,10 @@
         android:minHeight="@dimen/item_mine_height"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/about_item_style"
+
         >
 
         <ImageView
